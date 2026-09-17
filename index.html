@@ -1,2050 +1,2048 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#070b14">
-<title>NINE: OCTOBRAIN — Joheliv Labs</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --bg:#050810;
-    --panel:#0b1220;
-    --panel2:#101a2c;
-    --border:rgba(255,255,255,.09);
-    --text:#f4f7fb;
-    --muted:#8e9bb0;
-    --cyan:#27d9ff;
-    --blue:#5578ff;
-    --purple:#9b5cff;
-    --green:#32e6a1;
-    --danger:#ff5577;
-    --shadow:0 20px 70px rgba(0,0,0,.45);
-}
-
-html,body{
-    width:100%;
-    min-height:100%;
-    font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
-    background:
-      radial-gradient(circle at 50% 20%,rgba(39,217,255,.08),transparent 30%),
-      radial-gradient(circle at 80% 80%,rgba(155,92,255,.08),transparent 30%),
-      var(--bg);
-    color:var(--text);
-}
-
-body{
-    overflow-x:hidden;
-}
-
-button,input,textarea,select{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* ================= ACCESS ================= */
-
-#accessScreen{
-    position:fixed;
-    inset:0;
-    z-index:9999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:
-      radial-gradient(circle at center,rgba(39,217,255,.10),transparent 35%),
-      #03050a;
-}
-
-.access-card{
-    width:min(460px,100%);
-    padding:42px 32px;
-    border:1px solid var(--border);
-    border-radius:28px;
-    background:rgba(10,16,28,.86);
-    backdrop-filter:blur(25px);
-    box-shadow:var(--shadow);
-    text-align:center;
-}
-
-.brand-mini{
-    color:var(--cyan);
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:3px;
-    margin-bottom:8px;
-}
-
-.access-card h1{
-    font-size:38px;
-    letter-spacing:-1px;
-}
-
-.access-card .sub{
-    color:var(--muted);
-    margin:10px 0 28px;
-}
-
-.ceo{
-    margin:25px 0;
-    color:#c9d3e5;
-    font-size:13px;
-}
-
-.access-input{
-    width:100%;
-    height:54px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    outline:none;
-    background:#070c16;
-    color:white;
-    text-align:center;
-    letter-spacing:7px;
-    font-size:18px;
-}
-
-.access-input:focus{
-    border-color:var(--cyan);
-    box-shadow:0 0 0 3px rgba(39,217,255,.08);
-}
-
-.unlock{
-    width:100%;
-    height:54px;
-    margin-top:14px;
-    border:0;
-    border-radius:14px;
-    color:#021018;
-    font-weight:900;
-    background:linear-gradient(135deg,var(--cyan),#74eaff);
-}
-
-.error{
-    min-height:20px;
-    margin-top:12px;
-    color:#ff6685;
-    font-size:13px;
-}
-
-/* ================= APP ================= */
-
-#app{
-    min-height:100vh;
-}
-
-.topbar{
-    height:72px;
-    position:sticky;
-    top:0;
-    z-index:100;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 28px;
-    border-bottom:1px solid var(--border);
-    background:rgba(5,8,16,.82);
-    backdrop-filter:blur(18px);
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.logo-icon{
-    width:40px;
-    height:40px;
-    display:grid;
-    place-items:center;
-    border-radius:13px;
-    background:linear-gradient(135deg,var(--cyan),var(--purple));
-    color:white;
-    font-size:20px;
-    box-shadow:0 0 30px rgba(39,217,255,.18);
-}
-
-.logo strong{
-    display:block;
-    font-size:16px;
-}
-
-.logo small{
-    color:var(--muted);
-}
-
-.top-actions{
-    display:flex;
-    gap:8px;
-}
-
-.icon-btn{
-    height:40px;
-    padding:0 13px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:var(--panel);
-    color:#dce5f4;
-}
-
-.icon-btn:hover{
-    border-color:rgba(39,217,255,.4);
-}
-
-/* ================= HERO ================= */
-
-.hero{
-    text-align:center;
-    padding:45px 20px 20px;
-}
-
-.hero .welcome{
-    color:var(--cyan);
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:3px;
-}
-
-.hero h1{
-    margin-top:10px;
-    font-size:clamp(34px,6vw,70px);
-    letter-spacing:-3px;
-    background:linear-gradient(90deg,#fff,var(--cyan),#b68cff);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-}
-
-.hero p{
-    max-width:680px;
-    margin:12px auto 0;
-    color:var(--muted);
-}
-
-/* ================= WORKSPACE ================= */
-
-.workspace{
-    width:min(1400px,94%);
-    margin:25px auto 60px;
-}
-
-.setup{
-    max-width:850px;
-    margin:0 auto 40px;
-    padding:25px;
-    border:1px solid var(--border);
-    border-radius:22px;
-    background:linear-gradient(180deg,rgba(16,26,44,.85),rgba(8,13,24,.85));
-    box-shadow:var(--shadow);
-}
-
-.field{
-    margin-bottom:18px;
-}
-
-.field label{
-    display:block;
-    margin-bottom:8px;
-    color:#cdd8e8;
-    font-size:13px;
-    font-weight:700;
-}
-
-.field input,
-.field textarea,
-.field select{
-    width:100%;
-    border:1px solid var(--border);
-    outline:none;
-    border-radius:12px;
-    padding:14px;
-    background:#070c16;
-    color:white;
-}
-
-.field textarea{
-    min-height:100px;
-    resize:vertical;
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-    border-color:rgba(39,217,255,.55);
-}
-
-.type-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.type-option{
-    padding:18px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:#070c16;
-    text-align:left;
-    transition:.2s;
-}
-
-.type-option.active{
-    border-color:var(--cyan);
-    background:rgba(39,217,255,.07);
-    box-shadow:inset 0 0 30px rgba(39,217,255,.04);
-}
-
-.type-option strong{
-    display:block;
-}
-
-.type-option span{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.generate{
-    width:100%;
-    height:56px;
-    border:0;
-    border-radius:14px;
-    background:linear-gradient(135deg,var(--cyan),var(--blue));
-    color:#020711;
-    font-weight:950;
-    font-size:15px;
-    margin-top:5px;
-}
-
-/* ================= BRAINS ================= */
-
-.brain-system{
-    position:relative;
-    min-height:730px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:10px auto 40px;
-}
-
-.neural-lines{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-}
-
-.line{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:2px;
-    height:260px;
-    transform-origin:bottom center;
-    background:linear-gradient(to top,transparent,var(--cyan),transparent);
-    opacity:.18;
-}
-
-.line:nth-child(1){transform:translate(-50%,-100%) rotate(0deg);}
-.line:nth-child(2){transform:translate(-50%,-100%) rotate(45deg);}
-.line:nth-child(3){transform:translate(-50%,-100%) rotate(90deg);}
-.line:nth-child(4){transform:translate(-50%,-100%) rotate(135deg);}
-.line:nth-child(5){transform:translate(-50%,-100%) rotate(180deg);}
-.line:nth-child(6){transform:translate(-50%,-100%) rotate(225deg);}
-.line:nth-child(7){transform:translate(-50%,-100%) rotate(270deg);}
-.line:nth-child(8){transform:translate(-50%,-100%) rotate(315deg);}
-
-.brain{
-    position:absolute;
-    width:150px;
-    min-height:115px;
-    padding:17px;
-    border:1px solid var(--border);
-    border-radius:22px;
-    background:rgba(10,17,30,.92);
-    backdrop-filter:blur(14px);
-    text-align:center;
-    transition:.35s;
-    box-shadow:0 15px 40px rgba(0,0,0,.3);
-}
-
-.brain:hover{
-    transform:scale(1.04);
-    border-color:rgba(39,217,255,.4);
-}
-
-.brain.active{
-    border-color:var(--cyan);
-    box-shadow:0 0 45px rgba(39,217,255,.2);
-    animation:pulse 1.4s infinite;
-}
-
-.brain.done{
-    border-color:rgba(50,230,161,.5);
-}
-
-.brain .emoji{
-    font-size:27px;
-}
-
-.brain strong{
-    display:block;
-    margin-top:6px;
-    font-size:12px;
-}
-
-.brain small{
-    display:block;
-    margin-top:5px;
-    color:var(--muted);
-    font-size:10px;
-}
-
-.brain:nth-of-type(1){top:3%;left:50%;transform:translateX(-50%);}
-.brain:nth-of-type(2){top:14%;right:5%;}
-.brain:nth-of-type(3){top:40%;right:0;}
-.brain:nth-of-type(4){bottom:7%;right:10%;}
-.brain:nth-of-type(5){bottom:0;left:50%;transform:translateX(-50%);}
-.brain:nth-of-type(6){bottom:7%;left:10%;}
-.brain:nth-of-type(7){top:40%;left:0;}
-.brain:nth-of-type(8){top:14%;left:5%;}
-
-.core{
-    position:relative;
-    z-index:5;
-    width:230px;
-    height:230px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    background:
-      radial-gradient(circle at 35% 30%,#54edff,transparent 8%),
-      radial-gradient(circle,#192b53,#07101f 62%);
-    border:1px solid rgba(39,217,255,.5);
-    box-shadow:
-      0 0 45px rgba(39,217,255,.15),
-      inset 0 0 60px rgba(39,217,255,.08);
-}
-
-.core .octopus{
-    font-size:76px;
-    filter:drop-shadow(0 0 20px rgba(39,217,255,.5));
-}
-
-.core strong{
-    font-size:14px;
-    letter-spacing:2px;
-}
-
-.core small{
-    margin-top:4px;
-    color:var(--muted);
-}
-
-@keyframes pulse{
-    0%,100%{box-shadow:0 0 20px rgba(39,217,255,.08)}
-    50%{box-shadow:0 0 50px rgba(39,217,255,.32)}
-}
-
-/* ================= RESULTS ================= */
-
-.results{
-    display:grid;
-    grid-template-columns:250px 1fr;
-    gap:18px;
-}
-
-.result-nav{
-    position:sticky;
-    top:90px;
-    align-self:start;
-    padding:12px;
-    border:1px solid var(--border);
-    border-radius:18px;
-    background:var(--panel);
-}
-
-.result-nav button{
-    width:100%;
-    text-align:left;
-    padding:11px;
-    border:0;
-    border-radius:9px;
-    background:transparent;
-    color:#aebbd0;
-    margin-bottom:3px;
-}
-
-.result-nav button:hover,
-.result-nav button.active{
-    background:rgba(39,217,255,.08);
-    color:var(--cyan);
-}
-
-.result-content{
-    min-width:0;
-}
-
-.result-card{
-    padding:25px;
-    margin-bottom:15px;
-    border:1px solid var(--border);
-    border-radius:20px;
-    background:rgba(10,17,30,.85);
-}
-
-.result-card h2{
-    margin-bottom:8px;
-}
-
-.result-card .meta{
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:20px;
-}
-
-.result-text{
-    white-space:pre-wrap;
-    line-height:1.75;
-    color:#d7dfec;
-}
-
-.result-actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:20px;
-}
-
-.action{
-    padding:10px 14px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:#080e19;
-    color:#dce7f5;
-}
-
-.action.primary{
-    background:var(--cyan);
-    color:#021018;
-    border:0;
-    font-weight:800;
-}
-
-.action:hover{
-    border-color:var(--cyan);
-}
-
-/* ================= HISTORY ================= */
-
-.history-panel{
-    width:min(1200px,94%);
-    margin:0 auto 50px;
-}
-
-.history-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:15px;
-}
-
-.history-list{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:12px;
-}
-
-.history-card{
-    padding:18px;
-    border:1px solid var(--border);
-    border-radius:17px;
-    background:var(--panel);
-}
-
-.history-card strong{
-    display:block;
-}
-
-.history-card small{
-    display:block;
-    color:var(--muted);
-    margin:7px 0 15px;
-}
-
-.history-card button{
-    border:1px solid var(--border);
-    background:#070c16;
-    color:white;
-    border-radius:9px;
-    padding:8px 12px;
-}
-
-.empty{
-    padding:30px;
-    text-align:center;
-    color:var(--muted);
-    border:1px dashed var(--border);
-    border-radius:15px;
-}
-
-/* ================= TOAST ================= */
-
-#toast{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:99999;
-    padding:14px 18px;
-    border-radius:12px;
-    background:#111b2c;
-    border:1px solid rgba(39,217,255,.3);
-    box-shadow:var(--shadow);
-    transform:translateY(120px);
-    opacity:0;
-    transition:.3s;
-}
-
-#toast.show{
-    transform:translateY(0);
-    opacity:1;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:800px){
-    .topbar{
-        padding:0 14px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070b14">
+  <title>NINE: OCTOBRAIN — Joheliv Labs</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .top-actions .icon-btn span{
-        display:none;
+    :root {
+      --bg: #050810;
+      --panel: #0b1220;
+      --panel2: #101a2c;
+      --border: rgba(255, 255, 255, .09);
+      --text: #f4f7fb;
+      --muted: #8e9bb0;
+      --cyan: #27d9ff;
+      --blue: #5578ff;
+      --purple: #9b5cff;
+      --green: #32e6a1;
+      --danger: #ff5577;
+      --shadow: 0 20px 70px rgba(0, 0, 0, .45);
     }
 
-    .brain-system{
-        min-height:900px;
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(39, 217, 255, .08), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(155, 92, 255, .08), transparent 30%),
+        var(--bg);
+      color: var(--text);
     }
 
-    .brain{
-        width:125px;
-        min-height:105px;
+    body {
+      overflow-x: hidden;
     }
 
-    .core{
-        width:190px;
-        height:190px;
+    button, input, textarea, select {
+      font: inherit;
     }
 
-    .core .octopus{
-        font-size:60px;
+    button {
+      cursor: pointer;
     }
 
-    .results{
-        grid-template-columns:1fr;
+    .hidden {
+      display: none !important;
     }
 
-    .result-nav{
-        position:static;
-        display:flex;
-        overflow-x:auto;
-        gap:4px;
+    /* ===== ACCESS ===== */
+    #accessScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at center, rgba(39, 217, 255, .10), transparent 35%),
+        #03050a;
     }
 
-    .result-nav button{
-        min-width:max-content;
+    .access-card {
+      width: min(460px, 100%);
+      padding: 42px 32px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: rgba(10, 16, 28, .86);
+      backdrop-filter: blur(25px);
+      box-shadow: var(--shadow);
+      text-align: center;
     }
 
-    .type-row{
-        grid-template-columns:1fr;
+    .brand-mini {
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
     }
-}
-</style>
+
+    .access-card h1 {
+      font-size: 38px;
+      letter-spacing: -1px;
+    }
+
+    .access-card .sub {
+      color: var(--muted);
+      margin: 10px 0 28px;
+    }
+
+    .ceo {
+      margin: 25px 0;
+      color: #c9d3e5;
+      font-size: 13px;
+    }
+
+    .access-input {
+      width: 100%;
+      height: 54px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      outline: none;
+      background: #070c16;
+      color: white;
+      text-align: center;
+      letter-spacing: 7px;
+      font-size: 18px;
+    }
+
+    .access-input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(39, 217, 255, .08);
+    }
+
+    .unlock {
+      width: 100%;
+      height: 54px;
+      margin-top: 14px;
+      border: 0;
+      border-radius: 14px;
+      color: #021018;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan), #74eaff);
+    }
+
+    .error {
+      min-height: 20px;
+      margin-top: 12px;
+      color: #ff6685;
+      font-size: 13px;
+    }
+
+    /* ===== APP ===== */
+    #app {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 72px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5, 8, 16, .82);
+      backdrop-filter: blur(18px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 0 30px rgba(39, 217, 255, .18);
+    }
+
+    .logo strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .logo small {
+      color: var(--muted);
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .icon-btn {
+      height: 40px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      color: #dce5f4;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .icon-btn:hover {
+      border-color: rgba(39, 217, 255, .4);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      text-align: center;
+      padding: 45px 20px 20px;
+    }
+
+    .hero .welcome {
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+    }
+
+    .hero h1 {
+      margin-top: 10px;
+      font-size: clamp(34px, 6vw, 70px);
+      letter-spacing: -3px;
+      background: linear-gradient(90deg, #fff, var(--cyan), #b68cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 12px auto 0;
+      color: var(--muted);
+    }
+
+    /* ===== WORKSPACE ===== */
+    .workspace {
+      width: min(1400px, 94%);
+      margin: 25px auto 60px;
+    }
+
+    .setup {
+      max-width: 850px;
+      margin: 0 auto 40px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(16, 26, 44, .85), rgba(8, 13, 24, .85));
+      box-shadow: var(--shadow);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #cdd8e8;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid var(--border);
+      outline: none;
+      border-radius: 12px;
+      padding: 14px;
+      background: #070c16;
+      color: white;
+    }
+
+    .field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: rgba(39, 217, 255, .55);
+    }
+
+    .type-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .type-option {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #070c16;
+      text-align: left;
+      transition: .2s;
+      color: white;
+    }
+
+    .type-option.active {
+      border-color: var(--cyan);
+      background: rgba(39, 217, 255, .07);
+      box-shadow: inset 0 0 30px rgba(39, 217, 255, .04);
+    }
+
+    .type-option strong {
+      display: block;
+    }
+
+    .type-option span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .generate {
+      width: 100%;
+      height: 56px;
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #020711;
+      font-weight: 950;
+      font-size: 15px;
+      margin-top: 5px;
+    }
+
+    /* ===== BRAINS ===== */
+    .brain-system {
+      position: relative;
+      min-height: 730px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px auto 40px;
+    }
+
+    .neural-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .line {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 2px;
+      height: 260px;
+      transform-origin: bottom center;
+      background: linear-gradient(to top, transparent, var(--cyan), transparent);
+      opacity: .18;
+    }
+
+    .line:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
+    .line:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); }
+    .line:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); }
+    .line:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); }
+    .line:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); }
+    .line:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); }
+    .line:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); }
+    .line:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); }
+
+    .brain {
+      position: absolute;
+      width: 150px;
+      min-height: 115px;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(10, 17, 30, .92);
+      backdrop-filter: blur(14px);
+      text-align: center;
+      transition: .35s;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, .3);
+    }
+
+    .brain:hover {
+      transform: scale(1.04);
+      border-color: rgba(39, 217, 255, .4);
+    }
+
+    .brain.active {
+      border-color: var(--cyan);
+      box-shadow: 0 0 45px rgba(39, 217, 255, .2);
+      animation: pulse 1.4s infinite;
+    }
+
+    .brain.done {
+      border-color: rgba(50, 230, 161, .5);
+    }
+
+    .brain .emoji {
+      font-size: 27px;
+    }
+
+    .brain strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 12px;
+    }
+
+    .brain small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .brain:nth-of-type(1) { top: 3%; left: 50%; transform: translateX(-50%); }
+    .brain:nth-of-type(2) { top: 14%; right: 5%; }
+    .brain:nth-of-type(3) { top: 40%; right: 0; }
+    .brain:nth-of-type(4) { bottom: 7%; right: 10%; }
+    .brain:nth-of-type(5) { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .brain:nth-of-type(6) { bottom: 7%; left: 10%; }
+    .brain:nth-of-type(7) { top: 40%; left: 0; }
+    .brain:nth-of-type(8) { top: 14%; left: 5%; }
+
+    .core {
+      position: relative;
+      z-index: 5;
+      width: 230px;
+      height: 230px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #54edff, transparent 8%),
+        radial-gradient(circle, #192b53, #07101f 62%);
+      border: 1px solid rgba(39, 217, 255, .5);
+      box-shadow:
+        0 0 45px rgba(39, 217, 255, .15),
+        inset 0 0 60px rgba(39, 217, 255, .08);
+      transition: box-shadow .5s;
+      animation: coreGlow 3s infinite alternate;
+    }
+
+    @keyframes coreGlow {
+      0% { box-shadow: 0 0 35px rgba(39, 217, 255, .10), inset 0 0 50px rgba(39, 217, 255, .05); }
+      100% { box-shadow: 0 0 80px rgba(39, 217, 255, .30), inset 0 0 80px rgba(39, 217, 255, .15); }
+    }
+
+    .core .octopus {
+      font-size: 76px;
+      filter: drop-shadow(0 0 25px rgba(39, 217, 255, .8));
+      animation: octoGlow 2s infinite alternate;
+    }
+
+    @keyframes octoGlow {
+      0% { filter: drop-shadow(0 0 15px rgba(39, 217, 255, .5)); }
+      100% { filter: drop-shadow(0 0 40px rgba(39, 217, 255, 1)); }
+    }
+
+    .core strong {
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+
+    .core small {
+      margin-top: 4px;
+      color: var(--muted);
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(39, 217, 255, .08); }
+      50% { box-shadow: 0 0 50px rgba(39, 217, 255, .32); }
+    }
+
+    /* ===== RESULTS ===== */
+    .results {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 18px;
+    }
+
+    .result-nav {
+      position: sticky;
+      top: 90px;
+      align-self: start;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+
+    .result-nav button {
+      width: 100%;
+      text-align: left;
+      padding: 11px;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      color: #aebbd0;
+      margin-bottom: 3px;
+    }
+
+    .result-nav button:hover,
+    .result-nav button.active {
+      background: rgba(39, 217, 255, .08);
+      color: var(--cyan);
+    }
+
+    .result-content {
+      min-width: 0;
+    }
+
+    .result-card {
+      padding: 25px;
+      margin-bottom: 15px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(10, 17, 30, .85);
+    }
+
+    .result-card h2 {
+      margin-bottom: 8px;
+    }
+
+    .result-card .meta {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .result-text {
+      white-space: pre-wrap;
+      line-height: 1.75;
+      color: #d7dfec;
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .action {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #080e19;
+      color: #dce7f5;
+    }
+
+    .action.primary {
+      background: var(--cyan);
+      color: #021018;
+      border: 0;
+      font-weight: 800;
+    }
+
+    .action:hover {
+      border-color: var(--cyan);
+    }
+
+    /* ===== LAUNCH GUIDE (BUILT-IN) ===== */
+    .launch-guide-section {
+      margin: 50px 0 30px;
+      border-top: 1px solid var(--border);
+      padding-top: 35px;
+    }
+
+    .launch-guide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .launch-guide-header h2 {
+      font-size: 26px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #fff, var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .guide-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .guide-tab {
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: var(--panel);
+      color: #b0bed2;
+      font-size: 14px;
+      transition: .2s;
+      font-weight: 600;
+    }
+
+    .guide-tab.active {
+      background: rgba(39, 217, 255, .12);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .guide-tab:hover {
+      border-color: rgba(39, 217, 255, .4);
+    }
+
+    .guide-content {
+      display: none;
+      animation: fadeIn .25s ease;
+    }
+
+    .guide-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .guide-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+
+    .guide-card h3 {
+      font-size: 17px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cyan);
+    }
+
+    .guide-card ul, .guide-card ol {
+      padding-left: 18px;
+      color: #cbd6e6;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .guide-card li {
+      margin-bottom: 6px;
+    }
+
+    .guide-card p {
+      color: #cbd6e6;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .guide-card a {
+      color: var(--cyan);
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(39, 217, 255, .4);
+    }
+
+    .guide-card a:hover {
+      border-bottom-color: var(--cyan);
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(39, 217, 255, .15);
+      color: var(--cyan);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 30px;
+      font-weight: 700;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    .copy-block {
+      background: #070c16;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #d2dcee;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 12px 0;
+      position: relative;
+    }
+
+    .copy-block button {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+    }
+
+    .copy-block button:hover {
+      color: var(--cyan);
+      border-color: var(--cyan);
+    }
+
+    /* ===== CHECKLIST MANAGER ===== */
+    .product-tracker {
+      margin: 40px 0 50px;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(16, 26, 44, .6), rgba(8, 13, 24, .8));
+      box-shadow: var(--shadow);
+    }
+
+    .product-tracker h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .product-tracker .sub {
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .tracker-input-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .tracker-input-row input {
+      flex: 1 1 200px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #070c16;
+      color: white;
+      outline: none;
+    }
+
+    .tracker-input-row input:focus {
+      border-color: var(--cyan);
+    }
+
+    .tracker-input-row button {
+      padding: 14px 26px;
+      border-radius: 12px;
+      border: none;
+      background: var(--cyan);
+      color: #021018;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .product-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--panel);
+      transition: .2s;
+      flex-wrap: wrap;
+    }
+
+    .product-item:hover {
+      border-color: rgba(39, 217, 255, .25);
+    }
+
+    .product-item .done-check {
+      width: 24px;
+      height: 24px;
+      accent-color: var(--cyan);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .product-item .product-info {
+      flex: 1 1 180px;
+      min-width: 0;
+    }
+
+    .product-item .product-name {
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .product-item .product-name.done {
+      text-decoration: line-through;
+      color: var(--muted);
+      opacity: .7;
+    }
+
+    .product-item .product-url {
+      font-size: 13px;
+      color: var(--muted);
+      word-break: break-all;
+      margin-top: 4px;
+    }
+
+    .product-item .product-url a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .product-item .product-url a:hover {
+      text-decoration: underline;
+    }
+
+    .product-item .delete-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 85, 119, .25);
+      color: #ff6685;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .product-item .delete-btn:hover {
+      background: rgba(255, 85, 119, .1);
+      border-color: var(--danger);
+    }
+
+    .tracker-empty {
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+    }
+
+    /* ===== HISTORY ===== */
+    .history-panel {
+      width: min(1200px, 94%);
+      margin: 0 auto 50px;
+    }
+
+    .history-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .history-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    .history-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: var(--panel);
+    }
+
+    .history-card strong {
+      display: block;
+    }
+
+    .history-card small {
+      display: block;
+      color: var(--muted);
+      margin: 7px 0 15px;
+    }
+
+    .history-card button {
+      border: 1px solid var(--border);
+      background: #070c16;
+      color: white;
+      border-radius: 9px;
+      padding: 8px 12px;
+    }
+
+    .empty {
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 15px;
+    }
+
+    /* ===== TOAST ===== */
+    #toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 99999;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: #111b2c;
+      border: 1px solid rgba(39, 217, 255, .3);
+      box-shadow: var(--shadow);
+      transform: translateY(120px);
+      opacity: 0;
+      transition: .3s;
+      max-width: 320px;
+    }
+
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 800px) {
+      .topbar {
+        padding: 0 14px;
+        height: auto;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .top-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .top-actions .icon-btn span {
+        display: inline;
+      }
+
+      .brain-system {
+        min-height: 900px;
+      }
+
+      .brain {
+        width: 125px;
+        min-height: 105px;
+      }
+
+      .core {
+        width: 190px;
+        height: 190px;
+      }
+
+      .core .octopus {
+        font-size: 60px;
+      }
+
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .result-nav {
+        position: static;
+        display: flex;
+        overflow-x: auto;
+        gap: 4px;
+      }
+
+      .result-nav button {
+        min-width: max-content;
+      }
+
+      .type-row {
+        grid-template-columns: 1fr;
+      }
+
+      .product-tracker {
+        padding: 20px;
+      }
+
+      .tracker-input-row button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 30px;
+        letter-spacing: -2px;
+      }
+
+      .access-card {
+        padding: 28px 18px;
+      }
+
+      .access-card h1 {
+        font-size: 28px;
+      }
+
+      .icon-btn {
+        font-size: 13px;
+        padding: 0 10px;
+        height: 36px;
+      }
+
+      .product-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .product-item .delete-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ================= ACCESS ================= -->
-
-<section id="accessScreen">
-
+  <!-- ================= ACCESS ================= -->
+  <section id="accessScreen">
     <div class="access-card">
-
-        <div class="brand-mini">
-            JOHELIV LABS
-        </div>
-
-        <h1>NINE</h1>
-
-        <div class="sub">
-            OCTOBRAIN
-        </div>
-
-        <p style="color:#cdd8e8;line-height:1.6;">
-            Welcome to Joheliv Labs<br>
-            <strong>JDev App Craft Co.</strong>
-        </p>
-
-        <div class="ceo">
-            CEO — <strong>JASON MUFAMADI</strong><br>
-            SOUTH AFRICA
-        </div>
-
-        <input
-            id="accessCode"
-            class="access-input"
-            type="password"
-            inputmode="numeric"
-            autocomplete="off"
-            placeholder="ACCESS CODE"
-        >
-
-        <button class="unlock" onclick="unlockApp()">
-            UNLOCK OCTOBRAIN
-        </button>
-
-        <div id="accessError" class="error"></div>
-
+      <div class="brand-mini">JOHELIV LABS</div>
+      <h1>NINE</h1>
+      <div class="sub">OCTOBRAIN</div>
+      <p style="color:#cdd8e8;line-height:1.6;">
+        Welcome to Joheliv Labs<br>
+        <strong>JDev App Craft Co.</strong>
+      </p>
+      <div class="ceo">
+        CEO — <strong>JASON MUFAMADI</strong><br>
+        SOUTH AFRICA
+      </div>
+      <input id="accessCode" class="access-input" type="password" inputmode="numeric" autocomplete="off" placeholder="ACCESS CODE">
+      <button class="unlock" onclick="unlockApp()">UNLOCK OCTOBRAIN</button>
+      <div id="accessError" class="error"></div>
     </div>
+  </section>
 
-</section>
-
-<!-- ================= APPLICATION ================= -->
-
-<div id="app" class="hidden">
+  <!-- ================= APPLICATION ================= -->
+  <div id="app" class="hidden">
 
     <header class="topbar">
-
-        <div class="logo">
-            <div class="logo-icon">🐙</div>
-
-            <div>
-                <strong>NINE: OCTOBRAIN</strong>
-                <small>Product Intelligence System</small>
-            </div>
+      <div class="logo">
+        <div class="logo-icon">🐙</div>
+        <div>
+          <strong>NINE: OCTOBRAIN</strong>
+          <small>Product Intelligence System</small>
         </div>
-
-        <div class="top-actions">
-            <button class="icon-btn" onclick="showHistory()">
-                🕘 <span>History</span>
-            </button>
-
-            <button class="icon-btn" onclick="clearHistory()">
-                🗑 <span>Clear</span>
-            </button>
-        </div>
-
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" onclick="showHistory()">🕘 <span>History</span></button>
+        <button class="icon-btn" onclick="clearHistory()">🗑 <span>Clear</span></button>
+        <button class="icon-btn" onclick="scrollToLaunchGuide()">🚀 <span>Launch Guide</span></button>
+      </div>
     </header>
 
     <section class="hero">
-
-        <div class="welcome">
-            WELCOME TO JOHELIV LABS
-        </div>
-
-        <h1>NINE: OCTOBRAIN</h1>
-
-        <p>
-            One idea. Nine specialised brains. One complete product blueprint.
-        </p>
-
+      <div class="welcome">WELCOME TO JOHELIV LABS</div>
+      <h1>NINE: OCTOBRAIN</h1>
+      <p>One idea. Nine specialised brains. One complete product blueprint. Plus a full launch guide and tracker.</p>
     </section>
 
     <main class="workspace">
 
-        <!-- SETUP -->
-
-        <section class="setup">
-
-            <div class="field">
-                <label>PRODUCT / APPLICATION NAME</label>
-
-                <input
-                    id="productName"
-                    type="text"
-                    placeholder="Example: StudyPad"
-                >
-            </div>
-
-            <div class="field">
-                <label>WHAT ARE YOU BUILDING?</label>
-
-                <div class="type-row">
-
-                    <div
-                        id="appType"
-                        class="type-option active"
-                        onclick="selectType('Application')"
-                    >
-                        <strong>📱 Application</strong>
-                        <span>Android, iOS, desktop or mobile product</span>
-                    </div>
-
-                    <div
-                        id="webType"
-                        class="type-option"
-                        onclick="selectType('Website')"
-                    >
-                        <strong>🌐 Website</strong>
-                        <span>Web application, platform or website</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="field">
-                <label>DESCRIBE YOUR IDEA</label>
-
-                <textarea
-                    id="productIdea"
-                    placeholder="Tell OCTOBRAIN what you want to build..."
-                ></textarea>
-            </div>
-
-            <button class="generate" onclick="startGeneration()">
-                🧠 ACTIVATE OCTOBRAIN
-            </button>
-
-        </section>
-
-        <!-- BRAIN SYSTEM -->
-
-        <section class="brain-system">
-
-            <div class="neural-lines">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
-
-            <div class="brain" data-index="0">
-                <div class="emoji">🎯</div>
-                <strong>STRATEGY</strong>
-                <small>Product direction</small>
-            </div>
-
-            <div class="brain" data-index="1">
-                <div class="emoji">👥</div>
-                <strong>USERS</strong>
-                <small>Audience & UX</small>
-            </div>
-
-            <div class="brain" data-index="2">
-                <div class="emoji">⚙️</div>
-                <strong>FEATURES</strong>
-                <small>Functionality</small>
-            </div>
-
-            <div class="brain" data-index="3">
-                <div class="emoji">📜</div>
-                <strong>POLICY</strong>
-                <small>Rules & terms</small>
-            </div>
-
-            <div class="brain" data-index="4">
-                <div class="emoji">🔐</div>
-                <strong>SECURITY</strong>
-                <small>Privacy & safety</small>
-            </div>
-
-            <div class="brain" data-index="5">
-                <div class="emoji">💻</div>
-                <strong>TECH</strong>
-                <small>Architecture</small>
-            </div>
-
-            <div class="brain" data-index="6">
-                <div class="emoji">💰</div>
-                <strong>BUSINESS</strong>
-                <small>Monetization</small>
-            </div>
-
-            <div class="brain" data-index="7">
-                <div class="emoji">🚀</div>
-                <strong>LAUNCH</strong>
-                <small>Roadmap</small>
-            </div>
-
-            <div class="core">
-
-                <div class="octopus">🐙</div>
-
-                <strong>CORE BRAIN</strong>
-
-                <small id="brainStatus">
-                    Ready
-                </small>
-
-            </div>
-
-        </section>
-
-        <!-- RESULTS -->
-
-        <section id="resultsSection" class="results hidden">
-
-            <aside class="result-nav" id="resultNav"></aside>
-
-            <div class="result-content" id="resultContent"></div>
-
-        </section>
-
-    </main>
-
-    <!-- HISTORY -->
-
-    <section class="history-panel">
-
-        <div class="history-header">
-
-            <h2>Project History</h2>
-
-            <button
-                class="action"
-                onclick="exportHistory()"
-            >
-                ⬇ Export History
-            </button>
-
+      <!-- SETUP -->
+      <section class="setup">
+        <div class="field">
+          <label>PRODUCT / APPLICATION NAME</label>
+          <input id="productName" type="text" placeholder="Example: StudyPad">
         </div>
 
+        <div class="field">
+          <label>WHAT ARE YOU BUILDING?</label>
+          <div class="type-row">
+            <div id="appType" class="type-option active" onclick="selectType('Application')">
+              <strong>📱 Application</strong>
+              <span>Android, iOS, desktop or mobile product</span>
+            </div>
+            <div id="webType" class="type-option" onclick="selectType('Website')">
+              <strong>🌐 Website</strong>
+              <span>Web application, platform or website</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>DESCRIBE YOUR IDEA</label>
+          <textarea id="productIdea" placeholder="Tell OCTOBRAIN what you want to build..."></textarea>
+        </div>
+
+        <button class="generate" onclick="startGeneration()">🧠 ACTIVATE OCTOBRAIN</button>
+      </section>
+
+      <!-- BRAIN SYSTEM -->
+      <section class="brain-system">
+        <div class="neural-lines">
+          <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+          <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+        </div>
+
+        <div class="brain" data-index="0"><div class="emoji">🎯</div><strong>STRATEGY</strong><small>Product direction</small></div>
+        <div class="brain" data-index="1"><div class="emoji">👥</div><strong>USERS</strong><small>Audience & UX</small></div>
+        <div class="brain" data-index="2"><div class="emoji">⚙️</div><strong>FEATURES</strong><small>Functionality</small></div>
+        <div class="brain" data-index="3"><div class="emoji">📜</div><strong>POLICY</strong><small>Rules & terms</small></div>
+        <div class="brain" data-index="4"><div class="emoji">🔐</div><strong>SECURITY</strong><small>Privacy & safety</small></div>
+        <div class="brain" data-index="5"><div class="emoji">💻</div><strong>TECH</strong><small>Architecture</small></div>
+        <div class="brain" data-index="6"><div class="emoji">💰</div><strong>BUSINESS</strong><small>Monetization</small></div>
+        <div class="brain" data-index="7"><div class="emoji">🚀</div><strong>LAUNCH</strong><small>Roadmap</small></div>
+
+        <div class="core">
+          <div class="octopus">🐙</div>
+          <strong>CORE BRAIN</strong>
+          <small id="brainStatus">Ready</small>
+        </div>
+      </section>
+
+      <!-- RESULTS -->
+      <section id="resultsSection" class="results hidden">
+        <aside class="result-nav" id="resultNav"></aside>
+        <div class="result-content" id="resultContent"></div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- LAUNCH GUIDE (BUILT-IN) -->
+      <!-- ========================================================= -->
+      <section class="launch-guide-section" id="launchGuideSection">
+        <div class="launch-guide-header">
+          <h2>🚀 App Launch & Store Guide</h2>
+          <span class="badge">Google Play</span>
+          <span class="badge">Apple App Store</span>
+          <span class="badge">Huawei AppGallery</span>
+        </div>
+
+        <div class="guide-tabs">
+          <button class="guide-tab active" data-tab="store-requirements">📋 Store Requirements</button>
+          <button class="guide-tab" data-tab="screenshots-icons">📸 Screenshots & Icons</button>
+          <button class="guide-tab" data-tab="pricing-ads">💰 Pricing & Ads</button>
+          <button class="guide-tab" data-tab="policy-urls">🔗 Policy URLs</button>
+          <button class="guide-tab" data-tab="marketing">📣 Marketing Guide</button>
+          <button class="guide-tab" data-tab="policy-drafting">📝 Draft a Policy</button>
+        </div>
+
+        <!-- TAB: Store Requirements -->
+        <div class="guide-content active" id="tab-store-requirements">
+          <div class="guide-grid">
+            <div class="guide-card">
+              <h3>▶️ Google Play Store</h3>
+              <p><strong>Requirements for a new app:</strong></p>
+              <ul>
+                <li>Google Play Developer account: <strong>$25 once</strong></li>
+                <li>App must target recent Android API (currently API 34+)</li>
+                <li>Signed APK or AAB (Android App Bundle)</li>
+                <li>Privacy Policy URL (required if app collects data)</li>
+                <li>Content rating questionnaire</li>
+                <li>App category & contact details</li>
+                <li>Data safety form</li>
+                <li>Store listing: title, short & full description, screenshots, feature graphic, icon (512×512)</li>
+                <li>App must not violate impersonation, hate, or malware policies</li>
+              </ul>
+              <p><strong>Useful links:</strong><br>
+                <a href="https://play.google.com/console" target="_blank">Google Play Console</a><br>
+                <a href="https://support.google.com/googleplay/android-developer/answer/9859152" target="_blank">Play Console Help</a>
+              </p>
+            </div>
+            <div class="guide-card">
+              <h3>🍎 Apple App Store</h3>
+              <p><strong>Requirements for a new app:</strong></p>
+              <ul>
+                <li>Apple Developer Program: <strong>$99/year</strong></li>
+                <li>Build with Xcode, upload via App Store Connect</li>
+                <li>App must follow App Store Review Guidelines</li>
+                <li>Privacy Policy URL required</li>
+                <li>App Privacy details (data collection)</li>
+                <li>Age rating</li>
+                <li>Screenshots for iPhone, iPad (if supported), Apple Watch (if supported)</li>
+                <li>App icon (1024×1024 for App Store)</li>
+                <li>Support URL & marketing URL (optional but recommended)</li>
+              </ul>
+              <p><strong>Useful links:</strong><br>
+                <a href="https://developer.apple.com/app-store-connect/" target="_blank">App Store Connect</a><br>
+                <a href="https://developer.apple.com/app-store/review/guidelines/" target="_blank">App Store Review Guidelines</a>
+              </p>
+            </div>
+            <div class="guide-card">
+              <h3>🌸 Huawei AppGallery</h3>
+              <p><strong>Requirements for a new app:</strong></p>
+              <ul>
+                <li>Huawei Developer account (free)</li>
+                <li>Signed APK or App Bundle (Huawei supports APK & AAB)</li>
+                <li>Privacy Policy URL (mandatory)</li>
+                <li>App must comply with Huawei's content policies</li>
+                <li>App icon: 216×216 px (recommended)</li>
+                <li>Screenshots: at least 3, up to 8, various sizes accepted</li>
+                <li>Feature graphic: 1024×500 px</li>
+                <li>Category, age rating, contact info</li>
+              </ul>
+              <p><strong>Useful links:</strong><br>
+                <a href="https://developer.huawei.com/consumer/en/appgallery" target="_blank">Huawei AppGallery Connect</a><br>
+                <a href="https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-Guides/agc-introduction" target="_blank">AppGallery Documentation</a>
+              </p>
+            </div>
+            <div class="guide-card">
+              <h3>📦 General checklist for all stores</h3>
+              <ul>
+                <li>App name (unique, no trademark issues)</li>
+                <li>Short description (80 chars) & full description (4000 chars)</li>
+                <li>Privacy policy URL (hosted, publicly accessible)</li>
+                <li>App icon: high-resolution (512×512 PNG for Play, 1024×1024 for Apple)</li>
+                <li>Feature graphic (Play: 1024×500, AppGallery similar)</li>
+                <li>Screenshots (phone & tablet if applicable)</li>
+                <li>Promo video (optional)</li>
+                <li>Contact email & website</li>
+                <li>Content rating</li>
+                <li>Target audience & age group</li>
+                <li>Data safety / privacy declaration</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Screenshots & Icons -->
+        <div class="guide-content" id="tab-screenshots-icons">
+          <div class="guide-grid">
+            <div class="guide-card">
+              <h3>📱 Google Play — Icon & Screenshots</h3>
+              <ul>
+                <li><strong>App icon:</strong> 512×512 px, 32-bit PNG (with alpha), max 1MB</li>
+                <li><strong>Feature graphic:</strong> 1024×500 px, JPEG or 24-bit PNG (no alpha)</li>
+                <li><strong>Phone screenshots:</strong> 2–8 images, 16:9 or 9:16, min 320px, max 3840px</li>
+                <li><strong>7-inch tablet:</strong> 2–8 images, 16:9 or 9:16 (optional but recommended)</li>
+                <li><strong>10-inch tablet:</strong> 2–8 images (optional)</li>
+                <li><strong>Promo video:</strong> YouTube URL (optional)</li>
+              </ul>
+              <p><strong>Tips:</strong> Show the core UI, highlight features with text overlays, keep it clean.</p>
+            </div>
+            <div class="guide-card">
+              <h3>🍎 Apple App Store — Icon & Screenshots</h3>
+              <ul>
+                <li><strong>App icon:</strong> 1024×1024 px, PNG, no transparency, no rounded corners</li>
+                <li><strong>iPhone screenshots:</strong> 6.7" (1290×2796), 6.5" (1242×2688), 5.5" (1242×2208) — at least one set</li>
+                <li><strong>iPad screenshots:</strong> 12.9" (2048×2732), 11" (1668×2388) — if app supports iPad</li>
+                <li><strong>App previews:</strong> optional 15–30 sec videos</li>
+              </ul>
+              <p><strong>Tips:</strong> Use device frames, show real UI, add short captions.</p>
+            </div>
+            <div class="guide-card">
+              <h3>🌸 Huawei AppGallery — Icon & Screenshots</h3>
+              <ul>
+                <li><strong>App icon:</strong> 216×216 px, PNG</li>
+                <li><strong>Feature graphic:</strong> 1024×500 px</li>
+                <li><strong>Screenshots:</strong> 3–8 images, recommended 1080×1920 or similar</li>
+                <li><strong>Promo video:</strong> optional</li>
+              </ul>
+              <p><strong>Tips:</strong> Similar to Play Store, but ensure Chinese market guidelines if targeting China.</p>
+            </div>
+            <div class="guide-card">
+              <h3>🖼️ Quick icon sizes summary</h3>
+              <ul>
+                <li>Google Play Store: 512×512</li>
+                <li>Apple App Store: 1024×1024</li>
+                <li>Huawei AppGallery: 216×216</li>
+                <li>In-app icons: multiple densities (mdpi, hdpi, xhdpi, etc.)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Pricing & Ads -->
+        <div class="guide-content" id="tab-pricing-ads">
+          <div class="guide-grid">
+            <div class="guide-card">
+              <h3>💰 App Pricing Models</h3>
+              <ul>
+                <li><strong>Free:</strong> Ad-supported or feature-limited</li>
+                <li><strong>Paid:</strong> One-time purchase (e.g., $0.99 – $9.99)</li>
+                <li><strong>Freemium:</strong> Free with in-app purchases (IAP)</li>
+                <li><strong>Subscription:</strong> Monthly/yearly (e.g., $2.99/month)</li>
+                <li><strong>Pay-what-you-want:</strong> Donation-based</li>
+              </ul>
+              <p><strong>Store fees:</strong> Google 15–30%, Apple 15–30%, Huawei 15–30%.</p>
+            </div>
+            <div class="guide-card">
+              <h3>📢 Types of Ads for Apps</h3>
+              <ul>
+                <li><strong>Banner ads:</strong> Small, top/bottom – low revenue</li>
+                <li><strong>Interstitial ads:</strong> Full-screen between actions</li>
+                <li><strong>Rewarded video:</strong> User watches to get in-app reward</li>
+                <li><strong>Native ads:</strong> Blend into UI</li>
+                <li><strong>Playable ads:</strong> Interactive demo</li>
+              </ul>
+            </div>
+            <div class="guide-card">
+              <h3>🔗 Ad Networks & Links</h3>
+              <ul>
+                <li><strong>Google AdMob:</strong> <a href="https://admob.google.com" target="_blank">admob.google.com</a></li>
+                <li><strong>Meta Audience Network:</strong> <a href="https://developers.facebook.com/docs/audience-network" target="_blank">developers.facebook.com/audience-network</a></li>
+                <li><strong>Unity Ads:</strong> <a href="https://unity.com/solutions/unity-ads" target="_blank">unity.com/solutions/unity-ads</a></li>
+                <li><strong>AppLovin:</strong> <a href="https://www.applovin.com" target="_blank">applovin.com</a></li>
+                <li><strong>Huawei Ads:</strong> <a href="https://developer.huawei.com/consumer/en/hms/huawei-ads" target="_blank">Huawei Ads</a></li>
+              </ul>
+            </div>
+            <div class="guide-card">
+              <h3>📋 Ad integration instructions (general)</h3>
+              <ol>
+                <li>Create account on ad network.</li>
+                <li>Add app to network.</li>
+                <li>Generate ad unit IDs.</li>
+                <li>Integrate SDK into your app.</li>
+                <li>Place ads according to UX best practices.</li>
+                <li>Test with test ads.</li>
+                <li>Publish & monitor revenue.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Policy URLs -->
+        <div class="guide-content" id="tab-policy-urls">
+          <div class="guide-grid">
+            <div class="guide-card">
+              <h3>🔗 Why you need a Privacy Policy URL</h3>
+              <p>All major app stores require a publicly accessible URL to your privacy policy if your app collects any personal data (even analytics).</p>
+              <ul>
+                <li>Google Play: mandatory if data collection</li>
+                <li>Apple: mandatory for all apps</li>
+                <li>Huawei: mandatory</li>
+              </ul>
+            </div>
+            <div class="guide-card">
+              <h3>🛠️ How to create a policy with Google Sites</h3>
+              <ol>
+                <li>Go to <a href="https://sites.google.com" target="_blank">sites.google.com</a></li>
+                <li>Create a blank site.</li>
+                <li>Name it e.g. "MyApp Privacy Policy".</li>
+                <li>Add a new page.</li>
+                <li>Paste your policy text.</li>
+                <li>Publish the site.</li>
+                <li>Copy the published URL.</li>
+                <li>Use that URL in the store listing.</li>
+              </ol>
+              <p><strong>Tip:</strong> Also create a "Terms of Service" page and link it.</p>
+            </div>
+            <div class="guide-card">
+              <h3>📄 Policy template (copy & adapt)</h3>
+              <div class="copy-block" id="policyTemplateBlock">
+Privacy Policy for [App Name]
+
+Last updated: [Date]
+
+[Company Name] ("we", "us") operates [App Name].
+This page informs you of our policies regarding the collection,
+use, and disclosure of personal data when you use our app.
+
+Information Collection and Use:
+We may collect several different types of information for various
+purposes to provide and improve our service to you.
+
+Types of Data Collected:
+- Personal Data (email, name)
+- Usage Data (device info, log data)
+- Tracking & Cookies Data
+
+Use of Data:
+We use the collected data to:
+- Provide and maintain the service
+- Notify you about changes
+- Allow interactive features
+- Provide customer support
+- Gather analysis to improve the app
+
+Security of Data:
+The security of your data is important to us, but remember that
+no method of transmission over the Internet is 100% secure.
+
+Changes to This Privacy Policy:
+We may update our Privacy Policy from time to time.
+
+Contact Us:
+If you have any questions, contact us at [your email].
+              </div>
+              <button class="action" onclick="copyPolicyTemplate()">📋 Copy Template</button>
+            </div>
+            <div class="guide-card">
+              <h3>🧾 What to include in a Privacy Policy</h3>
+              <ul>
+                <li>What data you collect</li>
+                <li>How you collect it</li>
+                <li>Why you collect it</li>
+                <li>Who you share it with (third-party services)</li>
+                <li>How long you keep it</li>
+                <li>How users can request deletion</li>
+                <li>Contact information</li>
+                <li>Children's privacy (COPPA/GDPR-K)</li>
+                <li>Changes to policy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Marketing Guide -->
+        <div class="guide-content" id="tab-marketing">
+          <div class="guide-grid">
+            <div class="guide-card">
+              <h3>📣 Marketing your app — step by step</h3>
+              <ol>
+                <li><strong>Define your audience:</strong> Who will use it and why?</li>
+                <li><strong>Create a landing page:</strong> Simple site with app info & download links.</li>
+                <li><strong>Social media:</strong> Post on TikTok, Instagram, X, LinkedIn.</li>
+                <li><strong>App Store Optimization (ASO):</strong> Keywords, title, description, screenshots.</li>
+                <li><strong>Content marketing:</strong> Blog posts, YouTube tutorials.</li>
+                <li><strong>Influencer outreach:</strong> Find micro-influencers in your niche.</li>
+                <li><strong>Paid ads:</strong> Facebook, Instagram, Google Ads, TikTok Ads.</li>
+                <li><strong>Email marketing:</strong> Build a list and send updates.</li>
+                <li><strong>Communities:</strong> Reddit, Discord, Facebook Groups.</li>
+                <li><strong>Track & optimize:</strong> Use analytics to see what works.</li>
+              </ol>
+            </div>
+            <div class="guide-card">
+              <h3>📈 ASO Checklist</h3>
+              <ul>
+                <li>App title with main keyword</li>
+                <li>Short description with benefits</li>
+                <li>Full description with features & keywords</li>
+                <li>High-quality screenshots</li>
+                <li>Feature graphic</li>
+                <li>Promo video</li>
+                <li>Localization for key markets</li>
+                <li>Encourage reviews after positive interactions</li>
+              </ul>
+            </div>
+            <div class="guide-card">
+              <h3>📱 Social Media Post Ideas</h3>
+              <ul>
+                <li>Behind-the-scenes of development</li>
+                <li>Feature highlights</li>
+                <li>User testimonials</li>
+                <li>Tips & tricks</li>
+                <li>Poll: "Which feature do you want next?"</li>
+                <li>Giveaways / contests</li>
+              </ul>
+            </div>
+            <div class="guide-card">
+              <h3>🔗 Useful marketing links</h3>
+              <ul>
+                <li><a href="https://ads.google.com" target="_blank">Google Ads</a></li>
+                <li><a href="https://www.facebook.com/business/ads" target="_blank">Meta Ads</a></li>
+                <li><a href="https://ads.tiktok.com" target="_blank">TikTok Ads</a></li>
+                <li><a href="https://analytics.google.com" target="_blank">Google Analytics</a></li>
+                <li><a href="https://mixpanel.com" target="_blank">Mixpanel</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Draft a Policy -->
+        <div class="guide-content" id="tab-policy-drafting">
+          <div class="guide-grid">
+            <div class="guide-card">
+              <h3>📝 How to draft a policy (step-by-step)</h3>
+              <ol>
+                <li><strong>Identify data:</strong> What personal data does your app collect? (email, name, location, device ID)</li>
+                <li><strong>Purpose:</strong> Why do you need it? (account, analytics, ads)</li>
+                <li><strong>Third parties:</strong> List all services (e.g., Firebase, AdMob, AWS).</li>
+                <li><strong>Retention:</strong> How long do you keep data?</li>
+                <li><strong>User rights:</strong> How can users access, correct, or delete their data?</li>
+                <li><strong>Children:</strong> Are you targeting under 13? If yes, COPPA applies.</li>
+                <li><strong>Security:</strong> How do you protect data? (encryption, HTTPS)</li>
+                <li><strong>Contact:</strong> Provide an email for privacy questions.</li>
+                <li><strong>Legal review:</strong> Consult a lawyer for full compliance (POPIA in South Africa).</li>
+              </ol>
+            </div>
+            <div class="guide-card">
+              <h3>⚖️ South African context (POPIA)</h3>
+              <p>If you operate in South Africa, the Protection of Personal Information Act (POPIA) applies.</p>
+              <ul>
+                <li>You must have a lawful basis for processing.</li>
+                <li>You must inform users what you collect and why.</li>
+                <li>Users have the right to access, correct, and delete their data.</li>
+                <li>You must secure data and report breaches.</li>
+              </ul>
+              <p><a href="https://www.justice.gov.za/inforeg/" target="_blank">Information Regulator South Africa</a></p>
+            </div>
+            <div class="guide-card">
+              <h3>📄 Quick template for About page</h3>
+              <div class="copy-block">
+About [App Name]
+
+[App Name] is developed by [Company Name], based in [Country].
+We aim to [mission statement].
+
+Founder: [CEO Name]
+Contact: [email]
+Website: [URL]
+
+Version: [x.y.z]
+              </div>
+            </div>
+            <div class="guide-card">
+              <h3>📌 Policy URL checklist</h3>
+              <ul>
+                <li>URL must be public (no login)</li>
+                <li>Must be accessible on mobile</li>
+                <li>Must match app name and company</li>
+                <li>Must include contact details</li>
+                <li>Should be updated regularly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- PRODUCT TRACKER (URL + NAME + DONE) -->
+      <!-- ========================================================= -->
+      <section class="product-tracker" id="productTracker">
+        <h2>📌 Product Launch Tracker</h2>
+        <div class="sub">Save your product name, URL, and mark as done. Data is stored locally in your browser.</div>
+
+        <div class="tracker-input-row">
+          <input id="trackerName" type="text" placeholder="Product name (e.g., StudyPad)">
+          <input id="trackerUrl" type="url" placeholder="Product URL (e.g., https://studypad.app)">
+          <button onclick="addTrackedProduct()">+ Add Product</button>
+        </div>
+
+        <div id="trackedProductList" class="product-list">
+          <div class="tracker-empty">No products tracked yet. Add your first product above.</div>
+        </div>
+      </section>
+
+      <!-- HISTORY -->
+      <section class="history-panel">
+        <div class="history-header">
+          <h2>Project History</h2>
+          <button class="action" onclick="exportHistory()">⬇ Export History</button>
+        </div>
         <div id="historyList" class="history-list"></div>
+      </section>
 
-    </section>
+    </main>
+  </div>
 
-</div>
+  <div id="toast"></div>
 
-<div id="toast"></div>
+  <script>
+    /* =========================================================
+       NINE: OCTOBRAIN — JOHELIV LABS
+       ========================================================= */
 
-<script>
-/* =========================================================
-   NINE: OCTOBRAIN
-   JOHELIV LABS — JDEV APP CRAFT CO.
-   ========================================================= */
-
-const CONFIG = {
-
-    /* Brand identity */
-    company: "JOHELIV LABS — JDEV APP CRAFT CO.",
-    ceo: "JASON MUFAMADI",
-    country: "SOUTH AFRICA",
-    email: "johelivlabs@gmail.com",
-    phone: "0738592196",
-
-    /* Worker supplied by Jason */
-    workerUrl:
-        "https://octopusmindorbrain.jdevapphub.workers.dev",
-
-    /*
-       This is intentionally configurable.
-
-       For production security, authentication should be
-       verified by the Worker rather than relying on this
-       browser-side value.
-    */
-    accessCode: "0105075874088",
-
-    storageKey: "nine_octobrain_history_v1"
-};
-
-let selectedType = "Application";
-let currentProject = null;
-
-const brains = [
-    "STRATEGY",
-    "USERS",
-    "FEATURES",
-    "POLICY",
-    "SECURITY",
-    "TECH",
-    "BUSINESS",
-    "LAUNCH"
-];
-
-/* =========================================================
-   ACCESS
-   ========================================================= */
-
-function unlockApp(){
-
-    const input =
-        document.getElementById("accessCode").value.trim();
-
-    const error =
-        document.getElementById("accessError");
-
-    if(input === CONFIG.accessCode){
-
-        sessionStorage.setItem("nineUnlocked","true");
-
-        document
-            .getElementById("accessScreen")
-            .classList.add("hidden");
-
-        document
-            .getElementById("app")
-            .classList.remove("hidden");
-
-        renderHistory();
-
-        showToast("OCTOBRAIN unlocked.");
-
-    }else{
-
-        error.textContent =
-            "Access denied. Enter the authorised access code.";
-
-        document.getElementById("accessCode").value = "";
-    }
-}
-
-document
-    .getElementById("accessCode")
-    .addEventListener("keydown",function(e){
-
-        if(e.key === "Enter"){
-            unlockApp();
-        }
-
-    });
-
-/* =========================================================
-   TYPE
-   ========================================================= */
-
-function selectType(type){
-
-    selectedType = type;
-
-    document
-        .getElementById("appType")
-        .classList.toggle(
-            "active",
-            type === "Application"
-        );
-
-    document
-        .getElementById("webType")
-        .classList.toggle(
-            "active",
-            type === "Website"
-        );
-}
-
-/* =========================================================
-   GENERATION
-   ========================================================= */
-
-async function startGeneration(){
-
-    const name =
-        document.getElementById("productName").value.trim();
-
-    const idea =
-        document.getElementById("productIdea").value.trim();
-
-    if(!name){
-
-        showToast("Enter the product name first.");
-        return;
-    }
-
-    if(!idea){
-
-        showToast("Describe what you want to build.");
-        return;
-    }
-
-    currentProject = {
-        id: Date.now(),
-        name,
-        type:selectedType,
-        idea,
-        created:new Date().toISOString(),
-        company:CONFIG.company,
-        ceo:CONFIG.ceo,
-        country:CONFIG.country
+    const CONFIG = {
+      company: "JOHELIV LABS — JDEV APP CRAFT CO.",
+      ceo: "JASON MUFAMADI",
+      country: "SOUTH AFRICA",
+      email: "johelivlabs@gmail.com",
+      phone: "0738592196",
+      workerUrl: "https://octopusmindorbrain.jdevapphub.workers.dev",
+      accessCode: "0105075874088",
+      storageKey: "nine_octobrain_history_v1",
+      trackerKey: "nine_octobrain_products_v1"
     };
 
-    document.getElementById("brainStatus").textContent =
-        "Activating...";
-
-    const brainElements =
-        document.querySelectorAll(".brain");
-
-    brainElements.forEach(b=>{
-        b.classList.remove("active","done");
-    });
-
-    document
-        .getElementById("resultsSection")
-        .classList.add("hidden");
-
-    /*
-       First try the Worker.
-
-       The Worker can return either:
-       {
-          "results": {
-             "strategy":"...",
-             ...
-          }
-       }
-
-       or:
-       {
-          "strategy":"...",
-          "users":"..."
-       }
-
-       If the Worker is not yet configured, the local
-       generator keeps the application functional.
-    */
-
-    let results = null;
-
-    try{
-
-        results = await callWorker(name,idea,selectedType);
-
-    }catch(error){
-
-        console.warn(
-            "Worker unavailable. Using local blueprint generator.",
-            error
-        );
-
-    }
-
-    if(!results){
-
-        results = generateLocalBlueprint(
-            name,
-            idea,
-            selectedType
-        );
-
-    }
-
-    currentProject.results = results;
-
-    saveHistory(currentProject);
-
-    await animateBrains();
-
-    renderResults(currentProject);
-
-    document
-        .getElementById("brainStatus")
-        .textContent = "Complete";
-
-    showToast("OCTOBRAIN completed the product blueprint.");
-
-}
-
-/* =========================================================
-   WORKER CONNECTION
-   ========================================================= */
-
-async function callWorker(name,idea,type){
-
-    const controller =
-        new AbortController();
-
-    const timeout =
-        setTimeout(
-            ()=>controller.abort(),
-            15000
-        );
-
-    try{
-
-        const response = await fetch(
-            CONFIG.workerUrl + "/generate",
-            {
-                method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json"
-                },
-
-                body:JSON.stringify({
-
-                    productName:name,
-                    productType:type,
-                    productIdea:idea,
-
-                    company:{
-                        name:CONFIG.company,
-                        ceo:CONFIG.ceo,
-                        email:CONFIG.email,
-                        phone:CONFIG.phone,
-                        country:CONFIG.country
-                    },
-
-                    brains:brains
-                }),
-
-                signal:controller.signal
-            }
-        );
-
-        if(!response.ok){
-            throw new Error(
-                "Worker returned HTTP " +
-                response.status
-            );
-        }
-
-        const data = await response.json();
-
-        return data.results || data;
-
-    }finally{
-
-        clearTimeout(timeout);
-
-    }
-
-}
-
-/* =========================================================
-   LOCAL FALLBACK GENERATOR
-   ========================================================= */
-
-function generateLocalBlueprint(
-    name,
-    idea,
-    type
-){
-
-    return {
-
-        core:
-`PRODUCT DNA
-
-Product:
-${name}
-
-Type:
-${type}
-
-Description:
-${idea}
-
-Company:
-${CONFIG.company}
-
-CEO:
-${CONFIG.ceo}
-
-Country:
-${CONFIG.country}
-
-Contact:
-${CONFIG.email}
-${CONFIG.phone}
-
-Core purpose:
-Turn the supplied concept into a structured, testable and launch-ready digital product.
-
-Primary objective:
-Define the problem, users, features, technical architecture, safety requirements, business model and launch plan before development begins.`,
-
-        strategy:
-`PRODUCT STRATEGY
-
-Product:
-${name}
-
-Target problem:
-${idea}
-
-Value proposition:
-${name} should provide a clear, useful solution to the problem described by the developer.
-
-Target market:
-Define the primary users based on the actual problem being solved.
-
-Positioning:
-The product should have a simple, memorable value proposition and a clearly defined reason for users to choose it.
-
-Goals:
-1. Build a reliable MVP.
-2. Validate the main user problem.
-3. Measure real user engagement.
-4. Improve based on user feedback.
-5. Develop advanced features after the core experience is stable.`,
-
-        users:
-`USERS & EXPERIENCE
-
-Primary audience:
-Users who experience the problem addressed by ${name}.
-
-User journey:
-
-1. Discover ${name}
-2. Open the ${type.toLowerCase()}
-3. Complete onboarding where required
-4. Reach the main dashboard
-5. Select the required feature
-6. Provide required information
-7. Receive the result
-8. Save, share or continue
-9. Return through history/profile
-
-UX requirements:
-• Clear navigation
-• Simple onboarding
-• Helpful empty states
-• Visible loading states
-• Friendly error messages
-• Accessible controls
-• Mobile-responsive interface
-• Clear confirmation after important actions`,
-
-        features:
-`FEATURE ARCHITECTURE
-
-CORE FEATURES
-
-1. Onboarding
-2. Main dashboard
-3. Core product functionality
-4. User profile where required
-5. History
-6. Search where useful
-7. Settings
-8. Help/support
-
-ADVANCED FEATURES
-
-• Notifications
-• Analytics
-• Cloud synchronization
-• AI capabilities
-• Sharing
-• Export
-• Personalisation
-
-FUTURE FEATURES
-
-Future functionality should be added only after the MVP has been tested and validated.`,
-
-        policy:
-`USER POLICY & TERMS DRAFT
-
-${name} should provide users with clear rules governing responsible use.
-
-Users should:
-• Provide accurate information.
-• Use the product lawfully.
-• Respect other users.
-• Avoid attempting to bypass security.
-• Avoid abusing APIs or automated systems.
-• Not use the service for prohibited or harmful activity.
-
-The company may restrict or terminate accounts that violate applicable rules.
-
-IMPORTANT:
-This is a product-development draft and should be reviewed by a qualified legal professional before publication. Requirements may vary by jurisdiction and product category.`,
-
-        security:
-`PRIVACY & SECURITY BLUEPRINT
-
-Potential data categories:
-
-• Account information
-• Contact information
-• Product usage information
-• Technical/device information
-• User-generated content
-
-Security requirements:
-
-• Secure authentication
-• Authorisation checks
-• HTTPS
-• Server-side API credentials
-• Input validation
-• Rate limiting
-• Secure database rules
-• Secure file handling
-• Logging without unnecessary sensitive data
-• Account/data deletion mechanisms
-• Regular security testing
-
-Privacy requirements:
-
-Explain what information is collected, why it is collected, how long it is retained, whether it is shared, which third-party services are involved and how users can exercise applicable rights.
-
-IMPORTANT:
-The final Privacy Policy should be reviewed against the actual data flows and applicable South African and other relevant privacy requirements.`,
-
-        tech:
-`TECHNICAL ARCHITECTURE
-
-PRODUCT:
-${name}
-
-TYPE:
-${type}
-
-RECOMMENDED STRUCTURE:
-
-Frontend
-↓
-Secure API / Worker
-↓
-Backend Services
-↓
-Database
-↓
-External APIs
-
-Recommended components:
-
-Frontend:
-HTML / CSS / JavaScript or the selected application framework.
-
-Backend:
-Cloudflare Worker or another secure backend.
-
-Database:
-Choose based on the actual requirements.
-
-Authentication:
-Use a secure authentication provider when accounts are required.
-
-API SECURITY:
-API keys must not be embedded directly into publicly accessible frontend JavaScript.
-
-External APIs:
-Add only the APIs actually required by the product.
-
-Environment variables:
-Secrets should be stored server-side.`,
-
-        business:
-`BUSINESS MODEL
-
-Possible models for ${name}:
-
-FREE
-• Core functionality
-• Limited usage
-• Optional advertising
-
-PRO
-• Advanced features
-• Higher limits
-• Additional storage/features
-
-PREMIUM
-• Complete feature set
-• Priority functionality
-• Advanced AI or automation
-
-Alternative:
-One-time purchase or usage-based pricing where appropriate.
-
-Revenue strategy should match the product's actual audience and operating costs.`,
-
-        launch:
-`DEVELOPMENT & LAUNCH ROADMAP
-
-PHASE 1 — PRODUCT DEFINITION
-✓ Product DNA
-✓ Target users
-✓ Core problem
-✓ MVP
-
-PHASE 2 — DESIGN
-✓ UI
-✓ UX
-✓ Navigation
-✓ Responsive behaviour
-
-PHASE 3 — DEVELOPMENT
-✓ Frontend
-✓ Backend
-✓ Database
-✓ Authentication
-✓ API integrations
-
-PHASE 4 — SECURITY
-✓ Input validation
-✓ Authentication testing
-✓ API protection
-✓ Database rules
-✓ Privacy review
-
-PHASE 5 — TESTING
-✓ Functional testing
-✓ UI testing
-✓ Mobile testing
-✓ Performance testing
-✓ Error handling
-
-PHASE 6 — LAUNCH
-✓ Production configuration
-✓ Privacy/terms review
-✓ Analytics
-✓ Support channel
-✓ Version 1.0
-
-PHASE 7 — FUTURE
-Collect user feedback and create a version 1.1 / 2.0 roadmap based on actual usage.`
-    };
-
-}
-
-/* =========================================================
-   BRAIN ANIMATION
-   ========================================================= */
-
-function animateBrains(){
-
-    return new Promise(resolve=>{
-
-        const items =
-            document.querySelectorAll(".brain");
-
-        let i=0;
-
-        function next(){
-
-            if(i >= items.length){
-
-                items.forEach(
-                    x=>x.classList.add("done")
-                );
-
-                resolve();
-                return;
-            }
-
-            items[i].classList.add("active");
-
-            document.getElementById("brainStatus")
-                .textContent =
-                "Analysing " + brains[i] + "...";
-
-            setTimeout(()=>{
-
-                items[i].classList.remove("active");
-                items[i].classList.add("done");
-
-                i++;
-                next();
-
-            },500);
-
-        }
-
-        next();
-
-    });
-
-}
-
-/* =========================================================
-   RESULTS
-   ========================================================= */
-
-function renderResults(project){
-
-    const section =
-        document.getElementById("resultsSection");
-
-    const nav =
-        document.getElementById("resultNav");
-
-    const content =
-        document.getElementById("resultContent");
-
-    section.classList.remove("hidden");
-
-    nav.innerHTML = "";
-
-    content.innerHTML = "";
-
-    const entries = [
-        ["core","🐙 Core Brain"],
-        ["strategy","🎯 Strategy"],
-        ["users","👥 Users & UX"],
-        ["features","⚙️ Features"],
-        ["policy","📜 Policy"],
-        ["security","🔐 Security & Privacy"],
-        ["tech","💻 Technology"],
-        ["business","💰 Business"],
-        ["launch","🚀 Launch"]
+    let selectedType = "Application";
+    let currentProject = null;
+
+    const brains = [
+      "STRATEGY", "USERS", "FEATURES", "POLICY",
+      "SECURITY", "TECH", "BUSINESS", "LAUNCH"
     ];
 
-    entries.forEach(([key,label],index)=>{
+    /* ===== ACCESS ===== */
+    function unlockApp() {
+      const input = document.getElementById("accessCode").value.trim();
+      const error = document.getElementById("accessError");
 
-        const button =
-            document.createElement("button");
+      if (input === CONFIG.accessCode) {
+        sessionStorage.setItem("nineUnlocked", "true");
+        document.getElementById("accessScreen").classList.add("hidden");
+        document.getElementById("app").classList.remove("hidden");
+        renderHistory();
+        renderTrackedProducts();
+        showToast("OCTOBRAIN unlocked.");
+      } else {
+        error.textContent = "Access denied. Enter the authorised access code.";
+        document.getElementById("accessCode").value = "";
+      }
+    }
 
+    document.getElementById("accessCode").addEventListener("keydown", function(e) {
+      if (e.key === "Enter") unlockApp();
+    });
+
+    /* ===== TYPE ===== */
+    function selectType(type) {
+      selectedType = type;
+      document.getElementById("appType").classList.toggle("active", type === "Application");
+      document.getElementById("webType").classList.toggle("active", type === "Website");
+    }
+
+    /* ===== GENERATION ===== */
+    async function startGeneration() {
+      const name = document.getElementById("productName").value.trim();
+      const idea = document.getElementById("productIdea").value.trim();
+
+      if (!name) { showToast("Enter the product name first."); return; }
+      if (!idea) { showToast("Describe what you want to build."); return; }
+
+      currentProject = {
+        id: Date.now(),
+        name, type: selectedType, idea,
+        created: new Date().toISOString(),
+        company: CONFIG.company,
+        ceo: CONFIG.ceo,
+        country: CONFIG.country
+      };
+
+      document.getElementById("brainStatus").textContent = "Activating...";
+      document.querySelectorAll(".brain").forEach(b => b.classList.remove("active", "done"));
+      document.getElementById("resultsSection").classList.add("hidden");
+
+      let results = null;
+      try {
+        results = await callWorker(name, idea, selectedType);
+      } catch (error) {
+        console.warn("Worker unavailable. Using local blueprint generator.", error);
+      }
+
+      if (!results) {
+        results = generateLocalBlueprint(name, idea, selectedType);
+      }
+
+      currentProject.results = results;
+      saveHistory(currentProject);
+      await animateBrains();
+      renderResults(currentProject);
+      document.getElementById("brainStatus").textContent = "Complete";
+      showToast("OCTOBRAIN completed the product blueprint.");
+    }
+
+    /* ===== WORKER ===== */
+    async function callWorker(name, idea, type) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(CONFIG.workerUrl + "/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            productName: name,
+            productType: type,
+            productIdea: idea,
+            company: {
+              name: CONFIG.company,
+              ceo: CONFIG.ceo,
+              email: CONFIG.email,
+              phone: CONFIG.phone,
+              country: CONFIG.country
+            },
+            brains: brains
+          }),
+          signal: controller.signal
+        });
+        if (!response.ok) throw new Error("Worker returned HTTP " + response.status);
+        const data = await response.json();
+        return data.results || data;
+      } finally {
+        clearTimeout(timeout);
+      }
+    }
+
+    /* ===== LOCAL FALLBACK ===== */
+    function generateLocalBlueprint(name, idea, type) {
+      return {
+        core: `PRODUCT DNA\n\nProduct:\n${name}\n\nType:\n${type}\n\nDescription:\n${idea}\n\nCompany:\n${CONFIG.company}\n\nCEO:\n${CONFIG.ceo}\n\nCountry:\n${CONFIG.country}\n\nContact:\n${CONFIG.email}\n${CONFIG.phone}\n\nCore purpose:\nTurn the supplied concept into a structured, testable and launch-ready digital product.\n\nPrimary objective:\nDefine the problem, users, features, technical architecture, safety requirements, business model and launch plan before development begins.`,
+        strategy: `PRODUCT STRATEGY\n\nProduct:\n${name}\n\nTarget problem:\n${idea}\n\nValue proposition:\n${name} should provide a clear, useful solution to the problem described by the developer.\n\nTarget market:\nDefine the primary users based on the actual problem being solved.\n\nPositioning:\nThe product should have a simple, memorable value proposition and a clearly defined reason for users to choose it.\n\nGoals:\n1. Build a reliable MVP.\n2. Validate the main user problem.\n3. Measure real user engagement.\n4. Improve based on user feedback.\n5. Develop advanced features after the core experience is stable.`,
+        users: `USERS & EXPERIENCE\n\nPrimary audience:\nUsers who experience the problem addressed by ${name}.\n\nUser journey:\n\n1. Discover ${name}\n2. Open the ${type.toLowerCase()}\n3. Complete onboarding where required\n4. Reach the main dashboard\n5. Select the required feature\n6. Provide required information\n7. Receive the result\n8. Save, share or continue\n9. Return through history/profile\n\nUX requirements:\n• Clear navigation\n• Simple onboarding\n• Helpful empty states\n• Visible loading states\n• Friendly error messages\n• Accessible controls\n• Mobile-responsive interface\n• Clear confirmation after important actions`,
+        features: `FEATURE ARCHITECTURE\n\nCORE FEATURES\n\n1. Onboarding\n2. Main dashboard\n3. Core product functionality\n4. User profile where required\n5. History\n6. Search where useful\n7. Settings\n8. Help/support\n\nADVANCED FEATURES\n\n• Notifications\n• Analytics\n• Cloud synchronization\n• AI capabilities\n• Sharing\n• Export\n• Personalisation\n\nFUTURE FEATURES\n\nFuture functionality should be added only after the MVP has been tested and validated.`,
+        policy: `USER POLICY & TERMS DRAFT\n\n${name} should provide users with clear rules governing responsible use.\n\nUsers should:\n• Provide accurate information.\n• Use the product lawfully.\n• Respect other users.\n• Avoid attempting to bypass security.\n• Avoid abusing APIs or automated systems.\n• Not use the service for prohibited or harmful activity.\n\nThe company may restrict or terminate accounts that violate applicable rules.\n\nIMPORTANT:\nThis is a product-development draft and should be reviewed by a qualified legal professional before publication. Requirements may vary by jurisdiction and product category.`,
+        security: `PRIVACY & SECURITY BLUEPRINT\n\nPotential data categories:\n\n• Account information\n• Contact information\n• Product usage information\n• Technical/device information\n• User-generated content\n\nSecurity requirements:\n\n• Secure authentication\n• Authorisation checks\n• HTTPS\n• Server-side API credentials\n• Input validation\n• Rate limiting\n• Secure database rules\n• Secure file handling\n• Logging without unnecessary sensitive data\n• Account/data deletion mechanisms\n• Regular security testing\n\nPrivacy requirements:\n\nExplain what information is collected, why it is collected, how long it is retained, whether it is shared, which third-party services are involved and how users can exercise applicable rights.\n\nIMPORTANT:\nThe final Privacy Policy should be reviewed against the actual data flows and applicable South African and other relevant privacy requirements.`,
+        tech: `TECHNICAL ARCHITECTURE\n\nPRODUCT:\n${name}\n\nTYPE:\n${type}\n\nRECOMMENDED STRUCTURE:\n\nFrontend\n↓\nSecure API / Worker\n↓\nBackend Services\n↓\nDatabase\n↓\nExternal APIs\n\nRecommended components:\n\nFrontend:\nHTML / CSS / JavaScript or the selected application framework.\n\nBackend:\nCloudflare Worker or another secure backend.\n\nDatabase:\nChoose based on the actual requirements.\n\nAuthentication:\nUse a secure authentication provider when accounts are required.\n\nAPI SECURITY:\nAPI keys must not be embedded directly into publicly accessible frontend JavaScript.\n\nExternal APIs:\nAdd only the APIs actually required by the product.\n\nEnvironment variables:\nSecrets should be stored server-side.`,
+        business: `BUSINESS MODEL\n\nPossible models for ${name}:\n\nFREE\n• Core functionality\n• Limited usage\n• Optional advertising\n\nPRO\n• Advanced features\n• Higher limits\n• Additional storage/features\n\nPREMIUM\n• Complete feature set\n• Priority functionality\n• Advanced AI or automation\n\nAlternative:\nOne-time purchase or usage-based pricing where appropriate.\n\nRevenue strategy should match the product's actual audience and operating costs.`,
+        launch: `DEVELOPMENT & LAUNCH ROADMAP\n\nPHASE 1 — PRODUCT DEFINITION\n✓ Product DNA\n✓ Target users\n✓ Core problem\n✓ MVP\n\nPHASE 2 — DESIGN\n✓ UI\n✓ UX\n✓ Navigation\n✓ Responsive behaviour\n\nPHASE 3 — DEVELOPMENT\n✓ Frontend\n✓ Backend\n✓ Database\n✓ Authentication\n✓ API integrations\n\nPHASE 4 — SECURITY\n✓ Input validation\n✓ Authentication testing\n✓ API protection\n✓ Database rules\n✓ Privacy review\n\nPHASE 5 — TESTING\n✓ Functional testing\n✓ UI testing\n✓ Mobile testing\n✓ Performance testing\n✓ Error handling\n\nPHASE 6 — LAUNCH\n✓ Production configuration\n✓ Privacy/terms review\n✓ Analytics\n✓ Support channel\n✓ Version 1.0\n\nPHASE 7 — FUTURE\nCollect user feedback and create a version 1.1 / 2.0 roadmap based on actual usage.`
+      };
+    }
+
+    /* ===== ANIMATION ===== */
+    function animateBrains() {
+      return new Promise(resolve => {
+        const items = document.querySelectorAll(".brain");
+        let i = 0;
+        function next() {
+          if (i >= items.length) {
+            items.forEach(x => x.classList.add("done"));
+            resolve();
+            return;
+          }
+          items[i].classList.add("active");
+          document.getElementById("brainStatus").textContent = "Analysing " + brains[i] + "...";
+          setTimeout(() => {
+            items[i].classList.remove("active");
+            items[i].classList.add("done");
+            i++;
+            next();
+          }, 500);
+        }
+        next();
+      });
+    }
+
+    /* ===== RESULTS ===== */
+    function renderResults(project) {
+      const section = document.getElementById("resultsSection");
+      const nav = document.getElementById("resultNav");
+      const content = document.getElementById("resultContent");
+
+      section.classList.remove("hidden");
+      nav.innerHTML = "";
+      content.innerHTML = "";
+
+      const entries = [
+        ["core", "🐙 Core Brain"],
+        ["strategy", "🎯 Strategy"],
+        ["users", "👥 Users & UX"],
+        ["features", "⚙️ Features"],
+        ["policy", "📜 Policy"],
+        ["security", "🔐 Security & Privacy"],
+        ["tech", "💻 Technology"],
+        ["business", "💰 Business"],
+        ["launch", "🚀 Launch"]
+      ];
+
+      entries.forEach(([key, label]) => {
+        const button = document.createElement("button");
         button.textContent = label;
-
-        button.onclick = ()=>{
-
-            document
-                .getElementById("result-"+key)
-                .scrollIntoView({
-                    behavior:"smooth",
-                    block:"start"
-                });
-
+        button.onclick = () => {
+          document.getElementById("result-" + key).scrollIntoView({ behavior: "smooth", block: "start" });
         };
-
         nav.appendChild(button);
 
-        const card =
-            document.createElement("article");
-
+        const card = document.createElement("article");
         card.className = "result-card";
-        card.id = "result-"+key;
+        card.id = "result-" + key;
 
-        const title =
-            document.createElement("h2");
-
+        const title = document.createElement("h2");
         title.textContent = label;
 
-        const meta =
-            document.createElement("div");
-
+        const meta = document.createElement("div");
         meta.className = "meta";
+        meta.textContent = project.name + " • " + project.type;
 
-        meta.textContent =
-            project.name +
-            " • " +
-            project.type;
-
-        const actions =
-            document.createElement("div");
-
+        const actions = document.createElement("div");
         actions.className = "result-actions";
 
-        const copy =
-            document.createElement("button");
-
+        const copy = document.createElement("button");
         copy.className = "action primary";
         copy.textContent = "📋 Copy";
+        copy.onclick = () => copyText(project.results[key]);
 
-        copy.onclick = ()=>{
-            copyText(project.results[key]);
-        };
-
-        const download =
-            document.createElement("button");
-
+        const download = document.createElement("button");
         download.className = "action";
         download.textContent = "⬇ Download";
-
-        download.onclick = ()=>{
-            downloadText(
-                project.results[key],
-                project.name +
-                "-" +
-                key +
-                ".txt"
-            );
-        };
+        download.onclick = () => downloadText(project.results[key], project.name + "-" + key + ".txt");
 
         actions.appendChild(copy);
         actions.appendChild(download);
 
-        const text =
-            document.createElement("div");
-
+        const text = document.createElement("div");
         text.className = "result-text";
-        text.textContent =
-            project.results[key];
+        text.textContent = project.results[key];
 
         card.appendChild(title);
         card.appendChild(meta);
         card.appendChild(actions);
         card.appendChild(text);
-
         content.appendChild(card);
+      });
 
-    });
-
-    const exportButton =
-        document.createElement("button");
-
-    exportButton.className =
-        "action primary";
-
-    exportButton.textContent =
-        "📦 Download Complete Product DNA";
-
-    exportButton.onclick =
-        ()=>downloadProject(project);
-
-    content.prepend(exportButton);
-
-    section.scrollIntoView({
-        behavior:"smooth"
-    });
-
-}
-
-/* =========================================================
-   HISTORY
-   ========================================================= */
-
-function getHistory(){
-
-    try{
-
-        return JSON.parse(
-            localStorage.getItem(
-                CONFIG.storageKey
-            ) || "[]"
-        );
-
-    }catch{
-
-        return [];
-
+      const exportButton = document.createElement("button");
+      exportButton.className = "action primary";
+      exportButton.textContent = "📦 Download Complete Product DNA";
+      exportButton.onclick = () => downloadProject(project);
+      content.prepend(exportButton);
+      section.scrollIntoView({ behavior: "smooth" });
     }
 
-}
+    /* ===== HISTORY ===== */
+    function getHistory() {
+      try { return JSON.parse(localStorage.getItem(CONFIG.storageKey) || "[]"); } catch { return []; }
+    }
 
-function saveHistory(project){
+    function saveHistory(project) {
+      let history = getHistory();
+      history.unshift(project);
+      history = history.slice(0, 50);
+      localStorage.setItem(CONFIG.storageKey, JSON.stringify(history));
+      renderHistory();
+    }
 
-    let history =
-        getHistory();
-
-    history.unshift(project);
-
-    /*
-       Keep the latest 50 projects.
-    */
-
-    history =
-        history.slice(0,50);
-
-    localStorage.setItem(
-        CONFIG.storageKey,
-        JSON.stringify(history)
-    );
-
-    renderHistory();
-
-}
-
-function renderHistory(){
-
-    const container =
-        document.getElementById("historyList");
-
-    const history =
-        getHistory();
-
-    if(!history.length){
-
-        container.innerHTML =
-            '<div class="empty">No projects yet. Your generated projects will appear here.</div>';
-
+    function renderHistory() {
+      const container = document.getElementById("historyList");
+      const history = getHistory();
+      if (!history.length) {
+        container.innerHTML = '<div class="empty">No projects yet. Your generated projects will appear here.</div>';
         return;
-    }
-
-    container.innerHTML = "";
-
-    history.forEach(project=>{
-
-        const card =
-            document.createElement("div");
-
-        card.className =
-            "history-card";
-
-        const date =
-            new Date(project.created)
-                .toLocaleString();
-
-        card.innerHTML = `
-            <strong>${escapeHTML(project.name)}</strong>
-            <small>
-                ${escapeHTML(project.type)}
-                • ${escapeHTML(date)}
-            </small>
-        `;
-
-        const open =
-            document.createElement("button");
-
-        open.textContent =
-            "Open Project";
-
-        open.onclick = ()=>{
-            currentProject = project;
-            renderResults(project);
-        };
-
+      }
+      container.innerHTML = "";
+      history.forEach(project => {
+        const card = document.createElement("div");
+        card.className = "history-card";
+        const date = new Date(project.created).toLocaleString();
+        card.innerHTML = `<strong>${escapeHTML(project.name)}</strong><small>${escapeHTML(project.type)} • ${escapeHTML(date)}</small>`;
+        const open = document.createElement("button");
+        open.textContent = "Open Project";
+        open.onclick = () => { currentProject = project; renderResults(project); };
         card.appendChild(open);
-
         container.appendChild(card);
+      });
+    }
 
+    function showHistory() {
+      document.querySelector(".history-panel").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function clearHistory() {
+      if (!confirm("Delete all locally stored OCTOBRAIN history?")) return;
+      localStorage.removeItem(CONFIG.storageKey);
+      renderHistory();
+      showToast("History cleared.");
+    }
+
+    /* ===== EXPORT ===== */
+    function downloadProject(project) {
+      let output = `NINE: OCTOBRAIN\nPRODUCT DNA\n==============================\n\nPRODUCT:\n${project.name}\n\nTYPE:\n${project.type}\n\nGENERATED:\n${new Date(project.created).toLocaleString()}\n\nCOMPANY:\n${CONFIG.company}\n\nCEO:\n${CONFIG.ceo}\n\nCOUNTRY:\n${CONFIG.country}\n\nEMAIL:\n${CONFIG.email}\n\nPHONE:\n${CONFIG.phone}\n\n`;
+      Object.entries(project.results).forEach(([key, value]) => {
+        output += `\n\n==============================\n${key.toUpperCase()}\n==============================\n\n${value}\n`;
+      });
+      downloadText(output, project.name.replace(/\s+/g, "-") + "-PRODUCT-DNA.txt");
+    }
+
+    function exportHistory() {
+      const history = getHistory();
+      if (!history.length) { showToast("No history to export."); return; }
+      downloadText(JSON.stringify(history, null, 2), "nine-octobrain-history.json");
+    }
+
+    /* ===== PRODUCT TRACKER ===== */
+    function getTrackedProducts() {
+      try { return JSON.parse(localStorage.getItem(CONFIG.trackerKey) || "[]"); } catch { return []; }
+    }
+
+    function saveTrackedProducts(products) {
+      localStorage.setItem(CONFIG.trackerKey, JSON.stringify(products));
+    }
+
+    function addTrackedProduct() {
+      const nameInput = document.getElementById("trackerName");
+      const urlInput = document.getElementById("trackerUrl");
+      const name = nameInput.value.trim();
+      const url = urlInput.value.trim();
+
+      if (!name) { showToast("Please enter a product name."); return; }
+      if (!url) { showToast("Please enter a product URL."); return; }
+
+      const products = getTrackedProducts();
+      products.unshift({
+        id: Date.now(),
+        name: name,
+        url: url,
+        done: false,
+        created: new Date().toISOString()
+      });
+      saveTrackedProducts(products);
+      nameInput.value = "";
+      urlInput.value = "";
+      renderTrackedProducts();
+      showToast("Product added to tracker.");
+    }
+
+    function toggleTrackedDone(id) {
+      const products = getTrackedProducts();
+      const product = products.find(p => p.id === id);
+      if (product) {
+        product.done = !product.done;
+        saveTrackedProducts(products);
+        renderTrackedProducts();
+      }
+    }
+
+    function deleteTrackedProduct(id) {
+      if (!confirm("Remove this product from the tracker?")) return;
+      const products = getTrackedProducts().filter(p => p.id !== id);
+      saveTrackedProducts(products);
+      renderTrackedProducts();
+      showToast("Product removed.");
+    }
+
+    function renderTrackedProducts() {
+      const container = document.getElementById("trackedProductList");
+      const products = getTrackedProducts();
+
+      if (!products.length) {
+        container.innerHTML = '<div class="tracker-empty">No products tracked yet. Add your first product above.</div>';
+        return;
+      }
+
+      container.innerHTML = "";
+      products.forEach(product => {
+        const item = document.createElement("div");
+        item.className = "product-item";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "done-check";
+        checkbox.checked = product.done;
+        checkbox.onchange = () => toggleTrackedDone(product.id);
+
+        const info = document.createElement("div");
+        info.className = "product-info";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "product-name" + (product.done ? " done" : "");
+        nameDiv.textContent = product.name;
+
+        const urlDiv = document.createElement("div");
+        urlDiv.className = "product-url";
+        urlDiv.innerHTML = `<a href="${escapeHTML(product.url)}" target="_blank" rel="noopener">${escapeHTML(product.url)}</a>`;
+
+        info.appendChild(nameDiv);
+        info.appendChild(urlDiv);
+
+        const del = document.createElement("button");
+        del.className = "delete-btn";
+        del.textContent = "🗑 Remove";
+        del.onclick = () => deleteTrackedProduct(product.id);
+
+        item.appendChild(checkbox);
+        item.appendChild(info);
+        item.appendChild(del);
+        container.appendChild(item);
+      });
+    }
+
+    /* ===== UTILITIES ===== */
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast("Copied to clipboard.");
+      } catch {
+        const area = document.createElement("textarea");
+        area.value = text;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+        showToast("Copied.");
+      }
+    }
+
+    function downloadText(text, filename) {
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      showToast("Download created.");
+    }
+
+    function escapeHTML(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    function copyPolicyTemplate() {
+      const text = document.getElementById("policyTemplateBlock").innerText;
+      copyText(text);
+    }
+
+    function scrollToLaunchGuide() {
+      document.getElementById("launchGuideSection").scrollIntoView({ behavior: "smooth" });
+    }
+
+    /* ===== GUIDE TABS ===== */
+    document.querySelectorAll(".guide-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".guide-tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".guide-content").forEach(c => c.classList.remove("active"));
+        tab.classList.add("active");
+        const target = document.getElementById("tab-" + tab.dataset.tab);
+        if (target) target.classList.add("active");
+      });
     });
 
-}
-
-function showHistory(){
-
-    document
-        .querySelector(".history-panel")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-}
-
-function clearHistory(){
-
-    if(!confirm(
-        "Delete all locally stored OCTOBRAIN history?"
-    )){
-        return;
-    }
-
-    localStorage.removeItem(
-        CONFIG.storageKey
-    );
-
-    renderHistory();
-
-    showToast("History cleared.");
-
-}
-
-/* =========================================================
-   EXPORT
-   ========================================================= */
-
-function downloadProject(project){
-
-    let output =
-`NINE: OCTOBRAIN
-PRODUCT DNA
-==============================
-
-PRODUCT:
-${project.name}
-
-TYPE:
-${project.type}
-
-GENERATED:
-${new Date(project.created).toLocaleString()}
-
-COMPANY:
-${CONFIG.company}
-
-CEO:
-${CONFIG.ceo}
-
-COUNTRY:
-${CONFIG.country}
-
-EMAIL:
-${CONFIG.email}
-
-PHONE:
-${CONFIG.phone}
-
-`;
-
-    Object.entries(project.results)
-        .forEach(([key,value])=>{
-
-            output +=
-`\n\n==============================
-${key.toUpperCase()}
-==============================
-
-${value}
-`;
-
-        });
-
-    downloadText(
-        output,
-        project.name.replace(/\s+/g,"-") +
-        "-PRODUCT-DNA.txt"
-    );
-
-}
-
-function exportHistory(){
-
-    const history =
-        getHistory();
-
-    if(!history.length){
-
-        showToast("No history to export.");
-        return;
-    }
-
-    downloadText(
-        JSON.stringify(
-            history,
-            null,
-            2
-        ),
-        "nine-octobrain-history.json"
-    );
-
-}
-
-/* =========================================================
-   UTILITIES
-   ========================================================= */
-
-async function copyText(text){
-
-    try{
-
-        await navigator.clipboard.writeText(text);
-
-        showToast("Copied to clipboard.");
-
-    }catch{
-
-        const area =
-            document.createElement("textarea");
-
-        area.value = text;
-
-        document.body.appendChild(area);
-
-        area.select();
-
-        document.execCommand("copy");
-
-        area.remove();
-
-        showToast("Copied.");
-
-    }
-
-}
-
-function downloadText(text,filename){
-
-    const blob =
-        new Blob(
-            [text],
-            {type:"text/plain;charset=utf-8"}
-        );
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const a =
-        document.createElement("a");
-
-    a.href = url;
-    a.download = filename;
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-    URL.revokeObjectURL(url);
-
-    showToast("Download created.");
-
-}
-
-function escapeHTML(value){
-
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-let toastTimer;
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    clearTimeout(toastTimer);
-
-    toastTimer =
-        setTimeout(
-            ()=>toast.classList.remove("show"),
-            2500
-        );
-
-}
-
-/* =========================================================
-   STARTUP
-   ========================================================= */
-
-window.addEventListener("DOMContentLoaded",()=>{
-
-    /*
-       Require the code whenever a new browser session
-       starts. sessionStorage disappears when the session
-       ends.
-    */
-
-    if(sessionStorage.getItem("nineUnlocked") === "true"){
-
-        document
-            .getElementById("accessScreen")
-            .classList.add("hidden");
-
-        document
-            .getElementById("app")
-            .classList.remove("hidden");
-
+    /* ===== STARTUP ===== */
+    window.addEventListener("DOMContentLoaded", () => {
+      if (sessionStorage.getItem("nineUnlocked") === "true") {
+        document.getElementById("accessScreen").classList.add("hidden");
+        document.getElementById("app").classList.remove("hidden");
         renderHistory();
-
-    }
-
-});
-</script>
+        renderTrackedProducts();
+      }
+    });
+  </script>
 
 </body>
 </html>

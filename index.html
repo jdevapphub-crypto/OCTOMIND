@@ -24,6 +24,8 @@
       --purple: #9b5cff;
       --green: #32e6a1;
       --danger: #ff5577;
+      --gold: #ffc857;
+      --gold-glow: #ffaa33;
       --shadow: 0 20px 70px rgba(0, 0, 0, .45);
     }
 
@@ -36,6 +38,7 @@
         radial-gradient(circle at 80% 80%, rgba(155, 92, 255, .08), transparent 30%),
         var(--bg);
       color: var(--text);
+      scroll-behavior: smooth;
     }
 
     body {
@@ -156,6 +159,8 @@
       border-bottom: 1px solid var(--border);
       background: rgba(5, 8, 16, .82);
       backdrop-filter: blur(18px);
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .logo {
@@ -189,6 +194,7 @@
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     .icon-btn {
@@ -201,10 +207,22 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      font-size: 13px;
+      transition: .2s;
     }
 
     .icon-btn:hover {
       border-color: rgba(39, 217, 255, .4);
+    }
+
+    .icon-btn.gold {
+      border-color: rgba(255, 200, 87, .25);
+      color: var(--gold);
+    }
+
+    .icon-btn.gold:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(255, 200, 87, .15);
     }
 
     /* ===== HERO ===== */
@@ -562,7 +580,7 @@
       border-color: var(--cyan);
     }
 
-    /* ===== LAUNCH GUIDE (BUILT-IN) ===== */
+    /* ===== LAUNCH GUIDE ===== */
     .launch-guide-section {
       margin: 50px 0 30px;
       border-top: 1px solid var(--border);
@@ -722,7 +740,7 @@
       border-color: var(--cyan);
     }
 
-    /* ===== CHECKLIST MANAGER ===== */
+    /* ===== PRODUCT TRACKER ===== */
     .product-tracker {
       margin: 40px 0 50px;
       padding: 30px;
@@ -867,6 +885,562 @@
       border-radius: 14px;
     }
 
+    /* ===== JASON'S OFFICE (KING'S CASTLE) ===== */
+    .office-section {
+      margin: 60px 0 40px;
+      border-radius: 32px;
+      background: linear-gradient(145deg, #0e0a04, #1a1208, #0b0703);
+      border: 1px solid rgba(255, 200, 87, .25);
+      box-shadow:
+        0 0 80px rgba(255, 170, 51, .08),
+        inset 0 0 80px rgba(255, 200, 87, .03);
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .office-section::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: radial-gradient(circle at 30% 40%, rgba(255, 200, 87, .06), transparent 60%);
+      pointer-events: none;
+    }
+
+    .office-section::after {
+      content: '👑';
+      position: absolute;
+      top: 12px;
+      right: 30px;
+      font-size: 48px;
+      opacity: .15;
+      filter: drop-shadow(0 0 20px rgba(255, 200, 87, .5));
+    }
+
+    .office-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .office-header h2 {
+      font-size: 28px;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #ffc857, #ffaa33, #ffd97a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 40px rgba(255, 200, 87, .15);
+    }
+
+    .office-header .crown-badge {
+      background: rgba(255, 200, 87, .12);
+      border: 1px solid rgba(255, 200, 87, .3);
+      color: var(--gold);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .office-glow-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 200, 87, .4), transparent);
+      margin: 18px 0 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .office-codes-area {
+      background: rgba(12, 9, 5, .6);
+      border: 1px solid rgba(255, 200, 87, .15);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .office-codes-area h3 {
+      color: var(--gold);
+      font-size: 15px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .office-code-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 200, 87, .08);
+      font-size: 13px;
+      flex-wrap: wrap;
+    }
+
+    .office-code-item:last-child {
+      border-bottom: none;
+    }
+
+    .office-code-item .code-label {
+      color: #b8a88a;
+      min-width: 140px;
+    }
+
+    .office-code-item .code-value {
+      font-family: 'Courier New', monospace;
+      color: var(--gold);
+      background: rgba(255, 200, 87, .08);
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 200, 87, .15);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .office-code-item button {
+      background: transparent;
+      border: 1px solid rgba(255, 200, 87, .2);
+      color: var(--gold);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 11px;
+      transition: .2s;
+    }
+
+    .office-code-item button:hover {
+      background: rgba(255, 200, 87, .1);
+      border-color: var(--gold);
+    }
+
+    .office-input-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .office-input-area input,
+    .office-input-area textarea {
+      flex: 1 1 200px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 200, 87, .18);
+      background: rgba(10, 8, 4, .8);
+      color: #f5ecd9;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .office-input-area input:focus,
+    .office-input-area textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 30px rgba(255, 200, 87, .06);
+    }
+
+    .office-input-area textarea {
+      min-height: 80px;
+      resize: vertical;
+      flex: 1 1 100%;
+    }
+
+    .office-input-area button {
+      padding: 14px 28px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #ffc857, #ffaa33);
+      color: #1a1208;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: .2s;
+    }
+
+    .office-input-area button:hover {
+      box-shadow: 0 0 40px rgba(255, 200, 87, .3);
+      transform: scale(1.02);
+    }
+
+    .office-task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .office-task-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: rgba(12, 9, 5, .7);
+      border: 1px solid rgba(255, 200, 87, .1);
+      transition: .2s;
+      flex-wrap: wrap;
+    }
+
+    .office-task-item:hover {
+      border-color: rgba(255, 200, 87, .3);
+      box-shadow: 0 0 30px rgba(255, 200, 87, .04);
+    }
+
+    .office-task-item .task-check {
+      width: 22px;
+      height: 22px;
+      accent-color: var(--gold);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .office-task-item .task-info {
+      flex: 1 1 200px;
+      min-width: 0;
+    }
+
+    .office-task-item .task-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: #f5ecd9;
+    }
+
+    .office-task-item .task-title.done {
+      text-decoration: line-through;
+      color: #8a7d6b;
+    }
+
+    .office-task-item .task-desc {
+      font-size: 13px;
+      color: #b8a88a;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    .office-task-item .task-date {
+      font-size: 11px;
+      color: #7a6e5b;
+      margin-top: 4px;
+    }
+
+    .office-task-item .task-delete {
+      background: transparent;
+      border: 1px solid rgba(255, 85, 119, .2);
+      color: #ff6685;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 13px;
+      flex-shrink: 0;
+      transition: .2s;
+    }
+
+    .office-task-item .task-delete:hover {
+      background: rgba(255, 85, 119, .08);
+      border-color: var(--danger);
+    }
+
+    .office-empty {
+      padding: 40px;
+      text-align: center;
+      color: #8a7d6b;
+      border: 1px dashed rgba(255, 200, 87, .15);
+      border-radius: 16px;
+      font-style: italic;
+    }
+
+    /* ===== TEAM ROOM ===== */
+    .team-room-section {
+      margin: 40px 0 50px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #0a0f1a, #0d1525, #080c14);
+      border: 1px solid rgba(39, 217, 255, .2);
+      box-shadow: 0 0 60px rgba(39, 217, 255, .05);
+      padding: 32px 28px;
+    }
+
+    .team-room-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .team-room-header h2 {
+      font-size: 24px;
+      background: linear-gradient(90deg, #27d9ff, #5578ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .team-badge {
+      background: rgba(39, 217, 255, .1);
+      border: 1px solid rgba(39, 217, 255, .25);
+      color: var(--cyan);
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .team-input-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .team-input-area input,
+    .team-input-area textarea {
+      flex: 1 1 180px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #070c16;
+      color: white;
+      outline: none;
+    }
+
+    .team-input-area input:focus,
+    .team-input-area textarea:focus {
+      border-color: var(--cyan);
+    }
+
+    .team-input-area textarea {
+      min-height: 70px;
+      resize: vertical;
+      flex: 1 1 100%;
+    }
+
+    .team-input-area button {
+      padding: 14px 26px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: #021018;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .team-entries-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .team-entry-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--panel);
+      transition: .2s;
+      flex-wrap: wrap;
+    }
+
+    .team-entry-item:hover {
+      border-color: rgba(39, 217, 255, .2);
+    }
+
+    .team-entry-item .entry-info {
+      flex: 1 1 200px;
+      min-width: 0;
+    }
+
+    .team-entry-item .entry-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .team-entry-item .entry-link {
+      font-size: 13px;
+      color: var(--muted);
+      word-break: break-all;
+      margin-top: 4px;
+    }
+
+    .team-entry-item .entry-link a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .team-entry-item .entry-link a:hover {
+      text-decoration: underline;
+    }
+
+    .team-entry-item .entry-date {
+      font-size: 11px;
+      color: #6b7a90;
+      margin-top: 4px;
+    }
+
+    .team-entry-item .entry-notes {
+      font-size: 13px;
+      color: #b0bed2;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .team-entry-item .entry-delete {
+      background: transparent;
+      border: 1px solid rgba(255, 85, 119, .2);
+      color: #ff6685;
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .team-entry-item .entry-delete:hover {
+      background: rgba(255, 85, 119, .08);
+      border-color: var(--danger);
+    }
+
+    .team-empty {
+      padding: 30px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+    }
+
+    /* ===== LEARN ROOM ===== */
+    .learn-section {
+      margin: 60px 0 40px;
+      border-radius: 28px;
+      background: linear-gradient(145deg, #0a0e1a, #0e1528, #080c14);
+      border: 1px solid rgba(155, 92, 255, .2);
+      box-shadow: 0 0 60px rgba(155, 92, 255, .05);
+      padding: 36px 30px;
+    }
+
+    .learn-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .learn-header h2 {
+      font-size: 28px;
+      background: linear-gradient(90deg, #9b5cff, #27d9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .learn-badge {
+      background: rgba(155, 92, 255, .12);
+      border: 1px solid rgba(155, 92, 255, .3);
+      color: #b68cff;
+      padding: 5px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .learn-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .learn-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(12, 18, 32, .7);
+    }
+
+    .learn-card h3 {
+      font-size: 17px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #b68cff;
+    }
+
+    .learn-card p {
+      color: #cbd6e6;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+
+    .learn-card ul, .learn-card ol {
+      padding-left: 18px;
+      color: #cbd6e6;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .learn-card li {
+      margin-bottom: 6px;
+    }
+
+    .learn-card code {
+      background: #070c16;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: var(--cyan);
+      border: 1px solid rgba(39, 217, 255, .15);
+    }
+
+    .learn-card pre {
+      background: #070c16;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #d2dcee;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+
+    .learn-card .hl {
+      color: var(--cyan);
+    }
+
+    .learn-card .hl2 {
+      color: var(--gold);
+    }
+
+    .learn-card .hl3 {
+      color: var(--green);
+    }
+
     /* ===== HISTORY ===== */
     .history-panel {
       width: min(1200px, 94%);
@@ -959,10 +1533,6 @@
         justify-content: flex-start;
       }
 
-      .top-actions .icon-btn span {
-        display: inline;
-      }
-
       .brain-system {
         min-height: 900px;
       }
@@ -1007,6 +1577,36 @@
       .tracker-input-row button {
         width: 100%;
       }
+
+      .office-section {
+        padding: 24px 18px;
+      }
+
+      .office-input-area button {
+        width: 100%;
+      }
+
+      .team-room-section {
+        padding: 22px 18px;
+      }
+
+      .team-input-area button {
+        width: 100%;
+      }
+
+      .learn-section {
+        padding: 24px 18px;
+      }
+
+      .office-code-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .office-code-item .code-label {
+        min-width: auto;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1024,7 +1624,7 @@
       }
 
       .icon-btn {
-        font-size: 13px;
+        font-size: 12px;
         padding: 0 10px;
         height: 36px;
       }
@@ -1035,6 +1635,26 @@
       }
 
       .product-item .delete-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .office-task-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .office-task-item .task-delete {
+        width: 100%;
+        text-align: center;
+      }
+
+      .team-entry-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .team-entry-item .entry-delete {
         width: 100%;
         text-align: center;
       }
@@ -1079,13 +1699,16 @@
         <button class="icon-btn" onclick="showHistory()">🕘 <span>History</span></button>
         <button class="icon-btn" onclick="clearHistory()">🗑 <span>Clear</span></button>
         <button class="icon-btn" onclick="scrollToLaunchGuide()">🚀 <span>Launch Guide</span></button>
+        <button class="icon-btn gold" onclick="openOfficeRoom()">👑 <span>Jason's Office</span></button>
+        <button class="icon-btn" onclick="openTeamRoom()">👥 <span>Team Room</span></button>
+        <button class="icon-btn" onclick="scrollToLearn()">📚 <span>Learn</span></button>
       </div>
     </header>
 
     <section class="hero">
       <div class="welcome">WELCOME TO JOHELIV LABS</div>
       <h1>NINE: OCTOBRAIN</h1>
-      <p>One idea. Nine specialised brains. One complete product blueprint. Plus a full launch guide and tracker.</p>
+      <p>One idea. Nine specialised brains. One complete product blueprint. Plus a full launch guide, tracker, private office, team room, and learning centre.</p>
     </section>
 
     <main class="workspace">
@@ -1149,7 +1772,7 @@
       </section>
 
       <!-- ========================================================= -->
-      <!-- LAUNCH GUIDE (BUILT-IN) -->
+      <!-- LAUNCH GUIDE -->
       <!-- ========================================================= -->
       <section class="launch-guide-section" id="launchGuideSection">
         <div class="launch-guide-header">
@@ -1168,7 +1791,6 @@
           <button class="guide-tab" data-tab="policy-drafting">📝 Draft a Policy</button>
         </div>
 
-        <!-- TAB: Store Requirements -->
         <div class="guide-content active" id="tab-store-requirements">
           <div class="guide-grid">
             <div class="guide-card">
@@ -1246,7 +1868,6 @@
           </div>
         </div>
 
-        <!-- TAB: Screenshots & Icons -->
         <div class="guide-content" id="tab-screenshots-icons">
           <div class="guide-grid">
             <div class="guide-card">
@@ -1293,7 +1914,6 @@
           </div>
         </div>
 
-        <!-- TAB: Pricing & Ads -->
         <div class="guide-content" id="tab-pricing-ads">
           <div class="guide-grid">
             <div class="guide-card">
@@ -1342,7 +1962,6 @@
           </div>
         </div>
 
-        <!-- TAB: Policy URLs -->
         <div class="guide-content" id="tab-policy-urls">
           <div class="guide-grid">
             <div class="guide-card">
@@ -1425,7 +2044,6 @@ If you have any questions, contact us at [your email].
           </div>
         </div>
 
-        <!-- TAB: Marketing Guide -->
         <div class="guide-content" id="tab-marketing">
           <div class="guide-grid">
             <div class="guide-card">
@@ -1480,7 +2098,6 @@ If you have any questions, contact us at [your email].
           </div>
         </div>
 
-        <!-- TAB: Draft a Policy -->
         <div class="guide-content" id="tab-policy-drafting">
           <div class="guide-grid">
             <div class="guide-card">
@@ -1538,7 +2155,277 @@ Version: [x.y.z]
       </section>
 
       <!-- ========================================================= -->
-      <!-- PRODUCT TRACKER (URL + NAME + DONE) -->
+      <!-- JASON'S OFFICE (KING'S CASTLE) -->
+      <!-- ========================================================= -->
+      <section class="office-section hidden" id="officeSection">
+        <div class="office-header">
+          <h2>👑 Jason's Office</h2>
+          <span class="crown-badge">KING'S CASTLE</span>
+          <span class="crown-badge">PRIVATE</span>
+        </div>
+        <div class="office-glow-line"></div>
+
+        <!-- Access Codes Area -->
+        <div class="office-codes-area">
+          <h3>🔐 Access Codes</h3>
+          <div class="office-code-item">
+            <span class="code-label">Main App Code</span>
+            <span class="code-value">0105075874088</span>
+            <button onclick="copyCode('0105075874088')">Copy</button>
+          </div>
+          <div class="office-code-item">
+            <span class="code-label">Jason's Office Code</span>
+            <span class="code-value">01050758740880663195345</span>
+            <button onclick="copyCode('01050758740880663195345')">Copy</button>
+          </div>
+          <div class="office-code-item">
+            <span class="code-label">Team Room Code</span>
+            <span class="code-value">0698416632</span>
+            <button onclick="copyCode('0698416632')">Copy</button>
+          </div>
+        </div>
+
+        <div class="office-input-area">
+          <input id="officeTaskTitle" type="text" placeholder="Task title (e.g., Review Q3 strategy)">
+          <textarea id="officeTaskDesc" placeholder="Task description, notes, or final instructions..."></textarea>
+          <button onclick="addOfficeTask()">+ Add Task</button>
+        </div>
+
+        <div id="officeTaskList" class="office-task-list">
+          <div class="office-empty">No tasks yet. The King's chamber awaits your command.</div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- TEAM ROOM -->
+      <!-- ========================================================= -->
+      <section class="team-room-section hidden" id="teamRoomSection">
+        <div class="team-room-header">
+          <h2>👥 Team Room</h2>
+          <span class="team-badge">COLLABORATIVE SPACE</span>
+        </div>
+
+        <div class="team-input-area">
+          <input id="teamEntryName" type="text" placeholder="Entry name / product (e.g., StudyPad)">
+          <input id="teamEntryUrl" type="url" placeholder="Link (e.g., https://studypad.app)">
+          <textarea id="teamEntryNotes" placeholder="Notes, description, or date-specific info..."></textarea>
+          <button onclick="addTeamEntry()">+ Save Entry</button>
+        </div>
+
+        <div id="teamEntriesList" class="team-entries-list">
+          <div class="team-empty">No entries yet. Share your links, names, and notes here.</div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- LEARN ROOM -->
+      <!-- ========================================================= -->
+      <section class="learn-section" id="learnSection">
+        <div class="learn-header">
+          <h2>📚 Learn HTML & Code Basics</h2>
+          <span class="learn-badge">FROM ZERO TO HERO</span>
+        </div>
+        <div class="learn-sub">
+          Master the fundamentals of web development. This room teaches you how HTML, CSS, and JavaScript work together — from a single button to a complete app structure.
+        </div>
+
+        <div class="learn-grid">
+          <div class="learn-card">
+            <h3>🧱 1. The Basic HTML Structure</h3>
+            <p>Every web page follows the same skeleton. Think of it like a human body:</p>
+            <pre><span class="hl">&lt;!DOCTYPE html&gt;</span>  <span class="hl3">&lt;!-- Tells the browser: "This is HTML5" --&gt;</span>
+<span class="hl">&lt;html</span> <span class="hl2">lang</span>=<span class="hl3">"en"</span><span class="hl">&gt;</span>  <span class="hl3">&lt;!-- The root container --&gt;</span>
+  <span class="hl">&lt;head&gt;</span>  <span class="hl3">&lt;!-- The brain: invisible info --&gt;</span>
+    <span class="hl">&lt;meta</span> <span class="hl2">charset</span>=<span class="hl3">"UTF-8"</span><span class="hl">&gt;</span>
+    <span class="hl">&lt;title&gt;</span>My App<span class="hl">&lt;/title&gt;</span>
+    <span class="hl">&lt;style&gt;</span>... CSS goes here ...<span class="hl">&lt;/style&gt;</span>
+  <span class="hl">&lt;/head&gt;</span>
+  <span class="hl">&lt;body&gt;</span>  <span class="hl3">&lt;!-- The body: visible content --&gt;</span>
+    <span class="hl">&lt;h1&gt;</span>Hello World<span class="hl">&lt;/h1&gt;</span>
+    <span class="hl">&lt;button&gt;</span>Click Me<span class="hl">&lt;/button&gt;</span>
+  <span class="hl">&lt;/body&gt;</span>
+<span class="hl">&lt;/html&gt;</span></pre>
+            <p><strong>What goes in the <code>&lt;head&gt;</code>?</strong></p>
+            <ul>
+              <li><code>&lt;meta&gt;</code> — character set, viewport, description</li>
+              <li><code>&lt;title&gt;</code> — text on the browser tab</li>
+              <li><code>&lt;style&gt;</code> — all your CSS (appearance)</li>
+              <li><code>&lt;script&gt;</code> — JavaScript (behaviour)</li>
+              <li><code>&lt;link&gt;</code> — external files (fonts, icons)</li>
+            </ul>
+            <p><strong>What goes in the <code>&lt;body&gt;</code>?</strong></p>
+            <ul>
+              <li>Headings, paragraphs, images, buttons</li>
+              <li>Divs, sections, forms, lists</li>
+              <li>Anything the user can see or interact with</li>
+            </ul>
+          </div>
+
+          <div class="learn-card">
+            <h3>🔘 2. Full Button Code (Anatomy)</h3>
+            <p>A button has three layers: HTML (structure), CSS (appearance), and JavaScript (action).</p>
+            <p><strong>HTML — the button element:</strong></p>
+            <pre><span class="hl">&lt;button</span> <span class="hl2">class</span>=<span class="hl3">"my-btn"</span> <span class="hl2">onclick</span>=<span class="hl3">"doSomething()"</span><span class="hl">&gt;</span>
+  Click Me
+<span class="hl">&lt;/button&gt;</span></pre>
+            <p><strong>CSS — the appearance:</strong></p>
+            <pre><span class="hl">.my-btn</span> {
+  <span class="hl2">background</span>: <span class="hl3">#27d9ff</span>;
+  <span class="hl2">color</span>: <span class="hl3">#000</span>;
+  <span class="hl2">padding</span>: <span class="hl3">12px 24px</span>;
+  <span class="hl2">border</span>: <span class="hl3">none</span>;
+  <span class="hl2">border-radius</span>: <span class="hl3">10px</span>;
+  <span class="hl2">font-weight</span>: <span class="hl3">bold</span>;
+  <span class="hl2">cursor</span>: <span class="hl3">pointer</span>;
+}</pre>
+            <p><strong>JavaScript — the action:</strong></p>
+            <pre><span class="hl">function</span> <span class="hl2">doSomething</span>() {
+  <span class="hl3">alert</span>(<span class="hl3">"Button clicked!"</span>);
+}</pre>
+            <p><strong>Where does each part go?</strong></p>
+            <ul>
+              <li>HTML button → inside <code>&lt;body&gt;</code></li>
+              <li>CSS → inside <code>&lt;style&gt;</code> in <code>&lt;head&gt;</code> (or external .css file)</li>
+              <li>JavaScript → inside <code>&lt;script&gt;</code> before <code>&lt;/body&gt;</code> (or external .js file)</li>
+            </ul>
+          </div>
+
+          <div class="learn-card">
+            <h3>🗂️ 3. Divs, Sections & Layout</h3>
+            <p>Think of <code>&lt;div&gt;</code> as a box. You put things inside boxes and arrange them.</p>
+            <pre><span class="hl">&lt;div</span> <span class="hl2">class</span>=<span class="hl3">"container"</span><span class="hl">&gt;</span>
+  <span class="hl">&lt;header&gt;</span>Top bar<span class="hl">&lt;/header&gt;</span>
+  <span class="hl">&lt;main&gt;</span>
+    <span class="hl">&lt;section</span> <span class="hl2">class</span>=<span class="hl3">"hero"</span><span class="hl">&gt;</span>Welcome<span class="hl">&lt;/section&gt;</span>
+    <span class="hl">&lt;div</span> <span class="hl2">class</span>=<span class="hl3">"grid"</span><span class="hl">&gt;</span>
+      <span class="hl">&lt;div&gt;</span>Card 1<span class="hl">&lt;/div&gt;</span>
+      <span class="hl">&lt;div&gt;</span>Card 2<span class="hl">&lt;/div&gt;</span>
+    <span class="hl">&lt;/div&gt;</span>
+  <span class="hl">&lt;/main&gt;</span>
+  <span class="hl">&lt;footer&gt;</span>Bottom<span class="hl">&lt;/footer&gt;</span>
+<span class="hl">&lt;/div&gt;</span></pre>
+            <p><strong>Key CSS for layout:</strong></p>
+            <pre><span class="hl">.container</span> {
+  <span class="hl2">width</span>: <span class="hl3">90%</span>;
+  <span class="hl2">margin</span>: <span class="hl3">0 auto</span>;  <span class="hl3">/* centers it */</span>
+}
+<span class="hl">.grid</span> {
+  <span class="hl2">display</span>: <span class="hl3">grid</span>;
+  <span class="hl2">grid-template-columns</span>: <span class="hl3">1fr 1fr</span>;
+  <span class="hl2">gap</span>: <span class="hl3">16px</span>;
+}</pre>
+          </div>
+
+          <div class="learn-card">
+            <h3>🎨 4. Styling: Colors, Fonts, Spacing</h3>
+            <p>CSS makes things look good. Here are the essentials:</p>
+            <pre><span class="hl">body</span> {
+  <span class="hl2">background</span>: <span class="hl3">#050810</span>;      <span class="hl3">/* dark background */</span>
+  <span class="hl2">color</span>: <span class="hl3">#ffffff</span>;           <span class="hl3">/* white text */</span>
+  <span class="hl2">font-family</span>: <span class="hl3">Arial, sans-serif</span>;
+}
+
+<span class="hl">h1</span> {
+  <span class="hl2">font-size</span>: <span class="hl3">2rem</span>;           <span class="hl3">/* 2x root size */</span>
+  <span class="hl2">margin-bottom</span>: <span class="hl3">16px</span>;
+}
+
+<span class="hl">.card</span> {
+  <span class="hl2">background</span>: <span class="hl3">#0b1220</span>;
+  <span class="hl2">padding</span>: <span class="hl3">20px</span>;
+  <span class="hl2">border-radius</span>: <span class="hl3">12px</span>;
+  <span class="hl2">border</span>: <span class="hl3">1px solid rgba(255,255,255,0.1)</span>;
+}</pre>
+            <p><strong>Spacing shortcut:</strong> <code>padding</code> = inside space, <code>margin</code> = outside space.</p>
+            <p><strong>Colors:</strong> Use hex (<code>#27d9ff</code>), rgb (<code>rgb(39,217,255)</code>), or rgba for transparency.</p>
+          </div>
+
+          <div class="learn-card">
+            <h3>🔄 5. JavaScript: Making Things Work</h3>
+            <p>JavaScript is the brain of your page. It reacts to clicks, saves data, and changes the page.</p>
+            <pre><span class="hl">// 1. Grab an element</span>
+<span class="hl">const</span> btn = document.<span class="hl3">getElementById</span>(<span class="hl3">"myBtn"</span>);
+
+<span class="hl">// 2. Listen for a click</span>
+btn.<span class="hl3">addEventListener</span>(<span class="hl3">"click"</span>, <span class="hl">function</span>() {
+  <span class="hl3">alert</span>(<span class="hl3">"You clicked!"</span>);
+});
+
+<span class="hl">// 3. Save data to localStorage</span>
+localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <span class="hl3">"Jason"</span>);
+
+<span class="hl">// 4. Read data back</span>
+<span class="hl">const</span> name = localStorage.<span class="hl3">getItem</span>(<span class="hl3">"name"</span>);</pre>
+            <p><strong>Functions:</strong> A block of code you can run anytime.</p>
+            <pre><span class="hl">function</span> <span class="hl2">greet</span>(name) {
+  <span class="hl3">console</span>.log(<span class="hl3">"Hello " + name</span>);
+}
+<span class="hl2">greet</span>(<span class="hl3">"Jason"</span>);  <span class="hl3">// Output: Hello Jason</span></pre>
+          </div>
+
+          <div class="learn-card">
+            <h3>🚀 6. Starting a New Screen</h3>
+            <p>To create a new "screen" or page, you have two main options:</p>
+            <p><strong>Option A — Separate HTML files:</strong></p>
+            <ul>
+              <li>Create <code>index.html</code> (home)</li>
+              <li>Create <code>about.html</code> (about page)</li>
+              <li>Link them: <code>&lt;a href="about.html"&gt;About&lt;/a&gt;</code></li>
+            </ul>
+            <p><strong>Option B — One page, multiple sections (SPA style):</strong></p>
+            <pre><span class="hl">&lt;div</span> <span class="hl2">id</span>=<span class="hl3">"homeScreen"</span><span class="hl">&gt;</span>Home content<span class="hl">&lt;/div&gt;</span>
+<span class="hl">&lt;div</span> <span class="hl2">id</span>=<span class="hl3">"aboutScreen"</span> <span class="hl2">class</span>=<span class="hl3">"hidden"</span><span class="hl">&gt;</span>About content<span class="hl">&lt;/div&gt;</span>
+
+<span class="hl">&lt;script&gt;</span>
+<span class="hl">function</span> <span class="hl2">showAbout</span>() {
+  document.<span class="hl3">getElementById</span>(<span class="hl3">"homeScreen"</span>).classList.<span class="hl3">add</span>(<span class="hl3">"hidden"</span>);
+  document.<span class="hl3">getElementById</span>(<span class="hl3">"aboutScreen"</span>).classList.<span class="hl3">remove</span>(<span class="hl3">"hidden"</span>);
+}
+<span class="hl">&lt;/script&gt;</span></pre>
+            <p>This is exactly how NINE: OCTOBRAIN switches between rooms!</p>
+          </div>
+
+          <div class="learn-card">
+            <h3>📋 7. Full Checklist: New App From Scratch</h3>
+            <ol>
+              <li><strong>Create <code>index.html</code></strong> with the basic structure (DOCTYPE, html, head, body).</li>
+              <li><strong>In <code>&lt;head&gt;</code>:</strong> Add charset, viewport, title, and <code>&lt;style&gt;</code> for CSS.</li>
+              <li><strong>In <code>&lt;body&gt;</code>:</strong> Add your header, main content, and footer.</li>
+              <li><strong>Add a button:</strong> <code>&lt;button onclick="myFunc()"&gt;Go&lt;/button&gt;</code>.</li>
+              <li><strong>Add <code>&lt;script&gt;</code></strong> before <code>&lt;/body&gt;</code> for your JavaScript.</li>
+              <li><strong>Style everything</strong> with CSS in the <code>&lt;style&gt;</code> tag.</li>
+              <li><strong>Test in browser:</strong> Open the file and click around.</li>
+              <li><strong>Save data</strong> with <code>localStorage</code> if you need persistence.</li>
+              <li><strong>Add more screens</strong> using hidden divs and <code>classList</code> toggles.</li>
+              <li><strong>Deploy:</strong> Upload to Google Sites, Netlify, or any web host.</li>
+            </ol>
+          </div>
+
+          <div class="learn-card">
+            <h3>💡 8. Pro Tips & Common Mistakes</h3>
+            <p><strong>✅ Do:</strong></p>
+            <ul>
+              <li>Always close your tags: <code>&lt;div&gt;...&lt;/div&gt;</code></li>
+              <li>Use <code>class</code> for styling, <code>id</code> for JavaScript hooks</li>
+              <li>Test on mobile — use <code>@media</code> queries</li>
+              <li>Keep functions small and focused</li>
+              <li>Comment your code: <code>&lt;!-- like this --&gt;</code></li>
+            </ul>
+            <p><strong>❌ Avoid:</strong></p>
+            <ul>
+              <li>Forgetting <code>charset="UTF-8"</code> — breaks special characters</li>
+              <li>Using <code>id</code> for multiple elements — must be unique</li>
+              <li>Putting CSS in the body — keep it in <code>&lt;head&gt;</code></li>
+              <li>Hardcoding API keys in frontend JavaScript</li>
+              <li>Not testing on different screen sizes</li>
+            </ul>
+            <p><strong>CSS variables:</strong> Use <code>:root { --my-color: #27d9ff; }</code> then <code>color: var(--my-color);</code> for easy theming.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- PRODUCT TRACKER -->
       <!-- ========================================================= -->
       <section class="product-tracker" id="productTracker">
         <h2>📌 Product Launch Tracker</h2>
@@ -1582,17 +2469,84 @@ Version: [x.y.z]
       phone: "0738592196",
       workerUrl: "https://octopusmindorbrain.jdevapphub.workers.dev",
       accessCode: "0105075874088",
+      officeCode: "01050758740880663195345",
+      teamCode: "0698416632",
       storageKey: "nine_octobrain_history_v1",
-      trackerKey: "nine_octobrain_products_v1"
+      trackerKey: "nine_octobrain_products_v1",
+      officeKey: "nine_octobrain_office_v1",
+      teamKey: "nine_octobrain_team_v1"
     };
 
     let selectedType = "Application";
     let currentProject = null;
+    let officeUnlocked = false;
+    let teamUnlocked = false;
 
     const brains = [
       "STRATEGY", "USERS", "FEATURES", "POLICY",
       "SECURITY", "TECH", "BUSINESS", "LAUNCH"
     ];
+
+    /* ===== FEMALE VOICE ===== */
+    function speak(text) {
+      if (!window.speechSynthesis) return;
+
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+
+      // Try to find a female voice
+      const voices = window.speechSynthesis.getVoices();
+      let femaleVoice = null;
+
+      // Common female voice identifiers across browsers
+      const femaleNames = [
+        'Samantha', 'Victoria', 'Karen', 'Moira', 'Tessa',
+        'Zira', 'Hazel', 'Susan', 'Google UK English Female',
+        'Google US English', 'Microsoft Zira', 'Microsoft Hazel',
+        'Female', 'Woman', 'Girl'
+      ];
+
+      for (const voice of voices) {
+        for (const name of femaleNames) {
+          if (voice.name.includes(name) || voice.name.toLowerCase().includes('female')) {
+            femaleVoice = voice;
+            break;
+          }
+        }
+        if (femaleVoice) break;
+      }
+
+      // Fallback: try to find any voice that isn't obviously male
+      if (!femaleVoice) {
+        for (const voice of voices) {
+          if (!voice.name.toLowerCase().includes('male') &&
+              !voice.name.toLowerCase().includes('david') &&
+              !voice.name.toLowerCase().includes('mark')) {
+            femaleVoice = voice;
+            break;
+          }
+        }
+      }
+
+      if (femaleVoice) {
+        utterance.voice = femaleVoice;
+      }
+
+      utterance.rate = 0.95;
+      utterance.pitch = 1.15;
+      utterance.volume = 1;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Some browsers load voices asynchronously
+    if (window.speechSynthesis) {
+      window.speechSynthesis.onvoiceschanged = function() {
+        // Voices loaded — no action needed, speak() will pick them up
+      };
+    }
 
     /* ===== ACCESS ===== */
     function unlockApp() {
@@ -1606,9 +2560,11 @@ Version: [x.y.z]
         renderHistory();
         renderTrackedProducts();
         showToast("OCTOBRAIN unlocked.");
+        speak("Welcome back, Jason. OCTOBRAIN is now unlocked. Your product intelligence system is ready.");
       } else {
         error.textContent = "Access denied. Enter the authorised access code.";
         document.getElementById("accessCode").value = "";
+        speak("Access denied. Please enter the correct access code.");
       }
     }
 
@@ -1628,8 +2584,8 @@ Version: [x.y.z]
       const name = document.getElementById("productName").value.trim();
       const idea = document.getElementById("productIdea").value.trim();
 
-      if (!name) { showToast("Enter the product name first."); return; }
-      if (!idea) { showToast("Describe what you want to build."); return; }
+      if (!name) { showToast("Enter the product name first."); speak("Please enter the product name first."); return; }
+      if (!idea) { showToast("Describe what you want to build."); speak("Please describe what you want to build."); return; }
 
       currentProject = {
         id: Date.now(),
@@ -1643,6 +2599,10 @@ Version: [x.y.z]
       document.getElementById("brainStatus").textContent = "Activating...";
       document.querySelectorAll(".brain").forEach(b => b.classList.remove("active", "done"));
       document.getElementById("resultsSection").classList.add("hidden");
+
+      // Announce activation
+      showToast("OCTOBRAIN activated.");
+      speak("OCTOBRAIN activated. Initialising the nine brains. Analysing your product idea now.");
 
       let results = null;
       try {
@@ -1661,6 +2621,7 @@ Version: [x.y.z]
       renderResults(currentProject);
       document.getElementById("brainStatus").textContent = "Complete";
       showToast("OCTOBRAIN completed the product blueprint.");
+      speak("OCTOBRAIN has completed the product blueprint. Your full product DNA is ready for review.");
     }
 
     /* ===== WORKER ===== */
@@ -1966,6 +2927,244 @@ Version: [x.y.z]
       });
     }
 
+    /* ===== JASON'S OFFICE ===== */
+    function openOfficeRoom() {
+      if (!officeUnlocked) {
+        const code = prompt("Enter Jason's Office access code:");
+        if (code !== CONFIG.officeCode) {
+          showToast("Access denied. Invalid office code.");
+          speak("Access denied. Invalid office code.");
+          return;
+        }
+        officeUnlocked = true;
+        sessionStorage.setItem("officeUnlocked", "true");
+        speak("Welcome to your office, Jason. The King's chamber is now open.");
+      }
+      document.getElementById("officeSection").classList.remove("hidden");
+      document.getElementById("teamRoomSection").classList.add("hidden");
+      document.getElementById("officeSection").scrollIntoView({ behavior: "smooth" });
+      renderOfficeTasks();
+    }
+
+    function getOfficeTasks() {
+      try { return JSON.parse(localStorage.getItem(CONFIG.officeKey) || "[]"); } catch { return []; }
+    }
+
+    function saveOfficeTasks(tasks) {
+      localStorage.setItem(CONFIG.officeKey, JSON.stringify(tasks));
+    }
+
+    function addOfficeTask() {
+      const titleInput = document.getElementById("officeTaskTitle");
+      const descInput = document.getElementById("officeTaskDesc");
+      const title = titleInput.value.trim();
+      const desc = descInput.value.trim();
+
+      if (!title) { showToast("Please enter a task title."); return; }
+
+      const tasks = getOfficeTasks();
+      tasks.unshift({
+        id: Date.now(),
+        title: title,
+        desc: desc,
+        done: false,
+        created: new Date().toISOString()
+      });
+      saveOfficeTasks(tasks);
+      titleInput.value = "";
+      descInput.value = "";
+      renderOfficeTasks();
+      showToast("Task added to the King's chamber.");
+      speak("Task added to your royal chamber.");
+    }
+
+    function toggleOfficeTask(id) {
+      const tasks = getOfficeTasks();
+      const task = tasks.find(t => t.id === id);
+      if (task) {
+        task.done = !task.done;
+        saveOfficeTasks(tasks);
+        renderOfficeTasks();
+      }
+    }
+
+    function deleteOfficeTask(id) {
+      if (!confirm("Remove this task from the King's chamber?")) return;
+      const tasks = getOfficeTasks().filter(t => t.id !== id);
+      saveOfficeTasks(tasks);
+      renderOfficeTasks();
+      showToast("Task removed from the King's chamber.");
+    }
+
+    function renderOfficeTasks() {
+      const container = document.getElementById("officeTaskList");
+      const tasks = getOfficeTasks();
+
+      if (!tasks.length) {
+        container.innerHTML = '<div class="office-empty">No tasks yet. The King\'s chamber awaits your command.</div>';
+        return;
+      }
+
+      container.innerHTML = "";
+      tasks.forEach(task => {
+        const item = document.createElement("div");
+        item.className = "office-task-item";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "task-check";
+        checkbox.checked = task.done;
+        checkbox.onchange = () => toggleOfficeTask(task.id);
+
+        const info = document.createElement("div");
+        info.className = "task-info";
+
+        const titleDiv = document.createElement("div");
+        titleDiv.className = "task-title" + (task.done ? " done" : "");
+        titleDiv.textContent = "👑 " + task.title;
+
+        const descDiv = document.createElement("div");
+        descDiv.className = "task-desc";
+        descDiv.textContent = task.desc || "No description";
+
+        const dateDiv = document.createElement("div");
+        dateDiv.className = "task-date";
+        dateDiv.textContent = new Date(task.created).toLocaleString();
+
+        info.appendChild(titleDiv);
+        if (task.desc) info.appendChild(descDiv);
+        info.appendChild(dateDiv);
+
+        const del = document.createElement("button");
+        del.className = "task-delete";
+        del.textContent = "🗑 Remove";
+        del.onclick = () => deleteOfficeTask(task.id);
+
+        item.appendChild(checkbox);
+        item.appendChild(info);
+        item.appendChild(del);
+        container.appendChild(item);
+      });
+    }
+
+    function copyCode(code) {
+      copyText(code);
+      speak("Code copied to clipboard.");
+    }
+
+    /* ===== TEAM ROOM ===== */
+    function openTeamRoom() {
+      if (!teamUnlocked) {
+        const code = prompt("Enter Team Room access code:");
+        if (code !== CONFIG.teamCode) {
+          showToast("Access denied. Invalid team code.");
+          speak("Access denied. Invalid team code.");
+          return;
+        }
+        teamUnlocked = true;
+        sessionStorage.setItem("teamUnlocked", "true");
+        speak("Welcome to the Team Room. You can now save links, names, and notes.");
+      }
+      document.getElementById("teamRoomSection").classList.remove("hidden");
+      document.getElementById("officeSection").classList.add("hidden");
+      document.getElementById("teamRoomSection").scrollIntoView({ behavior: "smooth" });
+      renderTeamEntries();
+    }
+
+    function getTeamEntries() {
+      try { return JSON.parse(localStorage.getItem(CONFIG.teamKey) || "[]"); } catch { return []; }
+    }
+
+    function saveTeamEntries(entries) {
+      localStorage.setItem(CONFIG.teamKey, JSON.stringify(entries));
+    }
+
+    function addTeamEntry() {
+      const nameInput = document.getElementById("teamEntryName");
+      const urlInput = document.getElementById("teamEntryUrl");
+      const notesInput = document.getElementById("teamEntryNotes");
+      const name = nameInput.value.trim();
+      const url = urlInput.value.trim();
+      const notes = notesInput.value.trim();
+
+      if (!name) { showToast("Please enter an entry name."); return; }
+      if (!url) { showToast("Please enter a link."); return; }
+
+      const entries = getTeamEntries();
+      entries.unshift({
+        id: Date.now(),
+        name: name,
+        url: url,
+        notes: notes,
+        created: new Date().toISOString()
+      });
+      saveTeamEntries(entries);
+      nameInput.value = "";
+      urlInput.value = "";
+      notesInput.value = "";
+      renderTeamEntries();
+      showToast("Entry saved in the Team Room.");
+      speak("Entry saved in the Team Room.");
+    }
+
+    function deleteTeamEntry(id) {
+      if (!confirm("Remove this entry from the Team Room?")) return;
+      const entries = getTeamEntries().filter(e => e.id !== id);
+      saveTeamEntries(entries);
+      renderTeamEntries();
+      showToast("Entry removed.");
+    }
+
+    function renderTeamEntries() {
+      const container = document.getElementById("teamEntriesList");
+      const entries = getTeamEntries();
+
+      if (!entries.length) {
+        container.innerHTML = '<div class="team-empty">No entries yet. Share your links, names, and notes here.</div>';
+        return;
+      }
+
+      container.innerHTML = "";
+      entries.forEach(entry => {
+        const item = document.createElement("div");
+        item.className = "team-entry-item";
+
+        const info = document.createElement("div");
+        info.className = "entry-info";
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "entry-name";
+        nameDiv.textContent = entry.name;
+
+        const linkDiv = document.createElement("div");
+        linkDiv.className = "entry-link";
+        linkDiv.innerHTML = `<a href="${escapeHTML(entry.url)}" target="_blank" rel="noopener">${escapeHTML(entry.url)}</a>`;
+
+        const dateDiv = document.createElement("div");
+        dateDiv.className = "entry-date";
+        dateDiv.textContent = new Date(entry.created).toLocaleString();
+
+        info.appendChild(nameDiv);
+        info.appendChild(linkDiv);
+        if (entry.notes) {
+          const notesDiv = document.createElement("div");
+          notesDiv.className = "entry-notes";
+          notesDiv.textContent = entry.notes;
+          info.appendChild(notesDiv);
+        }
+        info.appendChild(dateDiv);
+
+        const del = document.createElement("button");
+        del.className = "entry-delete";
+        del.textContent = "🗑 Remove";
+        del.onclick = () => deleteTeamEntry(entry.id);
+
+        item.appendChild(info);
+        item.appendChild(del);
+        container.appendChild(item);
+      });
+    }
+
     /* ===== UTILITIES ===== */
     async function copyText(text) {
       try {
@@ -2022,6 +3221,10 @@ Version: [x.y.z]
       document.getElementById("launchGuideSection").scrollIntoView({ behavior: "smooth" });
     }
 
+    function scrollToLearn() {
+      document.getElementById("learnSection").scrollIntoView({ behavior: "smooth" });
+    }
+
     /* ===== GUIDE TABS ===== */
     document.querySelectorAll(".guide-tab").forEach(tab => {
       tab.addEventListener("click", () => {
@@ -2040,6 +3243,14 @@ Version: [x.y.z]
         document.getElementById("app").classList.remove("hidden");
         renderHistory();
         renderTrackedProducts();
+      }
+
+      if (sessionStorage.getItem("officeUnlocked") === "true") {
+        officeUnlocked = true;
+      }
+
+      if (sessionStorage.getItem("teamUnlocked") === "true") {
+        teamUnlocked = true;
       }
     });
   </script>

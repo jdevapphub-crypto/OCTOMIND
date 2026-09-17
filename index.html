@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070b14">
+<title>NINE: OCTOBRAIN — Joheliv Labs</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --bg:#050810;
+    --panel:#0b1220;
+    --panel2:#101a2c;
+    --border:rgba(255,255,255,.09);
+    --text:#f4f7fb;
+    --muted:#8e9bb0;
+    --cyan:#27d9ff;
+    --blue:#5578ff;
+    --purple:#9b5cff;
+    --green:#32e6a1;
+    --danger:#ff5577;
+    --shadow:0 20px 70px rgba(0,0,0,.45);
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;
+    background:
+      radial-gradient(circle at 50% 20%,rgba(39,217,255,.08),transparent 30%),
+      radial-gradient(circle at 80% 80%,rgba(155,92,255,.08),transparent 30%),
+      var(--bg);
+    color:var(--text);
+}
+
+body{
+    overflow-x:hidden;
+}
+
+button,input,textarea,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* ================= ACCESS ================= */
+
+#accessScreen{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:
+      radial-gradient(circle at center,rgba(39,217,255,.10),transparent 35%),
+      #03050a;
+}
+
+.access-card{
+    width:min(460px,100%);
+    padding:42px 32px;
+    border:1px solid var(--border);
+    border-radius:28px;
+    background:rgba(10,16,28,.86);
+    backdrop-filter:blur(25px);
+    box-shadow:var(--shadow);
+    text-align:center;
+}
+
+.brand-mini{
+    color:var(--cyan);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:3px;
+    margin-bottom:8px;
+}
+
+.access-card h1{
+    font-size:38px;
+    letter-spacing:-1px;
+}
+
+.access-card .sub{
+    color:var(--muted);
+    margin:10px 0 28px;
+}
+
+.ceo{
+    margin:25px 0;
+    color:#c9d3e5;
+    font-size:13px;
+}
+
+.access-input{
+    width:100%;
+    height:54px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    outline:none;
+    background:#070c16;
+    color:white;
+    text-align:center;
+    letter-spacing:7px;
+    font-size:18px;
+}
+
+.access-input:focus{
+    border-color:var(--cyan);
+    box-shadow:0 0 0 3px rgba(39,217,255,.08);
+}
+
+.unlock{
+    width:100%;
+    height:54px;
+    margin-top:14px;
+    border:0;
+    border-radius:14px;
+    color:#021018;
+    font-weight:900;
+    background:linear-gradient(135deg,var(--cyan),#74eaff);
+}
+
+.error{
+    min-height:20px;
+    margin-top:12px;
+    color:#ff6685;
+    font-size:13px;
+}
+
+/* ================= APP ================= */
+
+#app{
+    min-height:100vh;
+}
+
+.topbar{
+    height:72px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 28px;
+    border-bottom:1px solid var(--border);
+    background:rgba(5,8,16,.82);
+    backdrop-filter:blur(18px);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--cyan),var(--purple));
+    color:white;
+    font-size:20px;
+    box-shadow:0 0 30px rgba(39,217,255,.18);
+}
+
+.logo strong{
+    display:block;
+    font-size:16px;
+}
+
+.logo small{
+    color:var(--muted);
+}
+
+.top-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    height:40px;
+    padding:0 13px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--panel);
+    color:#dce5f4;
+}
+
+.icon-btn:hover{
+    border-color:rgba(39,217,255,.4);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    text-align:center;
+    padding:45px 20px 20px;
+}
+
+.hero .welcome{
+    color:var(--cyan);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:3px;
+}
+
+.hero h1{
+    margin-top:10px;
+    font-size:clamp(34px,6vw,70px);
+    letter-spacing:-3px;
+    background:linear-gradient(90deg,#fff,var(--cyan),#b68cff);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:680px;
+    margin:12px auto 0;
+    color:var(--muted);
+}
+
+/* ================= WORKSPACE ================= */
+
+.workspace{
+    width:min(1400px,94%);
+    margin:25px auto 60px;
+}
+
+.setup{
+    max-width:850px;
+    margin:0 auto 40px;
+    padding:25px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    background:linear-gradient(180deg,rgba(16,26,44,.85),rgba(8,13,24,.85));
+    box-shadow:var(--shadow);
+}
+
+.field{
+    margin-bottom:18px;
+}
+
+.field label{
+    display:block;
+    margin-bottom:8px;
+    color:#cdd8e8;
+    font-size:13px;
+    font-weight:700;
+}
+
+.field input,
+.field textarea,
+.field select{
+    width:100%;
+    border:1px solid var(--border);
+    outline:none;
+    border-radius:12px;
+    padding:14px;
+    background:#070c16;
+    color:white;
+}
+
+.field textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus{
+    border-color:rgba(39,217,255,.55);
+}
+
+.type-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.type-option{
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:#070c16;
+    text-align:left;
+    transition:.2s;
+}
+
+.type-option.active{
+    border-color:var(--cyan);
+    background:rgba(39,217,255,.07);
+    box-shadow:inset 0 0 30px rgba(39,217,255,.04);
+}
+
+.type-option strong{
+    display:block;
+}
+
+.type-option span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.generate{
+    width:100%;
+    height:56px;
+    border:0;
+    border-radius:14px;
+    background:linear-gradient(135deg,var(--cyan),var(--blue));
+    color:#020711;
+    font-weight:950;
+    font-size:15px;
+    margin-top:5px;
+}
+
+/* ================= BRAINS ================= */
+
+.brain-system{
+    position:relative;
+    min-height:730px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:10px auto 40px;
+}
+
+.neural-lines{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.line{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:2px;
+    height:260px;
+    transform-origin:bottom center;
+    background:linear-gradient(to top,transparent,var(--cyan),transparent);
+    opacity:.18;
+}
+
+.line:nth-child(1){transform:translate(-50%,-100%) rotate(0deg);}
+.line:nth-child(2){transform:translate(-50%,-100%) rotate(45deg);}
+.line:nth-child(3){transform:translate(-50%,-100%) rotate(90deg);}
+.line:nth-child(4){transform:translate(-50%,-100%) rotate(135deg);}
+.line:nth-child(5){transform:translate(-50%,-100%) rotate(180deg);}
+.line:nth-child(6){transform:translate(-50%,-100%) rotate(225deg);}
+.line:nth-child(7){transform:translate(-50%,-100%) rotate(270deg);}
+.line:nth-child(8){transform:translate(-50%,-100%) rotate(315deg);}
+
+.brain{
+    position:absolute;
+    width:150px;
+    min-height:115px;
+    padding:17px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    background:rgba(10,17,30,.92);
+    backdrop-filter:blur(14px);
+    text-align:center;
+    transition:.35s;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+.brain:hover{
+    transform:scale(1.04);
+    border-color:rgba(39,217,255,.4);
+}
+
+.brain.active{
+    border-color:var(--cyan);
+    box-shadow:0 0 45px rgba(39,217,255,.2);
+    animation:pulse 1.4s infinite;
+}
+
+.brain.done{
+    border-color:rgba(50,230,161,.5);
+}
+
+.brain .emoji{
+    font-size:27px;
+}
+
+.brain strong{
+    display:block;
+    margin-top:6px;
+    font-size:12px;
+}
+
+.brain small{
+    display:block;
+    margin-top:5px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.brain:nth-of-type(1){top:3%;left:50%;transform:translateX(-50%);}
+.brain:nth-of-type(2){top:14%;right:5%;}
+.brain:nth-of-type(3){top:40%;right:0;}
+.brain:nth-of-type(4){bottom:7%;right:10%;}
+.brain:nth-of-type(5){bottom:0;left:50%;transform:translateX(-50%);}
+.brain:nth-of-type(6){bottom:7%;left:10%;}
+.brain:nth-of-type(7){top:40%;left:0;}
+.brain:nth-of-type(8){top:14%;left:5%;}
+
+.core{
+    position:relative;
+    z-index:5;
+    width:230px;
+    height:230px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 35% 30%,#54edff,transparent 8%),
+      radial-gradient(circle,#192b53,#07101f 62%);
+    border:1px solid rgba(39,217,255,.5);
+    box-shadow:
+      0 0 45px rgba(39,217,255,.15),
+      inset 0 0 60px rgba(39,217,255,.08);
+}
+
+.core .octopus{
+    font-size:76px;
+    filter:drop-shadow(0 0 20px rgba(39,217,255,.5));
+}
+
+.core strong{
+    font-size:14px;
+    letter-spacing:2px;
+}
+
+.core small{
+    margin-top:4px;
+    color:var(--muted);
+}
+
+@keyframes pulse{
+    0%,100%{box-shadow:0 0 20px rgba(39,217,255,.08)}
+    50%{box-shadow:0 0 50px rgba(39,217,255,.32)}
+}
+
+/* ================= RESULTS ================= */
+
+.results{
+    display:grid;
+    grid-template-columns:250px 1fr;
+    gap:18px;
+}
+
+.result-nav{
+    position:sticky;
+    top:90px;
+    align-self:start;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:18px;
+    background:var(--panel);
+}
+
+.result-nav button{
+    width:100%;
+    text-align:left;
+    padding:11px;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    color:#aebbd0;
+    margin-bottom:3px;
+}
+
+.result-nav button:hover,
+.result-nav button.active{
+    background:rgba(39,217,255,.08);
+    color:var(--cyan);
+}
+
+.result-content{
+    min-width:0;
+}
+
+.result-card{
+    padding:25px;
+    margin-bottom:15px;
+    border:1px solid var(--border);
+    border-radius:20px;
+    background:rgba(10,17,30,.85);
+}
+
+.result-card h2{
+    margin-bottom:8px;
+}
+
+.result-card .meta{
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.result-text{
+    white-space:pre-wrap;
+    line-height:1.75;
+    color:#d7dfec;
+}
+
+.result-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.action{
+    padding:10px 14px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#080e19;
+    color:#dce7f5;
+}
+
+.action.primary{
+    background:var(--cyan);
+    color:#021018;
+    border:0;
+    font-weight:800;
+}
+
+.action:hover{
+    border-color:var(--cyan);
+}
+
+/* ================= HISTORY ================= */
+
+.history-panel{
+    width:min(1200px,94%);
+    margin:0 auto 50px;
+}
+
+.history-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.history-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:12px;
+}
+
+.history-card{
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:17px;
+    background:var(--panel);
+}
+
+.history-card strong{
+    display:block;
+}
+
+.history-card small{
+    display:block;
+    color:var(--muted);
+    margin:7px 0 15px;
+}
+
+.history-card button{
+    border:1px solid var(--border);
+    background:#070c16;
+    color:white;
+    border-radius:9px;
+    padding:8px 12px;
+}
+
+.empty{
+    padding:30px;
+    text-align:center;
+    color:var(--muted);
+    border:1px dashed var(--border);
+    border-radius:15px;
+}
+
+/* ================= TOAST ================= */
+
+#toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:99999;
+    padding:14px 18px;
+    border-radius:12px;
+    background:#111b2c;
+    border:1px solid rgba(39,217,255,.3);
+    box-shadow:var(--shadow);
+    transform:translateY(120px);
+    opacity:0;
+    transition:.3s;
+}
+
+#toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+    .topbar{
+        padding:0 14px;
+    }
+
+    .top-actions .icon-btn span{
+        display:none;
+    }
+
+    .brain-system{
+        min-height:900px;
+    }
+
+    .brain{
+        width:125px;
+        min-height:105px;
+    }
+
+    .core{
+        width:190px;
+        height:190px;
+    }
+
+    .core .octopus{
+        font-size:60px;
+    }
+
+    .results{
+        grid-template-columns:1fr;
+    }
+
+    .result-nav{
+        position:static;
+        display:flex;
+        overflow-x:auto;
+        gap:4px;
+    }
+
+    .result-nav button{
+        min-width:max-content;
+    }
+
+    .type-row{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= ACCESS ================= -->
+
+<section id="accessScreen">
+
+    <div class="access-card">
+
+        <div class="brand-mini">
+            JOHELIV LABS
+        </div>
+
+        <h1>NINE</h1>
+
+        <div class="sub">
+            OCTOBRAIN
+        </div>
+
+        <p style="color:#cdd8e8;line-height:1.6;">
+            Welcome to Joheliv Labs<br>
+            <strong>JDev App Craft Co.</strong>
+        </p>
+
+        <div class="ceo">
+            CEO — <strong>JASON MUFAMADI</strong><br>
+            SOUTH AFRICA
+        </div>
+
+        <input
+            id="accessCode"
+            class="access-input"
+            type="password"
+            inputmode="numeric"
+            autocomplete="off"
+            placeholder="ACCESS CODE"
+        >
+
+        <button class="unlock" onclick="unlockApp()">
+            UNLOCK OCTOBRAIN
+        </button>
+
+        <div id="accessError" class="error"></div>
+
+    </div>
+
+</section>
+
+<!-- ================= APPLICATION ================= -->
+
+<div id="app" class="hidden">
+
+    <header class="topbar">
+
+        <div class="logo">
+            <div class="logo-icon">🐙</div>
+
+            <div>
+                <strong>NINE: OCTOBRAIN</strong>
+                <small>Product Intelligence System</small>
+            </div>
+        </div>
+
+        <div class="top-actions">
+            <button class="icon-btn" onclick="showHistory()">
+                🕘 <span>History</span>
+            </button>
+
+            <button class="icon-btn" onclick="clearHistory()">
+                🗑 <span>Clear</span>
+            </button>
+        </div>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="welcome">
+            WELCOME TO JOHELIV LABS
+        </div>
+
+        <h1>NINE: OCTOBRAIN</h1>
+
+        <p>
+            One idea. Nine specialised brains. One complete product blueprint.
+        </p>
+
+    </section>
+
+    <main class="workspace">
+
+        <!-- SETUP -->
+
+        <section class="setup">
+
+            <div class="field">
+                <label>PRODUCT / APPLICATION NAME</label>
+
+                <input
+                    id="productName"
+                    type="text"
+                    placeholder="Example: StudyPad"
+                >
+            </div>
+
+            <div class="field">
+                <label>WHAT ARE YOU BUILDING?</label>
+
+                <div class="type-row">
+
+                    <div
+                        id="appType"
+                        class="type-option active"
+                        onclick="selectType('Application')"
+                    >
+                        <strong>📱 Application</strong>
+                        <span>Android, iOS, desktop or mobile product</span>
+                    </div>
+
+                    <div
+                        id="webType"
+                        class="type-option"
+                        onclick="selectType('Website')"
+                    >
+                        <strong>🌐 Website</strong>
+                        <span>Web application, platform or website</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="field">
+                <label>DESCRIBE YOUR IDEA</label>
+
+                <textarea
+                    id="productIdea"
+                    placeholder="Tell OCTOBRAIN what you want to build..."
+                ></textarea>
+            </div>
+
+            <button class="generate" onclick="startGeneration()">
+                🧠 ACTIVATE OCTOBRAIN
+            </button>
+
+        </section>
+
+        <!-- BRAIN SYSTEM -->
+
+        <section class="brain-system">
+
+            <div class="neural-lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+
+            <div class="brain" data-index="0">
+                <div class="emoji">🎯</div>
+                <strong>STRATEGY</strong>
+                <small>Product direction</small>
+            </div>
+
+            <div class="brain" data-index="1">
+                <div class="emoji">👥</div>
+                <strong>USERS</strong>
+                <small>Audience & UX</small>
+            </div>
+
+            <div class="brain" data-index="2">
+                <div class="emoji">⚙️</div>
+                <strong>FEATURES</strong>
+                <small>Functionality</small>
+            </div>
+
+            <div class="brain" data-index="3">
+                <div class="emoji">📜</div>
+                <strong>POLICY</strong>
+                <small>Rules & terms</small>
+            </div>
+
+            <div class="brain" data-index="4">
+                <div class="emoji">🔐</div>
+                <strong>SECURITY</strong>
+                <small>Privacy & safety</small>
+            </div>
+
+            <div class="brain" data-index="5">
+                <div class="emoji">💻</div>
+                <strong>TECH</strong>
+                <small>Architecture</small>
+            </div>
+
+            <div class="brain" data-index="6">
+                <div class="emoji">💰</div>
+                <strong>BUSINESS</strong>
+                <small>Monetization</small>
+            </div>
+
+            <div class="brain" data-index="7">
+                <div class="emoji">🚀</div>
+                <strong>LAUNCH</strong>
+                <small>Roadmap</small>
+            </div>
+
+            <div class="core">
+
+                <div class="octopus">🐙</div>
+
+                <strong>CORE BRAIN</strong>
+
+                <small id="brainStatus">
+                    Ready
+                </small>
+
+            </div>
+
+        </section>
+
+        <!-- RESULTS -->
+
+        <section id="resultsSection" class="results hidden">
+
+            <aside class="result-nav" id="resultNav"></aside>
+
+            <div class="result-content" id="resultContent"></div>
+
+        </section>
+
+    </main>
+
+    <!-- HISTORY -->
+
+    <section class="history-panel">
+
+        <div class="history-header">
+
+            <h2>Project History</h2>
+
+            <button
+                class="action"
+                onclick="exportHistory()"
+            >
+                ⬇ Export History
+            </button>
+
+        </div>
+
+        <div id="historyList" class="history-list"></div>
+
+    </section>
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* =========================================================
+   NINE: OCTOBRAIN
+   JOHELIV LABS — JDEV APP CRAFT CO.
+   ========================================================= */
+
+const CONFIG = {
+
+    /* Brand identity */
+    company: "JOHELIV LABS — JDEV APP CRAFT CO.",
+    ceo: "JASON MUFAMADI",
+    country: "SOUTH AFRICA",
+    email: "johelivlabs@gmail.com",
+    phone: "0738592196",
+
+    /* Worker supplied by Jason */
+    workerUrl:
+        "https://octopusmindorbrain.jdevapphub.workers.dev",
+
+    /*
+       This is intentionally configurable.
+
+       For production security, authentication should be
+       verified by the Worker rather than relying on this
+       browser-side value.
+    */
+    accessCode: "0105075874088",
+
+    storageKey: "nine_octobrain_history_v1"
+};
+
+let selectedType = "Application";
+let currentProject = null;
+
+const brains = [
+    "STRATEGY",
+    "USERS",
+    "FEATURES",
+    "POLICY",
+    "SECURITY",
+    "TECH",
+    "BUSINESS",
+    "LAUNCH"
+];
+
+/* =========================================================
+   ACCESS
+   ========================================================= */
+
+function unlockApp(){
+
+    const input =
+        document.getElementById("accessCode").value.trim();
+
+    const error =
+        document.getElementById("accessError");
+
+    if(input === CONFIG.accessCode){
+
+        sessionStorage.setItem("nineUnlocked","true");
+
+        document
+            .getElementById("accessScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("app")
+            .classList.remove("hidden");
+
+        renderHistory();
+
+        showToast("OCTOBRAIN unlocked.");
+
+    }else{
+
+        error.textContent =
+            "Access denied. Enter the authorised access code.";
+
+        document.getElementById("accessCode").value = "";
+    }
+}
+
+document
+    .getElementById("accessCode")
+    .addEventListener("keydown",function(e){
+
+        if(e.key === "Enter"){
+            unlockApp();
+        }
+
+    });
+
+/* =========================================================
+   TYPE
+   ========================================================= */
+
+function selectType(type){
+
+    selectedType = type;
+
+    document
+        .getElementById("appType")
+        .classList.toggle(
+            "active",
+            type === "Application"
+        );
+
+    document
+        .getElementById("webType")
+        .classList.toggle(
+            "active",
+            type === "Website"
+        );
+}
+
+/* =========================================================
+   GENERATION
+   ========================================================= */
+
+async function startGeneration(){
+
+    const name =
+        document.getElementById("productName").value.trim();
+
+    const idea =
+        document.getElementById("productIdea").value.trim();
+
+    if(!name){
+
+        showToast("Enter the product name first.");
+        return;
+    }
+
+    if(!idea){
+
+        showToast("Describe what you want to build.");
+        return;
+    }
+
+    currentProject = {
+        id: Date.now(),
+        name,
+        type:selectedType,
+        idea,
+        created:new Date().toISOString(),
+        company:CONFIG.company,
+        ceo:CONFIG.ceo,
+        country:CONFIG.country
+    };
+
+    document.getElementById("brainStatus").textContent =
+        "Activating...";
+
+    const brainElements =
+        document.querySelectorAll(".brain");
+
+    brainElements.forEach(b=>{
+        b.classList.remove("active","done");
+    });
+
+    document
+        .getElementById("resultsSection")
+        .classList.add("hidden");
+
+    /*
+       First try the Worker.
+
+       The Worker can return either:
+       {
+          "results": {
+             "strategy":"...",
+             ...
+          }
+       }
+
+       or:
+       {
+          "strategy":"...",
+          "users":"..."
+       }
+
+       If the Worker is not yet configured, the local
+       generator keeps the application functional.
+    */
+
+    let results = null;
+
+    try{
+
+        results = await callWorker(name,idea,selectedType);
+
+    }catch(error){
+
+        console.warn(
+            "Worker unavailable. Using local blueprint generator.",
+            error
+        );
+
+    }
+
+    if(!results){
+
+        results = generateLocalBlueprint(
+            name,
+            idea,
+            selectedType
+        );
+
+    }
+
+    currentProject.results = results;
+
+    saveHistory(currentProject);
+
+    await animateBrains();
+
+    renderResults(currentProject);
+
+    document
+        .getElementById("brainStatus")
+        .textContent = "Complete";
+
+    showToast("OCTOBRAIN completed the product blueprint.");
+
+}
+
+/* =========================================================
+   WORKER CONNECTION
+   ========================================================= */
+
+async function callWorker(name,idea,type){
+
+    const controller =
+        new AbortController();
+
+    const timeout =
+        setTimeout(
+            ()=>controller.abort(),
+            15000
+        );
+
+    try{
+
+        const response = await fetch(
+            CONFIG.workerUrl + "/generate",
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    productName:name,
+                    productType:type,
+                    productIdea:idea,
+
+                    company:{
+                        name:CONFIG.company,
+                        ceo:CONFIG.ceo,
+                        email:CONFIG.email,
+                        phone:CONFIG.phone,
+                        country:CONFIG.country
+                    },
+
+                    brains:brains
+                }),
+
+                signal:controller.signal
+            }
+        );
+
+        if(!response.ok){
+            throw new Error(
+                "Worker returned HTTP " +
+                response.status
+            );
+        }
+
+        const data = await response.json();
+
+        return data.results || data;
+
+    }finally{
+
+        clearTimeout(timeout);
+
+    }
+
+}
+
+/* =========================================================
+   LOCAL FALLBACK GENERATOR
+   ========================================================= */
+
+function generateLocalBlueprint(
+    name,
+    idea,
+    type
+){
+
+    return {
+
+        core:
+`PRODUCT DNA
+
+Product:
+${name}
+
+Type:
+${type}
+
+Description:
+${idea}
+
+Company:
+${CONFIG.company}
+
+CEO:
+${CONFIG.ceo}
+
+Country:
+${CONFIG.country}
+
+Contact:
+${CONFIG.email}
+${CONFIG.phone}
+
+Core purpose:
+Turn the supplied concept into a structured, testable and launch-ready digital product.
+
+Primary objective:
+Define the problem, users, features, technical architecture, safety requirements, business model and launch plan before development begins.`,
+
+        strategy:
+`PRODUCT STRATEGY
+
+Product:
+${name}
+
+Target problem:
+${idea}
+
+Value proposition:
+${name} should provide a clear, useful solution to the problem described by the developer.
+
+Target market:
+Define the primary users based on the actual problem being solved.
+
+Positioning:
+The product should have a simple, memorable value proposition and a clearly defined reason for users to choose it.
+
+Goals:
+1. Build a reliable MVP.
+2. Validate the main user problem.
+3. Measure real user engagement.
+4. Improve based on user feedback.
+5. Develop advanced features after the core experience is stable.`,
+
+        users:
+`USERS & EXPERIENCE
+
+Primary audience:
+Users who experience the problem addressed by ${name}.
+
+User journey:
+
+1. Discover ${name}
+2. Open the ${type.toLowerCase()}
+3. Complete onboarding where required
+4. Reach the main dashboard
+5. Select the required feature
+6. Provide required information
+7. Receive the result
+8. Save, share or continue
+9. Return through history/profile
+
+UX requirements:
+• Clear navigation
+• Simple onboarding
+• Helpful empty states
+• Visible loading states
+• Friendly error messages
+• Accessible controls
+• Mobile-responsive interface
+• Clear confirmation after important actions`,
+
+        features:
+`FEATURE ARCHITECTURE
+
+CORE FEATURES
+
+1. Onboarding
+2. Main dashboard
+3. Core product functionality
+4. User profile where required
+5. History
+6. Search where useful
+7. Settings
+8. Help/support
+
+ADVANCED FEATURES
+
+• Notifications
+• Analytics
+• Cloud synchronization
+• AI capabilities
+• Sharing
+• Export
+• Personalisation
+
+FUTURE FEATURES
+
+Future functionality should be added only after the MVP has been tested and validated.`,
+
+        policy:
+`USER POLICY & TERMS DRAFT
+
+${name} should provide users with clear rules governing responsible use.
+
+Users should:
+• Provide accurate information.
+• Use the product lawfully.
+• Respect other users.
+• Avoid attempting to bypass security.
+• Avoid abusing APIs or automated systems.
+• Not use the service for prohibited or harmful activity.
+
+The company may restrict or terminate accounts that violate applicable rules.
+
+IMPORTANT:
+This is a product-development draft and should be reviewed by a qualified legal professional before publication. Requirements may vary by jurisdiction and product category.`,
+
+        security:
+`PRIVACY & SECURITY BLUEPRINT
+
+Potential data categories:
+
+• Account information
+• Contact information
+• Product usage information
+• Technical/device information
+• User-generated content
+
+Security requirements:
+
+• Secure authentication
+• Authorisation checks
+• HTTPS
+• Server-side API credentials
+• Input validation
+• Rate limiting
+• Secure database rules
+• Secure file handling
+• Logging without unnecessary sensitive data
+• Account/data deletion mechanisms
+• Regular security testing
+
+Privacy requirements:
+
+Explain what information is collected, why it is collected, how long it is retained, whether it is shared, which third-party services are involved and how users can exercise applicable rights.
+
+IMPORTANT:
+The final Privacy Policy should be reviewed against the actual data flows and applicable South African and other relevant privacy requirements.`,
+
+        tech:
+`TECHNICAL ARCHITECTURE
+
+PRODUCT:
+${name}
+
+TYPE:
+${type}
+
+RECOMMENDED STRUCTURE:
+
+Frontend
+↓
+Secure API / Worker
+↓
+Backend Services
+↓
+Database
+↓
+External APIs
+
+Recommended components:
+
+Frontend:
+HTML / CSS / JavaScript or the selected application framework.
+
+Backend:
+Cloudflare Worker or another secure backend.
+
+Database:
+Choose based on the actual requirements.
+
+Authentication:
+Use a secure authentication provider when accounts are required.
+
+API SECURITY:
+API keys must not be embedded directly into publicly accessible frontend JavaScript.
+
+External APIs:
+Add only the APIs actually required by the product.
+
+Environment variables:
+Secrets should be stored server-side.`,
+
+        business:
+`BUSINESS MODEL
+
+Possible models for ${name}:
+
+FREE
+• Core functionality
+• Limited usage
+• Optional advertising
+
+PRO
+• Advanced features
+• Higher limits
+• Additional storage/features
+
+PREMIUM
+• Complete feature set
+• Priority functionality
+• Advanced AI or automation
+
+Alternative:
+One-time purchase or usage-based pricing where appropriate.
+
+Revenue strategy should match the product's actual audience and operating costs.`,
+
+        launch:
+`DEVELOPMENT & LAUNCH ROADMAP
+
+PHASE 1 — PRODUCT DEFINITION
+✓ Product DNA
+✓ Target users
+✓ Core problem
+✓ MVP
+
+PHASE 2 — DESIGN
+✓ UI
+✓ UX
+✓ Navigation
+✓ Responsive behaviour
+
+PHASE 3 — DEVELOPMENT
+✓ Frontend
+✓ Backend
+✓ Database
+✓ Authentication
+✓ API integrations
+
+PHASE 4 — SECURITY
+✓ Input validation
+✓ Authentication testing
+✓ API protection
+✓ Database rules
+✓ Privacy review
+
+PHASE 5 — TESTING
+✓ Functional testing
+✓ UI testing
+✓ Mobile testing
+✓ Performance testing
+✓ Error handling
+
+PHASE 6 — LAUNCH
+✓ Production configuration
+✓ Privacy/terms review
+✓ Analytics
+✓ Support channel
+✓ Version 1.0
+
+PHASE 7 — FUTURE
+Collect user feedback and create a version 1.1 / 2.0 roadmap based on actual usage.`
+    };
+
+}
+
+/* =========================================================
+   BRAIN ANIMATION
+   ========================================================= */
+
+function animateBrains(){
+
+    return new Promise(resolve=>{
+
+        const items =
+            document.querySelectorAll(".brain");
+
+        let i=0;
+
+        function next(){
+
+            if(i >= items.length){
+
+                items.forEach(
+                    x=>x.classList.add("done")
+                );
+
+                resolve();
+                return;
+            }
+
+            items[i].classList.add("active");
+
+            document.getElementById("brainStatus")
+                .textContent =
+                "Analysing " + brains[i] + "...";
+
+            setTimeout(()=>{
+
+                items[i].classList.remove("active");
+                items[i].classList.add("done");
+
+                i++;
+                next();
+
+            },500);
+
+        }
+
+        next();
+
+    });
+
+}
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
+
+function renderResults(project){
+
+    const section =
+        document.getElementById("resultsSection");
+
+    const nav =
+        document.getElementById("resultNav");
+
+    const content =
+        document.getElementById("resultContent");
+
+    section.classList.remove("hidden");
+
+    nav.innerHTML = "";
+
+    content.innerHTML = "";
+
+    const entries = [
+        ["core","🐙 Core Brain"],
+        ["strategy","🎯 Strategy"],
+        ["users","👥 Users & UX"],
+        ["features","⚙️ Features"],
+        ["policy","📜 Policy"],
+        ["security","🔐 Security & Privacy"],
+        ["tech","💻 Technology"],
+        ["business","💰 Business"],
+        ["launch","🚀 Launch"]
+    ];
+
+    entries.forEach(([key,label],index)=>{
+
+        const button =
+            document.createElement("button");
+
+        button.textContent = label;
+
+        button.onclick = ()=>{
+
+            document
+                .getElementById("result-"+key)
+                .scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
+
+        };
+
+        nav.appendChild(button);
+
+        const card =
+            document.createElement("article");
+
+        card.className = "result-card";
+        card.id = "result-"+key;
+
+        const title =
+            document.createElement("h2");
+
+        title.textContent = label;
+
+        const meta =
+            document.createElement("div");
+
+        meta.className = "meta";
+
+        meta.textContent =
+            project.name +
+            " • " +
+            project.type;
+
+        const actions =
+            document.createElement("div");
+
+        actions.className = "result-actions";
+
+        const copy =
+            document.createElement("button");
+
+        copy.className = "action primary";
+        copy.textContent = "📋 Copy";
+
+        copy.onclick = ()=>{
+            copyText(project.results[key]);
+        };
+
+        const download =
+            document.createElement("button");
+
+        download.className = "action";
+        download.textContent = "⬇ Download";
+
+        download.onclick = ()=>{
+            downloadText(
+                project.results[key],
+                project.name +
+                "-" +
+                key +
+                ".txt"
+            );
+        };
+
+        actions.appendChild(copy);
+        actions.appendChild(download);
+
+        const text =
+            document.createElement("div");
+
+        text.className = "result-text";
+        text.textContent =
+            project.results[key];
+
+        card.appendChild(title);
+        card.appendChild(meta);
+        card.appendChild(actions);
+        card.appendChild(text);
+
+        content.appendChild(card);
+
+    });
+
+    const exportButton =
+        document.createElement("button");
+
+    exportButton.className =
+        "action primary";
+
+    exportButton.textContent =
+        "📦 Download Complete Product DNA";
+
+    exportButton.onclick =
+        ()=>downloadProject(project);
+
+    content.prepend(exportButton);
+
+    section.scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+/* =========================================================
+   HISTORY
+   ========================================================= */
+
+function getHistory(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                CONFIG.storageKey
+            ) || "[]"
+        );
+
+    }catch{
+
+        return [];
+
+    }
+
+}
+
+function saveHistory(project){
+
+    let history =
+        getHistory();
+
+    history.unshift(project);
+
+    /*
+       Keep the latest 50 projects.
+    */
+
+    history =
+        history.slice(0,50);
+
+    localStorage.setItem(
+        CONFIG.storageKey,
+        JSON.stringify(history)
+    );
+
+    renderHistory();
+
+}
+
+function renderHistory(){
+
+    const container =
+        document.getElementById("historyList");
+
+    const history =
+        getHistory();
+
+    if(!history.length){
+
+        container.innerHTML =
+            '<div class="empty">No projects yet. Your generated projects will appear here.</div>';
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    history.forEach(project=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "history-card";
+
+        const date =
+            new Date(project.created)
+                .toLocaleString();
+
+        card.innerHTML = `
+            <strong>${escapeHTML(project.name)}</strong>
+            <small>
+                ${escapeHTML(project.type)}
+                • ${escapeHTML(date)}
+            </small>
+        `;
+
+        const open =
+            document.createElement("button");
+
+        open.textContent =
+            "Open Project";
+
+        open.onclick = ()=>{
+            currentProject = project;
+            renderResults(project);
+        };
+
+        card.appendChild(open);
+
+        container.appendChild(card);
+
+    });
+
+}
+
+function showHistory(){
+
+    document
+        .querySelector(".history-panel")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+function clearHistory(){
+
+    if(!confirm(
+        "Delete all locally stored OCTOBRAIN history?"
+    )){
+        return;
+    }
+
+    localStorage.removeItem(
+        CONFIG.storageKey
+    );
+
+    renderHistory();
+
+    showToast("History cleared.");
+
+}
+
+/* =========================================================
+   EXPORT
+   ========================================================= */
+
+function downloadProject(project){
+
+    let output =
+`NINE: OCTOBRAIN
+PRODUCT DNA
+==============================
+
+PRODUCT:
+${project.name}
+
+TYPE:
+${project.type}
+
+GENERATED:
+${new Date(project.created).toLocaleString()}
+
+COMPANY:
+${CONFIG.company}
+
+CEO:
+${CONFIG.ceo}
+
+COUNTRY:
+${CONFIG.country}
+
+EMAIL:
+${CONFIG.email}
+
+PHONE:
+${CONFIG.phone}
+
+`;
+
+    Object.entries(project.results)
+        .forEach(([key,value])=>{
+
+            output +=
+`\n\n==============================
+${key.toUpperCase()}
+==============================
+
+${value}
+`;
+
+        });
+
+    downloadText(
+        output,
+        project.name.replace(/\s+/g,"-") +
+        "-PRODUCT-DNA.txt"
+    );
+
+}
+
+function exportHistory(){
+
+    const history =
+        getHistory();
+
+    if(!history.length){
+
+        showToast("No history to export.");
+        return;
+    }
+
+    downloadText(
+        JSON.stringify(
+            history,
+            null,
+            2
+        ),
+        "nine-octobrain-history.json"
+    );
+
+}
+
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+
+async function copyText(text){
+
+    try{
+
+        await navigator.clipboard.writeText(text);
+
+        showToast("Copied to clipboard.");
+
+    }catch{
+
+        const area =
+            document.createElement("textarea");
+
+        area.value = text;
+
+        document.body.appendChild(area);
+
+        area.select();
+
+        document.execCommand("copy");
+
+        area.remove();
+
+        showToast("Copied.");
+
+    }
+
+}
+
+function downloadText(text,filename){
+
+    const blob =
+        new Blob(
+            [text],
+            {type:"text/plain;charset=utf-8"}
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+    a.download = filename;
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+    showToast("Download created.");
+
+}
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(
+            ()=>toast.classList.remove("show"),
+            2500
+        );
+
+}
+
+/* =========================================================
+   STARTUP
+   ========================================================= */
+
+window.addEventListener("DOMContentLoaded",()=>{
+
+    /*
+       Require the code whenever a new browser session
+       starts. sessionStorage disappears when the session
+       ends.
+    */
+
+    if(sessionStorage.getItem("nineUnlocked") === "true"){
+
+        document
+            .getElementById("accessScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("app")
+            .classList.remove("hidden");
+
+        renderHistory();
+
+    }
+
+});
+</script>
+
+</body>
+</html>

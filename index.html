@@ -885,156 +885,105 @@
       border-radius: 14px;
     }
 
-    /* ===== JASON'S OFFICE (KING'S CASTLE) ===== */
-    .office-section {
-      margin: 60px 0 40px;
-      border-radius: 32px;
+    /* ===== JASON'S OFFICE — FULL SCREEN OVERLAY ===== */
+    #officeOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
       background: linear-gradient(145deg, #0e0a04, #1a1208, #0b0703);
-      border: 1px solid rgba(255, 200, 87, .25);
-      box-shadow:
-        0 0 80px rgba(255, 170, 51, .08),
-        inset 0 0 80px rgba(255, 200, 87, .03);
-      padding: 36px 30px;
-      position: relative;
-      overflow: hidden;
+      overflow-y: auto;
+      padding: 30px 20px 60px;
+      display: none;
     }
 
-    .office-section::before {
+    #officeOverlay.active {
+      display: block;
+    }
+
+    #officeOverlay::before {
       content: '';
-      position: absolute;
-      inset: -50%;
+      position: fixed;
+      inset: 0;
       background: radial-gradient(circle at 30% 40%, rgba(255, 200, 87, .06), transparent 60%);
       pointer-events: none;
+      z-index: 0;
     }
 
-    .office-section::after {
-      content: '👑';
-      position: absolute;
-      top: 12px;
-      right: 30px;
-      font-size: 48px;
-      opacity: .15;
-      filter: drop-shadow(0 0 20px rgba(255, 200, 87, .5));
-    }
-
-    .office-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
+    .office-inner {
+      max-width: 1200px;
+      margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    .office-header h2 {
+    .office-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 26px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 200, 87, .2);
+    }
+
+    .office-topbar h2 {
       font-size: 28px;
       letter-spacing: -1px;
       background: linear-gradient(90deg, #ffc857, #ffaa33, #ffd97a);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      text-shadow: 0 0 40px rgba(255, 200, 87, .15);
-    }
-
-    .office-header .crown-badge {
-      background: rgba(255, 200, 87, .12);
-      border: 1px solid rgba(255, 200, 87, .3);
-      color: var(--gold);
-      padding: 6px 16px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .office-glow-line {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 200, 87, .4), transparent);
-      margin: 18px 0 22px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .office-codes-area {
-      background: rgba(12, 9, 5, .6);
-      border: 1px solid rgba(255, 200, 87, .15);
-      border-radius: 16px;
-      padding: 18px 20px;
-      margin-bottom: 22px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .office-codes-area h3 {
-      color: var(--gold);
-      font-size: 15px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .office-code-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 200, 87, .08);
-      font-size: 13px;
-      flex-wrap: wrap;
     }
 
-    .office-code-item:last-child {
-      border-bottom: none;
-    }
-
-    .office-code-item .code-label {
-      color: #b8a88a;
-      min-width: 140px;
-    }
-
-    .office-code-item .code-value {
-      font-family: 'Courier New', monospace;
-      color: var(--gold);
+    .office-close-btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 200, 87, .3);
       background: rgba(255, 200, 87, .08);
-      padding: 4px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 200, 87, .15);
-      font-size: 12px;
-      letter-spacing: 1px;
-    }
-
-    .office-code-item button {
-      background: transparent;
-      border: 1px solid rgba(255, 200, 87, .2);
       color: var(--gold);
-      border-radius: 8px;
-      padding: 4px 12px;
-      font-size: 11px;
+      font-weight: 700;
+      font-size: 14px;
       transition: .2s;
     }
 
-    .office-code-item button:hover {
-      background: rgba(255, 200, 87, .1);
-      border-color: var(--gold);
+    .office-close-btn:hover {
+      background: rgba(255, 200, 87, .18);
+      box-shadow: 0 0 30px rgba(255, 200, 87, .2);
     }
 
-    .office-input-area {
+    .office-panel {
+      background: rgba(12, 9, 5, .7);
+      border: 1px solid rgba(255, 200, 87, .15);
+      border-radius: 20px;
+      padding: 24px 22px;
+      margin-bottom: 22px;
+    }
+
+    .office-panel h3 {
+      color: var(--gold);
+      font-size: 17px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .office-panel .row-inputs {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-bottom: 22px;
-      position: relative;
-      z-index: 1;
+      margin-bottom: 14px;
     }
 
-    .office-input-area input,
-    .office-input-area textarea {
+    .office-panel input,
+    .office-panel textarea {
       flex: 1 1 200px;
-      padding: 14px 18px;
-      border-radius: 14px;
+      padding: 13px 16px;
+      border-radius: 12px;
       border: 1px solid rgba(255, 200, 87, .18);
       background: rgba(10, 8, 4, .8);
       color: #f5ecd9;
@@ -1042,60 +991,58 @@
       font-size: 14px;
     }
 
-    .office-input-area input:focus,
-    .office-input-area textarea:focus {
+    .office-panel input:focus,
+    .office-panel textarea:focus {
       border-color: var(--gold);
       box-shadow: 0 0 30px rgba(255, 200, 87, .06);
     }
 
-    .office-input-area textarea {
-      min-height: 80px;
+    .office-panel textarea {
+      min-height: 70px;
       resize: vertical;
       flex: 1 1 100%;
     }
 
-    .office-input-area button {
-      padding: 14px 28px;
-      border-radius: 14px;
+    .office-panel .btn-gold {
+      padding: 13px 26px;
+      border-radius: 12px;
       border: none;
       background: linear-gradient(135deg, #ffc857, #ffaa33);
       color: #1a1208;
       font-weight: 800;
       white-space: nowrap;
       transition: .2s;
+      font-size: 14px;
     }
 
-    .office-input-area button:hover {
+    .office-panel .btn-gold:hover {
       box-shadow: 0 0 40px rgba(255, 200, 87, .3);
       transform: scale(1.02);
     }
 
-    .office-task-list {
+    .office-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      position: relative;
-      z-index: 1;
     }
 
-    .office-task-item {
+    .office-list-item {
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 16px 20px;
-      border-radius: 16px;
-      background: rgba(12, 9, 5, .7);
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: rgba(12, 9, 5, .6);
       border: 1px solid rgba(255, 200, 87, .1);
-      transition: .2s;
       flex-wrap: wrap;
+      transition: .2s;
     }
 
-    .office-task-item:hover {
+    .office-list-item:hover {
       border-color: rgba(255, 200, 87, .3);
-      box-shadow: 0 0 30px rgba(255, 200, 87, .04);
     }
 
-    .office-task-item .task-check {
+    .office-list-item .item-check {
       width: 22px;
       height: 22px;
       accent-color: var(--gold);
@@ -1103,58 +1050,96 @@
       flex-shrink: 0;
     }
 
-    .office-task-item .task-info {
+    .office-list-item .item-info {
       flex: 1 1 200px;
       min-width: 0;
     }
 
-    .office-task-item .task-title {
+    .office-list-item .item-title {
       font-weight: 700;
       font-size: 15px;
       color: #f5ecd9;
     }
 
-    .office-task-item .task-title.done {
+    .office-list-item .item-title.done {
       text-decoration: line-through;
       color: #8a7d6b;
     }
 
-    .office-task-item .task-desc {
-      font-size: 13px;
+    .office-list-item .item-meta {
+      font-size: 12px;
       color: #b8a88a;
       margin-top: 4px;
       line-height: 1.5;
     }
 
-    .office-task-item .task-date {
-      font-size: 11px;
-      color: #7a6e5b;
-      margin-top: 4px;
+    .office-list-item .item-meta a {
+      color: var(--gold);
+      text-decoration: none;
     }
 
-    .office-task-item .task-delete {
-      background: transparent;
-      border: 1px solid rgba(255, 85, 119, .2);
-      color: #ff6685;
-      border-radius: 10px;
-      padding: 8px 14px;
-      font-size: 13px;
+    .office-list-item .item-meta a:hover {
+      text-decoration: underline;
+    }
+
+    .office-list-item .item-actions {
+      display: flex;
+      gap: 6px;
       flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .office-list-item .item-actions button {
+      background: transparent;
+      border: 1px solid rgba(255, 200, 87, .2);
+      color: var(--gold);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
       transition: .2s;
     }
 
-    .office-task-item .task-delete:hover {
+    .office-list-item .item-actions button:hover {
+      background: rgba(255, 200, 87, .1);
+      border-color: var(--gold);
+    }
+
+    .office-list-item .item-actions button.danger {
+      border-color: rgba(255, 85, 119, .2);
+      color: #ff6685;
+    }
+
+    .office-list-item .item-actions button.danger:hover {
       background: rgba(255, 85, 119, .08);
       border-color: var(--danger);
     }
 
     .office-empty {
-      padding: 40px;
+      padding: 30px;
       text-align: center;
       color: #8a7d6b;
       border: 1px dashed rgba(255, 200, 87, .15);
-      border-radius: 16px;
+      border-radius: 14px;
       font-style: italic;
+      font-size: 14px;
+    }
+
+    /* Password vault */
+    .password-value {
+      font-family: 'Courier New', monospace;
+      color: var(--gold);
+      background: rgba(255, 200, 87, .08);
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 200, 87, .15);
+      font-size: 13px;
+      letter-spacing: 2px;
+      display: inline-block;
+      min-width: 120px;
+    }
+
+    .password-value.revealed {
+      letter-spacing: 0;
     }
 
     /* ===== TEAM ROOM ===== */
@@ -1578,14 +1563,6 @@
         width: 100%;
       }
 
-      .office-section {
-        padding: 24px 18px;
-      }
-
-      .office-input-area button {
-        width: 100%;
-      }
-
       .team-room-section {
         padding: 22px 18px;
       }
@@ -1598,14 +1575,21 @@
         padding: 24px 18px;
       }
 
-      .office-code-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
+      .office-panel .btn-gold {
+        width: 100%;
       }
 
-      .office-code-item .code-label {
-        min-width: auto;
+      .office-list-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .office-list-item .item-actions {
+        width: 100%;
+      }
+
+      .office-list-item .item-actions button {
+        flex: 1;
       }
     }
 
@@ -1639,16 +1623,6 @@
         text-align: center;
       }
 
-      .office-task-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .office-task-item .task-delete {
-        width: 100%;
-        text-align: center;
-      }
-
       .team-entry-item {
         flex-direction: column;
         align-items: flex-start;
@@ -1657,6 +1631,10 @@
       .team-entry-item .entry-delete {
         width: 100%;
         text-align: center;
+      }
+
+      .office-topbar h2 {
+        font-size: 22px;
       }
     }
   </style>
@@ -2155,48 +2133,6 @@ Version: [x.y.z]
       </section>
 
       <!-- ========================================================= -->
-      <!-- JASON'S OFFICE (KING'S CASTLE) -->
-      <!-- ========================================================= -->
-      <section class="office-section hidden" id="officeSection">
-        <div class="office-header">
-          <h2>👑 Jason's Office</h2>
-          <span class="crown-badge">KING'S CASTLE</span>
-          <span class="crown-badge">PRIVATE</span>
-        </div>
-        <div class="office-glow-line"></div>
-
-        <!-- Access Codes Area -->
-        <div class="office-codes-area">
-          <h3>🔐 Access Codes</h3>
-          <div class="office-code-item">
-            <span class="code-label">Main App Code</span>
-            <span class="code-value">0105075874088</span>
-            <button onclick="copyCode('0105075874088')">Copy</button>
-          </div>
-          <div class="office-code-item">
-            <span class="code-label">Jason's Office Code</span>
-            <span class="code-value">01050758740880663195345</span>
-            <button onclick="copyCode('01050758740880663195345')">Copy</button>
-          </div>
-          <div class="office-code-item">
-            <span class="code-label">Team Room Code</span>
-            <span class="code-value">0698416632</span>
-            <button onclick="copyCode('0698416632')">Copy</button>
-          </div>
-        </div>
-
-        <div class="office-input-area">
-          <input id="officeTaskTitle" type="text" placeholder="Task title (e.g., Review Q3 strategy)">
-          <textarea id="officeTaskDesc" placeholder="Task description, notes, or final instructions..."></textarea>
-          <button onclick="addOfficeTask()">+ Add Task</button>
-        </div>
-
-        <div id="officeTaskList" class="office-task-list">
-          <div class="office-empty">No tasks yet. The King's chamber awaits your command.</div>
-        </div>
-      </section>
-
-      <!-- ========================================================= -->
       <!-- TEAM ROOM -->
       <!-- ========================================================= -->
       <section class="team-room-section hidden" id="teamRoomSection">
@@ -2454,6 +2390,96 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
     </main>
   </div>
 
+  <!-- ========================================================= -->
+  <!-- JASON'S OFFICE — FULL SCREEN OVERLAY -->
+  <!-- ========================================================= -->
+  <div id="officeOverlay">
+    <div class="office-inner">
+
+      <div class="office-topbar">
+        <h2>👑 Jason's Office <span class="crown-badge" style="font-size:12px;">KING'S CASTLE</span></h2>
+        <button class="office-close-btn" onclick="closeOfficeRoom()">✕ Close Office</button>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="office-panel">
+        <h3>📁 My Projects</h3>
+        <div class="row-inputs">
+          <input id="officeProjectName" type="text" placeholder="Project name (e.g., StudyPad)">
+          <input id="officeProjectUrl" type="url" placeholder="Project URL (e.g., https://studypad.app)">
+          <input id="officeProjectDate" type="datetime-local" title="Target date & time">
+          <button class="btn-gold" onclick="addOfficeProject()">+ Save Project</button>
+        </div>
+        <div id="officeProjectList" class="office-list">
+          <div class="office-empty">No projects saved yet. Add your first project above.</div>
+        </div>
+      </div>
+
+      <!-- TO-DO -->
+      <div class="office-panel">
+        <h3>✅ My To-Do List</h3>
+        <div class="row-inputs">
+          <input id="officeTodoTitle" type="text" placeholder="Task title (e.g., Review Q3 strategy)">
+          <input id="officeTodoDate" type="datetime-local" title="Due date & time">
+          <button class="btn-gold" onclick="addOfficeTodo()">+ Add Task</button>
+        </div>
+        <textarea id="officeTodoDesc" placeholder="Task description or notes..."></textarea>
+        <div id="officeTodoList" class="office-list" style="margin-top:14px;">
+          <div class="office-empty">No tasks yet. The King's chamber awaits your command.</div>
+        </div>
+      </div>
+
+      <!-- PASSWORDS VAULT -->
+      <div class="office-panel">
+        <h3>🔐 Password Vault</h3>
+        <div class="row-inputs">
+          <input id="officePwLabel" type="text" placeholder="Label (e.g., Google Play Console)">
+          <input id="officePwUser" type="text" placeholder="Username / Email">
+          <input id="officePwValue" type="password" placeholder="Password">
+          <button class="btn-gold" onclick="addOfficePassword()">+ Save Password</button>
+        </div>
+        <div id="officePasswordList" class="office-list">
+          <div class="office-empty">No passwords saved yet. Your vault is secure.</div>
+        </div>
+      </div>
+
+      <!-- ACCESS CODES -->
+      <div class="office-panel">
+        <h3>🔑 System Access Codes</h3>
+        <div class="office-list">
+          <div class="office-list-item">
+            <div class="item-info">
+              <div class="item-title">Main App Code</div>
+              <div class="item-meta"><span class="password-value revealed">0105075874088</span></div>
+            </div>
+            <div class="item-actions">
+              <button onclick="copyCode('0105075874088')">Copy</button>
+            </div>
+          </div>
+          <div class="office-list-item">
+            <div class="item-info">
+              <div class="item-title">Jason's Office Code</div>
+              <div class="item-meta"><span class="password-value revealed">01050758740880663195345</span></div>
+            </div>
+            <div class="item-actions">
+              <button onclick="copyCode('01050758740880663195345')">Copy</button>
+            </div>
+          </div>
+          <div class="office-list-item">
+            <div class="item-info">
+              <div class="item-title">Team Room Code</div>
+              <div class="item-meta"><span class="password-value revealed">0698416632</span></div>
+            </div>
+            <div class="item-actions">
+              <button onclick="copyCode('0698416632')">Copy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <div id="toast"></div>
 
   <script>
@@ -2473,8 +2499,10 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       teamCode: "0698416632",
       storageKey: "nine_octobrain_history_v1",
       trackerKey: "nine_octobrain_products_v1",
-      officeKey: "nine_octobrain_office_v1",
-      teamKey: "nine_octobrain_team_v1"
+      teamKey: "nine_octobrain_team_v1",
+      officeProjectsKey: "nine_octobrain_office_projects_v1",
+      officeTodoKey: "nine_octobrain_office_todo_v1",
+      officePwKey: "nine_octobrain_office_pw_v1"
     };
 
     let selectedType = "Application";
@@ -2487,65 +2515,66 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       "SECURITY", "TECH", "BUSINESS", "LAUNCH"
     ];
 
-    /* ===== FEMALE VOICE ===== */
+    /* ===== PROFESSIONAL FEMALE VOICE (AIRPORT STYLE) ===== */
     function speak(text) {
       if (!window.speechSynthesis) return;
 
-      // Cancel any ongoing speech
       window.speechSynthesis.cancel();
 
       const utterance = new SpeechSynthesisUtterance(text);
 
-      // Try to find a female voice
       const voices = window.speechSynthesis.getVoices();
-      let femaleVoice = null;
+      let professionalVoice = null;
 
-      // Common female voice identifiers across browsers
-      const femaleNames = [
-        'Samantha', 'Victoria', 'Karen', 'Moira', 'Tessa',
-        'Zira', 'Hazel', 'Susan', 'Google UK English Female',
-        'Google US English', 'Microsoft Zira', 'Microsoft Hazel',
-        'Female', 'Woman', 'Girl'
+      // Priority list for professional female voices (airport announcement style)
+      const priorityNames = [
+        'Google UK English Female',
+        'Microsoft Hazel',
+        'Microsoft Zira',
+        'Samantha',
+        'Victoria',
+        'Karen',
+        'Moira',
+        'Tessa',
+        'Fiona',
+        'Google US English',
+        'Female'
       ];
 
-      for (const voice of voices) {
-        for (const name of femaleNames) {
-          if (voice.name.includes(name) || voice.name.toLowerCase().includes('female')) {
-            femaleVoice = voice;
-            break;
-          }
-        }
-        if (femaleVoice) break;
-      }
-
-      // Fallback: try to find any voice that isn't obviously male
-      if (!femaleVoice) {
+      for (const name of priorityNames) {
         for (const voice of voices) {
-          if (!voice.name.toLowerCase().includes('male') &&
-              !voice.name.toLowerCase().includes('david') &&
-              !voice.name.toLowerCase().includes('mark')) {
-            femaleVoice = voice;
+          if (voice.name.includes(name) && voice.lang.startsWith('en')) {
+            professionalVoice = voice;
+            break;
+          }
+        }
+        if (professionalVoice) break;
+      }
+
+      // Fallback: any English female voice
+      if (!professionalVoice) {
+        for (const voice of voices) {
+          if (voice.lang.startsWith('en') &&
+              (voice.name.toLowerCase().includes('female') ||
+               !voice.name.toLowerCase().includes('male'))) {
+            professionalVoice = voice;
             break;
           }
         }
       }
 
-      if (femaleVoice) {
-        utterance.voice = femaleVoice;
-      }
+      if (professionalVoice) utterance.voice = professionalVoice;
 
-      utterance.rate = 0.95;
-      utterance.pitch = 1.15;
+      // Professional airport-announcement tone: clear, calm, measured
+      utterance.rate = 0.88;
+      utterance.pitch = 1.05;
       utterance.volume = 1;
 
       window.speechSynthesis.speak(utterance);
     }
 
-    // Some browsers load voices asynchronously
     if (window.speechSynthesis) {
-      window.speechSynthesis.onvoiceschanged = function() {
-        // Voices loaded — no action needed, speak() will pick them up
-      };
+      window.speechSynthesis.onvoiceschanged = function() {};
     }
 
     /* ===== ACCESS ===== */
@@ -2600,7 +2629,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       document.querySelectorAll(".brain").forEach(b => b.classList.remove("active", "done"));
       document.getElementById("resultsSection").classList.add("hidden");
 
-      // Announce activation
       showToast("OCTOBRAIN activated.");
       speak("OCTOBRAIN activated. Initialising the nine brains. Analysing your product idea now.");
 
@@ -2927,7 +2955,7 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       });
     }
 
-    /* ===== JASON'S OFFICE ===== */
+    /* ===== JASON'S OFFICE — FULL SCREEN OVERLAY ===== */
     function openOfficeRoom() {
       if (!officeUnlocked) {
         const code = prompt("Enter Jason's Office access code:");
@@ -2940,109 +2968,343 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         sessionStorage.setItem("officeUnlocked", "true");
         speak("Welcome to your office, Jason. The King's chamber is now open.");
       }
-      document.getElementById("officeSection").classList.remove("hidden");
-      document.getElementById("teamRoomSection").classList.add("hidden");
-      document.getElementById("officeSection").scrollIntoView({ behavior: "smooth" });
-      renderOfficeTasks();
+
+      document.getElementById("officeOverlay").classList.add("active");
+      document.body.style.overflow = "hidden";
+
+      renderOfficeProjects();
+      renderOfficeTodos();
+      renderOfficePasswords();
+
+      showToast("Jason's Office is now open.");
     }
 
-    function getOfficeTasks() {
-      try { return JSON.parse(localStorage.getItem(CONFIG.officeKey) || "[]"); } catch { return []; }
+    function closeOfficeRoom() {
+      document.getElementById("officeOverlay").classList.remove("active");
+      document.body.style.overflow = "";
+      showToast("Office closed. Back to OCTOBRAIN.");
     }
 
-    function saveOfficeTasks(tasks) {
-      localStorage.setItem(CONFIG.officeKey, JSON.stringify(tasks));
+    /* --- Office Projects --- */
+    function getOfficeProjects() {
+      try { return JSON.parse(localStorage.getItem(CONFIG.officeProjectsKey) || "[]"); } catch { return []; }
     }
 
-    function addOfficeTask() {
-      const titleInput = document.getElementById("officeTaskTitle");
-      const descInput = document.getElementById("officeTaskDesc");
-      const title = titleInput.value.trim();
-      const desc = descInput.value.trim();
+    function saveOfficeProjects(projects) {
+      localStorage.setItem(CONFIG.officeProjectsKey, JSON.stringify(projects));
+    }
 
-      if (!title) { showToast("Please enter a task title."); return; }
+    function addOfficeProject() {
+      const name = document.getElementById("officeProjectName").value.trim();
+      const url = document.getElementById("officeProjectUrl").value.trim();
+      const date = document.getElementById("officeProjectDate").value;
 
-      const tasks = getOfficeTasks();
-      tasks.unshift({
+      if (!name) { showToast("Please enter a project name."); return; }
+
+      const projects = getOfficeProjects();
+      projects.unshift({
         id: Date.now(),
-        title: title,
-        desc: desc,
+        name: name,
+        url: url,
+        date: date,
         done: false,
         created: new Date().toISOString()
       });
-      saveOfficeTasks(tasks);
-      titleInput.value = "";
-      descInput.value = "";
-      renderOfficeTasks();
+      saveOfficeProjects(projects);
+      document.getElementById("officeProjectName").value = "";
+      document.getElementById("officeProjectUrl").value = "";
+      document.getElementById("officeProjectDate").value = "";
+      renderOfficeProjects();
+      showToast("Project saved in your office.");
+      speak("Project saved in your office.");
+    }
+
+    function toggleOfficeProject(id) {
+      const projects = getOfficeProjects();
+      const p = projects.find(x => x.id === id);
+      if (p) { p.done = !p.done; saveOfficeProjects(projects); renderOfficeProjects(); }
+    }
+
+    function deleteOfficeProject(id) {
+      if (!confirm("Remove this project from your office?")) return;
+      const projects = getOfficeProjects().filter(x => x.id !== id);
+      saveOfficeProjects(projects);
+      renderOfficeProjects();
+      showToast("Project removed.");
+    }
+
+    function renderOfficeProjects() {
+      const container = document.getElementById("officeProjectList");
+      const projects = getOfficeProjects();
+
+      if (!projects.length) {
+        container.innerHTML = '<div class="office-empty">No projects saved yet. Add your first project above.</div>';
+        return;
+      }
+
+      container.innerHTML = "";
+      projects.forEach(p => {
+        const item = document.createElement("div");
+        item.className = "office-list-item";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "item-check";
+        checkbox.checked = p.done;
+        checkbox.onchange = () => toggleOfficeProject(p.id);
+
+        const info = document.createElement("div");
+        info.className = "item-info";
+
+        const title = document.createElement("div");
+        title.className = "item-title" + (p.done ? " done" : "");
+        title.textContent = p.name;
+
+        const meta = document.createElement("div");
+        meta.className = "item-meta";
+        let metaHtml = "";
+        if (p.url) metaHtml += `<a href="${escapeHTML(p.url)}" target="_blank" rel="noopener">${escapeHTML(p.url)}</a><br>`;
+        if (p.date) metaHtml += `📅 ${new Date(p.date).toLocaleString()}<br>`;
+        metaHtml += `Saved: ${new Date(p.created).toLocaleString()}`;
+        meta.innerHTML = metaHtml;
+
+        info.appendChild(title);
+        info.appendChild(meta);
+
+        const actions = document.createElement("div");
+        actions.className = "item-actions";
+
+        if (p.url) {
+          const openBtn = document.createElement("button");
+          openBtn.textContent = "Open";
+          openBtn.onclick = () => window.open(p.url, "_blank");
+          actions.appendChild(openBtn);
+        }
+
+        const del = document.createElement("button");
+        del.className = "danger";
+        del.textContent = "🗑";
+        del.onclick = () => deleteOfficeProject(p.id);
+        actions.appendChild(del);
+
+        item.appendChild(checkbox);
+        item.appendChild(info);
+        item.appendChild(actions);
+        container.appendChild(item);
+      });
+    }
+
+    /* --- Office To-Do --- */
+    function getOfficeTodos() {
+      try { return JSON.parse(localStorage.getItem(CONFIG.officeTodoKey) || "[]"); } catch { return []; }
+    }
+
+    function saveOfficeTodos(todos) {
+      localStorage.setItem(CONFIG.officeTodoKey, JSON.stringify(todos));
+    }
+
+    function addOfficeTodo() {
+      const title = document.getElementById("officeTodoTitle").value.trim();
+      const desc = document.getElementById("officeTodoDesc").value.trim();
+      const date = document.getElementById("officeTodoDate").value;
+
+      if (!title) { showToast("Please enter a task title."); return; }
+
+      const todos = getOfficeTodos();
+      todos.unshift({
+        id: Date.now(),
+        title: title,
+        desc: desc,
+        date: date,
+        done: false,
+        created: new Date().toISOString()
+      });
+      saveOfficeTodos(todos);
+      document.getElementById("officeTodoTitle").value = "";
+      document.getElementById("officeTodoDesc").value = "";
+      document.getElementById("officeTodoDate").value = "";
+      renderOfficeTodos();
       showToast("Task added to the King's chamber.");
       speak("Task added to your royal chamber.");
     }
 
-    function toggleOfficeTask(id) {
-      const tasks = getOfficeTasks();
-      const task = tasks.find(t => t.id === id);
-      if (task) {
-        task.done = !task.done;
-        saveOfficeTasks(tasks);
-        renderOfficeTasks();
-      }
+    function toggleOfficeTodo(id) {
+      const todos = getOfficeTodos();
+      const t = todos.find(x => x.id === id);
+      if (t) { t.done = !t.done; saveOfficeTodos(todos); renderOfficeTodos(); }
     }
 
-    function deleteOfficeTask(id) {
+    function deleteOfficeTodo(id) {
       if (!confirm("Remove this task from the King's chamber?")) return;
-      const tasks = getOfficeTasks().filter(t => t.id !== id);
-      saveOfficeTasks(tasks);
-      renderOfficeTasks();
+      const todos = getOfficeTodos().filter(x => x.id !== id);
+      saveOfficeTodos(todos);
+      renderOfficeTodos();
       showToast("Task removed from the King's chamber.");
     }
 
-    function renderOfficeTasks() {
-      const container = document.getElementById("officeTaskList");
-      const tasks = getOfficeTasks();
+    function renderOfficeTodos() {
+      const container = document.getElementById("officeTodoList");
+      const todos = getOfficeTodos();
 
-      if (!tasks.length) {
+      if (!todos.length) {
         container.innerHTML = '<div class="office-empty">No tasks yet. The King\'s chamber awaits your command.</div>';
         return;
       }
 
       container.innerHTML = "";
-      tasks.forEach(task => {
+      todos.forEach(t => {
         const item = document.createElement("div");
-        item.className = "office-task-item";
+        item.className = "office-list-item";
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.className = "task-check";
-        checkbox.checked = task.done;
-        checkbox.onchange = () => toggleOfficeTask(task.id);
+        checkbox.className = "item-check";
+        checkbox.checked = t.done;
+        checkbox.onchange = () => toggleOfficeTodo(t.id);
 
         const info = document.createElement("div");
-        info.className = "task-info";
+        info.className = "item-info";
 
-        const titleDiv = document.createElement("div");
-        titleDiv.className = "task-title" + (task.done ? " done" : "");
-        titleDiv.textContent = "👑 " + task.title;
+        const title = document.createElement("div");
+        title.className = "item-title" + (t.done ? " done" : "");
+        title.textContent = "👑 " + t.title;
 
-        const descDiv = document.createElement("div");
-        descDiv.className = "task-desc";
-        descDiv.textContent = task.desc || "No description";
+        const meta = document.createElement("div");
+        meta.className = "item-meta";
+        let metaHtml = "";
+        if (t.desc) metaHtml += `${escapeHTML(t.desc)}<br>`;
+        if (t.date) metaHtml += `⏰ Due: ${new Date(t.date).toLocaleString()}<br>`;
+        metaHtml += `Created: ${new Date(t.created).toLocaleString()}`;
+        meta.innerHTML = metaHtml;
 
-        const dateDiv = document.createElement("div");
-        dateDiv.className = "task-date";
-        dateDiv.textContent = new Date(task.created).toLocaleString();
+        info.appendChild(title);
+        info.appendChild(meta);
 
-        info.appendChild(titleDiv);
-        if (task.desc) info.appendChild(descDiv);
-        info.appendChild(dateDiv);
+        const actions = document.createElement("div");
+        actions.className = "item-actions";
 
         const del = document.createElement("button");
-        del.className = "task-delete";
-        del.textContent = "🗑 Remove";
-        del.onclick = () => deleteOfficeTask(task.id);
+        del.className = "danger";
+        del.textContent = "🗑";
+        del.onclick = () => deleteOfficeTodo(t.id);
+        actions.appendChild(del);
 
         item.appendChild(checkbox);
         item.appendChild(info);
-        item.appendChild(del);
+        item.appendChild(actions);
+        container.appendChild(item);
+      });
+    }
+
+    /* --- Office Passwords --- */
+    function getOfficePasswords() {
+      try { return JSON.parse(localStorage.getItem(CONFIG.officePwKey) || "[]"); } catch { return []; }
+    }
+
+    function saveOfficePasswords(pws) {
+      localStorage.setItem(CONFIG.officePwKey, JSON.stringify(pws));
+    }
+
+    function addOfficePassword() {
+      const label = document.getElementById("officePwLabel").value.trim();
+      const user = document.getElementById("officePwUser").value.trim();
+      const value = document.getElementById("officePwValue").value.trim();
+
+      if (!label) { showToast("Please enter a label."); return; }
+      if (!value) { showToast("Please enter a password."); return; }
+
+      const pws = getOfficePasswords();
+      pws.unshift({
+        id: Date.now(),
+        label: label,
+        user: user,
+        value: value,
+        created: new Date().toISOString()
+      });
+      saveOfficePasswords(pws);
+      document.getElementById("officePwLabel").value = "";
+      document.getElementById("officePwUser").value = "";
+      document.getElementById("officePwValue").value = "";
+      renderOfficePasswords();
+      showToast("Password saved to your vault.");
+      speak("Password saved to your vault.");
+    }
+
+    function deleteOfficePassword(id) {
+      if (!confirm("Remove this password from your vault?")) return;
+      const pws = getOfficePasswords().filter(x => x.id !== id);
+      saveOfficePasswords(pws);
+      renderOfficePasswords();
+      showToast("Password removed from vault.");
+    }
+
+    function togglePasswordVisibility(id) {
+      const el = document.getElementById("pw-value-" + id);
+      if (!el) return;
+      if (el.classList.contains("revealed")) {
+        el.textContent = "••••••••";
+        el.classList.remove("revealed");
+      } else {
+        const pws = getOfficePasswords();
+        const p = pws.find(x => x.id === id);
+        if (p) {
+          el.textContent = p.value;
+          el.classList.add("revealed");
+        }
+      }
+    }
+
+    function renderOfficePasswords() {
+      const container = document.getElementById("officePasswordList");
+      const pws = getOfficePasswords();
+
+      if (!pws.length) {
+        container.innerHTML = '<div class="office-empty">No passwords saved yet. Your vault is secure.</div>';
+        return;
+      }
+
+      container.innerHTML = "";
+      pws.forEach(p => {
+        const item = document.createElement("div");
+        item.className = "office-list-item";
+
+        const info = document.createElement("div");
+        info.className = "item-info";
+
+        const title = document.createElement("div");
+        title.className = "item-title";
+        title.textContent = "🔐 " + p.label;
+
+        const meta = document.createElement("div");
+        meta.className = "item-meta";
+        if (p.user) meta.innerHTML += `User: ${escapeHTML(p.user)}<br>`;
+        meta.innerHTML += `Password: <span class="password-value" id="pw-value-${p.id}">••••••••</span><br>`;
+        meta.innerHTML += `Saved: ${new Date(p.created).toLocaleString()}`;
+
+        info.appendChild(title);
+        info.appendChild(meta);
+
+        const actions = document.createElement("div");
+        actions.className = "item-actions";
+
+        const revealBtn = document.createElement("button");
+        revealBtn.textContent = "👁 View";
+        revealBtn.onclick = () => togglePasswordVisibility(p.id);
+        actions.appendChild(revealBtn);
+
+        const copyBtn = document.createElement("button");
+        copyBtn.textContent = "📋 Copy";
+        copyBtn.onclick = () => copyText(p.value);
+        actions.appendChild(copyBtn);
+
+        const del = document.createElement("button");
+        del.className = "danger";
+        del.textContent = "🗑";
+        del.onclick = () => deleteOfficePassword(p.id);
+        actions.appendChild(del);
+
+        item.appendChild(info);
+        item.appendChild(actions);
         container.appendChild(item);
       });
     }
@@ -3066,7 +3328,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         speak("Welcome to the Team Room. You can now save links, names, and notes.");
       }
       document.getElementById("teamRoomSection").classList.remove("hidden");
-      document.getElementById("officeSection").classList.add("hidden");
       document.getElementById("teamRoomSection").scrollIntoView({ behavior: "smooth" });
       renderTeamEntries();
     }

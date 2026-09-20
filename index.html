@@ -6,17 +6,13 @@
   <meta name="theme-color" content="#070b14">
   <title>NINE: OCTOBRAIN — Joheliv Labs</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --bg: #050810;
       --panel: #0b1220;
       --panel2: #101a2c;
-      --border: rgba(255, 255, 255, .09);
+      --border: rgba(255,255,255,.09);
       --text: #f4f7fb;
       --muted: #8e9bb0;
       --cyan: #27d9ff;
@@ -26,1616 +22,995 @@
       --danger: #ff5577;
       --gold: #ffc857;
       --gold-glow: #ffaa33;
-      --shadow: 0 20px 70px rgba(0, 0, 0, .45);
+      --hud: #00ff88;
+      --hud-warn: #ffaa00;
+      --hud-danger: #ff3333;
+      --shadow: 0 20px 70px rgba(0,0,0,.45);
     }
 
     html, body {
-      width: 100%;
-      min-height: 100%;
+      width: 100%; min-height: 100%;
       font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
       background:
-        radial-gradient(circle at 50% 20%, rgba(39, 217, 255, .08), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(155, 92, 255, .08), transparent 30%),
+        radial-gradient(circle at 50% 20%, rgba(39,217,255,.08), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(155,92,255,.08), transparent 30%),
         var(--bg);
       color: var(--text);
       scroll-behavior: smooth;
     }
-
-    body {
-      overflow-x: hidden;
-    }
-
-    button, input, textarea, select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .hidden {
-      display: none !important;
-    }
+    body { overflow-x: hidden; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .hidden { display: none !important; }
 
     /* ===== ACCESS ===== */
     #accessScreen {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background:
-        radial-gradient(circle at center, rgba(39, 217, 255, .10), transparent 35%),
-        #03050a;
+      position: fixed; inset: 0; z-index: 9999;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      background: radial-gradient(circle at center, rgba(39,217,255,.10), transparent 35%), #03050a;
     }
-
     .access-card {
-      width: min(460px, 100%);
-      padding: 42px 32px;
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      background: rgba(10, 16, 28, .86);
-      backdrop-filter: blur(25px);
-      box-shadow: var(--shadow);
-      text-align: center;
+      width: min(460px,100%); padding: 42px 32px;
+      border: 1px solid var(--border); border-radius: 28px;
+      background: rgba(10,16,28,.86); backdrop-filter: blur(25px);
+      box-shadow: var(--shadow); text-align: center;
     }
-
-    .brand-mini {
-      color: var(--cyan);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-    }
-
-    .access-card h1 {
-      font-size: 38px;
-      letter-spacing: -1px;
-    }
-
-    .access-card .sub {
-      color: var(--muted);
-      margin: 10px 0 28px;
-    }
-
-    .ceo {
-      margin: 25px 0;
-      color: #c9d3e5;
-      font-size: 13px;
-    }
-
+    .brand-mini { color: var(--cyan); font-size: 12px; font-weight: 800; letter-spacing: 3px; margin-bottom: 8px; }
+    .access-card h1 { font-size: 38px; letter-spacing: -1px; }
+    .access-card .sub { color: var(--muted); margin: 10px 0 28px; }
+    .ceo { margin: 25px 0; color: #c9d3e5; font-size: 13px; }
     .access-input {
-      width: 100%;
-      height: 54px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      outline: none;
-      background: #070c16;
-      color: white;
-      text-align: center;
-      letter-spacing: 7px;
-      font-size: 18px;
+      width: 100%; height: 54px; border: 1px solid var(--border); border-radius: 14px;
+      outline: none; background: #070c16; color: white; text-align: center;
+      letter-spacing: 7px; font-size: 18px;
     }
-
-    .access-input:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 0 3px rgba(39, 217, 255, .08);
-    }
-
+    .access-input:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(39,217,255,.08); }
     .unlock {
-      width: 100%;
-      height: 54px;
-      margin-top: 14px;
-      border: 0;
-      border-radius: 14px;
-      color: #021018;
-      font-weight: 900;
+      width: 100%; height: 54px; margin-top: 14px; border: 0; border-radius: 14px;
+      color: #021018; font-weight: 900;
       background: linear-gradient(135deg, var(--cyan), #74eaff);
     }
-
-    .error {
-      min-height: 20px;
-      margin-top: 12px;
-      color: #ff6685;
-      font-size: 13px;
-    }
+    .error { min-height: 20px; margin-top: 12px; color: #ff6685; font-size: 13px; }
 
     /* ===== APP ===== */
-    #app {
-      min-height: 100vh;
-    }
+    #app { min-height: 100vh; }
 
     .topbar {
-      height: 72px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(5, 8, 16, .82);
-      backdrop-filter: blur(18px);
-      flex-wrap: wrap;
-      gap: 8px;
+      min-height: 72px; position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 28px; border-bottom: 1px solid var(--border);
+      background: rgba(5,8,16,.82); backdrop-filter: blur(18px);
+      flex-wrap: wrap; gap: 8px;
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .logo { display: flex; align-items: center; gap: 12px; }
     .logo-icon {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      border-radius: 13px;
-      background: linear-gradient(135deg, var(--cyan), var(--purple));
-      color: white;
-      font-size: 20px;
-      box-shadow: 0 0 30px rgba(39, 217, 255, .18);
+      width: 40px; height: 40px; display: grid; place-items: center;
+      border-radius: 13px; background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: white; font-size: 20px; box-shadow: 0 0 30px rgba(39,217,255,.18);
     }
+    .logo strong { display: block; font-size: 16px; }
+    .logo small { color: var(--muted); }
 
-    .logo strong {
-      display: block;
-      font-size: 16px;
-    }
-
-    .logo small {
-      color: var(--muted);
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
+    .top-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .icon-btn {
-      height: 40px;
-      padding: 0 13px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--panel);
-      color: #dce5f4;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      transition: .2s;
+      height: 40px; padding: 0 13px; border: 1px solid var(--border); border-radius: 10px;
+      background: var(--panel); color: #dce5f4; display: flex; align-items: center; gap: 6px;
+      font-size: 13px; transition: .2s;
     }
-
-    .icon-btn:hover {
-      border-color: rgba(39, 217, 255, .4);
-    }
-
-    .icon-btn.gold {
-      border-color: rgba(255, 200, 87, .25);
-      color: var(--gold);
-    }
-
-    .icon-btn.gold:hover {
-      border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(255, 200, 87, .15);
-    }
+    .icon-btn:hover { border-color: rgba(39,217,255,.4); }
+    .icon-btn.gold { border-color: rgba(255,200,87,.25); color: var(--gold); }
+    .icon-btn.gold:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(255,200,87,.15); }
+    .icon-btn.hud { border-color: rgba(0,255,136,.25); color: var(--hud); }
+    .icon-btn.hud:hover { border-color: var(--hud); box-shadow: 0 0 20px rgba(0,255,136,.2); }
 
     /* ===== HERO ===== */
-    .hero {
-      text-align: center;
-      padding: 45px 20px 20px;
-    }
-
-    .hero .welcome {
-      color: var(--cyan);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 3px;
-    }
-
+    .hero { text-align: center; padding: 45px 20px 20px; }
+    .hero .welcome { color: var(--cyan); font-size: 11px; font-weight: 800; letter-spacing: 3px; }
     .hero h1 {
-      margin-top: 10px;
-      font-size: clamp(34px, 6vw, 70px);
-      letter-spacing: -3px;
+      margin-top: 10px; font-size: clamp(34px, 6vw, 70px); letter-spacing: -3px;
       background: linear-gradient(90deg, #fff, var(--cyan), #b68cff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-
-    .hero p {
-      max-width: 680px;
-      margin: 12px auto 0;
-      color: var(--muted);
-    }
+    .hero p { max-width: 680px; margin: 12px auto 0; color: var(--muted); }
 
     /* ===== WORKSPACE ===== */
-    .workspace {
-      width: min(1400px, 94%);
-      margin: 25px auto 60px;
-    }
-
+    .workspace { width: min(1400px, 94%); margin: 25px auto 60px; }
     .setup {
-      max-width: 850px;
-      margin: 0 auto 40px;
-      padding: 25px;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(16, 26, 44, .85), rgba(8, 13, 24, .85));
+      max-width: 850px; margin: 0 auto 40px; padding: 25px;
+      border: 1px solid var(--border); border-radius: 22px;
+      background: linear-gradient(180deg, rgba(16,26,44,.85), rgba(8,13,24,.85));
       box-shadow: var(--shadow);
     }
-
-    .field {
-      margin-bottom: 18px;
+    .field { margin-bottom: 18px; }
+    .field label { display: block; margin-bottom: 8px; color: #cdd8e8; font-size: 13px; font-weight: 700; }
+    .field input, .field textarea, .field select {
+      width: 100%; border: 1px solid var(--border); outline: none; border-radius: 12px;
+      padding: 14px; background: #070c16; color: white;
     }
+    .field textarea { min-height: 100px; resize: vertical; }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: rgba(39,217,255,.55); }
 
-    .field label {
-      display: block;
-      margin-bottom: 8px;
-      color: #cdd8e8;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .field input,
-    .field textarea,
-    .field select {
-      width: 100%;
-      border: 1px solid var(--border);
-      outline: none;
-      border-radius: 12px;
-      padding: 14px;
-      background: #070c16;
-      color: white;
-    }
-
-    .field textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
-      border-color: rgba(39, 217, 255, .55);
-    }
-
-    .type-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
+    .type-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .type-option {
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: #070c16;
-      text-align: left;
-      transition: .2s;
-      color: white;
+      padding: 18px; border: 1px solid var(--border); border-radius: 14px;
+      background: #070c16; text-align: left; transition: .2s; color: white;
     }
-
-    .type-option.active {
-      border-color: var(--cyan);
-      background: rgba(39, 217, 255, .07);
-      box-shadow: inset 0 0 30px rgba(39, 217, 255, .04);
-    }
-
-    .type-option strong {
-      display: block;
-    }
-
-    .type-option span {
-      color: var(--muted);
-      font-size: 12px;
-    }
+    .type-option.active { border-color: var(--cyan); background: rgba(39,217,255,.07); box-shadow: inset 0 0 30px rgba(39,217,255,.04); }
+    .type-option strong { display: block; }
+    .type-option span { color: var(--muted); font-size: 12px; }
 
     .generate {
-      width: 100%;
-      height: 56px;
-      border: 0;
-      border-radius: 14px;
+      width: 100%; height: 56px; border: 0; border-radius: 14px;
       background: linear-gradient(135deg, var(--cyan), var(--blue));
-      color: #020711;
-      font-weight: 950;
-      font-size: 15px;
-      margin-top: 5px;
+      color: #020711; font-weight: 950; font-size: 15px; margin-top: 5px;
     }
 
     /* ===== BRAINS ===== */
     .brain-system {
-      position: relative;
-      min-height: 730px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 10px auto 40px;
+      position: relative; min-height: 730px; display: flex;
+      justify-content: center; align-items: center; margin: 10px auto 40px;
     }
-
-    .neural-lines {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
+    .neural-lines { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
     .line {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 2px;
-      height: 260px;
+      position: absolute; left: 50%; top: 50%; width: 2px; height: 260px;
       transform-origin: bottom center;
       background: linear-gradient(to top, transparent, var(--cyan), transparent);
       opacity: .18;
     }
-
-    .line:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
-    .line:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); }
-    .line:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); }
-    .line:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); }
-    .line:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); }
-    .line:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); }
-    .line:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); }
-    .line:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); }
+    .line:nth-child(1){transform:translate(-50%,-100%) rotate(0deg);}
+    .line:nth-child(2){transform:translate(-50%,-100%) rotate(45deg);}
+    .line:nth-child(3){transform:translate(-50%,-100%) rotate(90deg);}
+    .line:nth-child(4){transform:translate(-50%,-100%) rotate(135deg);}
+    .line:nth-child(5){transform:translate(-50%,-100%) rotate(180deg);}
+    .line:nth-child(6){transform:translate(-50%,-100%) rotate(225deg);}
+    .line:nth-child(7){transform:translate(-50%,-100%) rotate(270deg);}
+    .line:nth-child(8){transform:translate(-50%,-100%) rotate(315deg);}
 
     .brain {
-      position: absolute;
-      width: 150px;
-      min-height: 115px;
-      padding: 17px;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: rgba(10, 17, 30, .92);
-      backdrop-filter: blur(14px);
-      text-align: center;
-      transition: .35s;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, .3);
+      position: absolute; width: 150px; min-height: 115px; padding: 17px;
+      border: 1px solid var(--border); border-radius: 22px;
+      background: rgba(10,17,30,.92); backdrop-filter: blur(14px);
+      text-align: center; transition: .35s; box-shadow: 0 15px 40px rgba(0,0,0,.3);
     }
+    .brain:hover { transform: scale(1.04); border-color: rgba(39,217,255,.4); }
+    .brain.active { border-color: var(--cyan); box-shadow: 0 0 45px rgba(39,217,255,.2); animation: pulse 1.4s infinite; }
+    .brain.done { border-color: rgba(50,230,161,.5); }
+    .brain .emoji { font-size: 27px; }
+    .brain strong { display: block; margin-top: 6px; font-size: 12px; }
+    .brain small { display: block; margin-top: 5px; color: var(--muted); font-size: 10px; }
 
-    .brain:hover {
-      transform: scale(1.04);
-      border-color: rgba(39, 217, 255, .4);
-    }
-
-    .brain.active {
-      border-color: var(--cyan);
-      box-shadow: 0 0 45px rgba(39, 217, 255, .2);
-      animation: pulse 1.4s infinite;
-    }
-
-    .brain.done {
-      border-color: rgba(50, 230, 161, .5);
-    }
-
-    .brain .emoji {
-      font-size: 27px;
-    }
-
-    .brain strong {
-      display: block;
-      margin-top: 6px;
-      font-size: 12px;
-    }
-
-    .brain small {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .brain:nth-of-type(1) { top: 3%; left: 50%; transform: translateX(-50%); }
-    .brain:nth-of-type(2) { top: 14%; right: 5%; }
-    .brain:nth-of-type(3) { top: 40%; right: 0; }
-    .brain:nth-of-type(4) { bottom: 7%; right: 10%; }
-    .brain:nth-of-type(5) { bottom: 0; left: 50%; transform: translateX(-50%); }
-    .brain:nth-of-type(6) { bottom: 7%; left: 10%; }
-    .brain:nth-of-type(7) { top: 40%; left: 0; }
-    .brain:nth-of-type(8) { top: 14%; left: 5%; }
+    .brain:nth-of-type(1){top:3%;left:50%;transform:translateX(-50%);}
+    .brain:nth-of-type(2){top:14%;right:5%;}
+    .brain:nth-of-type(3){top:40%;right:0;}
+    .brain:nth-of-type(4){bottom:7%;right:10%;}
+    .brain:nth-of-type(5){bottom:0;left:50%;transform:translateX(-50%);}
+    .brain:nth-of-type(6){bottom:7%;left:10%;}
+    .brain:nth-of-type(7){top:40%;left:0;}
+    .brain:nth-of-type(8){top:14%;left:5%;}
 
     .core {
-      position: relative;
-      z-index: 5;
-      width: 230px;
-      height: 230px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      position: relative; z-index: 5; width: 230px; height: 230px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
       border-radius: 50%;
       background:
         radial-gradient(circle at 35% 30%, #54edff, transparent 8%),
         radial-gradient(circle, #192b53, #07101f 62%);
-      border: 1px solid rgba(39, 217, 255, .5);
-      box-shadow:
-        0 0 45px rgba(39, 217, 255, .15),
-        inset 0 0 60px rgba(39, 217, 255, .08);
-      transition: box-shadow .5s;
-      animation: coreGlow 3s infinite alternate;
+      border: 1px solid rgba(39,217,255,.5);
+      box-shadow: 0 0 45px rgba(39,217,255,.15), inset 0 0 60px rgba(39,217,255,.08);
+      transition: box-shadow .5s; animation: coreGlow 3s infinite alternate;
     }
-
     @keyframes coreGlow {
-      0% { box-shadow: 0 0 35px rgba(39, 217, 255, .10), inset 0 0 50px rgba(39, 217, 255, .05); }
-      100% { box-shadow: 0 0 80px rgba(39, 217, 255, .30), inset 0 0 80px rgba(39, 217, 255, .15); }
+      0%{box-shadow:0 0 35px rgba(39,217,255,.10),inset 0 0 50px rgba(39,217,255,.05);}
+      100%{box-shadow:0 0 80px rgba(39,217,255,.30),inset 0 0 80px rgba(39,217,255,.15);}
     }
-
     .core .octopus {
       font-size: 76px;
-      filter: drop-shadow(0 0 25px rgba(39, 217, 255, .8));
+      filter: drop-shadow(0 0 25px rgba(39,217,255,.8));
       animation: octoGlow 2s infinite alternate;
     }
-
     @keyframes octoGlow {
-      0% { filter: drop-shadow(0 0 15px rgba(39, 217, 255, .5)); }
-      100% { filter: drop-shadow(0 0 40px rgba(39, 217, 255, 1)); }
+      0%{filter:drop-shadow(0 0 15px rgba(39,217,255,.5));}
+      100%{filter:drop-shadow(0 0 40px rgba(39,217,255,1));}
     }
-
-    .core strong {
-      font-size: 14px;
-      letter-spacing: 2px;
-    }
-
-    .core small {
-      margin-top: 4px;
-      color: var(--muted);
-    }
-
+    .core strong { font-size: 14px; letter-spacing: 2px; }
+    .core small { margin-top: 4px; color: var(--muted); }
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(39, 217, 255, .08); }
-      50% { box-shadow: 0 0 50px rgba(39, 217, 255, .32); }
+      0%,100%{box-shadow:0 0 20px rgba(39,217,255,.08);}
+      50%{box-shadow:0 0 50px rgba(39,217,255,.32);}
     }
 
     /* ===== RESULTS ===== */
-    .results {
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: 18px;
-    }
-
+    .results { display: grid; grid-template-columns: 250px 1fr; gap: 18px; }
     .result-nav {
-      position: sticky;
-      top: 90px;
-      align-self: start;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: var(--panel);
+      position: sticky; top: 90px; align-self: start; padding: 12px;
+      border: 1px solid var(--border); border-radius: 18px; background: var(--panel);
     }
-
     .result-nav button {
-      width: 100%;
-      text-align: left;
-      padding: 11px;
-      border: 0;
-      border-radius: 9px;
-      background: transparent;
-      color: #aebbd0;
-      margin-bottom: 3px;
+      width: 100%; text-align: left; padding: 11px; border: 0; border-radius: 9px;
+      background: transparent; color: #aebbd0; margin-bottom: 3px;
     }
-
-    .result-nav button:hover,
-    .result-nav button.active {
-      background: rgba(39, 217, 255, .08);
-      color: var(--cyan);
-    }
-
-    .result-content {
-      min-width: 0;
-    }
-
+    .result-nav button:hover, .result-nav button.active { background: rgba(39,217,255,.08); color: var(--cyan); }
+    .result-content { min-width: 0; }
     .result-card {
-      padding: 25px;
-      margin-bottom: 15px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: rgba(10, 17, 30, .85);
+      padding: 25px; margin-bottom: 15px; border: 1px solid var(--border);
+      border-radius: 20px; background: rgba(10,17,30,.85);
     }
-
-    .result-card h2 {
-      margin-bottom: 8px;
-    }
-
-    .result-card .meta {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 20px;
-    }
-
-    .result-text {
-      white-space: pre-wrap;
-      line-height: 1.75;
-      color: #d7dfec;
-    }
-
-    .result-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
+    .result-card h2 { margin-bottom: 8px; }
+    .result-card .meta { color: var(--muted); font-size: 12px; margin-bottom: 20px; }
+    .result-text { white-space: pre-wrap; line-height: 1.75; color: #d7dfec; }
+    .result-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
     .action {
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #080e19;
-      color: #dce7f5;
+      padding: 10px 14px; border: 1px solid var(--border); border-radius: 10px;
+      background: #080e19; color: #dce7f5;
     }
-
-    .action.primary {
-      background: var(--cyan);
-      color: #021018;
-      border: 0;
-      font-weight: 800;
-    }
-
-    .action:hover {
-      border-color: var(--cyan);
-    }
+    .action.primary { background: var(--cyan); color: #021018; border: 0; font-weight: 800; }
+    .action:hover { border-color: var(--cyan); }
 
     /* ===== LAUNCH GUIDE ===== */
-    .launch-guide-section {
-      margin: 50px 0 30px;
-      border-top: 1px solid var(--border);
-      padding-top: 35px;
-    }
-
+    .launch-guide-section { margin: 50px 0 30px; border-top: 1px solid var(--border); padding-top: 35px; }
     .launch-guide-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px; margin-bottom: 22px;
     }
-
     .launch-guide-header h2 {
-      font-size: 26px;
-      letter-spacing: -0.5px;
+      font-size: 26px; letter-spacing: -0.5px;
       background: linear-gradient(90deg, #fff, var(--cyan));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-
-    .guide-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
+    .guide-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
     .guide-tab {
-      padding: 10px 18px;
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background: var(--panel);
-      color: #b0bed2;
-      font-size: 14px;
-      transition: .2s;
-      font-weight: 600;
+      padding: 10px 18px; border: 1px solid var(--border); border-radius: 30px;
+      background: var(--panel); color: #b0bed2; font-size: 14px; transition: .2s; font-weight: 600;
     }
-
-    .guide-tab.active {
-      background: rgba(39, 217, 255, .12);
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-
-    .guide-tab:hover {
-      border-color: rgba(39, 217, 255, .4);
-    }
-
-    .guide-content {
-      display: none;
-      animation: fadeIn .25s ease;
-    }
-
-    .guide-content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .guide-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-    }
-
+    .guide-tab.active { background: rgba(39,217,255,.12); border-color: var(--cyan); color: var(--cyan); }
+    .guide-tab:hover { border-color: rgba(39,217,255,.4); }
+    .guide-content { display: none; animation: fadeIn .25s ease; }
+    .guide-content.active { display: block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);} }
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 18px; }
     .guide-card {
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: var(--panel);
+      padding: 22px; border: 1px solid var(--border); border-radius: 18px; background: var(--panel);
     }
-
     .guide-card h3 {
-      font-size: 17px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--cyan);
+      font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; color: var(--cyan);
     }
-
-    .guide-card ul, .guide-card ol {
-      padding-left: 18px;
-      color: #cbd6e6;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .guide-card li {
-      margin-bottom: 6px;
-    }
-
-    .guide-card p {
-      color: #cbd6e6;
-      font-size: 14px;
-      line-height: 1.7;
-      margin-bottom: 10px;
-    }
-
-    .guide-card a {
-      color: var(--cyan);
-      text-decoration: none;
-      border-bottom: 1px dotted rgba(39, 217, 255, .4);
-    }
-
-    .guide-card a:hover {
-      border-bottom-color: var(--cyan);
-    }
-
+    .guide-card ul, .guide-card ol { padding-left: 18px; color: #cbd6e6; line-height: 1.8; font-size: 14px; }
+    .guide-card li { margin-bottom: 6px; }
+    .guide-card p { color: #cbd6e6; font-size: 14px; line-height: 1.7; margin-bottom: 10px; }
+    .guide-card a { color: var(--cyan); text-decoration: none; border-bottom: 1px dotted rgba(39,217,255,.4); }
+    .guide-card a:hover { border-bottom-color: var(--cyan); }
     .badge {
-      display: inline-block;
-      background: rgba(39, 217, 255, .15);
-      color: var(--cyan);
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 30px;
-      font-weight: 700;
-      margin-right: 6px;
-      margin-bottom: 6px;
+      display: inline-block; background: rgba(39,217,255,.15); color: var(--cyan);
+      font-size: 11px; padding: 3px 10px; border-radius: 30px; font-weight: 700;
+      margin-right: 6px; margin-bottom: 6px;
     }
-
     .copy-block {
-      background: #070c16;
-      padding: 14px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      font-family: 'Courier New', monospace;
-      font-size: 13px;
-      color: #d2dcee;
-      white-space: pre-wrap;
-      word-break: break-word;
-      margin: 12px 0;
-      position: relative;
+      background: #070c16; padding: 14px 16px; border-radius: 12px;
+      border: 1px solid var(--border); font-family: 'Courier New', monospace;
+      font-size: 13px; color: #d2dcee; white-space: pre-wrap; word-break: break-word;
+      margin: 12px 0; position: relative;
     }
-
     .copy-block button {
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      background: var(--panel2);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-size: 11px;
+      position: absolute; top: 8px; right: 10px; background: var(--panel2);
+      border: 1px solid var(--border); color: var(--muted); border-radius: 6px;
+      padding: 4px 10px; font-size: 11px;
     }
-
-    .copy-block button:hover {
-      color: var(--cyan);
-      border-color: var(--cyan);
-    }
+    .copy-block button:hover { color: var(--cyan); border-color: var(--cyan); }
 
     /* ===== PRODUCT TRACKER ===== */
     .product-tracker {
-      margin: 40px 0 50px;
-      padding: 30px;
-      border: 1px solid var(--border);
+      margin: 40px 0 50px; padding: 30px; border: 1px solid var(--border);
       border-radius: 24px;
-      background: linear-gradient(180deg, rgba(16, 26, 44, .6), rgba(8, 13, 24, .8));
+      background: linear-gradient(180deg, rgba(16,26,44,.6), rgba(8,13,24,.8));
       box-shadow: var(--shadow);
     }
-
-    .product-tracker h2 {
-      font-size: 24px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .product-tracker .sub {
-      color: var(--muted);
-      margin-bottom: 24px;
-      font-size: 14px;
-    }
-
-    .tracker-input-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
+    .product-tracker h2 { font-size: 24px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .product-tracker .sub { color: var(--muted); margin-bottom: 24px; font-size: 14px; }
+    .tracker-input-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
     .tracker-input-row input {
-      flex: 1 1 200px;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #070c16;
-      color: white;
-      outline: none;
+      flex: 1 1 200px; padding: 14px; border-radius: 12px; border: 1px solid var(--border);
+      background: #070c16; color: white; outline: none;
     }
-
-    .tracker-input-row input:focus {
-      border-color: var(--cyan);
-    }
-
+    .tracker-input-row input:focus { border-color: var(--cyan); }
     .tracker-input-row button {
-      padding: 14px 26px;
-      border-radius: 12px;
-      border: none;
-      background: var(--cyan);
-      color: #021018;
-      font-weight: 800;
-      white-space: nowrap;
+      padding: 14px 26px; border-radius: 12px; border: none;
+      background: var(--cyan); color: #021018; font-weight: 800; white-space: nowrap;
     }
-
-    .product-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
+    .product-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
     .product-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 18px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: var(--panel);
-      transition: .2s;
-      flex-wrap: wrap;
+      display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+      border: 1px solid var(--border); border-radius: 16px; background: var(--panel);
+      transition: .2s; flex-wrap: wrap;
     }
-
-    .product-item:hover {
-      border-color: rgba(39, 217, 255, .25);
-    }
-
-    .product-item .done-check {
-      width: 24px;
-      height: 24px;
-      accent-color: var(--cyan);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .product-item .product-info {
-      flex: 1 1 180px;
-      min-width: 0;
-    }
-
+    .product-item:hover { border-color: rgba(39,217,255,.25); }
+    .product-item .done-check { width: 24px; height: 24px; accent-color: var(--cyan); cursor: pointer; flex-shrink: 0; }
+    .product-item .product-info { flex: 1 1 180px; min-width: 0; }
     .product-item .product-name {
-      font-weight: 700;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
     }
-
-    .product-item .product-name.done {
-      text-decoration: line-through;
-      color: var(--muted);
-      opacity: .7;
-    }
-
-    .product-item .product-url {
-      font-size: 13px;
-      color: var(--muted);
-      word-break: break-all;
-      margin-top: 4px;
-    }
-
-    .product-item .product-url a {
-      color: var(--cyan);
-      text-decoration: none;
-    }
-
-    .product-item .product-url a:hover {
-      text-decoration: underline;
-    }
-
+    .product-item .product-name.done { text-decoration: line-through; color: var(--muted); opacity: .7; }
+    .product-item .product-url { font-size: 13px; color: var(--muted); word-break: break-all; margin-top: 4px; }
+    .product-item .product-url a { color: var(--cyan); text-decoration: none; }
+    .product-item .product-url a:hover { text-decoration: underline; }
     .product-item .delete-btn {
-      background: transparent;
-      border: 1px solid rgba(255, 85, 119, .25);
-      color: #ff6685;
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 13px;
-      flex-shrink: 0;
+      background: transparent; border: 1px solid rgba(255,85,119,.25); color: #ff6685;
+      border-radius: 10px; padding: 8px 12px; font-size: 13px; flex-shrink: 0;
     }
-
-    .product-item .delete-btn:hover {
-      background: rgba(255, 85, 119, .1);
-      border-color: var(--danger);
-    }
-
+    .product-item .delete-btn:hover { background: rgba(255,85,119,.1); border-color: var(--danger); }
     .tracker-empty {
-      padding: 30px;
-      text-align: center;
-      color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: 14px;
-    }
-
-    /* ===== JASON'S OFFICE — FULL SCREEN OVERLAY ===== */
-    #officeOverlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9000;
-      background: linear-gradient(145deg, #0e0a04, #1a1208, #0b0703);
-      overflow-y: auto;
-      padding: 30px 20px 60px;
-      display: none;
-    }
-
-    #officeOverlay.active {
-      display: block;
-    }
-
-    #officeOverlay::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 30% 40%, rgba(255, 200, 87, .06), transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .office-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .office-topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 26px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid rgba(255, 200, 87, .2);
-    }
-
-    .office-topbar h2 {
-      font-size: 28px;
-      letter-spacing: -1px;
-      background: linear-gradient(90deg, #ffc857, #ffaa33, #ffd97a);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .office-close-btn {
-      padding: 12px 24px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 200, 87, .3);
-      background: rgba(255, 200, 87, .08);
-      color: var(--gold);
-      font-weight: 700;
-      font-size: 14px;
-      transition: .2s;
-    }
-
-    .office-close-btn:hover {
-      background: rgba(255, 200, 87, .18);
-      box-shadow: 0 0 30px rgba(255, 200, 87, .2);
-    }
-
-    .office-panel {
-      background: rgba(12, 9, 5, .7);
-      border: 1px solid rgba(255, 200, 87, .15);
-      border-radius: 20px;
-      padding: 24px 22px;
-      margin-bottom: 22px;
-    }
-
-    .office-panel h3 {
-      color: var(--gold);
-      font-size: 17px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .office-panel .row-inputs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .office-panel input,
-    .office-panel textarea {
-      flex: 1 1 200px;
-      padding: 13px 16px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 200, 87, .18);
-      background: rgba(10, 8, 4, .8);
-      color: #f5ecd9;
-      outline: none;
-      font-size: 14px;
-    }
-
-    .office-panel input:focus,
-    .office-panel textarea:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 30px rgba(255, 200, 87, .06);
-    }
-
-    .office-panel textarea {
-      min-height: 70px;
-      resize: vertical;
-      flex: 1 1 100%;
-    }
-
-    .office-panel .btn-gold {
-      padding: 13px 26px;
-      border-radius: 12px;
-      border: none;
-      background: linear-gradient(135deg, #ffc857, #ffaa33);
-      color: #1a1208;
-      font-weight: 800;
-      white-space: nowrap;
-      transition: .2s;
-      font-size: 14px;
-    }
-
-    .office-panel .btn-gold:hover {
-      box-shadow: 0 0 40px rgba(255, 200, 87, .3);
-      transform: scale(1.02);
-    }
-
-    .office-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .office-list-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 18px;
-      border-radius: 14px;
-      background: rgba(12, 9, 5, .6);
-      border: 1px solid rgba(255, 200, 87, .1);
-      flex-wrap: wrap;
-      transition: .2s;
-    }
-
-    .office-list-item:hover {
-      border-color: rgba(255, 200, 87, .3);
-    }
-
-    .office-list-item .item-check {
-      width: 22px;
-      height: 22px;
-      accent-color: var(--gold);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .office-list-item .item-info {
-      flex: 1 1 200px;
-      min-width: 0;
-    }
-
-    .office-list-item .item-title {
-      font-weight: 700;
-      font-size: 15px;
-      color: #f5ecd9;
-    }
-
-    .office-list-item .item-title.done {
-      text-decoration: line-through;
-      color: #8a7d6b;
-    }
-
-    .office-list-item .item-meta {
-      font-size: 12px;
-      color: #b8a88a;
-      margin-top: 4px;
-      line-height: 1.5;
-    }
-
-    .office-list-item .item-meta a {
-      color: var(--gold);
-      text-decoration: none;
-    }
-
-    .office-list-item .item-meta a:hover {
-      text-decoration: underline;
-    }
-
-    .office-list-item .item-actions {
-      display: flex;
-      gap: 6px;
-      flex-shrink: 0;
-      flex-wrap: wrap;
-    }
-
-    .office-list-item .item-actions button {
-      background: transparent;
-      border: 1px solid rgba(255, 200, 87, .2);
-      color: var(--gold);
-      border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 12px;
-      transition: .2s;
-    }
-
-    .office-list-item .item-actions button:hover {
-      background: rgba(255, 200, 87, .1);
-      border-color: var(--gold);
-    }
-
-    .office-list-item .item-actions button.danger {
-      border-color: rgba(255, 85, 119, .2);
-      color: #ff6685;
-    }
-
-    .office-list-item .item-actions button.danger:hover {
-      background: rgba(255, 85, 119, .08);
-      border-color: var(--danger);
-    }
-
-    .office-empty {
-      padding: 30px;
-      text-align: center;
-      color: #8a7d6b;
-      border: 1px dashed rgba(255, 200, 87, .15);
-      border-radius: 14px;
-      font-style: italic;
-      font-size: 14px;
-    }
-
-    /* Password vault */
-    .password-value {
-      font-family: 'Courier New', monospace;
-      color: var(--gold);
-      background: rgba(255, 200, 87, .08);
-      padding: 4px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 200, 87, .15);
-      font-size: 13px;
-      letter-spacing: 2px;
-      display: inline-block;
-      min-width: 120px;
-    }
-
-    .password-value.revealed {
-      letter-spacing: 0;
+      padding: 30px; text-align: center; color: var(--muted);
+      border: 1px dashed var(--border); border-radius: 14px;
     }
 
     /* ===== TEAM ROOM ===== */
     .team-room-section {
-      margin: 40px 0 50px;
-      border-radius: 28px;
+      margin: 40px 0 50px; border-radius: 28px;
       background: linear-gradient(145deg, #0a0f1a, #0d1525, #080c14);
-      border: 1px solid rgba(39, 217, 255, .2);
-      box-shadow: 0 0 60px rgba(39, 217, 255, .05);
+      border: 1px solid rgba(39,217,255,.2);
+      box-shadow: 0 0 60px rgba(39,217,255,.05);
       padding: 32px 28px;
     }
-
-    .team-room-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
+    .team-room-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
     .team-room-header h2 {
       font-size: 24px;
       background: linear-gradient(90deg, #27d9ff, #5578ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-
     .team-badge {
-      background: rgba(39, 217, 255, .1);
-      border: 1px solid rgba(39, 217, 255, .25);
-      color: var(--cyan);
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 700;
+      background: rgba(39,217,255,.1); border: 1px solid rgba(39,217,255,.25);
+      color: var(--cyan); padding: 5px 14px; border-radius: 30px; font-size: 12px; font-weight: 700;
     }
-
-    .team-input-area {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 20px;
+    .team-input-area { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .team-input-area input, .team-input-area textarea {
+      flex: 1 1 180px; padding: 14px; border-radius: 12px; border: 1px solid var(--border);
+      background: #070c16; color: white; outline: none;
     }
-
-    .team-input-area input,
-    .team-input-area textarea {
-      flex: 1 1 180px;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #070c16;
-      color: white;
-      outline: none;
-    }
-
-    .team-input-area input:focus,
-    .team-input-area textarea:focus {
-      border-color: var(--cyan);
-    }
-
-    .team-input-area textarea {
-      min-height: 70px;
-      resize: vertical;
-      flex: 1 1 100%;
-    }
-
+    .team-input-area input:focus, .team-input-area textarea:focus { border-color: var(--cyan); }
+    .team-input-area textarea { min-height: 70px; resize: vertical; flex: 1 1 100%; }
     .team-input-area button {
-      padding: 14px 26px;
-      border-radius: 12px;
-      border: none;
+      padding: 14px 26px; border-radius: 12px; border: none;
       background: linear-gradient(135deg, var(--cyan), var(--blue));
-      color: #021018;
-      font-weight: 800;
-      white-space: nowrap;
+      color: #021018; font-weight: 800; white-space: nowrap;
     }
-
-    .team-entries-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .team-entries-list { display: flex; flex-direction: column; gap: 10px; }
     .team-entry-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 16px 18px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: var(--panel);
-      transition: .2s;
-      flex-wrap: wrap;
+      display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px;
+      border: 1px solid var(--border); border-radius: 16px; background: var(--panel);
+      transition: .2s; flex-wrap: wrap;
     }
-
-    .team-entry-item:hover {
-      border-color: rgba(39, 217, 255, .2);
-    }
-
-    .team-entry-item .entry-info {
-      flex: 1 1 200px;
-      min-width: 0;
-    }
-
-    .team-entry-item .entry-name {
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .team-entry-item .entry-link {
-      font-size: 13px;
-      color: var(--muted);
-      word-break: break-all;
-      margin-top: 4px;
-    }
-
-    .team-entry-item .entry-link a {
-      color: var(--cyan);
-      text-decoration: none;
-    }
-
-    .team-entry-item .entry-link a:hover {
-      text-decoration: underline;
-    }
-
-    .team-entry-item .entry-date {
-      font-size: 11px;
-      color: #6b7a90;
-      margin-top: 4px;
-    }
-
-    .team-entry-item .entry-notes {
-      font-size: 13px;
-      color: #b0bed2;
-      margin-top: 6px;
-      line-height: 1.5;
-    }
-
+    .team-entry-item:hover { border-color: rgba(39,217,255,.2); }
+    .team-entry-item .entry-info { flex: 1 1 200px; min-width: 0; }
+    .team-entry-item .entry-name { font-weight: 700; font-size: 15px; color: var(--text); }
+    .team-entry-item .entry-link { font-size: 13px; color: var(--muted); word-break: break-all; margin-top: 4px; }
+    .team-entry-item .entry-link a { color: var(--cyan); text-decoration: none; }
+    .team-entry-item .entry-link a:hover { text-decoration: underline; }
+    .team-entry-item .entry-date { font-size: 11px; color: #6b7a90; margin-top: 4px; }
+    .team-entry-item .entry-notes { font-size: 13px; color: #b0bed2; margin-top: 6px; line-height: 1.5; }
     .team-entry-item .entry-delete {
-      background: transparent;
-      border: 1px solid rgba(255, 85, 119, .2);
-      color: #ff6685;
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 13px;
-      flex-shrink: 0;
+      background: transparent; border: 1px solid rgba(255,85,119,.2); color: #ff6685;
+      border-radius: 10px; padding: 8px 12px; font-size: 13px; flex-shrink: 0;
     }
-
-    .team-entry-item .entry-delete:hover {
-      background: rgba(255, 85, 119, .08);
-      border-color: var(--danger);
-    }
-
+    .team-entry-item .entry-delete:hover { background: rgba(255,85,119,.08); border-color: var(--danger); }
     .team-empty {
-      padding: 30px;
-      text-align: center;
-      color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: 14px;
+      padding: 30px; text-align: center; color: var(--muted);
+      border: 1px dashed var(--border); border-radius: 14px;
     }
 
     /* ===== LEARN ROOM ===== */
     .learn-section {
-      margin: 60px 0 40px;
-      border-radius: 28px;
+      margin: 60px 0 40px; border-radius: 28px;
       background: linear-gradient(145deg, #0a0e1a, #0e1528, #080c14);
-      border: 1px solid rgba(155, 92, 255, .2);
-      box-shadow: 0 0 60px rgba(155, 92, 255, .05);
+      border: 1px solid rgba(155,92,255,.2);
+      box-shadow: 0 0 60px rgba(155,92,255,.05);
       padding: 36px 30px;
     }
-
-    .learn-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-
+    .learn-header { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
     .learn-header h2 {
       font-size: 28px;
       background: linear-gradient(90deg, #9b5cff, #27d9ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-
     .learn-badge {
-      background: rgba(155, 92, 255, .12);
-      border: 1px solid rgba(155, 92, 255, .3);
-      color: #b68cff;
-      padding: 5px 14px;
-      border-radius: 30px;
-      font-size: 12px;
-      font-weight: 700;
+      background: rgba(155,92,255,.12); border: 1px solid rgba(155,92,255,.3);
+      color: #b68cff; padding: 5px 14px; border-radius: 30px; font-size: 12px; font-weight: 700;
     }
-
-    .learn-sub {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 28px;
-      line-height: 1.6;
-    }
-
-    .learn-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-
+    .learn-sub { color: var(--muted); font-size: 14px; margin-bottom: 28px; line-height: 1.6; }
+    .learn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 20px; }
     .learn-card {
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(12, 18, 32, .7);
+      padding: 22px; border: 1px solid var(--border); border-radius: 18px;
+      background: rgba(12,18,32,.7);
     }
-
     .learn-card h3 {
-      font-size: 17px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #b68cff;
+      font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; color: #b68cff;
     }
-
-    .learn-card p {
-      color: #cbd6e6;
-      font-size: 14px;
-      line-height: 1.7;
-      margin-bottom: 10px;
-    }
-
-    .learn-card ul, .learn-card ol {
-      padding-left: 18px;
-      color: #cbd6e6;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .learn-card li {
-      margin-bottom: 6px;
-    }
-
+    .learn-card p { color: #cbd6e6; font-size: 14px; line-height: 1.7; margin-bottom: 10px; }
+    .learn-card ul, .learn-card ol { padding-left: 18px; color: #cbd6e6; line-height: 1.8; font-size: 14px; }
+    .learn-card li { margin-bottom: 6px; }
     .learn-card code {
-      background: #070c16;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-family: 'Courier New', monospace;
-      font-size: 13px;
-      color: var(--cyan);
-      border: 1px solid rgba(39, 217, 255, .15);
+      background: #070c16; padding: 2px 8px; border-radius: 6px;
+      font-family: 'Courier New', monospace; font-size: 13px; color: var(--cyan);
+      border: 1px solid rgba(39,217,255,.15);
     }
-
     .learn-card pre {
-      background: #070c16;
-      padding: 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      font-family: 'Courier New', monospace;
-      font-size: 13px;
-      color: #d2dcee;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      margin: 10px 0;
-      line-height: 1.6;
+      background: #070c16; padding: 16px; border-radius: 12px;
+      border: 1px solid var(--border); font-family: 'Courier New', monospace;
+      font-size: 13px; color: #d2dcee; overflow-x: auto; white-space: pre-wrap;
+      word-break: break-word; margin: 10px 0; line-height: 1.6;
     }
-
-    .learn-card .hl {
-      color: var(--cyan);
-    }
-
-    .learn-card .hl2 {
-      color: var(--gold);
-    }
-
-    .learn-card .hl3 {
-      color: var(--green);
-    }
+    .learn-card .hl { color: var(--cyan); }
+    .learn-card .hl2 { color: var(--gold); }
+    .learn-card .hl3 { color: var(--green); }
 
     /* ===== HISTORY ===== */
-    .history-panel {
-      width: min(1200px, 94%);
-      margin: 0 auto 50px;
-    }
-
+    .history-panel { width: min(1200px, 94%); margin: 0 auto 50px; }
     .history-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
-      gap: 12px;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 15px; flex-wrap: wrap; gap: 12px;
     }
-
-    .history-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px;
-    }
-
+    .history-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 12px; }
     .history-card {
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      background: var(--panel);
+      padding: 18px; border: 1px solid var(--border); border-radius: 17px; background: var(--panel);
     }
-
-    .history-card strong {
-      display: block;
-    }
-
-    .history-card small {
-      display: block;
-      color: var(--muted);
-      margin: 7px 0 15px;
-    }
-
+    .history-card strong { display: block; }
+    .history-card small { display: block; color: var(--muted); margin: 7px 0 15px; }
     .history-card button {
-      border: 1px solid var(--border);
-      background: #070c16;
-      color: white;
-      border-radius: 9px;
-      padding: 8px 12px;
+      border: 1px solid var(--border); background: #070c16; color: white;
+      border-radius: 9px; padding: 8px 12px;
     }
-
     .empty {
-      padding: 30px;
-      text-align: center;
-      color: var(--muted);
-      border: 1px dashed var(--border);
-      border-radius: 15px;
+      padding: 30px; text-align: center; color: var(--muted);
+      border: 1px dashed var(--border); border-radius: 15px;
     }
 
     /* ===== TOAST ===== */
     #toast {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 99999;
-      padding: 14px 18px;
-      border-radius: 12px;
-      background: #111b2c;
-      border: 1px solid rgba(39, 217, 255, .3);
-      box-shadow: var(--shadow);
-      transform: translateY(120px);
-      opacity: 0;
-      transition: .3s;
-      max-width: 320px;
+      position: fixed; right: 20px; bottom: 20px; z-index: 99999;
+      padding: 14px 18px; border-radius: 12px; background: #111b2c;
+      border: 1px solid rgba(39,217,255,.3); box-shadow: var(--shadow);
+      transform: translateY(120px); opacity: 0; transition: .3s; max-width: 320px;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ================= JASON'S OFFICE — FULL SCREEN OVERLAY ================= */
+    #officeOverlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: linear-gradient(145deg, #0e0a04, #1a1208, #0b0703);
+      overflow-y: auto; padding: 30px 20px 60px;
+      display: none;
+    }
+    #officeOverlay.active {
+      display: block;
+      animation: officeEnter .45s cubic-bezier(.2,.9,.3,1.2);
+    }
+    @keyframes officeEnter {
+      0% { opacity: 0; transform: scale(.96); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    #officeOverlay::before {
+      content: ''; position: fixed; inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(255,200,87,.06), transparent 60%);
+      pointer-events: none; z-index: 0;
+    }
+    .office-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .office-topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 14px; margin-bottom: 26px; padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,200,87,.2);
+    }
+    .office-topbar h2 {
+      font-size: 28px; letter-spacing: -1px;
+      background: linear-gradient(90deg, #ffc857, #ffaa33, #ffd97a);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .office-close-btn {
+      padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(255,200,87,.3);
+      background: rgba(255,200,87,.08); color: var(--gold);
+      font-weight: 700; font-size: 14px; transition: .2s;
+    }
+    .office-close-btn:hover {
+      background: rgba(255,200,87,.18); box-shadow: 0 0 30px rgba(255,200,87,.2);
+    }
+    .office-panel {
+      background: rgba(12,9,5,.7); border: 1px solid rgba(255,200,87,.15);
+      border-radius: 20px; padding: 24px 22px; margin-bottom: 22px;
+    }
+    .office-panel h3 {
+      color: var(--gold); font-size: 17px; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .office-panel .row-inputs { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; }
+    .office-panel input, .office-panel textarea {
+      flex: 1 1 200px; padding: 13px 16px; border-radius: 12px;
+      border: 1px solid rgba(255,200,87,.18); background: rgba(10,8,4,.8);
+      color: #f5ecd9; outline: none; font-size: 14px;
+    }
+    .office-panel input:focus, .office-panel textarea:focus {
+      border-color: var(--gold); box-shadow: 0 0 30px rgba(255,200,87,.06);
+    }
+    .office-panel textarea { min-height: 70px; resize: vertical; flex: 1 1 100%; }
+    .office-panel .btn-gold {
+      padding: 13px 26px; border-radius: 12px; border: none;
+      background: linear-gradient(135deg, #ffc857, #ffaa33); color: #1a1208;
+      font-weight: 800; white-space: nowrap; transition: .2s; font-size: 14px;
+    }
+    .office-panel .btn-gold:hover { box-shadow: 0 0 40px rgba(255,200,87,.3); transform: scale(1.02); }
+    .office-list { display: flex; flex-direction: column; gap: 10px; }
+    .office-list-item {
+      display: flex; align-items: center; gap: 14px; padding: 14px 18px;
+      border-radius: 14px; background: rgba(12,9,5,.6);
+      border: 1px solid rgba(255,200,87,.1); flex-wrap: wrap; transition: .2s;
+    }
+    .office-list-item:hover { border-color: rgba(255,200,87,.3); }
+    .office-list-item .item-check {
+      width: 22px; height: 22px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0;
+    }
+    .office-list-item .item-info { flex: 1 1 200px; min-width: 0; }
+    .office-list-item .item-title { font-weight: 700; font-size: 15px; color: #f5ecd9; }
+    .office-list-item .item-title.done { text-decoration: line-through; color: #8a7d6b; }
+    .office-list-item .item-meta { font-size: 12px; color: #b8a88a; margin-top: 4px; line-height: 1.5; }
+    .office-list-item .item-meta a { color: var(--gold); text-decoration: none; }
+    .office-list-item .item-meta a:hover { text-decoration: underline; }
+    .office-list-item .item-actions { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
+    .office-list-item .item-actions button {
+      background: transparent; border: 1px solid rgba(255,200,87,.2); color: var(--gold);
+      border-radius: 8px; padding: 6px 12px; font-size: 12px; transition: .2s;
+    }
+    .office-list-item .item-actions button:hover { background: rgba(255,200,87,.1); border-color: var(--gold); }
+    .office-list-item .item-actions button.danger { border-color: rgba(255,85,119,.2); color: #ff6685; }
+    .office-list-item .item-actions button.danger:hover { background: rgba(255,85,119,.08); border-color: var(--danger); }
+    .office-empty {
+      padding: 30px; text-align: center; color: #8a7d6b;
+      border: 1px dashed rgba(255,200,87,.15); border-radius: 14px;
+      font-style: italic; font-size: 14px;
+    }
+    .password-value {
+      font-family: 'Courier New', monospace; color: var(--gold);
+      background: rgba(255,200,87,.08); padding: 4px 10px; border-radius: 8px;
+      border: 1px solid rgba(255,200,87,.15); font-size: 13px; letter-spacing: 2px;
+      display: inline-block; min-width: 120px;
+    }
+    .password-value.revealed { letter-spacing: 0; }
+
+    /* ================= B-2 SPIRIT — APP DEV COMMAND CENTRE ================= */
+    #b2Overlay {
+      position: fixed; inset: 0; z-index: 9500;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(0,255,136,.04), transparent 60%),
+        linear-gradient(145deg, #050805, #0a120a, #030503);
+      overflow-y: auto; padding: 24px 18px 50px;
+      display: none;
+      font-family: 'Courier New', Consolas, monospace;
+      color: var(--hud);
+    }
+    #b2Overlay.active {
+      display: block;
+      animation: b2Enter .5s cubic-bezier(.2,.9,.3,1.1);
+    }
+    @keyframes b2Enter {
+      0% { opacity: 0; transform: scale(.97); filter: brightness(2); }
+      100% { opacity: 1; transform: scale(1); filter: brightness(1); }
+    }
+    .b2-inner { max-width: 1400px; margin: 0 auto; }
+
+    .b2-hud-top {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 14px; padding: 14px 20px; margin-bottom: 18px;
+      border: 1px solid rgba(0,255,136,.3);
+      background: rgba(0,20,10,.5);
+      border-radius: 14px;
+      box-shadow: 0 0 30px rgba(0,255,136,.08), inset 0 0 30px rgba(0,255,136,.03);
+    }
+    .b2-callsign { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .b2-callsign .plane-icon {
+      font-size: 28px;
+      filter: drop-shadow(0 0 12px rgba(0,255,136,.7));
+    }
+    .b2-callsign .label { font-size: 11px; color: #4da876; letter-spacing: 3px; }
+    .b2-callsign .value {
+      font-size: 18px; font-weight: 700; letter-spacing: 2px;
+      text-shadow: 0 0 12px rgba(0,255,136,.6);
+    }
+    .b2-status-group { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .b2-status-pill {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 16px; border-radius: 20px;
+      border: 1px solid rgba(0,255,136,.3);
+      background: rgba(0,20,10,.5);
+      font-size: 12px; letter-spacing: 1.5px;
+    }
+    .b2-status-pill .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--hud);
+      box-shadow: 0 0 10px var(--hud);
+      animation: b2Pulse 2s infinite;
+    }
+    .b2-status-pill.warn { border-color: rgba(255,170,0,.4); color: var(--hud-warn); }
+    .b2-status-pill.warn .dot { background: var(--hud-warn); box-shadow: 0 0 10px var(--hud-warn); }
+    .b2-status-pill.danger { border-color: rgba(255,51,51,.4); color: var(--hud-danger); }
+    .b2-status-pill.danger .dot { background: var(--hud-danger); box-shadow: 0 0 10px var(--hud-danger); }
+    @keyframes b2Pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+    .b2-close-btn {
+      padding: 10px 22px; border-radius: 10px;
+      border: 1px solid rgba(0,255,136,.4);
+      background: rgba(0,255,136,.08); color: var(--hud);
+      font-weight: 700; font-size: 13px; letter-spacing: 2px;
+      font-family: inherit; transition: .2s;
+    }
+    .b2-close-btn:hover {
+      background: rgba(0,255,136,.18); box-shadow: 0 0 30px rgba(0,255,136,.3);
     }
 
-    #toast.show {
-      transform: translateY(0);
-      opacity: 1;
+    .b2-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+    .b2-tab {
+      padding: 10px 20px; border-radius: 10px;
+      border: 1px solid rgba(0,255,136,.3);
+      background: rgba(0,20,10,.4); color: #5cc98a;
+      font-family: inherit; font-size: 13px; letter-spacing: 1.5px;
+      font-weight: 700; transition: .2s;
     }
+    .b2-tab.active {
+      background: rgba(0,255,136,.15); color: var(--hud);
+      box-shadow: 0 0 20px rgba(0,255,136,.2);
+    }
+    .b2-tab:hover { border-color: var(--hud); }
+    .b2-tab-content { display: none; }
+    .b2-tab-content.active { display: block; animation: fadeIn .3s ease; }
+
+    .b2-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.4fr) minmax(280px, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 1100px) { .b2-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 720px) { .b2-grid { grid-template-columns: 1fr; } }
+
+    .b2-panel {
+      border: 1px solid rgba(0,255,136,.25);
+      background: rgba(0,15,8,.55);
+      border-radius: 14px;
+      padding: 18px 16px;
+      box-shadow: inset 0 0 40px rgba(0,255,136,.03);
+    }
+    .b2-panel h3 {
+      font-size: 12px; letter-spacing: 3px; color: #5cc98a;
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0,255,136,.15);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px;
+    }
+    .b2-panel h3 .small-tag {
+      font-size: 10px; padding: 3px 8px; border-radius: 10px;
+      background: rgba(0,255,136,.1); border: 1px solid rgba(0,255,136,.25);
+      color: #5cc98a; letter-spacing: 1px;
+    }
+
+    /* MARKET RADAR */
+    .b2-radar-wrap {
+      position: relative; width: 100%; aspect-ratio: 1/1;
+      max-width: 340px; margin: 0 auto;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(0,255,136,.06), transparent 70%),
+        #030803;
+      border: 2px solid rgba(0,255,136,.35);
+      box-shadow: 0 0 40px rgba(0,255,136,.15), inset 0 0 60px rgba(0,255,136,.05);
+      overflow: hidden;
+    }
+    .b2-radar-canvas { width: 100%; height: 100%; display: block; }
+    .b2-radar-center {
+      position: absolute; top: 50%; left: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--hud); box-shadow: 0 0 15px var(--hud);
+      transform: translate(-50%, -50%); pointer-events: none;
+    }
+    .b2-radar-legend {
+      display: flex; justify-content: center; gap: 14px;
+      margin-top: 12px; font-size: 11px; letter-spacing: 1px;
+      flex-wrap: wrap;
+    }
+    .b2-radar-legend span { display: flex; align-items: center; gap: 6px; color: #5cc98a; }
+    .b2-radar-legend .lg-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .b2-radar-legend .lg-dot.you { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
+    .b2-radar-legend .lg-dot.competitor { background: #ffaa00; box-shadow: 0 0 8px #ffaa00; }
+    .b2-radar-legend .lg-dot.threat { background: #ff3333; box-shadow: 0 0 8px #ff3333; }
+
+    /* Market radar input row */
+    .b2-radar-add-row {
+      display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap;
+    }
+    .b2-radar-add-row input {
+      flex: 1 1 100px; padding: 8px 12px; border-radius: 8px;
+      border: 1px solid rgba(0,255,136,.25);
+      background: rgba(0,20,10,.6); color: var(--hud);
+      font-family: inherit; font-size: 12px; outline: none;
+    }
+    .b2-radar-add-row input:focus { border-color: var(--hud); }
+    .b2-radar-add-row select {
+      padding: 8px 10px; border-radius: 8px;
+      border: 1px solid rgba(0,255,136,.25);
+      background: rgba(0,20,10,.6); color: var(--hud);
+      font-family: inherit; font-size: 12px; outline: none;
+    }
+    .b2-radar-add-row button {
+      padding: 8px 14px; border-radius: 8px;
+      border: 1px solid rgba(0,255,136,.4);
+      background: rgba(0,255,136,.12); color: var(--hud);
+      font-family: inherit; font-size: 12px; letter-spacing: 1px;
+      font-weight: 700; transition: .2s;
+    }
+    .b2-radar-add-row button:hover {
+      background: rgba(0,255,136,.25); box-shadow: 0 0 15px rgba(0,255,136,.3);
+    }
+
+    .b2-contact-list {
+      margin-top: 12px; max-height: 160px; overflow-y: auto;
+      font-size: 11px; line-height: 1.7;
+    }
+    .b2-contact-list .ct-row {
+      display: flex; justify-content: space-between;
+      padding: 5px 8px; border-radius: 6px;
+      border-bottom: 1px solid rgba(0,255,136,.08);
+      color: #5cc98a;
+    }
+    .b2-contact-list .ct-row.hostile { color: var(--hud-danger); }
+    .b2-contact-list .ct-row.competitor { color: var(--hud-warn); }
+    .b2-contact-list .ct-row .ct-del {
+      cursor: pointer; color: #ff6685; padding: 0 6px;
+    }
+
+    /* APP VITALS */
+    .b2-telemetry-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .b2-readout {
+      padding: 12px 14px; border-radius: 10px;
+      background: rgba(0,15,8,.7);
+      border: 1px solid rgba(0,255,136,.15);
+    }
+    .b2-readout .label { font-size: 10px; letter-spacing: 2px; color: #4da876; margin-bottom: 6px; }
+    .b2-readout .value {
+      font-size: 22px; font-weight: 700; letter-spacing: 1px;
+      text-shadow: 0 0 12px rgba(0,255,136,.5);
+      line-height: 1;
+    }
+    .b2-readout .value small { font-size: 11px; color: #5cc98a; margin-left: 4px; letter-spacing: 1px; }
+    .b2-readout.warn { border-color: rgba(255,170,0,.4); }
+    .b2-readout.warn .value { color: var(--hud-warn); text-shadow: 0 0 12px rgba(255,170,0,.6); }
+    .b2-readout.danger { border-color: rgba(255,51,51,.4); }
+    .b2-readout.danger .value { color: var(--hud-danger); text-shadow: 0 0 12px rgba(255,51,51,.6); }
+
+    .b2-input-row {
+      display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .b2-input-row input {
+      flex: 1 1 100px; padding: 8px 12px; border-radius: 8px;
+      border: 1px solid rgba(0,255,136,.25);
+      background: rgba(0,20,10,.6); color: var(--hud);
+      font-family: inherit; font-size: 12px; outline: none;
+    }
+    .b2-input-row input:focus { border-color: var(--hud); }
+    .b2-input-row button {
+      padding: 8px 14px; border-radius: 8px;
+      border: 1px solid rgba(0,255,136,.4);
+      background: rgba(0,255,136,.12); color: var(--hud);
+      font-family: inherit; font-size: 12px; letter-spacing: 1px;
+      font-weight: 700; transition: .2s;
+    }
+    .b2-input-row button:hover { background: rgba(0,255,136,.25); }
+
+    /* ASO STEALTH */
+    .b2-stealth-bar {
+      position: relative; height: 22px; border-radius: 11px;
+      background: rgba(0,15,8,.8); overflow: hidden;
+      border: 1px solid rgba(0,255,136,.2);
+      margin: 10px 0;
+    }
+    .b2-stealth-fill {
+      position: absolute; inset: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #00ff88, #00cc66);
+      transition: width .4s ease, background .4s ease;
+    }
+    .b2-stealth-bar .bar-label {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; letter-spacing: 2px; font-weight: 700;
+      color: #030803; z-index: 2;
+    }
+
+    .b2-toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid rgba(0,255,136,.1);
+      font-size: 12px; letter-spacing: 1px;
+    }
+    .b2-toggle-row:last-child { border-bottom: none; }
+    .b2-toggle-btn {
+      padding: 6px 14px; border-radius: 8px;
+      border: 1px solid rgba(0,255,136,.3);
+      background: rgba(0,20,10,.5); color: #5cc98a;
+      font-family: inherit; font-size: 11px; letter-spacing: 1px;
+      transition: .2s; min-width: 70px;
+    }
+    .b2-toggle-btn.on {
+      background: rgba(0,255,136,.2); color: var(--hud);
+      border-color: var(--hud); box-shadow: 0 0 15px rgba(0,255,136,.3);
+    }
+    .b2-toggle-btn.warn {
+      background: rgba(255,170,0,.15); color: var(--hud-warn);
+      border-color: var(--hud-warn);
+    }
+
+    /* TECH STACK */
+    .b2-engine-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .b2-engine {
+      padding: 12px; border-radius: 10px;
+      background: rgba(0,15,8,.7);
+      border: 1px solid rgba(0,255,136,.15);
+    }
+    .b2-engine .eng-title { font-size: 10px; letter-spacing: 2px; color: #4da876; margin-bottom: 8px; }
+    .b2-engine .eng-bar {
+      height: 6px; border-radius: 3px; background: rgba(0,255,136,.1);
+      overflow: hidden; margin-bottom: 6px;
+    }
+    .b2-engine .eng-fill {
+      height: 100%; width: 0%; background: var(--hud);
+      box-shadow: 0 0 10px var(--hud); transition: width .3s;
+    }
+    .b2-engine .eng-num { font-size: 14px; font-weight: 700; letter-spacing: 1px; }
+    .b2-engine .eng-status {
+      font-size: 10px; color: #5cc98a; letter-spacing: 1px;
+      margin-top: 4px;
+    }
+    .b2-engine.off { opacity: .55; }
+    .b2-engine.off .eng-fill { background: #444; box-shadow: none; }
+    .b2-engine.off .eng-status { color: #ffaa00; }
+
+    /* FEATURE ARSENAL */
+    .b2-weapon-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid rgba(0,255,136,.1);
+      font-size: 12px; flex-wrap: wrap;
+    }
+    .b2-weapon-row:last-child { border-bottom: none; }
+    .b2-weapon-row .w-name { flex: 1 1 140px; }
+    .b2-weapon-row .w-count { font-size: 11px; color: #5cc98a; letter-spacing: 1px; }
+
+    /* DEV LOG */
+    .b2-log {
+      max-height: 260px; overflow-y: auto;
+      background: rgba(0,15,8,.7);
+      border: 1px solid rgba(0,255,136,.15);
+      border-radius: 10px; padding: 12px;
+      font-size: 12px; line-height: 1.7;
+    }
+    .b2-log .log-entry { color: #5cc98a; margin-bottom: 4px; }
+    .b2-log .log-entry .ts { color: #4da876; }
+    .b2-log .log-entry.warn { color: var(--hud-warn); }
+    .b2-log .log-entry.danger { color: var(--hud-danger); }
+    .b2-log::-webkit-scrollbar { width: 6px; }
+    .b2-log::-webkit-scrollbar-track { background: rgba(0,255,136,.05); border-radius: 3px; }
+    .b2-log::-webkit-scrollbar-thumb { background: rgba(0,255,136,.3); border-radius: 3px; }
+
+    .b2-log-controls { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+    .b2-log-controls button {
+      padding: 6px 12px; border-radius: 8px;
+      border: 1px solid rgba(0,255,136,.3);
+      background: rgba(0,20,10,.5); color: #5cc98a;
+      font-family: inherit; font-size: 11px; letter-spacing: 1px;
+      transition: .2s;
+    }
+    .b2-log-controls button:hover { border-color: var(--hud); color: var(--hud); }
+
+    /* ALERTS */
+    .b2-alert-list { display: flex; flex-direction: column; gap: 8px; }
+    .b2-alert {
+      padding: 10px 12px; border-radius: 8px;
+      border-left: 3px solid var(--hud-warn);
+      background: rgba(255,170,0,.06);
+      font-size: 12px; line-height: 1.5;
+      display: flex; justify-content: space-between; gap: 8px;
+      align-items: center; flex-wrap: wrap;
+    }
+    .b2-alert.danger { border-left-color: var(--hud-danger); background: rgba(255,51,51,.06); color: #ffb3b3; }
+    .b2-alert.info { border-left-color: var(--hud); background: rgba(0,255,136,.05); color: #a3ffcc; }
+    .b2-alert .a-dismiss {
+      background: transparent; border: 1px solid rgba(255,255,255,.15);
+      color: inherit; padding: 3px 8px; border-radius: 6px;
+      font-size: 10px; cursor: pointer;
+    }
+
+    /* B-2 master caution */
+    .b2-master-caution {
+      position: fixed; top: 90px; left: 50%; transform: translateX(-50%);
+      z-index: 9600;
+      padding: 12px 28px; border-radius: 10px;
+      background: rgba(255,51,51,.15);
+      border: 2px solid var(--hud-danger);
+      color: var(--hud-danger);
+      font-family: 'Courier New', monospace;
+      font-size: 14px; letter-spacing: 3px; font-weight: 700;
+      box-shadow: 0 0 40px rgba(255,51,51,.4);
+      animation: masterBlink 1s infinite;
+      display: none;
+    }
+    .b2-master-caution.show { display: block; }
+    @keyframes masterBlink { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
+    /* SETUP HINT for command centre */
+    .b2-setup-hint {
+      padding: 14px 18px; margin-bottom: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,255,136,.25);
+      background: rgba(0,20,10,.4);
+      font-size: 12px; line-height: 1.7; color: #5cc98a;
+    }
+    .b2-setup-hint strong { color: var(--hud); letter-spacing: 1px; }
+
+    /* SPECS TAB (kept) */
+    .b2-specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .b2-spec-card {
+      padding: 20px; border-radius: 14px;
+      background: rgba(0,15,8,.55);
+      border: 1px solid rgba(0,255,136,.25);
+    }
+    .b2-spec-card h3 {
+      font-size: 13px; letter-spacing: 3px; color: var(--hud);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0,255,136,.15);
+    }
+    .b2-spec-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px dashed rgba(0,255,136,.1);
+      font-size: 13px;
+    }
+    .b2-spec-row:last-child { border-bottom: none; }
+    .b2-spec-row .k { color: #5cc98a; letter-spacing: 1px; }
+    .b2-spec-row .v { color: var(--hud); font-weight: 700; text-align: right; }
 
     /* ===== MOBILE ===== */
     @media (max-width: 800px) {
-      .topbar {
-        padding: 0 14px;
-        height: auto;
-        flex-wrap: wrap;
-        gap: 10px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-      }
-
-      .top-actions {
-        width: 100%;
-        justify-content: flex-start;
-      }
-
-      .brain-system {
-        min-height: 900px;
-      }
-
-      .brain {
-        width: 125px;
-        min-height: 105px;
-      }
-
-      .core {
-        width: 190px;
-        height: 190px;
-      }
-
-      .core .octopus {
-        font-size: 60px;
-      }
-
-      .results {
-        grid-template-columns: 1fr;
-      }
-
-      .result-nav {
-        position: static;
-        display: flex;
-        overflow-x: auto;
-        gap: 4px;
-      }
-
-      .result-nav button {
-        min-width: max-content;
-      }
-
-      .type-row {
-        grid-template-columns: 1fr;
-      }
-
-      .product-tracker {
-        padding: 20px;
-      }
-
-      .tracker-input-row button {
-        width: 100%;
-      }
-
-      .team-room-section {
-        padding: 22px 18px;
-      }
-
-      .team-input-area button {
-        width: 100%;
-      }
-
-      .learn-section {
-        padding: 24px 18px;
-      }
-
-      .office-panel .btn-gold {
-        width: 100%;
-      }
-
-      .office-list-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .office-list-item .item-actions {
-        width: 100%;
-      }
-
-      .office-list-item .item-actions button {
-        flex: 1;
-      }
+      .topbar { padding: 0 14px; height: auto; padding-top: 10px; padding-bottom: 10px; }
+      .top-actions { width: 100%; justify-content: flex-start; }
+      .brain-system { min-height: 900px; }
+      .brain { width: 125px; min-height: 105px; }
+      .core { width: 190px; height: 190px; }
+      .core .octopus { font-size: 60px; }
+      .results { grid-template-columns: 1fr; }
+      .result-nav { position: static; display: flex; overflow-x: auto; gap: 4px; }
+      .result-nav button { min-width: max-content; }
+      .type-row { grid-template-columns: 1fr; }
+      .product-tracker { padding: 20px; }
+      .tracker-input-row button { width: 100%; }
+      .team-room-section { padding: 22px 18px; }
+      .team-input-area button { width: 100%; }
+      .learn-section { padding: 24px 18px; }
+      .office-panel .btn-gold { width: 100%; }
+      .office-list-item { flex-direction: column; align-items: flex-start; }
+      .office-list-item .item-actions { width: 100%; }
+      .office-list-item .item-actions button { flex: 1; }
+      .b2-telemetry-grid { grid-template-columns: 1fr; }
+      .b2-engine-grid { grid-template-columns: 1fr; }
+      #b2Overlay { padding: 16px 10px 40px; }
+      .b2-hud-top { padding: 12px 14px; }
+      .b2-close-btn { padding: 8px 14px; font-size: 11px; letter-spacing: 1px; }
     }
 
     @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 30px;
-        letter-spacing: -2px;
-      }
-
-      .access-card {
-        padding: 28px 18px;
-      }
-
-      .access-card h1 {
-        font-size: 28px;
-      }
-
-      .icon-btn {
-        font-size: 12px;
-        padding: 0 10px;
-        height: 36px;
-      }
-
-      .product-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .product-item .delete-btn {
-        width: 100%;
-        text-align: center;
-      }
-
-      .team-entry-item {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .team-entry-item .entry-delete {
-        width: 100%;
-        text-align: center;
-      }
-
-      .office-topbar h2 {
-        font-size: 22px;
-      }
+      .hero h1 { font-size: 30px; letter-spacing: -2px; }
+      .access-card { padding: 28px 18px; }
+      .access-card h1 { font-size: 28px; }
+      .icon-btn { font-size: 12px; padding: 0 10px; height: 36px; }
+      .product-item { flex-direction: column; align-items: flex-start; }
+      .product-item .delete-btn { width: 100%; text-align: center; }
+      .team-entry-item { flex-direction: column; align-items: flex-start; }
+      .team-entry-item .entry-delete { width: 100%; text-align: center; }
+      .office-topbar h2 { font-size: 22px; }
     }
   </style>
 </head>
@@ -1679,6 +1054,7 @@
         <button class="icon-btn" onclick="scrollToLaunchGuide()">🚀 <span>Launch Guide</span></button>
         <button class="icon-btn gold" onclick="openOfficeRoom()">👑 <span>Jason's Office</span></button>
         <button class="icon-btn" onclick="openTeamRoom()">👥 <span>Team Room</span></button>
+        <button class="icon-btn hud" onclick="openB2Room()">🛩️ <span>B-2 COMMAND</span></button>
         <button class="icon-btn" onclick="scrollToLearn()">📚 <span>Learn</span></button>
       </div>
     </header>
@@ -1686,12 +1062,11 @@
     <section class="hero">
       <div class="welcome">WELCOME TO JOHELIV LABS</div>
       <h1>NINE: OCTOBRAIN</h1>
-      <p>One idea. Nine specialised brains. One complete product blueprint. Plus a full launch guide, tracker, private office, team room, and learning centre.</p>
+      <p>One idea. Nine specialised brains. One complete product blueprint. Plus a full launch guide, tracker, private office, team room, B-2 App Command Centre, and learning centre.</p>
     </section>
 
     <main class="workspace">
 
-      <!-- SETUP -->
       <section class="setup">
         <div class="field">
           <label>PRODUCT / APPLICATION NAME</label>
@@ -1720,7 +1095,6 @@
         <button class="generate" onclick="startGeneration()">🧠 ACTIVATE OCTOBRAIN</button>
       </section>
 
-      <!-- BRAIN SYSTEM -->
       <section class="brain-system">
         <div class="neural-lines">
           <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
@@ -1743,15 +1117,12 @@
         </div>
       </section>
 
-      <!-- RESULTS -->
       <section id="resultsSection" class="results hidden">
         <aside class="result-nav" id="resultNav"></aside>
         <div class="result-content" id="resultContent"></div>
       </section>
 
-      <!-- ========================================================= -->
       <!-- LAUNCH GUIDE -->
-      <!-- ========================================================= -->
       <section class="launch-guide-section" id="launchGuideSection">
         <div class="launch-guide-header">
           <h2>🚀 App Launch & Store Guide</h2>
@@ -2132,9 +1503,7 @@ Version: [x.y.z]
         </div>
       </section>
 
-      <!-- ========================================================= -->
       <!-- TEAM ROOM -->
-      <!-- ========================================================= -->
       <section class="team-room-section hidden" id="teamRoomSection">
         <div class="team-room-header">
           <h2>👥 Team Room</h2>
@@ -2153,9 +1522,7 @@ Version: [x.y.z]
         </div>
       </section>
 
-      <!-- ========================================================= -->
       <!-- LEARN ROOM -->
-      <!-- ========================================================= -->
       <section class="learn-section" id="learnSection">
         <div class="learn-header">
           <h2>📚 Learn HTML & Code Basics</h2>
@@ -2360,9 +1727,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         </div>
       </section>
 
-      <!-- ========================================================= -->
-      <!-- PRODUCT TRACKER -->
-      <!-- ========================================================= -->
       <section class="product-tracker" id="productTracker">
         <h2>📌 Product Launch Tracker</h2>
         <div class="sub">Save your product name, URL, and mark as done. Data is stored locally in your browser.</div>
@@ -2378,7 +1742,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         </div>
       </section>
 
-      <!-- HISTORY -->
       <section class="history-panel">
         <div class="history-header">
           <h2>Project History</h2>
@@ -2390,18 +1753,14 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
     </main>
   </div>
 
-  <!-- ========================================================= -->
   <!-- JASON'S OFFICE — FULL SCREEN OVERLAY -->
-  <!-- ========================================================= -->
   <div id="officeOverlay">
     <div class="office-inner">
-
       <div class="office-topbar">
-        <h2>👑 Jason's Office <span class="crown-badge" style="font-size:12px;">KING'S CASTLE</span></h2>
-        <button class="office-close-btn" onclick="closeOfficeRoom()">✕ Close Office</button>
+        <h2>👑 Jason's Office <span style="font-size:12px;background:rgba(255,200,87,.12);border:1px solid rgba(255,200,87,.3);padding:5px 14px;border-radius:30px;color:var(--gold);font-weight:700;letter-spacing:1px;">KING'S CASTLE</span></h2>
+        <button class="office-close-btn" onclick="closeOfficeRoom()">✕ Close Office (ESC)</button>
       </div>
 
-      <!-- PROJECTS -->
       <div class="office-panel">
         <h3>📁 My Projects</h3>
         <div class="row-inputs">
@@ -2415,7 +1774,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         </div>
       </div>
 
-      <!-- TO-DO -->
       <div class="office-panel">
         <h3>✅ My To-Do List</h3>
         <div class="row-inputs">
@@ -2429,7 +1787,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         </div>
       </div>
 
-      <!-- PASSWORDS VAULT -->
       <div class="office-panel">
         <h3>🔐 Password Vault</h3>
         <div class="row-inputs">
@@ -2443,7 +1800,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         </div>
       </div>
 
-      <!-- ACCESS CODES -->
       <div class="office-panel">
         <h3>🔑 System Access Codes</h3>
         <div class="office-list">
@@ -2452,28 +1808,369 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
               <div class="item-title">Main App Code</div>
               <div class="item-meta"><span class="password-value revealed">0105075874088</span></div>
             </div>
-            <div class="item-actions">
-              <button onclick="copyCode('0105075874088')">Copy</button>
-            </div>
+            <div class="item-actions"><button onclick="copyCode('0105075874088')">Copy</button></div>
           </div>
           <div class="office-list-item">
             <div class="item-info">
               <div class="item-title">Jason's Office Code</div>
               <div class="item-meta"><span class="password-value revealed">01050758740880663195345</span></div>
             </div>
-            <div class="item-actions">
-              <button onclick="copyCode('01050758740880663195345')">Copy</button>
-            </div>
+            <div class="item-actions"><button onclick="copyCode('01050758740880663195345')">Copy</button></div>
           </div>
           <div class="office-list-item">
             <div class="item-info">
               <div class="item-title">Team Room Code</div>
               <div class="item-meta"><span class="password-value revealed">0698416632</span></div>
             </div>
-            <div class="item-actions">
-              <button onclick="copyCode('0698416632')">Copy</button>
+            <div class="item-actions"><button onclick="copyCode('0698416632')">Copy</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- B-2 SPIRIT — APP DEV COMMAND CENTRE (FULL SCREEN) -->
+  <!-- ========================================================= -->
+  <div id="b2Overlay">
+
+    <div class="b2-master-caution" id="b2MasterCaution">⚠ CRITICAL ALERTS — CHECK COMMAND CENTRE</div>
+
+    <div class="b2-inner">
+
+      <div class="b2-hud-top">
+        <div class="b2-callsign">
+          <div class="plane-icon">🛩️</div>
+          <div>
+            <div class="label">APP COMMAND CENTRE</div>
+            <div class="value" id="b2ActiveApp">NO APP LOADED</div>
+          </div>
+        </div>
+        <div class="b2-status-group">
+          <div class="b2-status-pill" id="b2SystemsPill"><span class="dot"></span> SYSTEMS NOMINAL</div>
+          <div class="b2-status-pill" id="b2AsoPill"><span class="dot"></span> ASO: --</div>
+          <div class="b2-status-pill" id="b2UtcPill"><span class="dot"></span> <span id="b2UtcClock">--:--:--Z</span></div>
+        </div>
+        <button class="b2-close-btn" onclick="closeB2Room()">✕ EXIT COMMAND (ESC)</button>
+      </div>
+
+      <div class="b2-tabs">
+        <button class="b2-tab active" data-b2tab="live">⚡ LIVE COMMAND</button>
+        <button class="b2-tab" data-b2tab="specs">📖 REFERENCE</button>
+      </div>
+
+      <!-- ============ LIVE COMMAND TAB ============ -->
+      <div class="b2-tab-content active" id="b2tab-live">
+
+        <div class="b2-setup-hint">
+          <strong>HOW TO USE:</strong> Type your app name below and click LOAD. Add competitors to the Market Radar. Update App Vitals as your numbers change. Everything saves automatically. The B-2 cockpit is now a mirror of your app development — you fly the plane, you build the app.
+        </div>
+
+        <div class="b2-input-row" style="margin-bottom:16px;">
+          <input id="b2AppNameInput" type="text" placeholder="Enter your app name (e.g., StudyPad)">
+          <input id="b2AppUrlInput" type="url" placeholder="App URL / store link">
+          <button onclick="b2LoadApp()">LOAD APP</button>
+          <button onclick="b2UnloadApp()" style="border-color:rgba(255,85,119,.3);color:#ff6685;background:rgba(255,85,119,.08);">UNLOAD</button>
+        </div>
+
+        <div class="b2-grid">
+
+          <!-- MARKET RADAR -->
+          <div class="b2-panel">
+            <h3>MARKET RADAR <span class="small-tag" id="b2RadarRangeTag">ALL</span></h3>
+            <div class="b2-radar-wrap">
+              <canvas class="b2-radar-canvas" id="b2RadarCanvas"></canvas>
+              <div class="b2-radar-center"></div>
+            </div>
+            <div class="b2-radar-legend">
+              <span><span class="lg-dot you"></span> YOUR APP</span>
+              <span><span class="lg-dot competitor"></span> COMPETITOR</span>
+              <span><span class="lg-dot threat"></span> THREAT</span>
+            </div>
+
+            <div class="b2-radar-add-row">
+              <input id="b2ContactName" type="text" placeholder="Name (e.g., Quizlet)">
+              <select id="b2ContactType">
+                <option value="competitor">Competitor</option>
+                <option value="threat">Threat</option>
+                <option value="you">My App</option>
+              </select>
+              <button onclick="b2AddContact()">+ ADD</button>
+            </div>
+
+            <div class="b2-contact-list" id="b2ContactList">
+              <div style="color:#4da876;font-style:italic;">No contacts yet. Add competitors or threats above.</div>
             </div>
           </div>
+
+          <!-- APP VITALS -->
+          <div class="b2-panel">
+            <h3>APP VITALS <span class="small-tag" id="b2VitalsTag">NOT LOADED</span></h3>
+            <div class="b2-telemetry-grid">
+              <div class="b2-readout" id="b2DownloadsRO">
+                <div class="label">DOWNLOADS</div>
+                <div class="value" id="b2Downloads">0<small></small></div>
+              </div>
+              <div class="b2-readout" id="b2UsersRO">
+                <div class="label">ACTIVE USERS (DAU)</div>
+                <div class="value" id="b2Users">0<small></small></div>
+              </div>
+              <div class="b2-readout" id="b2RatingRO">
+                <div class="label">RATING</div>
+                <div class="value" id="b2Rating">0.0<small>⭐</small></div>
+              </div>
+              <div class="b2-readout" id="b2CrashRO">
+                <div class="label">CRASH RATE</div>
+                <div class="value" id="b2Crash">0<small>%</small></div>
+              </div>
+              <div class="b2-readout" id="b2RetentionRO">
+                <div class="label">RETENTION D7</div>
+                <div class="value" id="b2Retention">0<small>%</small></div>
+              </div>
+              <div class="b2-readout" id="b2RevenueRO">
+                <div class="label">REVENUE</div>
+                <div class="value" id="b2Revenue">$0</div>
+              </div>
+              <div class="b2-readout" id="b2VersionRO">
+                <div class="label">VERSION</div>
+                <div class="value" id="b2Version">v0.0<small></small></div>
+              </div>
+              <div class="b2-readout" id="b2DaysRO">
+                <div class="label">DAYS SINCE LAUNCH</div>
+                <div class="value" id="b2Days">0<small>d</small></div>
+              </div>
+            </div>
+
+            <div class="b2-input-row">
+              <input id="b2MetricKey" type="text" placeholder="Metric (downloads, users, rating, crash, retention, revenue, version)">
+              <input id="b2MetricValue" type="text" placeholder="Value">
+              <button onclick="b2UpdateMetric()">UPDATE</button>
+            </div>
+
+            <div style="margin-top:10px;font-size:11px;color:#4da876;letter-spacing:1px;">
+              Tip: "downloads", "users", "rating", "crash", "retention", "revenue", "version"
+            </div>
+          </div>
+
+          <!-- ASO STEALTH -->
+          <div class="b2-panel">
+            <h3>ASO STEALTH <span class="small-tag" id="b2RcsTag">--</span></h3>
+            <div class="b2-stealth-bar">
+              <div class="b2-stealth-fill" id="b2StealthFill" style="width:0%"></div>
+              <div class="bar-label" id="b2StealthLabel">LOAD APP</div>
+            </div>
+
+            <div class="b2-toggle-row">
+              <span>PRIVACY POLICY URL</span>
+              <button class="b2-toggle-btn" id="b2PolicyBtn" onclick="b2ToggleASO('policy')">MISSING</button>
+            </div>
+            <div class="b2-toggle-row">
+              <span>SCREENSHOTS UPLOADED</span>
+              <button class="b2-toggle-btn" id="b2ScreensBtn" onclick="b2ToggleASO('screens')">NO</button>
+            </div>
+            <div class="b2-toggle-row">
+              <span>KEYWORDS OPTIMISED</span>
+              <button class="b2-toggle-btn" id="b2KeywordsBtn" onclick="b2ToggleASO('keywords')">NO</button>
+            </div>
+            <div class="b2-toggle-row">
+              <span>FEATURE GRAPHIC</span>
+              <button class="b2-toggle-btn" id="b2GraphicBtn" onclick="b2ToggleASO('graphic')">NO</button>
+            </div>
+            <div class="b2-toggle-row">
+              <span>PROMO VIDEO</span>
+              <button class="b2-toggle-btn" id="b2VideoBtn" onclick="b2ToggleASO('video')">NO</button>
+            </div>
+            <div class="b2-toggle-row">
+              <span>STORE RATING ≥ 4.0</span>
+              <button class="b2-toggle-btn" id="b2StoreRatingBtn" onclick="b2ToggleASO('storerating')">NO</button>
+            </div>
+
+            <div style="margin-top:14px;font-size:11px;color:#4da876;line-height:1.6;">
+              Each YES makes your app more visible (higher stealth). Missing items lower ASO score.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TECH STACK + FEATURE ARSENAL + DEV LOG + ALERTS -->
+        <div class="b2-grid" style="margin-top:16px;grid-template-columns:1fr 1fr;">
+          <div class="b2-panel">
+            <h3>TECH STACK HEALTH — 4 PILLARS</h3>
+            <div class="b2-engine-grid" id="b2TechGrid">
+              <div class="b2-engine" data-key="frontend">
+                <div class="eng-title">FRONTEND</div>
+                <div class="eng-bar"><div class="eng-fill" id="b2Eng1Bar"></div></div>
+                <div class="eng-num"><span id="b2Eng1N1">0</span>%</div>
+                <div class="eng-status" id="b2Eng1Status">NOT BUILT</div>
+              </div>
+              <div class="b2-engine" data-key="backend">
+                <div class="eng-title">BACKEND / API</div>
+                <div class="eng-bar"><div class="eng-fill" id="b2Eng2Bar"></div></div>
+                <div class="eng-num"><span id="b2Eng2N1">0</span>%</div>
+                <div class="eng-status" id="b2Eng2Status">NOT BUILT</div>
+              </div>
+              <div class="b2-engine" data-key="database">
+                <div class="eng-title">DATABASE</div>
+                <div class="eng-bar"><div class="eng-fill" id="b2Eng3Bar"></div></div>
+                <div class="eng-num"><span id="b2Eng3N1">0</span>%</div>
+                <div class="eng-status" id="b2Eng3Status">NOT BUILT</div>
+              </div>
+              <div class="b2-engine" data-key="auth">
+                <div class="eng-title">AUTH / PAYMENTS</div>
+                <div class="eng-bar"><div class="eng-fill" id="b2Eng4Bar"></div></div>
+                <div class="eng-num"><span id="b2Eng4N1">0</span>%</div>
+                <div class="eng-status" id="b2Eng4Status">NOT BUILT</div>
+              </div>
+            </div>
+
+            <div class="b2-log-controls" style="margin-top:14px;">
+              <button onclick="b2SetTechLevel('frontend')">ADVANCE FRONTEND</button>
+              <button onclick="b2SetTechLevel('backend')">ADVANCE BACKEND</button>
+              <button onclick="b2SetTechLevel('database')">ADVANCE DB</button>
+              <button onclick="b2SetTechLevel('auth')">ADVANCE AUTH</button>
+            </div>
+            <div style="margin-top:8px;font-size:11px;color:#4da876;">
+              Click to cycle: NOT BUILT → PARTIAL → IN PROGRESS → LIVE
+            </div>
+          </div>
+
+          <div class="b2-panel">
+            <h3>FEATURE ARSENAL <span class="small-tag">ARMED = READY TO SHIP</span></h3>
+            <div class="b2-weapon-row">
+              <span class="w-name">User Login / Signup</span>
+              <button class="b2-toggle-btn" id="b2Feat1" onclick="b2ToggleFeature('login')">SAFE</button>
+            </div>
+            <div class="b2-weapon-row">
+              <span class="w-name">Payments / IAP</span>
+              <button class="b2-toggle-btn" id="b2Feat2" onclick="b2ToggleFeature('payments')">SAFE</button>
+            </div>
+            <div class="b2-weapon-row">
+              <span class="w-name">Push Notifications</span>
+              <button class="b2-toggle-btn" id="b2Feat3" onclick="b2ToggleFeature('push')">SAFE</button>
+            </div>
+            <div class="b2-weapon-row">
+              <span class="w-name">Analytics</span>
+              <button class="b2-toggle-btn" id="b2Feat4" onclick="b2ToggleFeature('analytics')">SAFE</button>
+            </div>
+            <div class="b2-weapon-row">
+              <span class="w-name">AI / Smart Features</span>
+              <button class="b2-toggle-btn" id="b2Feat5" onclick="b2ToggleFeature('ai')">SAFE</button>
+            </div>
+
+            <div class="b2-input-row" style="margin-top:12px;">
+              <input id="b2NewFeatureName" type="text" placeholder="Add custom feature...">
+              <button onclick="b2AddCustomFeature()">+ ADD FEATURE</button>
+            </div>
+
+            <div class="b2-log-controls" style="margin-top:14px;">
+              <button onclick="b2ShipAllFeatures()">🚀 MARK ALL ARMED</button>
+              <button onclick="b2SafeAllFeatures()">■ SAFE ALL</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALERTS + DEV LOG -->
+        <div class="b2-grid" style="margin-top:16px;grid-template-columns:1fr 1fr;">
+          <div class="b2-panel">
+            <h3>CRITICAL ALERTS <span class="small-tag" id="b2AlertCount">0</span></h3>
+            <div class="b2-alert-list" id="b2AlertList">
+              <div style="color:#4da876;font-style:italic;font-size:12px;">No alerts. Systems looking good.</div>
+            </div>
+            <div class="b2-log-controls" style="margin-top:12px;">
+              <button onclick="b2AddAlert('info')">+ LOG INFO</button>
+              <button onclick="b2AddAlert('warn')">+ LOG WARNING</button>
+              <button onclick="b2AddAlert('danger')">+ LOG CRITICAL</button>
+            </div>
+          </div>
+
+          <div class="b2-panel">
+            <h3>DEV LOG <span class="small-tag" id="b2LogCount">0 ENTRIES</span></h3>
+            <div class="b2-log" id="b2Log"></div>
+            <div class="b2-log-controls">
+              <button onclick="b2ClearLog()">🗑 CLEAR LOG</button>
+              <button onclick="b2ExportLog()">⬇ EXPORT LOG</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============ REFERENCE TAB ============ -->
+      <div class="b2-tab-content" id="b2tab-specs">
+        <div class="b2-setup-hint" style="margin-bottom:16px;">
+          <strong>REFERENCE:</strong> The B-2 Spirit is used here as a metaphor for your app. Your app is the aircraft. Every system on the B-2 maps to a part of app development. Use this tab as a reminder of what "flying your app" really means.
+        </div>
+
+        <div class="b2-specs-grid">
+
+          <div class="b2-spec-card">
+            <h3>YOUR APP = THE B-2</h3>
+            <div class="b2-spec-row"><span class="k">App</span><span class="v">Aircraft</span></div>
+            <div class="b2-spec-row"><span class="k">Launch</span><span class="v">Takeoff</span></div>
+            <div class="b2-spec-row"><span class="k">Users</span><span class="v">Crew + Mission</span></div>
+            <div class="b2-spec-row"><span class="k">Features</span><span class="v">Weapons</span></div>
+            <div class="b2-spec-row"><span class="k">Tech Stack</span><span class="v">Engines</span></div>
+            <div class="b2-spec-row"><span class="k">ASO</span><span class="v">Stealth</span></div>
+            <div class="b2-spec-row"><span class="k">Roadmap</span><span class="v">Flight Plan</span></div>
+            <div class="b2-spec-row"><span class="k">Alerts</span><span class="v">Master Caution</span></div>
+          </div>
+
+          <div class="b2-spec-card">
+            <h3>MARKET RADAR MEANING</h3>
+            <div class="b2-spec-row"><span class="k">Green</span><span class="v">Your apps</span></div>
+            <div class="b2-spec-row"><span class="k">Amber</span><span class="v">Competitors</span></div>
+            <div class="b2-spec-row"><span class="k">Red</span><span class="v">Threats</span></div>
+            <div class="b2-spec-row"><span class="k">Center</span><span class="v">You</span></div>
+            <div class="b2-spec-row"><span class="k">Rings</span><span class="v">Market reach</span></div>
+            <div class="b2-spec-row"><span class="k">Sweep</span><span class="v">Continuous monitoring</span></div>
+          </div>
+
+          <div class="b2-spec-card">
+            <h3>APP VITALS GUIDE</h3>
+            <div class="b2-spec-row"><span class="k">Downloads</span><span class="v">Total installs</span></div>
+            <div class="b2-spec-row"><span class="k">DAU</span><span class="v">Daily Active Users</span></div>
+            <div class="b2-spec-row"><span class="k">Rating</span><span class="v">Store star rating</span></div>
+            <div class="b2-spec-row"><span class="k">Crash Rate</span><span class="v">% sessions that crash</span></div>
+            <div class="b2-spec-row"><span class="k">Retention D7</span><span class="v">% users back after 7 days</span></div>
+            <div class="b2-spec-row"><span class="k">Revenue</span><span class="v">Total income</span></div>
+            <div class="b2-spec-row"><span class="k">Version</span><span class="v">Current build</span></div>
+            <div class="b2-spec-row"><span class="k">Days</span><span class="v">Since launch</span></div>
+          </div>
+
+          <div class="b2-spec-card">
+            <h3>ASO STEALTH GUIDE</h3>
+            <div class="b2-spec-row"><span class="k">Privacy URL</span><span class="v">Required by all stores</span></div>
+            <div class="b2-spec-row"><span class="k">Screenshots</span><span class="v">2–8 images per device</span></div>
+            <div class="b2-spec-row"><span class="k">Keywords</span><span class="v">Search visibility</span></div>
+            <div class="b2-spec-row"><span class="k">Feature Graphic</span><span class="v">Play: 1024×500</span></div>
+            <div class="b2-spec-row"><span class="k">Promo Video</span><span class="v">Optional but boosts</span></div>
+            <div class="b2-spec-row"><span class="k">Rating ≥ 4.0</span><span class="v">Buyer trust signal</span></div>
+          </div>
+
+          <div class="b2-spec-card">
+            <h3>TECH STACK PILLARS</h3>
+            <div class="b2-spec-row"><span class="k">Frontend</span><span class="v">What users see</span></div>
+            <div class="b2-spec-row"><span class="k">Backend</span><span class="v">API / logic</span></div>
+            <div class="b2-spec-row"><span class="k">Database</span><span class="v">Data storage</span></div>
+            <div class="b2-spec-row"><span class="k">Auth</span><span class="v">Identity / payments</span></div>
+            <div class="b2-spec-row"><span class="k">NOT BUILT</span><span class="v">0%</span></div>
+            <div class="b2-spec-row"><span class="k">PARTIAL</span><span class="v">25%</span></div>
+            <div class="b2-spec-row"><span class="k">IN PROGRESS</span><span class="v">60%</span></div>
+            <div class="b2-spec-row"><span class="k">LIVE</span><span class="v">100%</span></div>
+          </div>
+
+          <div class="b2-spec-card">
+            <h3>REAL B-2 SPIRIT (REFERENCE)</h3>
+            <div class="b2-spec-row"><span class="k">Manufacturer</span><span class="v">Northrop Grumman</span></div>
+            <div class="b2-spec-row"><span class="k">Role</span><span class="v">Stealth Bomber</span></div>
+            <div class="b2-spec-row"><span class="k">First Flight</span><span class="v">1989</span></div>
+            <div class="b2-spec-row"><span class="k">Crew</span><span class="v">2</span></div>
+            <div class="b2-spec-row"><span class="k">Built</span><span class="v">21</span></div>
+            <div class="b2-spec-row"><span class="k">Max Speed</span><span class="v">Mach 0.95</span></div>
+            <div class="b2-spec-row"><span class="k">Range</span><span class="v">11,100 km</span></div>
+            <div class="b2-spec-row"><span class="k">Unit Cost</span><span class="v">~$2.1B</span></div>
+          </div>
+
         </div>
       </div>
 
@@ -2502,7 +2199,9 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       teamKey: "nine_octobrain_team_v1",
       officeProjectsKey: "nine_octobrain_office_projects_v1",
       officeTodoKey: "nine_octobrain_office_todo_v1",
-      officePwKey: "nine_octobrain_office_pw_v1"
+      officePwKey: "nine_octobrain_office_pw_v1",
+      b2LogKey: "nine_octobrain_b2_log_v1",
+      b2StateKey: "nine_octobrain_b2_state_v1"
     };
 
     let selectedType = "Application";
@@ -2515,133 +2214,92 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       "SECURITY", "TECH", "BUSINESS", "LAUNCH"
     ];
 
-    /* ===== PROFESSIONAL FEMALE VOICE (AIRPORT STYLE) ===== */
+    /* ===== FEMALE VOICE ===== */
     function speak(text) {
       if (!window.speechSynthesis) return;
-
       window.speechSynthesis.cancel();
-
       const utterance = new SpeechSynthesisUtterance(text);
-
       const voices = window.speechSynthesis.getVoices();
       let professionalVoice = null;
-
-      // Priority list for professional female voices (airport announcement style)
       const priorityNames = [
-        'Google UK English Female',
-        'Microsoft Hazel',
-        'Microsoft Zira',
-        'Samantha',
-        'Victoria',
-        'Karen',
-        'Moira',
-        'Tessa',
-        'Fiona',
-        'Google US English',
-        'Female'
+        'Google UK English Female','Microsoft Hazel','Microsoft Zira',
+        'Samantha','Victoria','Karen','Moira','Tessa','Fiona',
+        'Google US English','Female'
       ];
-
       for (const name of priorityNames) {
         for (const voice of voices) {
           if (voice.name.includes(name) && voice.lang.startsWith('en')) {
-            professionalVoice = voice;
-            break;
+            professionalVoice = voice; break;
           }
         }
         if (professionalVoice) break;
       }
-
-      // Fallback: any English female voice
       if (!professionalVoice) {
         for (const voice of voices) {
           if (voice.lang.startsWith('en') &&
               (voice.name.toLowerCase().includes('female') ||
                !voice.name.toLowerCase().includes('male'))) {
-            professionalVoice = voice;
-            break;
+            professionalVoice = voice; break;
           }
         }
       }
-
       if (professionalVoice) utterance.voice = professionalVoice;
-
-      // Professional airport-announcement tone: clear, calm, measured
       utterance.rate = 0.88;
       utterance.pitch = 1.05;
       utterance.volume = 1;
-
       window.speechSynthesis.speak(utterance);
     }
-
-    if (window.speechSynthesis) {
-      window.speechSynthesis.onvoiceschanged = function() {};
-    }
+    if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = function(){};
 
     /* ===== ACCESS ===== */
     function unlockApp() {
       const input = document.getElementById("accessCode").value.trim();
       const error = document.getElementById("accessError");
-
       if (input === CONFIG.accessCode) {
-        sessionStorage.setItem("nineUnlocked", "true");
+        sessionStorage.setItem("nineUnlocked","true");
         document.getElementById("accessScreen").classList.add("hidden");
         document.getElementById("app").classList.remove("hidden");
-        renderHistory();
-        renderTrackedProducts();
+        renderHistory(); renderTrackedProducts();
         showToast("OCTOBRAIN unlocked.");
-        speak("Welcome back, Jason. OCTOBRAIN is now unlocked. Your product intelligence system is ready.");
+        speak("Welcome back, Jason. OCTOBRAIN is now unlocked.");
       } else {
         error.textContent = "Access denied. Enter the authorised access code.";
         document.getElementById("accessCode").value = "";
-        speak("Access denied. Please enter the correct access code.");
+        speak("Access denied.");
       }
     }
-
-    document.getElementById("accessCode").addEventListener("keydown", function(e) {
+    document.getElementById("accessCode").addEventListener("keydown", e => {
       if (e.key === "Enter") unlockApp();
     });
 
-    /* ===== TYPE ===== */
     function selectType(type) {
       selectedType = type;
       document.getElementById("appType").classList.toggle("active", type === "Application");
       document.getElementById("webType").classList.toggle("active", type === "Website");
     }
 
-    /* ===== GENERATION ===== */
     async function startGeneration() {
       const name = document.getElementById("productName").value.trim();
       const idea = document.getElementById("productIdea").value.trim();
-
-      if (!name) { showToast("Enter the product name first."); speak("Please enter the product name first."); return; }
-      if (!idea) { showToast("Describe what you want to build."); speak("Please describe what you want to build."); return; }
+      if (!name) { showToast("Enter the product name first."); speak("Please enter the product name."); return; }
+      if (!idea) { showToast("Describe what you want to build."); speak("Please describe your idea."); return; }
 
       currentProject = {
-        id: Date.now(),
-        name, type: selectedType, idea,
+        id: Date.now(), name, type: selectedType, idea,
         created: new Date().toISOString(),
-        company: CONFIG.company,
-        ceo: CONFIG.ceo,
-        country: CONFIG.country
+        company: CONFIG.company, ceo: CONFIG.ceo, country: CONFIG.country
       };
 
       document.getElementById("brainStatus").textContent = "Activating...";
-      document.querySelectorAll(".brain").forEach(b => b.classList.remove("active", "done"));
+      document.querySelectorAll(".brain").forEach(b => b.classList.remove("active","done"));
       document.getElementById("resultsSection").classList.add("hidden");
-
       showToast("OCTOBRAIN activated.");
-      speak("OCTOBRAIN activated. Initialising the nine brains. Analysing your product idea now.");
+      speak("OCTOBRAIN activated. Initialising the nine brains.");
 
       let results = null;
-      try {
-        results = await callWorker(name, idea, selectedType);
-      } catch (error) {
-        console.warn("Worker unavailable. Using local blueprint generator.", error);
-      }
-
-      if (!results) {
-        results = generateLocalBlueprint(name, idea, selectedType);
-      }
+      try { results = await callWorker(name, idea, selectedType); }
+      catch (error) { console.warn("Worker unavailable.", error); }
+      if (!results) results = generateLocalBlueprint(name, idea, selectedType);
 
       currentProject.results = results;
       saveHistory(currentProject);
@@ -2649,10 +2307,9 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       renderResults(currentProject);
       document.getElementById("brainStatus").textContent = "Complete";
       showToast("OCTOBRAIN completed the product blueprint.");
-      speak("OCTOBRAIN has completed the product blueprint. Your full product DNA is ready for review.");
+      speak("OCTOBRAIN has completed the product blueprint.");
     }
 
-    /* ===== WORKER ===== */
     async function callWorker(name, idea, type) {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 15000);
@@ -2661,830 +2318,1009 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            productName: name,
-            productType: type,
-            productIdea: idea,
-            company: {
-              name: CONFIG.company,
-              ceo: CONFIG.ceo,
-              email: CONFIG.email,
-              phone: CONFIG.phone,
-              country: CONFIG.country
-            },
+            productName: name, productType: type, productIdea: idea,
+            company: { name: CONFIG.company, ceo: CONFIG.ceo, email: CONFIG.email, phone: CONFIG.phone, country: CONFIG.country },
             brains: brains
           }),
           signal: controller.signal
         });
-        if (!response.ok) throw new Error("Worker returned HTTP " + response.status);
+        if (!response.ok) throw new Error("Worker HTTP " + response.status);
         const data = await response.json();
         return data.results || data;
-      } finally {
-        clearTimeout(timeout);
-      }
+      } finally { clearTimeout(timeout); }
     }
 
-    /* ===== LOCAL FALLBACK ===== */
     function generateLocalBlueprint(name, idea, type) {
       return {
-        core: `PRODUCT DNA\n\nProduct:\n${name}\n\nType:\n${type}\n\nDescription:\n${idea}\n\nCompany:\n${CONFIG.company}\n\nCEO:\n${CONFIG.ceo}\n\nCountry:\n${CONFIG.country}\n\nContact:\n${CONFIG.email}\n${CONFIG.phone}\n\nCore purpose:\nTurn the supplied concept into a structured, testable and launch-ready digital product.\n\nPrimary objective:\nDefine the problem, users, features, technical architecture, safety requirements, business model and launch plan before development begins.`,
-        strategy: `PRODUCT STRATEGY\n\nProduct:\n${name}\n\nTarget problem:\n${idea}\n\nValue proposition:\n${name} should provide a clear, useful solution to the problem described by the developer.\n\nTarget market:\nDefine the primary users based on the actual problem being solved.\n\nPositioning:\nThe product should have a simple, memorable value proposition and a clearly defined reason for users to choose it.\n\nGoals:\n1. Build a reliable MVP.\n2. Validate the main user problem.\n3. Measure real user engagement.\n4. Improve based on user feedback.\n5. Develop advanced features after the core experience is stable.`,
-        users: `USERS & EXPERIENCE\n\nPrimary audience:\nUsers who experience the problem addressed by ${name}.\n\nUser journey:\n\n1. Discover ${name}\n2. Open the ${type.toLowerCase()}\n3. Complete onboarding where required\n4. Reach the main dashboard\n5. Select the required feature\n6. Provide required information\n7. Receive the result\n8. Save, share or continue\n9. Return through history/profile\n\nUX requirements:\n• Clear navigation\n• Simple onboarding\n• Helpful empty states\n• Visible loading states\n• Friendly error messages\n• Accessible controls\n• Mobile-responsive interface\n• Clear confirmation after important actions`,
-        features: `FEATURE ARCHITECTURE\n\nCORE FEATURES\n\n1. Onboarding\n2. Main dashboard\n3. Core product functionality\n4. User profile where required\n5. History\n6. Search where useful\n7. Settings\n8. Help/support\n\nADVANCED FEATURES\n\n• Notifications\n• Analytics\n• Cloud synchronization\n• AI capabilities\n• Sharing\n• Export\n• Personalisation\n\nFUTURE FEATURES\n\nFuture functionality should be added only after the MVP has been tested and validated.`,
-        policy: `USER POLICY & TERMS DRAFT\n\n${name} should provide users with clear rules governing responsible use.\n\nUsers should:\n• Provide accurate information.\n• Use the product lawfully.\n• Respect other users.\n• Avoid attempting to bypass security.\n• Avoid abusing APIs or automated systems.\n• Not use the service for prohibited or harmful activity.\n\nThe company may restrict or terminate accounts that violate applicable rules.\n\nIMPORTANT:\nThis is a product-development draft and should be reviewed by a qualified legal professional before publication. Requirements may vary by jurisdiction and product category.`,
-        security: `PRIVACY & SECURITY BLUEPRINT\n\nPotential data categories:\n\n• Account information\n• Contact information\n• Product usage information\n• Technical/device information\n• User-generated content\n\nSecurity requirements:\n\n• Secure authentication\n• Authorisation checks\n• HTTPS\n• Server-side API credentials\n• Input validation\n• Rate limiting\n• Secure database rules\n• Secure file handling\n• Logging without unnecessary sensitive data\n• Account/data deletion mechanisms\n• Regular security testing\n\nPrivacy requirements:\n\nExplain what information is collected, why it is collected, how long it is retained, whether it is shared, which third-party services are involved and how users can exercise applicable rights.\n\nIMPORTANT:\nThe final Privacy Policy should be reviewed against the actual data flows and applicable South African and other relevant privacy requirements.`,
-        tech: `TECHNICAL ARCHITECTURE\n\nPRODUCT:\n${name}\n\nTYPE:\n${type}\n\nRECOMMENDED STRUCTURE:\n\nFrontend\n↓\nSecure API / Worker\n↓\nBackend Services\n↓\nDatabase\n↓\nExternal APIs\n\nRecommended components:\n\nFrontend:\nHTML / CSS / JavaScript or the selected application framework.\n\nBackend:\nCloudflare Worker or another secure backend.\n\nDatabase:\nChoose based on the actual requirements.\n\nAuthentication:\nUse a secure authentication provider when accounts are required.\n\nAPI SECURITY:\nAPI keys must not be embedded directly into publicly accessible frontend JavaScript.\n\nExternal APIs:\nAdd only the APIs actually required by the product.\n\nEnvironment variables:\nSecrets should be stored server-side.`,
-        business: `BUSINESS MODEL\n\nPossible models for ${name}:\n\nFREE\n• Core functionality\n• Limited usage\n• Optional advertising\n\nPRO\n• Advanced features\n• Higher limits\n• Additional storage/features\n\nPREMIUM\n• Complete feature set\n• Priority functionality\n• Advanced AI or automation\n\nAlternative:\nOne-time purchase or usage-based pricing where appropriate.\n\nRevenue strategy should match the product's actual audience and operating costs.`,
-        launch: `DEVELOPMENT & LAUNCH ROADMAP\n\nPHASE 1 — PRODUCT DEFINITION\n✓ Product DNA\n✓ Target users\n✓ Core problem\n✓ MVP\n\nPHASE 2 — DESIGN\n✓ UI\n✓ UX\n✓ Navigation\n✓ Responsive behaviour\n\nPHASE 3 — DEVELOPMENT\n✓ Frontend\n✓ Backend\n✓ Database\n✓ Authentication\n✓ API integrations\n\nPHASE 4 — SECURITY\n✓ Input validation\n✓ Authentication testing\n✓ API protection\n✓ Database rules\n✓ Privacy review\n\nPHASE 5 — TESTING\n✓ Functional testing\n✓ UI testing\n✓ Mobile testing\n✓ Performance testing\n✓ Error handling\n\nPHASE 6 — LAUNCH\n✓ Production configuration\n✓ Privacy/terms review\n✓ Analytics\n✓ Support channel\n✓ Version 1.0\n\nPHASE 7 — FUTURE\nCollect user feedback and create a version 1.1 / 2.0 roadmap based on actual usage.`
+        core: `PRODUCT DNA\n\nProduct:\n${name}\n\nType:\n${type}\n\nDescription:\n${idea}\n\nCompany:\n${CONFIG.company}\n\nCEO:\n${CONFIG.ceo}\n\nCountry:\n${CONFIG.country}\n\nContact:\n${CONFIG.email}\n${CONFIG.phone}`,
+        strategy: `PRODUCT STRATEGY\n\nProduct: ${name}\n\nTarget problem: ${idea}\n\nValue proposition: Clear solution.\nTarget market: Define primary users.\nPositioning: Simple memorable reason to choose.\nGoals: MVP → validate → measure → improve → scale.`,
+        users: `USERS & EXPERIENCE\n\nPrimary audience: Problem-affected users.\n\nJourney: Discover → Open → Onboard → Dashboard → Core → Provide → Receive → Save → Return.\n\nUX: Clear nav, simple onboarding, helpful states, responsive, accessible.`,
+        features: `FEATURE ARCHITECTURE\n\nCORE: Onboarding, dashboard, core, profile, history, settings, help.\n\nADVANCED: Notifications, analytics, cloud sync, AI, sharing, export.\n\nFUTURE: Add after MVP validation.`,
+        policy: `USER POLICY DRAFT\n\nUsers should use lawfully, respect others, not bypass security, not abuse APIs.\n\nDraft only — needs legal review.`,
+        security: `PRIVACY & SECURITY\n\nData: account, contact, usage, technical, content.\nSecurity: auth, HTTPS, server secrets, validation, rate limits, secure DB, logging, deletion, testing.\nPrivacy: explain collection, use, retention, sharing, rights.`,
+        tech: `TECHNICAL ARCHITECTURE\n\nFrontend ↓ Secure API ↓ Backend ↓ Database ↓ External APIs\n\nKeys server-side. Secrets never in frontend.`,
+        business: `BUSINESS MODEL\n\nFREE: Core + limited\nPRO: Advanced\nPREMIUM: Full + AI\n\nMatch to audience.`,
+        launch: `LAUNCH ROADMAP\n\n1. Definition\n2. Design\n3. Development\n4. Security\n5. Testing\n6. Launch\n7. Future`
       };
     }
 
-    /* ===== ANIMATION ===== */
     function animateBrains() {
       return new Promise(resolve => {
         const items = document.querySelectorAll(".brain");
         let i = 0;
         function next() {
-          if (i >= items.length) {
-            items.forEach(x => x.classList.add("done"));
-            resolve();
-            return;
-          }
+          if (i >= items.length) { items.forEach(x => x.classList.add("done")); resolve(); return; }
           items[i].classList.add("active");
           document.getElementById("brainStatus").textContent = "Analysing " + brains[i] + "...";
           setTimeout(() => {
             items[i].classList.remove("active");
             items[i].classList.add("done");
-            i++;
-            next();
+            i++; next();
           }, 500);
         }
         next();
       });
     }
 
-    /* ===== RESULTS ===== */
     function renderResults(project) {
       const section = document.getElementById("resultsSection");
       const nav = document.getElementById("resultNav");
       const content = document.getElementById("resultContent");
-
       section.classList.remove("hidden");
-      nav.innerHTML = "";
-      content.innerHTML = "";
-
+      nav.innerHTML = ""; content.innerHTML = "";
       const entries = [
-        ["core", "🐙 Core Brain"],
-        ["strategy", "🎯 Strategy"],
-        ["users", "👥 Users & UX"],
-        ["features", "⚙️ Features"],
-        ["policy", "📜 Policy"],
-        ["security", "🔐 Security & Privacy"],
-        ["tech", "💻 Technology"],
-        ["business", "💰 Business"],
-        ["launch", "🚀 Launch"]
+        ["core","🐙 Core Brain"],["strategy","🎯 Strategy"],["users","👥 Users & UX"],
+        ["features","⚙️ Features"],["policy","📜 Policy"],["security","🔐 Security & Privacy"],
+        ["tech","💻 Technology"],["business","💰 Business"],["launch","🚀 Launch"]
       ];
-
       entries.forEach(([key, label]) => {
         const button = document.createElement("button");
         button.textContent = label;
-        button.onclick = () => {
-          document.getElementById("result-" + key).scrollIntoView({ behavior: "smooth", block: "start" });
-        };
+        button.onclick = () => document.getElementById("result-" + key).scrollIntoView({ behavior:"smooth", block:"start" });
         nav.appendChild(button);
-
         const card = document.createElement("article");
-        card.className = "result-card";
-        card.id = "result-" + key;
-
-        const title = document.createElement("h2");
-        title.textContent = label;
-
-        const meta = document.createElement("div");
-        meta.className = "meta";
+        card.className = "result-card"; card.id = "result-" + key;
+        const title = document.createElement("h2"); title.textContent = label;
+        const meta = document.createElement("div"); meta.className = "meta";
         meta.textContent = project.name + " • " + project.type;
-
-        const actions = document.createElement("div");
-        actions.className = "result-actions";
-
-        const copy = document.createElement("button");
-        copy.className = "action primary";
-        copy.textContent = "📋 Copy";
-        copy.onclick = () => copyText(project.results[key]);
-
-        const download = document.createElement("button");
-        download.className = "action";
+        const actions = document.createElement("div"); actions.className = "result-actions";
+        const copy = document.createElement("button"); copy.className = "action primary";
+        copy.textContent = "📋 Copy"; copy.onclick = () => copyText(project.results[key]);
+        const download = document.createElement("button"); download.className = "action";
         download.textContent = "⬇ Download";
         download.onclick = () => downloadText(project.results[key], project.name + "-" + key + ".txt");
-
-        actions.appendChild(copy);
-        actions.appendChild(download);
-
-        const text = document.createElement("div");
-        text.className = "result-text";
+        actions.appendChild(copy); actions.appendChild(download);
+        const text = document.createElement("div"); text.className = "result-text";
         text.textContent = project.results[key];
-
-        card.appendChild(title);
-        card.appendChild(meta);
-        card.appendChild(actions);
-        card.appendChild(text);
+        card.appendChild(title); card.appendChild(meta); card.appendChild(actions); card.appendChild(text);
         content.appendChild(card);
       });
-
       const exportButton = document.createElement("button");
       exportButton.className = "action primary";
       exportButton.textContent = "📦 Download Complete Product DNA";
       exportButton.onclick = () => downloadProject(project);
       content.prepend(exportButton);
-      section.scrollIntoView({ behavior: "smooth" });
+      section.scrollIntoView({ behavior:"smooth" });
     }
 
-    /* ===== HISTORY ===== */
-    function getHistory() {
-      try { return JSON.parse(localStorage.getItem(CONFIG.storageKey) || "[]"); } catch { return []; }
-    }
-
+    function getHistory() { try { return JSON.parse(localStorage.getItem(CONFIG.storageKey) || "[]"); } catch { return []; } }
     function saveHistory(project) {
-      let history = getHistory();
-      history.unshift(project);
-      history = history.slice(0, 50);
-      localStorage.setItem(CONFIG.storageKey, JSON.stringify(history));
-      renderHistory();
+      let h = getHistory(); h.unshift(project); h = h.slice(0,50);
+      localStorage.setItem(CONFIG.storageKey, JSON.stringify(h)); renderHistory();
     }
-
     function renderHistory() {
-      const container = document.getElementById("historyList");
-      const history = getHistory();
-      if (!history.length) {
-        container.innerHTML = '<div class="empty">No projects yet. Your generated projects will appear here.</div>';
-        return;
-      }
-      container.innerHTML = "";
-      history.forEach(project => {
-        const card = document.createElement("div");
-        card.className = "history-card";
-        const date = new Date(project.created).toLocaleString();
-        card.innerHTML = `<strong>${escapeHTML(project.name)}</strong><small>${escapeHTML(project.type)} • ${escapeHTML(date)}</small>`;
-        const open = document.createElement("button");
-        open.textContent = "Open Project";
-        open.onclick = () => { currentProject = project; renderResults(project); };
-        card.appendChild(open);
-        container.appendChild(card);
+      const c = document.getElementById("historyList"); const h = getHistory();
+      if (!h.length) { c.innerHTML = '<div class="empty">No projects yet.</div>'; return; }
+      c.innerHTML = "";
+      h.forEach(p => {
+        const card = document.createElement("div"); card.className = "history-card";
+        const date = new Date(p.created).toLocaleString();
+        card.innerHTML = `<strong>${escapeHTML(p.name)}</strong><small>${escapeHTML(p.type)} • ${escapeHTML(date)}</small>`;
+        const open = document.createElement("button"); open.textContent = "Open Project";
+        open.onclick = () => { currentProject = p; renderResults(p); };
+        card.appendChild(open); c.appendChild(card);
       });
     }
-
-    function showHistory() {
-      document.querySelector(".history-panel").scrollIntoView({ behavior: "smooth" });
-    }
-
+    function showHistory() { document.querySelector(".history-panel").scrollIntoView({ behavior:"smooth" }); }
     function clearHistory() {
       if (!confirm("Delete all locally stored OCTOBRAIN history?")) return;
-      localStorage.removeItem(CONFIG.storageKey);
-      renderHistory();
-      showToast("History cleared.");
+      localStorage.removeItem(CONFIG.storageKey); renderHistory(); showToast("History cleared.");
     }
-
-    /* ===== EXPORT ===== */
     function downloadProject(project) {
-      let output = `NINE: OCTOBRAIN\nPRODUCT DNA\n==============================\n\nPRODUCT:\n${project.name}\n\nTYPE:\n${project.type}\n\nGENERATED:\n${new Date(project.created).toLocaleString()}\n\nCOMPANY:\n${CONFIG.company}\n\nCEO:\n${CONFIG.ceo}\n\nCOUNTRY:\n${CONFIG.country}\n\nEMAIL:\n${CONFIG.email}\n\nPHONE:\n${CONFIG.phone}\n\n`;
-      Object.entries(project.results).forEach(([key, value]) => {
-        output += `\n\n==============================\n${key.toUpperCase()}\n==============================\n\n${value}\n`;
+      let out = `NINE: OCTOBRAIN\nPRODUCT DNA\n==============================\n\nPRODUCT:\n${project.name}\n\nTYPE:\n${project.type}\n\nGENERATED:\n${new Date(project.created).toLocaleString()}\n\nCOMPANY:\n${CONFIG.company}\n\nCEO:\n${CONFIG.ceo}\n\nCOUNTRY:\n${CONFIG.country}\n\n`;
+      Object.entries(project.results).forEach(([k,v]) => {
+        out += `\n\n==============================\n${k.toUpperCase()}\n==============================\n\n${v}\n`;
       });
-      downloadText(output, project.name.replace(/\s+/g, "-") + "-PRODUCT-DNA.txt");
+      downloadText(out, project.name.replace(/\s+/g,"-") + "-PRODUCT-DNA.txt");
     }
-
     function exportHistory() {
-      const history = getHistory();
-      if (!history.length) { showToast("No history to export."); return; }
-      downloadText(JSON.stringify(history, null, 2), "nine-octobrain-history.json");
+      const h = getHistory();
+      if (!h.length) { showToast("No history to export."); return; }
+      downloadText(JSON.stringify(h,null,2), "nine-octobrain-history.json");
     }
 
-    /* ===== PRODUCT TRACKER ===== */
-    function getTrackedProducts() {
-      try { return JSON.parse(localStorage.getItem(CONFIG.trackerKey) || "[]"); } catch { return []; }
-    }
-
-    function saveTrackedProducts(products) {
-      localStorage.setItem(CONFIG.trackerKey, JSON.stringify(products));
-    }
-
+    function getTrackedProducts() { try { return JSON.parse(localStorage.getItem(CONFIG.trackerKey) || "[]"); } catch { return []; } }
+    function saveTrackedProducts(p) { localStorage.setItem(CONFIG.trackerKey, JSON.stringify(p)); }
     function addTrackedProduct() {
-      const nameInput = document.getElementById("trackerName");
-      const urlInput = document.getElementById("trackerUrl");
-      const name = nameInput.value.trim();
-      const url = urlInput.value.trim();
-
-      if (!name) { showToast("Please enter a product name."); return; }
-      if (!url) { showToast("Please enter a product URL."); return; }
-
-      const products = getTrackedProducts();
-      products.unshift({
-        id: Date.now(),
-        name: name,
-        url: url,
-        done: false,
-        created: new Date().toISOString()
-      });
-      saveTrackedProducts(products);
-      nameInput.value = "";
-      urlInput.value = "";
-      renderTrackedProducts();
-      showToast("Product added to tracker.");
+      const n = document.getElementById("trackerName").value.trim();
+      const u = document.getElementById("trackerUrl").value.trim();
+      if (!n) { showToast("Please enter a product name."); return; }
+      if (!u) { showToast("Please enter a product URL."); return; }
+      const p = getTrackedProducts();
+      p.unshift({ id: Date.now(), name:n, url:u, done:false, created:new Date().toISOString() });
+      saveTrackedProducts(p);
+      document.getElementById("trackerName").value = ""; document.getElementById("trackerUrl").value = "";
+      renderTrackedProducts(); showToast("Product added to tracker.");
     }
-
     function toggleTrackedDone(id) {
-      const products = getTrackedProducts();
-      const product = products.find(p => p.id === id);
-      if (product) {
-        product.done = !product.done;
-        saveTrackedProducts(products);
-        renderTrackedProducts();
-      }
+      const p = getTrackedProducts(); const x = p.find(i => i.id === id);
+      if (x) { x.done = !x.done; saveTrackedProducts(p); renderTrackedProducts(); }
     }
-
     function deleteTrackedProduct(id) {
       if (!confirm("Remove this product from the tracker?")) return;
-      const products = getTrackedProducts().filter(p => p.id !== id);
-      saveTrackedProducts(products);
-      renderTrackedProducts();
-      showToast("Product removed.");
+      const p = getTrackedProducts().filter(i => i.id !== id);
+      saveTrackedProducts(p); renderTrackedProducts(); showToast("Product removed.");
     }
-
     function renderTrackedProducts() {
-      const container = document.getElementById("trackedProductList");
-      const products = getTrackedProducts();
-
-      if (!products.length) {
-        container.innerHTML = '<div class="tracker-empty">No products tracked yet. Add your first product above.</div>';
-        return;
-      }
-
-      container.innerHTML = "";
-      products.forEach(product => {
-        const item = document.createElement("div");
-        item.className = "product-item";
-
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.className = "done-check";
-        checkbox.checked = product.done;
-        checkbox.onchange = () => toggleTrackedDone(product.id);
-
-        const info = document.createElement("div");
-        info.className = "product-info";
-
-        const nameDiv = document.createElement("div");
-        nameDiv.className = "product-name" + (product.done ? " done" : "");
-        nameDiv.textContent = product.name;
-
-        const urlDiv = document.createElement("div");
-        urlDiv.className = "product-url";
-        urlDiv.innerHTML = `<a href="${escapeHTML(product.url)}" target="_blank" rel="noopener">${escapeHTML(product.url)}</a>`;
-
-        info.appendChild(nameDiv);
-        info.appendChild(urlDiv);
-
-        const del = document.createElement("button");
-        del.className = "delete-btn";
-        del.textContent = "🗑 Remove";
-        del.onclick = () => deleteTrackedProduct(product.id);
-
-        item.appendChild(checkbox);
-        item.appendChild(info);
-        item.appendChild(del);
-        container.appendChild(item);
+      const c = document.getElementById("trackedProductList"); const p = getTrackedProducts();
+      if (!p.length) { c.innerHTML = '<div class="tracker-empty">No products tracked yet.</div>'; return; }
+      c.innerHTML = "";
+      p.forEach(pr => {
+        const item = document.createElement("div"); item.className = "product-item";
+        const cb = document.createElement("input"); cb.type = "checkbox"; cb.className = "done-check";
+        cb.checked = pr.done; cb.onchange = () => toggleTrackedDone(pr.id);
+        const info = document.createElement("div"); info.className = "product-info";
+        const nd = document.createElement("div"); nd.className = "product-name" + (pr.done ? " done" : "");
+        nd.textContent = pr.name;
+        const ud = document.createElement("div"); ud.className = "product-url";
+        ud.innerHTML = `<a href="${escapeHTML(pr.url)}" target="_blank" rel="noopener">${escapeHTML(pr.url)}</a>`;
+        info.appendChild(nd); info.appendChild(ud);
+        const del = document.createElement("button"); del.className = "delete-btn";
+        del.textContent = "🗑 Remove"; del.onclick = () => deleteTrackedProduct(pr.id);
+        item.appendChild(cb); item.appendChild(info); item.appendChild(del);
+        c.appendChild(item);
       });
     }
 
-    /* ===== JASON'S OFFICE — FULL SCREEN OVERLAY ===== */
+    /* ===== JASON'S OFFICE ===== */
     function openOfficeRoom() {
       if (!officeUnlocked) {
         const code = prompt("Enter Jason's Office access code:");
         if (code !== CONFIG.officeCode) {
           showToast("Access denied. Invalid office code.");
-          speak("Access denied. Invalid office code.");
+          speak("Access denied.");
           return;
         }
         officeUnlocked = true;
-        sessionStorage.setItem("officeUnlocked", "true");
-        speak("Welcome to your office, Jason. The King's chamber is now open.");
+        sessionStorage.setItem("officeUnlocked","true");
+        speak("Welcome to your office, Jason.");
       }
-
       document.getElementById("officeOverlay").classList.add("active");
       document.body.style.overflow = "hidden";
-
-      renderOfficeProjects();
-      renderOfficeTodos();
-      renderOfficePasswords();
-
-      showToast("Jason's Office is now open.");
+      renderOfficeProjects(); renderOfficeTodos(); renderOfficePasswords();
+      showToast("Jason's Office is now open. Press ESC to close.");
     }
-
     function closeOfficeRoom() {
       document.getElementById("officeOverlay").classList.remove("active");
       document.body.style.overflow = "";
-      showToast("Office closed. Back to OCTOBRAIN.");
+      showToast("Office closed.");
     }
 
-    /* --- Office Projects --- */
-    function getOfficeProjects() {
-      try { return JSON.parse(localStorage.getItem(CONFIG.officeProjectsKey) || "[]"); } catch { return []; }
-    }
-
-    function saveOfficeProjects(projects) {
-      localStorage.setItem(CONFIG.officeProjectsKey, JSON.stringify(projects));
-    }
-
+    function getOfficeProjects() { try { return JSON.parse(localStorage.getItem(CONFIG.officeProjectsKey) || "[]"); } catch { return []; } }
+    function saveOfficeProjects(p) { localStorage.setItem(CONFIG.officeProjectsKey, JSON.stringify(p)); }
     function addOfficeProject() {
-      const name = document.getElementById("officeProjectName").value.trim();
-      const url = document.getElementById("officeProjectUrl").value.trim();
-      const date = document.getElementById("officeProjectDate").value;
-
-      if (!name) { showToast("Please enter a project name."); return; }
-
-      const projects = getOfficeProjects();
-      projects.unshift({
-        id: Date.now(),
-        name: name,
-        url: url,
-        date: date,
-        done: false,
-        created: new Date().toISOString()
-      });
-      saveOfficeProjects(projects);
+      const n = document.getElementById("officeProjectName").value.trim();
+      const u = document.getElementById("officeProjectUrl").value.trim();
+      const d = document.getElementById("officeProjectDate").value;
+      if (!n) { showToast("Please enter a project name."); return; }
+      const p = getOfficeProjects();
+      p.unshift({ id: Date.now(), name:n, url:u, date:d, done:false, created:new Date().toISOString() });
+      saveOfficeProjects(p);
       document.getElementById("officeProjectName").value = "";
       document.getElementById("officeProjectUrl").value = "";
       document.getElementById("officeProjectDate").value = "";
-      renderOfficeProjects();
-      showToast("Project saved in your office.");
-      speak("Project saved in your office.");
+      renderOfficeProjects(); showToast("Project saved.");
+      speak("Project saved.");
     }
-
     function toggleOfficeProject(id) {
-      const projects = getOfficeProjects();
-      const p = projects.find(x => x.id === id);
-      if (p) { p.done = !p.done; saveOfficeProjects(projects); renderOfficeProjects(); }
+      const p = getOfficeProjects(); const x = p.find(i => i.id === id);
+      if (x) { x.done = !x.done; saveOfficeProjects(p); renderOfficeProjects(); }
     }
-
     function deleteOfficeProject(id) {
-      if (!confirm("Remove this project from your office?")) return;
-      const projects = getOfficeProjects().filter(x => x.id !== id);
-      saveOfficeProjects(projects);
-      renderOfficeProjects();
-      showToast("Project removed.");
+      if (!confirm("Remove this project?")) return;
+      const p = getOfficeProjects().filter(i => i.id !== id);
+      saveOfficeProjects(p); renderOfficeProjects(); showToast("Project removed.");
     }
-
     function renderOfficeProjects() {
-      const container = document.getElementById("officeProjectList");
-      const projects = getOfficeProjects();
-
-      if (!projects.length) {
-        container.innerHTML = '<div class="office-empty">No projects saved yet. Add your first project above.</div>';
-        return;
-      }
-
-      container.innerHTML = "";
-      projects.forEach(p => {
-        const item = document.createElement("div");
-        item.className = "office-list-item";
-
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.className = "item-check";
-        checkbox.checked = p.done;
-        checkbox.onchange = () => toggleOfficeProject(p.id);
-
-        const info = document.createElement("div");
-        info.className = "item-info";
-
-        const title = document.createElement("div");
-        title.className = "item-title" + (p.done ? " done" : "");
-        title.textContent = p.name;
-
-        const meta = document.createElement("div");
-        meta.className = "item-meta";
-        let metaHtml = "";
-        if (p.url) metaHtml += `<a href="${escapeHTML(p.url)}" target="_blank" rel="noopener">${escapeHTML(p.url)}</a><br>`;
-        if (p.date) metaHtml += `📅 ${new Date(p.date).toLocaleString()}<br>`;
-        metaHtml += `Saved: ${new Date(p.created).toLocaleString()}`;
-        meta.innerHTML = metaHtml;
-
-        info.appendChild(title);
-        info.appendChild(meta);
-
-        const actions = document.createElement("div");
-        actions.className = "item-actions";
-
-        if (p.url) {
-          const openBtn = document.createElement("button");
-          openBtn.textContent = "Open";
-          openBtn.onclick = () => window.open(p.url, "_blank");
-          actions.appendChild(openBtn);
-        }
-
-        const del = document.createElement("button");
-        del.className = "danger";
-        del.textContent = "🗑";
-        del.onclick = () => deleteOfficeProject(p.id);
-        actions.appendChild(del);
-
-        item.appendChild(checkbox);
-        item.appendChild(info);
-        item.appendChild(actions);
-        container.appendChild(item);
+      const c = document.getElementById("officeProjectList"); const p = getOfficeProjects();
+      if (!p.length) { c.innerHTML = '<div class="office-empty">No projects saved yet.</div>'; return; }
+      c.innerHTML = "";
+      p.forEach(pr => {
+        const item = document.createElement("div"); item.className = "office-list-item";
+        const cb = document.createElement("input"); cb.type = "checkbox"; cb.className = "item-check";
+        cb.checked = pr.done; cb.onchange = () => toggleOfficeProject(pr.id);
+        const info = document.createElement("div"); info.className = "item-info";
+        const t = document.createElement("div"); t.className = "item-title" + (pr.done ? " done" : "");
+        t.textContent = pr.name;
+        const m = document.createElement("div"); m.className = "item-meta";
+        let mh = "";
+        if (pr.url) mh += `<a href="${escapeHTML(pr.url)}" target="_blank" rel="noopener">${escapeHTML(pr.url)}</a><br>`;
+        if (pr.date) mh += `📅 ${new Date(pr.date).toLocaleString()}<br>`;
+        mh += `Saved: ${new Date(pr.created).toLocaleString()}`;
+        m.innerHTML = mh;
+        info.appendChild(t); info.appendChild(m);
+        const actions = document.createElement("div"); actions.className = "item-actions";
+        if (pr.url) { const ob = document.createElement("button"); ob.textContent = "Open"; ob.onclick = () => window.open(pr.url,"_blank"); actions.appendChild(ob); }
+        const del = document.createElement("button"); del.className = "danger"; del.textContent = "🗑";
+        del.onclick = () => deleteOfficeProject(pr.id); actions.appendChild(del);
+        item.appendChild(cb); item.appendChild(info); item.appendChild(actions);
+        c.appendChild(item);
       });
     }
 
-    /* --- Office To-Do --- */
-    function getOfficeTodos() {
-      try { return JSON.parse(localStorage.getItem(CONFIG.officeTodoKey) || "[]"); } catch { return []; }
-    }
-
-    function saveOfficeTodos(todos) {
-      localStorage.setItem(CONFIG.officeTodoKey, JSON.stringify(todos));
-    }
-
+    function getOfficeTodos() { try { return JSON.parse(localStorage.getItem(CONFIG.officeTodoKey) || "[]"); } catch { return []; } }
+    function saveOfficeTodos(t) { localStorage.setItem(CONFIG.officeTodoKey, JSON.stringify(t)); }
     function addOfficeTodo() {
-      const title = document.getElementById("officeTodoTitle").value.trim();
-      const desc = document.getElementById("officeTodoDesc").value.trim();
-      const date = document.getElementById("officeTodoDate").value;
-
-      if (!title) { showToast("Please enter a task title."); return; }
-
-      const todos = getOfficeTodos();
-      todos.unshift({
-        id: Date.now(),
-        title: title,
-        desc: desc,
-        date: date,
-        done: false,
-        created: new Date().toISOString()
-      });
-      saveOfficeTodos(todos);
+      const t = document.getElementById("officeTodoTitle").value.trim();
+      const d = document.getElementById("officeTodoDesc").value.trim();
+      const dt = document.getElementById("officeTodoDate").value;
+      if (!t) { showToast("Please enter a task title."); return; }
+      const td = getOfficeTodos();
+      td.unshift({ id: Date.now(), title:t, desc:d, date:dt, done:false, created:new Date().toISOString() });
+      saveOfficeTodos(td);
       document.getElementById("officeTodoTitle").value = "";
       document.getElementById("officeTodoDesc").value = "";
       document.getElementById("officeTodoDate").value = "";
-      renderOfficeTodos();
-      showToast("Task added to the King's chamber.");
-      speak("Task added to your royal chamber.");
+      renderOfficeTodos(); showToast("Task added.");
+      speak("Task added.");
     }
-
     function toggleOfficeTodo(id) {
-      const todos = getOfficeTodos();
-      const t = todos.find(x => x.id === id);
-      if (t) { t.done = !t.done; saveOfficeTodos(todos); renderOfficeTodos(); }
+      const t = getOfficeTodos(); const x = t.find(i => i.id === id);
+      if (x) { x.done = !x.done; saveOfficeTodos(t); renderOfficeTodos(); }
     }
-
     function deleteOfficeTodo(id) {
-      if (!confirm("Remove this task from the King's chamber?")) return;
-      const todos = getOfficeTodos().filter(x => x.id !== id);
-      saveOfficeTodos(todos);
-      renderOfficeTodos();
-      showToast("Task removed from the King's chamber.");
+      if (!confirm("Remove this task?")) return;
+      const t = getOfficeTodos().filter(i => i.id !== id);
+      saveOfficeTodos(t); renderOfficeTodos(); showToast("Task removed.");
     }
-
     function renderOfficeTodos() {
-      const container = document.getElementById("officeTodoList");
-      const todos = getOfficeTodos();
-
-      if (!todos.length) {
-        container.innerHTML = '<div class="office-empty">No tasks yet. The King\'s chamber awaits your command.</div>';
-        return;
-      }
-
-      container.innerHTML = "";
-      todos.forEach(t => {
-        const item = document.createElement("div");
-        item.className = "office-list-item";
-
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.className = "item-check";
-        checkbox.checked = t.done;
-        checkbox.onchange = () => toggleOfficeTodo(t.id);
-
-        const info = document.createElement("div");
-        info.className = "item-info";
-
-        const title = document.createElement("div");
-        title.className = "item-title" + (t.done ? " done" : "");
-        title.textContent = "👑 " + t.title;
-
-        const meta = document.createElement("div");
-        meta.className = "item-meta";
-        let metaHtml = "";
-        if (t.desc) metaHtml += `${escapeHTML(t.desc)}<br>`;
-        if (t.date) metaHtml += `⏰ Due: ${new Date(t.date).toLocaleString()}<br>`;
-        metaHtml += `Created: ${new Date(t.created).toLocaleString()}`;
-        meta.innerHTML = metaHtml;
-
-        info.appendChild(title);
-        info.appendChild(meta);
-
-        const actions = document.createElement("div");
-        actions.className = "item-actions";
-
-        const del = document.createElement("button");
-        del.className = "danger";
-        del.textContent = "🗑";
-        del.onclick = () => deleteOfficeTodo(t.id);
-        actions.appendChild(del);
-
-        item.appendChild(checkbox);
-        item.appendChild(info);
-        item.appendChild(actions);
-        container.appendChild(item);
+      const c = document.getElementById("officeTodoList"); const t = getOfficeTodos();
+      if (!t.length) { c.innerHTML = '<div class="office-empty">No tasks yet.</div>'; return; }
+      c.innerHTML = "";
+      t.forEach(td => {
+        const item = document.createElement("div"); item.className = "office-list-item";
+        const cb = document.createElement("input"); cb.type = "checkbox"; cb.className = "item-check";
+        cb.checked = td.done; cb.onchange = () => toggleOfficeTodo(td.id);
+        const info = document.createElement("div"); info.className = "item-info";
+        const tt = document.createElement("div"); tt.className = "item-title" + (td.done ? " done" : "");
+        tt.textContent = "👑 " + td.title;
+        const m = document.createElement("div"); m.className = "item-meta";
+        let mh = "";
+        if (td.desc) mh += `${escapeHTML(td.desc)}<br>`;
+        if (td.date) mh += `⏰ Due: ${new Date(td.date).toLocaleString()}<br>`;
+        mh += `Created: ${new Date(td.created).toLocaleString()}`;
+        m.innerHTML = mh;
+        info.appendChild(tt); info.appendChild(m);
+        const actions = document.createElement("div"); actions.className = "item-actions";
+        const del = document.createElement("button"); del.className = "danger"; del.textContent = "🗑";
+        del.onclick = () => deleteOfficeTodo(td.id); actions.appendChild(del);
+        item.appendChild(cb); item.appendChild(info); item.appendChild(actions);
+        c.appendChild(item);
       });
     }
 
-    /* --- Office Passwords --- */
-    function getOfficePasswords() {
-      try { return JSON.parse(localStorage.getItem(CONFIG.officePwKey) || "[]"); } catch { return []; }
-    }
-
-    function saveOfficePasswords(pws) {
-      localStorage.setItem(CONFIG.officePwKey, JSON.stringify(pws));
-    }
-
+    function getOfficePasswords() { try { return JSON.parse(localStorage.getItem(CONFIG.officePwKey) || "[]"); } catch { return []; } }
+    function saveOfficePasswords(p) { localStorage.setItem(CONFIG.officePwKey, JSON.stringify(p)); }
     function addOfficePassword() {
-      const label = document.getElementById("officePwLabel").value.trim();
-      const user = document.getElementById("officePwUser").value.trim();
-      const value = document.getElementById("officePwValue").value.trim();
-
-      if (!label) { showToast("Please enter a label."); return; }
-      if (!value) { showToast("Please enter a password."); return; }
-
-      const pws = getOfficePasswords();
-      pws.unshift({
-        id: Date.now(),
-        label: label,
-        user: user,
-        value: value,
-        created: new Date().toISOString()
-      });
-      saveOfficePasswords(pws);
+      const l = document.getElementById("officePwLabel").value.trim();
+      const u = document.getElementById("officePwUser").value.trim();
+      const v = document.getElementById("officePwValue").value.trim();
+      if (!l) { showToast("Please enter a label."); return; }
+      if (!v) { showToast("Please enter a password."); return; }
+      const p = getOfficePasswords();
+      p.unshift({ id: Date.now(), label:l, user:u, value:v, created:new Date().toISOString() });
+      saveOfficePasswords(p);
       document.getElementById("officePwLabel").value = "";
       document.getElementById("officePwUser").value = "";
       document.getElementById("officePwValue").value = "";
-      renderOfficePasswords();
-      showToast("Password saved to your vault.");
+      renderOfficePasswords(); showToast("Password saved.");
       speak("Password saved to your vault.");
     }
-
     function deleteOfficePassword(id) {
-      if (!confirm("Remove this password from your vault?")) return;
-      const pws = getOfficePasswords().filter(x => x.id !== id);
-      saveOfficePasswords(pws);
-      renderOfficePasswords();
-      showToast("Password removed from vault.");
+      if (!confirm("Remove this password?")) return;
+      const p = getOfficePasswords().filter(i => i.id !== id);
+      saveOfficePasswords(p); renderOfficePasswords(); showToast("Password removed.");
     }
-
     function togglePasswordVisibility(id) {
       const el = document.getElementById("pw-value-" + id);
       if (!el) return;
-      if (el.classList.contains("revealed")) {
-        el.textContent = "••••••••";
-        el.classList.remove("revealed");
-      } else {
-        const pws = getOfficePasswords();
-        const p = pws.find(x => x.id === id);
-        if (p) {
-          el.textContent = p.value;
-          el.classList.add("revealed");
-        }
+      if (el.classList.contains("revealed")) { el.textContent = "••••••••"; el.classList.remove("revealed"); }
+      else {
+        const p = getOfficePasswords(); const x = p.find(i => i.id === id);
+        if (x) { el.textContent = x.value; el.classList.add("revealed"); }
       }
     }
-
     function renderOfficePasswords() {
-      const container = document.getElementById("officePasswordList");
-      const pws = getOfficePasswords();
-
-      if (!pws.length) {
-        container.innerHTML = '<div class="office-empty">No passwords saved yet. Your vault is secure.</div>';
-        return;
-      }
-
-      container.innerHTML = "";
-      pws.forEach(p => {
-        const item = document.createElement("div");
-        item.className = "office-list-item";
-
-        const info = document.createElement("div");
-        info.className = "item-info";
-
-        const title = document.createElement("div");
-        title.className = "item-title";
-        title.textContent = "🔐 " + p.label;
-
-        const meta = document.createElement("div");
-        meta.className = "item-meta";
-        if (p.user) meta.innerHTML += `User: ${escapeHTML(p.user)}<br>`;
-        meta.innerHTML += `Password: <span class="password-value" id="pw-value-${p.id}">••••••••</span><br>`;
-        meta.innerHTML += `Saved: ${new Date(p.created).toLocaleString()}`;
-
-        info.appendChild(title);
-        info.appendChild(meta);
-
-        const actions = document.createElement("div");
-        actions.className = "item-actions";
-
-        const revealBtn = document.createElement("button");
-        revealBtn.textContent = "👁 View";
-        revealBtn.onclick = () => togglePasswordVisibility(p.id);
-        actions.appendChild(revealBtn);
-
-        const copyBtn = document.createElement("button");
-        copyBtn.textContent = "📋 Copy";
-        copyBtn.onclick = () => copyText(p.value);
-        actions.appendChild(copyBtn);
-
-        const del = document.createElement("button");
-        del.className = "danger";
-        del.textContent = "🗑";
-        del.onclick = () => deleteOfficePassword(p.id);
-        actions.appendChild(del);
-
-        item.appendChild(info);
-        item.appendChild(actions);
-        container.appendChild(item);
+      const c = document.getElementById("officePasswordList"); const p = getOfficePasswords();
+      if (!p.length) { c.innerHTML = '<div class="office-empty">No passwords saved yet.</div>'; return; }
+      c.innerHTML = "";
+      p.forEach(pw => {
+        const item = document.createElement("div"); item.className = "office-list-item";
+        const info = document.createElement("div"); info.className = "item-info";
+        const t = document.createElement("div"); t.className = "item-title";
+        t.textContent = "🔐 " + pw.label;
+        const m = document.createElement("div"); m.className = "item-meta";
+        let mh = "";
+        if (pw.user) mh += `User: ${escapeHTML(pw.user)}<br>`;
+        mh += `Password: <span class="password-value" id="pw-value-${pw.id}">••••••••</span><br>`;
+        mh += `Saved: ${new Date(pw.created).toLocaleString()}`;
+        m.innerHTML = mh;
+        info.appendChild(t); info.appendChild(m);
+        const actions = document.createElement("div"); actions.className = "item-actions";
+        const rev = document.createElement("button"); rev.textContent = "👁 View";
+        rev.onclick = () => togglePasswordVisibility(pw.id); actions.appendChild(rev);
+        const cp = document.createElement("button"); cp.textContent = "📋 Copy";
+        cp.onclick = () => copyText(pw.value); actions.appendChild(cp);
+        const del = document.createElement("button"); del.className = "danger"; del.textContent = "🗑";
+        del.onclick = () => deleteOfficePassword(pw.id); actions.appendChild(del);
+        item.appendChild(info); item.appendChild(actions);
+        c.appendChild(item);
       });
     }
 
-    function copyCode(code) {
-      copyText(code);
-      speak("Code copied to clipboard.");
-    }
+    function copyCode(code) { copyText(code); speak("Code copied."); }
 
     /* ===== TEAM ROOM ===== */
     function openTeamRoom() {
       if (!teamUnlocked) {
         const code = prompt("Enter Team Room access code:");
-        if (code !== CONFIG.teamCode) {
-          showToast("Access denied. Invalid team code.");
-          speak("Access denied. Invalid team code.");
-          return;
-        }
-        teamUnlocked = true;
-        sessionStorage.setItem("teamUnlocked", "true");
-        speak("Welcome to the Team Room. You can now save links, names, and notes.");
+        if (code !== CONFIG.teamCode) { showToast("Access denied. Invalid team code."); speak("Access denied."); return; }
+        teamUnlocked = true; sessionStorage.setItem("teamUnlocked","true");
+        speak("Welcome to the Team Room.");
       }
       document.getElementById("teamRoomSection").classList.remove("hidden");
-      document.getElementById("teamRoomSection").scrollIntoView({ behavior: "smooth" });
+      document.getElementById("teamRoomSection").scrollIntoView({ behavior:"smooth" });
       renderTeamEntries();
     }
-
-    function getTeamEntries() {
-      try { return JSON.parse(localStorage.getItem(CONFIG.teamKey) || "[]"); } catch { return []; }
-    }
-
-    function saveTeamEntries(entries) {
-      localStorage.setItem(CONFIG.teamKey, JSON.stringify(entries));
-    }
-
+    function getTeamEntries() { try { return JSON.parse(localStorage.getItem(CONFIG.teamKey) || "[]"); } catch { return []; } }
+    function saveTeamEntries(e) { localStorage.setItem(CONFIG.teamKey, JSON.stringify(e)); }
     function addTeamEntry() {
-      const nameInput = document.getElementById("teamEntryName");
-      const urlInput = document.getElementById("teamEntryUrl");
-      const notesInput = document.getElementById("teamEntryNotes");
-      const name = nameInput.value.trim();
-      const url = urlInput.value.trim();
-      const notes = notesInput.value.trim();
-
-      if (!name) { showToast("Please enter an entry name."); return; }
-      if (!url) { showToast("Please enter a link."); return; }
-
-      const entries = getTeamEntries();
-      entries.unshift({
-        id: Date.now(),
-        name: name,
-        url: url,
-        notes: notes,
-        created: new Date().toISOString()
-      });
-      saveTeamEntries(entries);
-      nameInput.value = "";
-      urlInput.value = "";
-      notesInput.value = "";
-      renderTeamEntries();
-      showToast("Entry saved in the Team Room.");
+      const n = document.getElementById("teamEntryName").value.trim();
+      const u = document.getElementById("teamEntryUrl").value.trim();
+      const no = document.getElementById("teamEntryNotes").value.trim();
+      if (!n) { showToast("Please enter an entry name."); return; }
+      if (!u) { showToast("Please enter a link."); return; }
+      const e = getTeamEntries();
+      e.unshift({ id: Date.now(), name:n, url:u, notes:no, created:new Date().toISOString() });
+      saveTeamEntries(e);
+      document.getElementById("teamEntryName").value = "";
+      document.getElementById("teamEntryUrl").value = "";
+      document.getElementById("teamEntryNotes").value = "";
+      renderTeamEntries(); showToast("Entry saved in Team Room.");
       speak("Entry saved in the Team Room.");
     }
-
     function deleteTeamEntry(id) {
-      if (!confirm("Remove this entry from the Team Room?")) return;
-      const entries = getTeamEntries().filter(e => e.id !== id);
-      saveTeamEntries(entries);
-      renderTeamEntries();
-      showToast("Entry removed.");
+      if (!confirm("Remove this entry?")) return;
+      const e = getTeamEntries().filter(i => i.id !== id);
+      saveTeamEntries(e); renderTeamEntries(); showToast("Entry removed.");
     }
-
     function renderTeamEntries() {
-      const container = document.getElementById("teamEntriesList");
-      const entries = getTeamEntries();
-
-      if (!entries.length) {
-        container.innerHTML = '<div class="team-empty">No entries yet. Share your links, names, and notes here.</div>';
-        return;
-      }
-
-      container.innerHTML = "";
-      entries.forEach(entry => {
-        const item = document.createElement("div");
-        item.className = "team-entry-item";
-
-        const info = document.createElement("div");
-        info.className = "entry-info";
-
-        const nameDiv = document.createElement("div");
-        nameDiv.className = "entry-name";
-        nameDiv.textContent = entry.name;
-
-        const linkDiv = document.createElement("div");
-        linkDiv.className = "entry-link";
-        linkDiv.innerHTML = `<a href="${escapeHTML(entry.url)}" target="_blank" rel="noopener">${escapeHTML(entry.url)}</a>`;
-
-        const dateDiv = document.createElement("div");
-        dateDiv.className = "entry-date";
-        dateDiv.textContent = new Date(entry.created).toLocaleString();
-
-        info.appendChild(nameDiv);
-        info.appendChild(linkDiv);
-        if (entry.notes) {
-          const notesDiv = document.createElement("div");
-          notesDiv.className = "entry-notes";
-          notesDiv.textContent = entry.notes;
-          info.appendChild(notesDiv);
-        }
-        info.appendChild(dateDiv);
-
-        const del = document.createElement("button");
-        del.className = "entry-delete";
-        del.textContent = "🗑 Remove";
-        del.onclick = () => deleteTeamEntry(entry.id);
-
-        item.appendChild(info);
-        item.appendChild(del);
-        container.appendChild(item);
+      const c = document.getElementById("teamEntriesList"); const e = getTeamEntries();
+      if (!e.length) { c.innerHTML = '<div class="team-empty">No entries yet.</div>'; return; }
+      c.innerHTML = "";
+      e.forEach(en => {
+        const item = document.createElement("div"); item.className = "team-entry-item";
+        const info = document.createElement("div"); info.className = "entry-info";
+        const nd = document.createElement("div"); nd.className = "entry-name"; nd.textContent = en.name;
+        const ld = document.createElement("div"); ld.className = "entry-link";
+        ld.innerHTML = `<a href="${escapeHTML(en.url)}" target="_blank" rel="noopener">${escapeHTML(en.url)}</a>`;
+        const dd = document.createElement("div"); dd.className = "entry-date";
+        dd.textContent = new Date(en.created).toLocaleString();
+        info.appendChild(nd); info.appendChild(ld);
+        if (en.notes) { const nn = document.createElement("div"); nn.className = "entry-notes"; nn.textContent = en.notes; info.appendChild(nn); }
+        info.appendChild(dd);
+        const del = document.createElement("button"); del.className = "entry-delete";
+        del.textContent = "🗑 Remove"; del.onclick = () => deleteTeamEntry(en.id);
+        item.appendChild(info); item.appendChild(del);
+        c.appendChild(item);
       });
     }
+
+    /* =========================================================
+       B-2 SPIRIT — APP DEV COMMAND CENTRE
+       ========================================================= */
+    const B2 = {
+      state: {
+        appName: "",
+        appUrl: "",
+        contacts: [],
+        metrics: {
+          downloads: 0, users: 0, rating: 0, crash: 0,
+          retention: 0, revenue: 0, version: "v0.0", days: 0
+        },
+        aso: {
+          policy: false, screens: false, keywords: false,
+          graphic: false, video: false, storerating: false
+        },
+        tech: {
+          frontend: 0, backend: 0, database: 0, auth: 0
+        },
+        features: {
+          login: false, payments: false, push: false,
+          analytics: false, ai: false
+        },
+        customFeatures: [],
+        alerts: [],
+        log: []
+      },
+      radarCtx: null,
+      radarAnimId: null,
+      sweepAngle: 0,
+      tickInterval: null
+    };
+
+    function openB2Room() {
+      document.getElementById("b2Overlay").classList.add("active");
+      document.body.style.overflow = "hidden";
+      showToast("B-2 App Command Centre engaged.");
+      speak("B-2 App Command Centre engaged. Welcome, commander.");
+      b2InitRadar();
+      b2LoadAll();
+      b2UpdateUTC();
+      b2StartTick();
+      setTimeout(() => b2Log("Command Centre initialised.", "info"), 300);
+    }
+
+    function closeB2Room() {
+      document.getElementById("b2Overlay").classList.remove("active");
+      document.body.style.overflow = "";
+      b2StopTick();
+      if (B2.radarAnimId) cancelAnimationFrame(B2.radarAnimId);
+      B2.radarAnimId = null;
+      showToast("Command Centre disengaged.");
+    }
+
+    function b2InitRadar() {
+      const canvas = document.getElementById("b2RadarCanvas");
+      if (!canvas) return;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * 2;
+      canvas.height = rect.height * 2;
+      B2.radarCtx = canvas.getContext("2d");
+      B2.radarCtx.scale(2, 2);
+      b2RadarLoop();
+    }
+
+    function b2RadarLoop() {
+      const canvas = document.getElementById("b2RadarCanvas");
+      if (!canvas || !B2.radarCtx) return;
+      const ctx = B2.radarCtx;
+      const w = canvas.width / 2;
+      const h = canvas.height / 2;
+      const cx = w / 2, cy = h / 2;
+      const radius = Math.min(w, h) / 2 - 6;
+
+      ctx.clearRect(0, 0, w, h);
+
+      ctx.strokeStyle = "rgba(0,255,136,0.2)";
+      ctx.lineWidth = 1;
+      for (let i = 1; i <= 4; i++) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, (radius / 4) * i, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - radius); ctx.lineTo(cx, cy + radius);
+      ctx.moveTo(cx - radius, cy); ctx.lineTo(cx + radius, cy);
+      ctx.strokeStyle = "rgba(0,255,136,0.15)";
+      ctx.stroke();
+
+      // Sweep gradient
+      if (ctx.createConicGradient) {
+        const sweepGrad = ctx.createConicGradient(B2.sweepAngle, cx, cy);
+        sweepGrad.addColorStop(0, "rgba(0,255,136,0.5)");
+        sweepGrad.addColorStop(0.05, "rgba(0,255,136,0.02)");
+        sweepGrad.addColorStop(1, "rgba(0,255,136,0.02)");
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, B2.sweepAngle, B2.sweepAngle + 0.5);
+        ctx.closePath();
+        ctx.fillStyle = sweepGrad;
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      const endX = cx + Math.cos(B2.sweepAngle) * radius;
+      const endY = cy + Math.sin(B2.sweepAngle) * radius;
+      ctx.lineTo(endX, endY);
+      ctx.strokeStyle = "rgba(0,255,136,0.9)";
+      ctx.lineWidth = 2;
+      ctx.shadowColor = "#00ff88";
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Contacts
+      B2.state.contacts.forEach((c, i) => {
+        const totalContacts = Math.max(B2.state.contacts.length, 1);
+        const dist = 20 + (i / totalContacts) * (radius - 40);
+        const angleRad = (c.bearing - 90) * Math.PI / 180;
+        const x = cx + Math.cos(angleRad) * dist;
+        const y = cy + Math.sin(angleRad) * dist;
+        const col = c.type === "threat" ? "#ff3333" :
+                    c.type === "competitor" ? "#ffaa00" : "#00ff88";
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = col;
+        ctx.shadowColor = col;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = col;
+        ctx.font = "9px 'Courier New', monospace";
+        ctx.fillText(c.name.substring(0, 8), x + 8, y + 3);
+      });
+
+      B2.sweepAngle += 0.035;
+      if (B2.sweepAngle > Math.PI * 2) B2.sweepAngle -= Math.PI * 2;
+
+      B2.radarAnimId = requestAnimationFrame(b2RadarLoop);
+    }
+
+    function b2StartTick() {
+      if (B2.tickInterval) return;
+      B2.tickInterval = setInterval(b2Tick, 500);
+    }
+    function b2StopTick() {
+      if (B2.tickInterval) { clearInterval(B2.tickInterval); B2.tickInterval = null; }
+    }
+
+    function b2Tick() {
+      // Drift contact bearings so radar looks alive
+      B2.state.contacts.forEach(c => {
+        c.bearing = (c.bearing + (Math.random() - 0.5) * 2 + 360) % 360;
+      });
+      b2UpdateUI();
+    }
+
+    function b2UpdateUI() {
+      const s = B2.state;
+
+      // App name in top HUD
+      document.getElementById("b2ActiveApp").textContent = s.appName || "NO APP LOADED";
+
+      // Vitals readouts
+      document.getElementById("b2Downloads").innerHTML = formatNum(s.metrics.downloads) + "<small></small>";
+      document.getElementById("b2Users").innerHTML = formatNum(s.metrics.users) + "<small></small>";
+      document.getElementById("b2Rating").innerHTML = (s.metrics.rating || 0).toFixed(1) + "<small>⭐</small>";
+      document.getElementById("b2Crash").innerHTML = (s.metrics.crash || 0).toFixed(1) + "<small>%</small>";
+      document.getElementById("b2Retention").innerHTML = (s.metrics.retention || 0).toFixed(0) + "<small>%</small>";
+      document.getElementById("b2Revenue").innerHTML = "$" + formatNum(s.metrics.revenue);
+      document.getElementById("b2Version").innerHTML = escapeHTML(s.metrics.version || "v0.0") + "<small></small>";
+      document.getElementById("b2Days").innerHTML = (s.metrics.days || 0) + "<small>d</small>";
+
+      // Vitals tag
+      document.getElementById("b2VitalsTag").textContent = s.appName ? "LOADED" : "NOT LOADED";
+
+      // Readout color states
+      setReadoutState("b2RatingRO", s.metrics.rating >= 4.0 ? "" : s.metrics.rating >= 3.0 ? "warn" : "danger");
+      setReadoutState("b2CrashRO", s.metrics.crash <= 1 ? "" : s.metrics.crash <= 3 ? "warn" : "danger");
+      setReadoutState("b2RetentionRO", s.metrics.retention >= 40 ? "" : s.metrics.retention >= 20 ? "warn" : "danger");
+      setReadoutState("b2DownloadsRO", s.metrics.downloads > 1000 ? "" : s.metrics.downloads > 100 ? "warn" : "danger");
+      setReadoutState("b2UsersRO", s.metrics.users > 100 ? "" : s.metrics.users > 10 ? "warn" : "danger");
+
+      // ASO Stealth calc
+      const asoKeys = ["policy", "screens", "keywords", "graphic", "video", "storerating"];
+      let asoPoints = 0;
+      asoKeys.forEach(k => { if (s.aso[k]) asoPoints++; });
+      const asoPct = Math.round((asoPoints / asoKeys.length) * 100);
+
+      const fill = document.getElementById("b2StealthFill");
+      fill.style.width = asoPct + "%";
+      let label = "ASO: STRONG";
+      let fillColor = "linear-gradient(90deg, #00ff88, #00cc66)";
+      if (asoPct < 70) { label = "ASO: PARTIAL"; fillColor = "linear-gradient(90deg, #ffaa00, #ff8800)"; }
+      if (asoPct < 40) { label = "ASO: WEAK"; fillColor = "linear-gradient(90deg, #ff3333, #cc0000)"; }
+      if (!s.appName) { label = "LOAD APP"; fillColor = "linear-gradient(90deg, #444, #222)"; }
+      fill.style.background = fillColor;
+      document.getElementById("b2StealthLabel").textContent = label;
+      document.getElementById("b2RcsTag").textContent = asoPct + "%";
+
+      // ASO pill
+      const asoPill = document.getElementById("b2AsoPill");
+      asoPill.classList.remove("warn","danger");
+      if (asoPct < 70 && s.appName) asoPill.classList.add("warn");
+      if (asoPct < 40 && s.appName) asoPill.classList.add("danger");
+      asoPill.innerHTML = '<span class="dot"></span> ASO: ' + (s.appName ? asoPct + "%" : "--");
+
+      // Tech stack engines
+      const techMap = { frontend:"1", backend:"2", database:"3", auth:"4" };
+      Object.keys(techMap).forEach(k => {
+        const lvl = s.tech[k];
+        const bar = document.getElementById("b2Eng" + techMap[k] + "Bar");
+        const num = document.getElementById("b2Eng" + techMap[k] + "N1");
+        const stat = document.getElementById("b2Eng" + techMap[k] + "Status");
+        const engDiv = document.querySelector('.b2-engine[data-key="' + k + '"]');
+        if (bar) bar.style.width = lvl + "%";
+        if (num) num.textContent = lvl;
+        if (stat) {
+          if (lvl === 0) stat.textContent = "NOT BUILT";
+          else if (lvl === 25) stat.textContent = "PARTIAL";
+          else if (lvl === 60) stat.textContent = "IN PROGRESS";
+          else if (lvl === 100) stat.textContent = "LIVE";
+        }
+        if (engDiv) engDiv.classList.toggle("off", lvl === 0);
+      });
+
+      // Systems pill
+      const sysPill = document.getElementById("b2SystemsPill");
+      const techAvg = (s.tech.frontend + s.tech.backend + s.tech.database + s.tech.auth) / 4;
+      sysPill.classList.remove("warn","danger");
+      if (techAvg < 60) sysPill.classList.add("warn");
+      if (techAvg < 25) sysPill.classList.add("danger");
+      sysPill.innerHTML = '<span class="dot"></span> SYSTEMS ' + (s.appName ? Math.round(techAvg) + "%" : "NOMINAL");
+
+      // ASO toggle buttons sync
+      const asoBtnMap = {
+        policy: "b2PolicyBtn", screens: "b2ScreensBtn", keywords: "b2KeywordsBtn",
+        graphic: "b2GraphicBtn", video: "b2VideoBtn", storerating: "b2StoreRatingBtn"
+      };
+      Object.keys(asoBtnMap).forEach(k => {
+        const btn = document.getElementById(asoBtnMap[k]);
+        if (!btn) return;
+        const on = s.aso[k];
+        btn.textContent = on ? "YES" : "NO";
+        btn.classList.toggle("on", on);
+      });
+
+      // Feature arsenal sync
+      const featMap = { login:"b2Feat1", payments:"b2Feat2", push:"b2Feat3", analytics:"b2Feat4", ai:"b2Feat5" };
+      Object.keys(featMap).forEach(k => {
+        const btn = document.getElementById(featMap[k]);
+        if (!btn) return;
+        const on = s.features[k];
+        btn.textContent = on ? "ARMED" : "SAFE";
+        btn.classList.toggle("on", on);
+        btn.classList.toggle("warn", on);
+      });
+
+      // Master caution
+      const mc = document.getElementById("b2MasterCaution");
+      const dangerAlerts = s.alerts.filter(a => a.level === "danger").length;
+      const anyFeatureArmed = Object.values(s.features).some(v => v);
+      if (dangerAlerts > 0) mc.classList.add("show");
+      else mc.classList.remove("show");
+
+      // Alerts count
+      document.getElementById("b2AlertCount").textContent = s.alerts.length + " ALERTS";
+
+      // Save
+      b2SaveAll();
+    }
+
+    function setReadoutState(id, state) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove("warn","danger");
+      if (state) el.classList.add(state);
+    }
+
+    function formatNum(n) {
+      n = Number(n) || 0;
+      if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
+      if (n >= 1000) return (n / 1000).toFixed(1) + "K";
+      return String(Math.round(n));
+    }
+
+    /* --- Load / Unload App --- */
+    function b2LoadApp() {
+      const name = document.getElementById("b2AppNameInput").value.trim();
+      const url = document.getElementById("b2AppUrlInput").value.trim();
+      if (!name) { showToast("Please enter your app name."); return; }
+      B2.state.appName = name;
+      B2.state.appUrl = url;
+      b2Log("App loaded: " + name, "info");
+      showToast("App loaded: " + name);
+      speak(name + " loaded into command centre.");
+      b2UpdateUI();
+    }
+    function b2UnloadApp() {
+      B2.state.appName = "";
+      B2.state.appUrl = "";
+      b2Log("App unloaded from command centre.", "warn");
+      showToast("App unloaded.");
+      b2UpdateUI();
+    }
+
+    /* --- Contacts --- */
+    function b2AddContact() {
+      const name = document.getElementById("b2ContactName").value.trim();
+      const type = document.getElementById("b2ContactType").value;
+      if (!name) { showToast("Enter a name."); return; }
+      B2.state.contacts.push({
+        id: Date.now(),
+        name: name,
+        type: type,
+        bearing: Math.random() * 360
+      });
+      document.getElementById("b2ContactName").value = "";
+      b2RenderContacts();
+      b2Log("Contact added: " + name + " (" + type + ")", type === "threat" ? "danger" : "info");
+      showToast("Contact added.");
+      b2UpdateUI();
+    }
+    function b2DeleteContact(id) {
+      B2.state.contacts = B2.state.contacts.filter(c => c.id !== id);
+      b2RenderContacts();
+      b2UpdateUI();
+    }
+    function b2RenderContacts() {
+      const c = document.getElementById("b2ContactList");
+      if (!B2.state.contacts.length) {
+        c.innerHTML = '<div style="color:#4da876;font-style:italic;">No contacts yet. Add competitors or threats above.</div>';
+        return;
+      }
+      c.innerHTML = "";
+      B2.state.contacts.forEach(ct => {
+        const row = document.createElement("div");
+        row.className = "ct-row" + (ct.type === "threat" ? " hostile" : ct.type === "competitor" ? " competitor" : "");
+        row.innerHTML = `<span>${escapeHTML(ct.name)} — ${ct.type.toUpperCase()}</span><span class="ct-del" onclick="b2DeleteContact(${ct.id})">✕</span>`;
+        c.appendChild(row);
+      });
+    }
+
+    /* --- Metrics --- */
+    function b2UpdateMetric() {
+      const key = document.getElementById("b2MetricKey").value.trim().toLowerCase();
+      const val = document.getElementById("b2MetricValue").value.trim();
+      if (!key || !val) { showToast("Enter metric and value."); return; }
+      if (!(key in B2.state.metrics)) { showToast("Unknown metric: " + key); return; }
+
+      if (key === "version") B2.state.metrics.version = val;
+      else B2.state.metrics[key] = parseFloat(val) || 0;
+
+      document.getElementById("b2MetricKey").value = "";
+      document.getElementById("b2MetricValue").value = "";
+      b2Log("Metric updated: " + key + " = " + val, "info");
+      showToast("Metric updated.");
+      b2UpdateUI();
+    }
+
+    /* --- ASO --- */
+    function b2ToggleASO(key) {
+      B2.state.aso[key] = !B2.state.aso[key];
+      b2Log("ASO: " + key + " = " + (B2.state.aso[key] ? "YES" : "NO"), "info");
+      b2UpdateUI();
+    }
+
+    /* --- Tech Stack --- */
+    function b2SetTechLevel(key) {
+      const levels = [0, 25, 60, 100];
+      const cur = B2.state.tech[key];
+      const idx = levels.indexOf(cur);
+      const next = levels[(idx + 1) % levels.length];
+      B2.state.tech[key] = next;
+      b2Log("Tech " + key + " → " + next + "%", "info");
+      b2UpdateUI();
+    }
+
+    /* --- Features --- */
+    function b2ToggleFeature(key) {
+      B2.state.features[key] = !B2.state.features[key];
+      b2Log("Feature " + key + " " + (B2.state.features[key] ? "ARMED" : "SAFE"), B2.state.features[key] ? "warn" : "info");
+      b2UpdateUI();
+    }
+    function b2ShipAllFeatures() {
+      Object.keys(B2.state.features).forEach(k => B2.state.features[k] = true);
+      b2Log("All features ARMED — ready to ship.", "warn");
+      showToast("All features armed.");
+      b2UpdateUI();
+    }
+    function b2SafeAllFeatures() {
+      Object.keys(B2.state.features).forEach(k => B2.state.features[k] = false);
+      b2Log("All features SAFE.", "info");
+      showToast("All features safe.");
+      b2UpdateUI();
+    }
+    function b2AddCustomFeature() {
+      const name = document.getElementById("b2NewFeatureName").value.trim();
+      if (!name) { showToast("Enter a feature name."); return; }
+      B2.state.customFeatures.push({ name, armed: false });
+      document.getElementById("b2NewFeatureName").value = "";
+      b2Log("Custom feature added: " + name, "info");
+      showToast("Custom feature added.");
+      b2RenderCustomFeatures();
+    }
+    function b2RenderCustomFeatures() {
+      // Append to feature arsenal panel dynamically (optional — keep minimal)
+      // For simplicity, log only
+    }
+
+    /* --- Alerts --- */
+    function b2AddAlert(level) {
+      const msgs = {
+        info: prompt("Info alert message:", "Version 1.0.3 deployed") || "Info logged",
+        warn: prompt("Warning alert message:", "Crash rate rising") || "Warning logged",
+        danger: prompt("Critical alert message:", "Privacy policy URL missing") || "Critical logged"
+      };
+      B2.state.alerts.unshift({
+        id: Date.now(),
+        level: level,
+        msg: msgs[level],
+        ts: new Date().toISOString()
+      });
+      b2Log("Alert [" + level.toUpperCase() + "]: " + msgs[level], level === "danger" ? "danger" : level === "warn" ? "warn" : "info");
+      b2RenderAlerts();
+      b2UpdateUI();
+    }
+    function b2DismissAlert(id) {
+      B2.state.alerts = B2.state.alerts.filter(a => a.id !== id);
+      b2RenderAlerts();
+      b2UpdateUI();
+    }
+    function b2RenderAlerts() {
+      const c = document.getElementById("b2AlertList");
+      if (!B2.state.alerts.length) {
+        c.innerHTML = '<div style="color:#4da876;font-style:italic;font-size:12px;">No alerts. Systems looking good.</div>';
+        return;
+      }
+      c.innerHTML = "";
+      B2.state.alerts.forEach(a => {
+        const div = document.createElement("div");
+        div.className = "b2-alert" + (a.level === "danger" ? " danger" : a.level === "warn" ? "" : " info");
+        const t = new Date(a.ts);
+        const ts = String(t.getHours()).padStart(2,"0") + ":" + String(t.getMinutes()).padStart(2,"0");
+        div.innerHTML = `<span><strong>${ts}</strong> — ${escapeHTML(a.msg)}</span><button class="a-dismiss" onclick="b2DismissAlert(${a.id})">Dismiss</button>`;
+        c.appendChild(div);
+      });
+    }
+
+    /* --- Dev Log --- */
+    function b2Log(msg, type) {
+      B2.state.log.push({ ts: new Date().toISOString(), msg: msg, type: type || "info" });
+      if (B2.state.log.length > 200) B2.state.log = B2.state.log.slice(-200);
+      b2RenderLog();
+      b2SaveAll();
+    }
+    function b2RenderLog() {
+      const el = document.getElementById("b2Log");
+      if (!el) return;
+      el.innerHTML = "";
+      B2.state.log.slice().reverse().forEach(e => {
+        const div = document.createElement("div");
+        div.className = "log-entry" + (e.type === "warn" ? " warn" : e.type === "danger" ? " danger" : "");
+        const t = new Date(e.ts);
+        const ts = String(t.getUTCHours()).padStart(2,"0") + ":" +
+                   String(t.getUTCMinutes()).padStart(2,"0") + ":" +
+                   String(t.getUTCSeconds()).padStart(2,"0") + "Z";
+        div.innerHTML = `<span class="ts">${ts}</span> — ${escapeHTML(e.msg)}`;
+        el.appendChild(div);
+      });
+      document.getElementById("b2LogCount").textContent = B2.state.log.length + " ENTRIES";
+    }
+    function b2ClearLog() {
+      if (!confirm("Clear dev log?")) return;
+      B2.state.log = [];
+      b2RenderLog(); b2SaveAll();
+      showToast("Log cleared.");
+    }
+    function b2ExportLog() {
+      if (!B2.state.log.length) { showToast("Log is empty."); return; }
+      let out = "B-2 APP COMMAND CENTRE — DEV LOG\n==================================\n\n";
+      out += "App: " + (B2.state.appName || "NONE") + "\n\n";
+      B2.state.log.forEach(e => { out += `[${e.ts}] [${e.type.toUpperCase()}] ${e.msg}\n`; });
+      downloadText(out, "b2-command-dev-log.txt");
+    }
+
+    /* --- UTC Clock --- */
+    function b2UpdateUTC() {
+      const el = document.getElementById("b2UtcClock");
+      if (!el) return;
+      const tick = () => {
+        const t = new Date();
+        el.textContent = String(t.getUTCHours()).padStart(2,"0") + ":" +
+                         String(t.getUTCMinutes()).padStart(2,"0") + ":" +
+                         String(t.getUTCSeconds()).padStart(2,"0") + "Z";
+      };
+      tick();
+      if (window._b2UtcInt) clearInterval(window._b2UtcInt);
+      window._b2UtcInt = setInterval(tick, 1000);
+    }
+
+    /* --- Save / Load --- */
+    function b2SaveAll() {
+      try {
+        localStorage.setItem(CONFIG.b2StateKey, JSON.stringify({
+          appName: B2.state.appName,
+          appUrl: B2.state.appUrl,
+          contacts: B2.state.contacts,
+          metrics: B2.state.metrics,
+          aso: B2.state.aso,
+          tech: B2.state.tech,
+          features: B2.state.features,
+          customFeatures: B2.state.customFeatures,
+          alerts: B2.state.alerts
+        }));
+        localStorage.setItem(CONFIG.b2LogKey, JSON.stringify(B2.state.log));
+      } catch(e) {}
+    }
+
+    function b2LoadAll() {
+      try {
+        const raw = localStorage.getItem(CONFIG.b2StateKey);
+        if (raw) {
+          const d = JSON.parse(raw);
+          B2.state.appName = d.appName || "";
+          B2.state.appUrl = d.appUrl || "";
+          B2.state.contacts = d.contacts || [];
+          B2.state.metrics = Object.assign(B2.state.metrics, d.metrics || {});
+          B2.state.aso = Object.assign(B2.state.aso, d.aso || {});
+          B2.state.tech = Object.assign(B2.state.tech, d.tech || {});
+          B2.state.features = Object.assign(B2.state.features, d.features || {});
+          B2.state.customFeatures = d.customFeatures || [];
+          B2.state.alerts = d.alerts || [];
+        }
+        const log = localStorage.getItem(CONFIG.b2LogKey);
+        if (log) B2.state.log = JSON.parse(log) || [];
+
+        // Sync inputs
+        document.getElementById("b2AppNameInput").value = B2.state.appName || "";
+        document.getElementById("b2AppUrlInput").value = B2.state.appUrl || "";
+
+        b2RenderContacts();
+        b2RenderAlerts();
+        b2RenderLog();
+        b2UpdateUI();
+      } catch(e) { console.warn("B-2 load error", e); }
+    }
+
+    /* --- B-2 Tabs --- */
+    document.querySelectorAll(".b2-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".b2-tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".b2-tab-content").forEach(c => c.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById("b2tab-" + tab.dataset.b2tab).classList.add("active");
+        if (tab.dataset.b2tab === "live" && !B2.radarAnimId) b2InitRadar();
+      });
+    });
 
     /* ===== UTILITIES ===== */
     async function copyText(text) {
-      try {
-        await navigator.clipboard.writeText(text);
-        showToast("Copied to clipboard.");
-      } catch {
-        const area = document.createElement("textarea");
-        area.value = text;
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand("copy");
-        area.remove();
-        showToast("Copied.");
+      try { await navigator.clipboard.writeText(text); showToast("Copied to clipboard."); }
+      catch {
+        const a = document.createElement("textarea"); a.value = text;
+        document.body.appendChild(a); a.select();
+        document.execCommand("copy"); a.remove(); showToast("Copied.");
       }
     }
-
     function downloadText(text, filename) {
-      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const blob = new Blob([text], { type:"text/plain;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      showToast("Download created.");
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url); showToast("Download created.");
     }
-
     function escapeHTML(value) {
       return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;").replaceAll("'","&#039;");
     }
-
     let toastTimer;
     function showToast(message) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.classList.add("show");
+      const t = document.getElementById("toast");
+      t.textContent = message; t.classList.add("show");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
+      toastTimer = setTimeout(() => t.classList.remove("show"), 2500);
     }
-
     function copyPolicyTemplate() {
       const text = document.getElementById("policyTemplateBlock").innerText;
       copyText(text);
     }
-
-    function scrollToLaunchGuide() {
-      document.getElementById("launchGuideSection").scrollIntoView({ behavior: "smooth" });
-    }
-
-    function scrollToLearn() {
-      document.getElementById("learnSection").scrollIntoView({ behavior: "smooth" });
-    }
+    function scrollToLaunchGuide() { document.getElementById("launchGuideSection").scrollIntoView({ behavior:"smooth" }); }
+    function scrollToLearn() { document.getElementById("learnSection").scrollIntoView({ behavior:"smooth" }); }
 
     /* ===== GUIDE TABS ===== */
     document.querySelectorAll(".guide-tab").forEach(tab => {
@@ -3497,22 +3333,25 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       });
     });
 
+    /* ===== ESC KEY ===== */
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        const office = document.getElementById("officeOverlay");
+        const b2 = document.getElementById("b2Overlay");
+        if (office.classList.contains("active")) closeOfficeRoom();
+        else if (b2.classList.contains("active")) closeB2Room();
+      }
+    });
+
     /* ===== STARTUP ===== */
     window.addEventListener("DOMContentLoaded", () => {
       if (sessionStorage.getItem("nineUnlocked") === "true") {
         document.getElementById("accessScreen").classList.add("hidden");
         document.getElementById("app").classList.remove("hidden");
-        renderHistory();
-        renderTrackedProducts();
+        renderHistory(); renderTrackedProducts();
       }
-
-      if (sessionStorage.getItem("officeUnlocked") === "true") {
-        officeUnlocked = true;
-      }
-
-      if (sessionStorage.getItem("teamUnlocked") === "true") {
-        teamUnlocked = true;
-      }
+      if (sessionStorage.getItem("officeUnlocked") === "true") officeUnlocked = true;
+      if (sessionStorage.getItem("teamUnlocked") === "true") teamUnlocked = true;
     });
   </script>
 

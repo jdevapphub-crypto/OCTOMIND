@@ -102,6 +102,8 @@
     .icon-btn.gold:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(255,200,87,.15); }
     .icon-btn.hud { border-color: rgba(0,255,136,.25); color: var(--hud); }
     .icon-btn.hud:hover { border-color: var(--hud); box-shadow: 0 0 20px rgba(0,255,136,.2); }
+    .icon-btn.shield { border-color: rgba(30,144,255,.35); color: #5eb4ff; }
+    .icon-btn.shield:hover { border-color: #1E90FF; box-shadow: 0 0 20px rgba(30,144,255,.25); }
 
     /* ===== HERO ===== */
     .hero { text-align: center; padding: 45px 20px 20px; }
@@ -715,7 +717,6 @@
     .b2-radar-legend .lg-dot.competitor { background: #ffaa00; box-shadow: 0 0 8px #ffaa00; }
     .b2-radar-legend .lg-dot.threat { background: #ff3333; box-shadow: 0 0 8px #ff3333; }
 
-    /* Market radar input row */
     .b2-radar-add-row {
       display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap;
     }
@@ -973,6 +974,543 @@
     .b2-spec-row .k { color: #5cc98a; letter-spacing: 1px; }
     .b2-spec-row .v { color: var(--hud); font-weight: 700; text-align: right; }
 
+    /* ================= NOOFF GUARD ADMIN PANEL — FULL SCREEN OVERLAY ================= */
+    #adminOverlay {
+      position: fixed; inset: 0; z-index: 9600;
+      background: #0A0F1E;
+      overflow-y: auto;
+      display: none;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    #adminOverlay.active { display: block; }
+
+    #adminOverlay a { color: #1E90FF; text-decoration: none; }
+    #adminOverlay a:hover { text-decoration: underline; }
+    #adminOverlay button { font-family: inherit; cursor: pointer; }
+    #adminOverlay input { font-family: inherit; }
+
+    /* Admin login screen */
+    #adminLoginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #0A1931 0%, #0A0F1E 100%);
+    }
+    #adminLoginScreen .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #141E33;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    #adminLoginScreen .logo {
+      width: 72px; height: 72px;
+      margin: 0 auto 20px;
+      background: rgba(30,144,255,0.15);
+      border: 1.5px solid rgba(30,144,255,0.3);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px;
+    }
+    #adminLoginScreen h1 { font-size: 24px; font-weight: 800; margin-bottom: 6px; color: #fff; }
+    #adminLoginScreen p.sub {
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+    #adminLoginScreen input {
+      width: 100%;
+      padding: 15px 16px;
+      margin-bottom: 12px;
+      background: #0A0F1E;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      transition: border-color .2s;
+    }
+    #adminLoginScreen input:focus { border-color: #1E90FF; }
+    #adminLoginScreen input::placeholder { color: rgba(255,255,255,0.25); }
+    #adminLoginScreen button {
+      width: 100%;
+      padding: 15px;
+      background: #1E90FF;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-top: 8px;
+      transition: opacity .2s, transform .05s;
+    }
+    #adminLoginScreen button:hover { opacity: .9; }
+    #adminLoginScreen button:active { transform: scale(.98); }
+    #adminLoginScreen button:disabled { opacity: .5; cursor: not-allowed; }
+    #adminLoginScreen .login-error {
+      color: #ff6b6b;
+      font-size: 12px;
+      margin-top: 14px;
+      min-height: 16px;
+    }
+
+    /* Admin app */
+    #adminAppScreen { display: none; min-height: 100vh; flex-direction: column; }
+    #adminAppScreen.active { display: flex; }
+
+    .admin-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28px;
+      background: rgba(10,25,49,0.95);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .admin-topbar .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-weight: 800; font-size: 16px;
+    }
+    .admin-topbar .brand .icon {
+      width: 36px; height: 36px;
+      background: rgba(30,144,255,0.15);
+      border: 1px solid rgba(30,144,255,0.3);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+    }
+    .admin-topbar .brand .sub {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 700;
+    }
+    .admin-topbar .actions {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap;
+    }
+    .admin-close-btn {
+      padding: 10px 18px;
+      background: rgba(255,85,119,0.12);
+      border: 1px solid rgba(255,85,119,0.4);
+      border-radius: 10px;
+      color: #ff6b8a;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      transition: background .2s;
+    }
+    .admin-close-btn:hover { background: rgba(255,85,119,0.25); }
+    .admin-yoco-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: rgba(30,144,255,0.12);
+      border: 1px solid rgba(30,144,255,0.4);
+      border-radius: 10px;
+      color: #1E90FF;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      transition: background .2s;
+    }
+    .admin-yoco-link:hover { background: rgba(30,144,255,0.22); text-decoration: none; }
+    .admin-badge {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.4);
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #22c55e;
+    }
+    .admin-badge .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34,197,94,0.7);
+      animation: adminPulse 1.8s infinite;
+    }
+    @keyframes adminPulse {
+      0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    }
+    .admin-logout-btn {
+      padding: 10px 16px;
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: all .2s;
+    }
+    .admin-logout-btn:hover { color: #ef4444; border-color: rgba(239,68,68,0.4); }
+
+    .admin-content {
+      flex: 1;
+      padding: 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .admin-stat-card {
+      background: #141E33;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+    .admin-stat-card:hover { transform: translateY(-2px); border-color: rgba(30,144,255,0.3); }
+    .admin-stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: #1E90FF;
+    }
+    .admin-stat-card.stat-users::before { background: #1E90FF; }
+    .admin-stat-card.stat-paid::before  { background: #22c55e; }
+    .admin-stat-card.stat-pending::before { background: #f59e0b; }
+    .admin-stat-card .label {
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .admin-stat-card .value {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .admin-stat-card.stat-users .value   { color: #1E90FF; }
+    .admin-stat-card.stat-paid .value    { color: #22c55e; }
+    .admin-stat-card.stat-pending .value { color: #f59e0b; }
+    .admin-stat-card .desc { color: rgba(255,255,255,0.5); font-size: 12px; }
+
+    .admin-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      overflow-x: auto;
+    }
+    .admin-tab {
+      padding: 14px 22px;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      transition: color .2s;
+    }
+    .admin-tab:hover { color: white; }
+    .admin-tab.active { color: #1E90FF; }
+    .admin-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0; right: 0;
+      height: 3px;
+      background: #1E90FF;
+      border-radius: 3px 3px 0 0;
+    }
+    .admin-tab .count {
+      display: inline-block;
+      background: rgba(255,255,255,0.08);
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: 11px;
+      margin-left: 8px;
+    }
+    .admin-tab.active .count {
+      background: rgba(30,144,255,0.2);
+      color: #1E90FF;
+    }
+
+    .admin-toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .admin-search-wrap {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+    .admin-search-wrap input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      background: #141E33;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      color: white;
+      font-size: 13px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .admin-search-wrap input:focus { border-color: #1E90FF; }
+    .admin-search-wrap input::placeholder { color: rgba(255,255,255,0.3); }
+    .admin-search-wrap .icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .admin-tool-btn {
+      padding: 12px 18px;
+      background: #141E33;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: white;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .2s;
+    }
+    .admin-tool-btn:hover { border-color: #1E90FF; color: #1E90FF; }
+    .admin-tool-btn.primary { background: #1E90FF; border-color: #1E90FF; color: white; }
+    .admin-tool-btn.primary:hover { opacity: .9; }
+
+    .admin-table-wrap {
+      background: #141E33;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .admin-table-wrap table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .admin-table-wrap thead { background: rgba(10,15,30,0.6); }
+    .admin-table-wrap th {
+      text-align: left;
+      padding: 14px 16px;
+      color: rgba(255,255,255,0.5);
+      font-size: 11px;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      white-space: nowrap;
+    }
+    .admin-table-wrap td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.85);
+      vertical-align: middle;
+    }
+    .admin-table-wrap tbody tr { transition: background .15s; }
+    .admin-table-wrap tbody tr:hover { background: rgba(30,144,255,0.04); }
+    .admin-table-wrap tbody tr:last-child td { border-bottom: none; }
+
+    .admin-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+    .admin-pill.paid     { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+    .admin-pill.unpaid   { background: rgba(239,68,68,0.15); color: #ff6b6b; border: 1px solid rgba(239,68,68,0.3); }
+    .admin-pill.pending  { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+    .admin-pill.approved { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+    .admin-pill.rejected { background: rgba(239,68,68,0.15); color: #ff6b6b; border: 1px solid rgba(239,68,68,0.3); }
+
+    .admin-row-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .admin-btn-sm {
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .admin-btn-sm.approve { background: rgba(34,197,94,0.15); color: #22c55e; border-color: rgba(34,197,94,0.4); }
+    .admin-btn-sm.approve:hover { background: #22c55e; color: white; }
+    .admin-btn-sm.reject { background: rgba(239,68,68,0.15); color: #ff6b6b; border-color: rgba(239,68,68,0.4); }
+    .admin-btn-sm.reject:hover { background: #ef4444; color: white; }
+    .admin-btn-sm:disabled { opacity: .4; cursor: not-allowed; }
+
+    .admin-mono {
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+    .admin-muted { color: rgba(255,255,255,0.5); }
+    .admin-truncate {
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+
+    .admin-empty-state {
+      padding: 60px 24px;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+    }
+    .admin-empty-state .icon { font-size: 40px; margin-bottom: 12px; opacity: .5; }
+    .admin-empty-state p { font-size: 13px; margin-bottom: 4px; }
+
+    .admin-loading-row {
+      padding: 40px;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+    }
+    .admin-spinner {
+      display: inline-block;
+      width: 20px; height: 20px;
+      border: 2px solid rgba(30,144,255,0.2);
+      border-top-color: #1E90FF;
+      border-radius: 50%;
+      animation: adminSpin .8s linear infinite;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    @keyframes adminSpin { to { transform: rotate(360deg); } }
+
+    /* Admin toast */
+    .admin-toast {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      background: #141E33;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(200%);
+      transition: transform .3s ease;
+      z-index: 99999;
+      max-width: 360px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      color: #fff;
+    }
+    .admin-toast.show { transform: translateY(0); }
+    .admin-toast.success { border-color: rgba(34,197,94,0.5); }
+    .admin-toast.success .dot { background: #22c55e; }
+    .admin-toast.error { border-color: rgba(239,68,68,0.5); }
+    .admin-toast.error .dot { background: #ef4444; }
+    .admin-toast .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .admin-toast.info { border-color: rgba(30,144,255,0.5); }
+    .admin-toast.info .dot { background: #1E90FF; }
+
+    /* Admin confirm modal */
+    .admin-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99998;
+      padding: 24px;
+    }
+    .admin-modal-overlay.show { display: flex; }
+    .admin-modal {
+      background: #141E33;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      text-align: center;
+      color: #fff;
+    }
+    .admin-modal .icon {
+      width: 60px; height: 60px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+    .admin-modal .icon.warn   { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1.5px solid rgba(245,158,11,0.4); }
+    .admin-modal .icon.danger { background: rgba(239,68,68,0.15);  color: #ef4444; border: 1.5px solid rgba(239,68,68,0.4); }
+    .admin-modal h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+    .admin-modal p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; margin-bottom: 22px; }
+    .admin-modal p strong { color: white; }
+    .admin-modal .controls { display: flex; gap: 10px; justify-content: center; }
+    .admin-modal .controls button {
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      border: none;
+      transition: all .2s;
+    }
+    .admin-modal .controls .confirm { background: #ef4444; color: white; }
+    .admin-modal .controls .confirm.safe { background: #22c55e; }
+    .admin-modal .controls .cancel { background: transparent; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08); }
+    .admin-modal .controls button:hover { opacity: .9; transform: translateY(-1px); }
+
+    @media (max-width: 720px) {
+      .admin-content { padding: 16px; }
+      .admin-topbar { padding: 12px 16px; }
+      .admin-stat-card .value { font-size: 28px; }
+      .admin-table-wrap th, .admin-table-wrap td { padding: 12px 10px; font-size: 12px; }
+      .admin-truncate { max-width: 120px; }
+      .admin-row-actions { flex-direction: column; }
+      .admin-yoco-link span { display: none; }
+    }
+
     /* ===== MOBILE ===== */
     @media (max-width: 800px) {
       .topbar { padding: 0 14px; height: auto; padding-top: 10px; padding-bottom: 10px; }
@@ -1055,6 +1593,7 @@
         <button class="icon-btn gold" onclick="openOfficeRoom()">👑 <span>Jason's Office</span></button>
         <button class="icon-btn" onclick="openTeamRoom()">👥 <span>Team Room</span></button>
         <button class="icon-btn hud" onclick="openB2Room()">🛩️ <span>B-2 COMMAND</span></button>
+        <button class="icon-btn shield" onclick="openAdminRoom()">🛡️ <span>NoOff Admin</span></button>
         <button class="icon-btn" onclick="scrollToLearn()">📚 <span>Learn</span></button>
       </div>
     </header>
@@ -1062,7 +1601,7 @@
     <section class="hero">
       <div class="welcome">WELCOME TO JOHELIV LABS</div>
       <h1>NINE: OCTOBRAIN</h1>
-      <p>One idea. Nine specialised brains. One complete product blueprint. Plus a full launch guide, tracker, private office, team room, B-2 App Command Centre, and learning centre.</p>
+      <p>One idea. Nine specialised brains. One complete product blueprint. Plus a full launch guide, tracker, private office, team room, B-2 App Command Centre, NoOff Guard Admin, and learning centre.</p>
     </section>
 
     <main class="workspace">
@@ -2177,7 +2716,531 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
     </div>
   </div>
 
+  <!-- ========================================================= -->
+  <!-- NOOFF GUARD ADMIN PANEL — FULL SCREEN OVERLAY -->
+  <!-- ========================================================= -->
+  <div id="adminOverlay">
+
+    <!-- Admin Login -->
+    <div id="adminLoginScreen">
+      <div class="login-card">
+        <div class="logo">🛡️</div>
+        <h1>Admin Panel</h1>
+        <p class="sub">NoOff Guard Control Center</p>
+        <input id="adminLoginEmail" type="email" placeholder="Admin email" autocomplete="email" />
+        <input id="adminLoginPassword" type="password" placeholder="Password" autocomplete="current-password" />
+        <button id="adminLoginBtn" onclick="adminHandleLogin()">SIGN IN</button>
+        <div class="login-error" id="adminLoginError"></div>
+        <button style="background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.08);margin-top:12px;" onclick="closeAdminRoom()">← Back to OCTOBRAIN</button>
+      </div>
+    </div>
+
+    <!-- Admin App -->
+    <div id="adminAppScreen">
+      <div class="admin-topbar">
+        <div class="brand">
+          <div class="icon">🛡️</div>
+          <div>
+            NoOff Guard
+            <span class="sub">ADMIN CONTROL CENTER</span>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="admin-yoco-link" href="https://pay.yoco.com/NoOff-Guard" target="_blank" rel="noopener">
+            💳 <span>Yoco Dashboard</span>
+          </a>
+          <div class="admin-badge">
+            <span class="dot"></span>
+            <span id="adminEmailLabel">admin</span>
+          </div>
+          <button class="admin-logout-btn" onclick="adminHandleLogout()">Sign out</button>
+          <button class="admin-close-btn" onclick="closeAdminRoom()">✕ Close Admin</button>
+        </div>
+      </div>
+
+      <div class="admin-content">
+        <div class="admin-stats-grid">
+          <div class="admin-stat-card stat-users">
+            <div class="label">Total Users</div>
+            <div class="value" id="adminStatTotalUsers">—</div>
+            <div class="desc">Registered accounts</div>
+          </div>
+          <div class="admin-stat-card stat-paid">
+            <div class="label">Paid Users</div>
+            <div class="value" id="adminStatPaidUsers">—</div>
+            <div class="desc">Active subscribers</div>
+          </div>
+          <div class="admin-stat-card stat-pending">
+            <div class="label">Pending Requests</div>
+            <div class="value" id="adminStatPending">—</div>
+            <div class="desc">Awaiting verification</div>
+          </div>
+        </div>
+
+        <div class="admin-tabs">
+          <button class="admin-tab active" id="adminTabBtn-payments" onclick="adminSwitchTab('payments')">
+            💳 Payment Requests <span class="count" id="adminTabCountPayments">0</span>
+          </button>
+          <button class="admin-tab" id="adminTabBtn-users" onclick="adminSwitchTab('users')">
+            👥 All Users <span class="count" id="adminTabCountUsers">0</span>
+          </button>
+        </div>
+
+        <div class="admin-toolbar">
+          <div class="admin-search-wrap">
+            <span class="icon">🔍</span>
+            <input id="adminSearchInput" type="text" placeholder="Search by email, name or device code…" oninput="adminApplyFilter()" />
+          </div>
+          <button class="admin-tool-btn primary" onclick="adminExportCSV()">
+            ⬇ Export CSV
+          </button>
+        </div>
+
+        <div id="adminTabContent-payments">
+          <div class="admin-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>UID</th>
+                  <th>Requested</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminPaymentsBody">
+                <tr><td colspan="5" class="admin-loading-row"><span class="admin-spinner"></span>Loading requests…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="adminTabContent-users" style="display:none;">
+          <div class="admin-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Device Code</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th>Location</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersBody">
+                <tr><td colspan="7" class="admin-loading-row"><span class="admin-spinner"></span>Loading users…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Toast -->
+    <div class="admin-toast" id="adminToast">
+      <span class="dot"></span>
+      <span id="adminToastMsg"></span>
+    </div>
+
+    <!-- Admin Confirm Modal -->
+    <div class="admin-modal-overlay" id="adminConfirmModal">
+      <div class="admin-modal">
+        <div class="icon warn" id="adminConfirmIcon">⚠️</div>
+        <h3 id="adminConfirmTitle">Confirm action</h3>
+        <p id="adminConfirmMessage"></p>
+        <div class="controls">
+          <button class="cancel" onclick="adminCloseConfirm()">Cancel</button>
+          <button class="confirm" id="adminConfirmBtn">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="toast"></div>
+
+  <!-- ========================================================= -->
+  <!-- FIREBASE v9 MODULAR SDK (for NoOff Guard Admin) -->
+  <!-- ========================================================= -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getDatabase,
+      ref,
+      onValue,
+      get,
+      update,
+      set
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseOptions = {
+      apiKey: "AIzaSyCKGmlv_Ia0wGY_j96sjX1obyu_psZqIns",
+      authDomain: "nooff-guard.firebaseapp.com",
+      databaseURL: "https://nooff-guard-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "nooff-guard",
+      storageBucket: "nooff-guard.firebasestorage.app",
+      messagingSenderId: "828731218639",
+      appId: "1:828731218639:web:b4b2c0f63408ad39f975ba",
+      measurementId: "G-WZJ91Q7Q2E",
+    };
+    const ADMIN_EMAIL = "jason@nooffguard.co.za";
+
+    const adminApp  = initializeApp(firebaseOptions, "adminApp");
+    const adminAuth = getAuth(adminApp);
+    const adminDb   = getDatabase(adminApp);
+
+    window.__adminFirebase = { auth: adminAuth, db: adminDb, ref, onValue, get, update, set };
+
+    let adminAllUsers = {};
+    let adminAllPayments = {};
+    let adminCurrentTab = 'payments';
+    let adminSearchTerm = '';
+    let adminListenersAttached = false;
+
+    onAuthStateChanged(adminAuth, (user) => {
+      if (!user) { adminShowLogin(); return; }
+      if (user.email?.toLowerCase() !== ADMIN_EMAIL) {
+        signOut(adminAuth);
+        adminShowLogin();
+        adminShowLoginError("Access denied. This panel is restricted to authorised administrators only.");
+        return;
+      }
+      adminShowApp(user);
+      adminAttachListeners();
+    });
+
+    window.adminHandleLogin = async function() {
+      const email = document.getElementById('adminLoginEmail').value.trim();
+      const password = document.getElementById('adminLoginPassword').value;
+      const btn = document.getElementById('adminLoginBtn');
+      const err = document.getElementById('adminLoginError');
+      err.textContent = '';
+
+      if (!email || !password) { err.textContent = 'Please enter your email and password.'; return; }
+      if (email.toLowerCase() !== ADMIN_EMAIL) {
+        err.textContent = 'Access denied. Only authorised administrators may sign in.';
+        return;
+      }
+      btn.disabled = true; btn.textContent = 'SIGNING IN…';
+      try {
+        await signInWithEmailAndPassword(adminAuth, email, password);
+      } catch (e) {
+        const map = {
+          'auth/invalid-credential': 'Invalid email or password.',
+          'auth/wrong-password': 'Incorrect password.',
+          'auth/user-not-found': 'No admin account found with that email.',
+          'auth/too-many-requests': 'Too many attempts. Try again later.',
+        };
+        err.textContent = map[e.code] || (e.message || 'Sign-in failed.');
+        btn.disabled = false; btn.textContent = 'SIGN IN';
+      }
+    };
+
+    window.adminHandleLogout = async function() { await signOut(adminAuth); };
+
+    function adminShowLogin() {
+      document.getElementById('adminLoginScreen').style.display = 'flex';
+      document.getElementById('adminAppScreen').classList.remove('active');
+      document.getElementById('adminLoginBtn').disabled = false;
+      document.getElementById('adminLoginBtn').textContent = 'SIGN IN';
+      document.getElementById('adminLoginPassword').value = '';
+    }
+    function adminShowLoginError(msg) { document.getElementById('adminLoginError').textContent = msg; }
+    function adminShowApp(user) {
+      document.getElementById('adminLoginScreen').style.display = 'none';
+      document.getElementById('adminAppScreen').classList.add('active');
+      document.getElementById('adminEmailLabel').textContent = user.email;
+    }
+
+    function adminAttachListeners() {
+      if (adminListenersAttached) return;
+      adminListenersAttached = true;
+
+      onValue(ref(adminDb, 'users'), (snap) => {
+        adminAllUsers = snap.val() || {};
+        adminUpdateStats(); adminRenderUsers(); adminRenderPayments();
+      }, (err) => { console.error('Users listener error', err); });
+
+      onValue(ref(adminDb, 'paymentRequests'), (snap) => {
+        adminAllPayments = snap.val() || {};
+        adminUpdateStats(); adminRenderPayments();
+      }, (err) => {
+        adminAllPayments = {}; adminUpdateStats(); adminRenderPayments();
+      });
+    }
+
+    function adminUpdateStats() {
+      const usersArr = Object.values(adminAllUsers);
+      const totalUsers = usersArr.length;
+      const paidUsers = usersArr.filter(u => u && u.paid === true).length;
+      const pending = Object.values(adminAllPayments).filter(p => p && p.status === 'pending_verification').length;
+
+      document.getElementById('adminStatTotalUsers').textContent = totalUsers;
+      document.getElementById('adminStatPaidUsers').textContent = paidUsers;
+      document.getElementById('adminStatPending').textContent = pending;
+      document.getElementById('adminTabCountPayments').textContent = Object.keys(adminAllPayments).length;
+      document.getElementById('adminTabCountUsers').textContent = totalUsers;
+    }
+
+    window.adminSwitchTab = function(tab) {
+      adminCurrentTab = tab;
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('adminTabBtn-' + tab).classList.add('active');
+      document.getElementById('adminTabContent-payments').style.display = tab === 'payments' ? 'block' : 'none';
+      document.getElementById('adminTabContent-users').style.display    = tab === 'users'    ? 'block' : 'none';
+    };
+
+    window.adminApplyFilter = function() {
+      adminSearchTerm = document.getElementById('adminSearchInput').value.trim().toLowerCase();
+      adminRenderPayments(); adminRenderUsers();
+    };
+
+    function adminMatchesSearch(...fields) {
+      if (!adminSearchTerm) return true;
+      return fields.some(f => (f || '').toString().toLowerCase().includes(adminSearchTerm));
+    }
+
+    function adminRenderPayments() {
+      const body = document.getElementById('adminPaymentsBody');
+      const entries = Object.entries(adminAllPayments)
+        .filter(([uid, p]) => p && adminMatchesSearch(p.email, uid, p.status))
+        .sort((a, b) => {
+          const ta = new Date(a[1]?.requestedAt || 0).getTime();
+          const tb = new Date(b[1]?.requestedAt || 0).getTime();
+          return tb - ta;
+        });
+
+      if (entries.length === 0) {
+        body.innerHTML = `<tr><td colspan="5"><div class="admin-empty-state"><div class="icon">📭</div><p>No payment requests${adminSearchTerm ? ' match your search' : ''}.</p></div></td></tr>`;
+        return;
+      }
+
+      body.innerHTML = entries.map(([uid, p]) => {
+        const status = p.status || 'pending_verification';
+        const statusClass = status === 'approved' ? 'approved' : status === 'rejected' ? 'rejected' : 'pending';
+        const requested = p.requestedAt ? adminFormatDate(p.requestedAt) : '—';
+        const email = p.email || '—';
+        const disabled = status === 'approved' || status === 'rejected' ? 'disabled' : '';
+
+        return `
+          <tr>
+            <td><span class="admin-truncate" title="${adminEscape(email)}">${adminEscape(email)}</span></td>
+            <td><span class="admin-mono">${adminEscape(uid)}</span></td>
+            <td class="admin-muted">${requested}</td>
+            <td><span class="admin-pill ${statusClass}">${status.replace(/_/g, ' ')}</span></td>
+            <td>
+              <div class="admin-row-actions">
+                <button class="admin-btn-sm approve" ${disabled} onclick="adminApprovePayment('${uid}')">✓ APPROVE R70</button>
+                <button class="admin-btn-sm reject"  ${disabled} onclick="adminRejectPayment('${uid}')">✕ REJECT</button>
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    function adminRenderUsers() {
+      const body = document.getElementById('adminUsersBody');
+      const entries = Object.entries(adminAllUsers)
+        .filter(([uid, u]) => u && adminMatchesSearch(u.email, u.name, u.deviceCode, uid))
+        .sort((a, b) => {
+          const ta = new Date(a[1]?.createdAt || 0).getTime();
+          const tb = new Date(b[1]?.createdAt || 0).getTime();
+          return tb - ta;
+        });
+
+      if (entries.length === 0) {
+        body.innerHTML = `<tr><td colspan="7"><div class="admin-empty-state"><div class="icon">👥</div><p>No users${adminSearchTerm ? ' match your search' : ''}.</p></div></td></tr>`;
+        return;
+      }
+
+      body.innerHTML = entries.map(([uid, u]) => {
+        const paid = u.paid === true;
+        const paidClass = paid ? 'paid' : 'unpaid';
+        const paidLabel = paid ? 'PAID' : 'UNPAID';
+        const created = u.createdAt ? adminFormatDate(u.createdAt) : '—';
+        const name = u.name || '—';
+        const email = u.email || '—';
+        const code = u.deviceCode || '—';
+
+        const loc = u.lastLocation;
+        let locHtml = '<span class="admin-muted">No location</span>';
+        if (loc && loc.lat != null && loc.lng != null) {
+          const lat = Number(loc.lat).toFixed(5);
+          const lng = Number(loc.lng).toFixed(5);
+          const gmap = `https://www.google.com/maps?q=${loc.lat},${loc.lng}`;
+          locHtml = `<a href="${gmap}" target="_blank" rel="noopener" class="admin-mono" title="Open in Google Maps">${lat}, ${lng}</a>`;
+        }
+
+        const toggleLabel = paid ? 'DEACTIVATE' : 'ACTIVATE';
+        const toggleClass = paid ? 'reject' : 'approve';
+
+        return `
+          <tr>
+            <td><span class="admin-truncate" title="${adminEscape(name)}">${adminEscape(name)}</span></td>
+            <td><span class="admin-truncate" title="${adminEscape(email)}">${adminEscape(email)}</span></td>
+            <td><span class="admin-mono">${adminEscape(code)}</span></td>
+            <td><span class="admin-pill ${paidClass}">${paidLabel}</span></td>
+            <td class="admin-muted">${created}</td>
+            <td>${locHtml}</td>
+            <td>
+              <div class="admin-row-actions">
+                <button class="admin-btn-sm ${toggleClass}" onclick="adminTogglePaid('${uid}', ${paid})">${toggleLabel}</button>
+              </div>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+
+    window.adminApprovePayment = function(uid) {
+      const p = adminAllPayments[uid] || {};
+      const email = p.email || uid;
+      adminShowConfirm({
+        icon: '✅', iconClass: 'warn',
+        title: 'Approve payment?',
+        message: `Mark <strong>${adminEscape(email)}</strong> as paid (R70). This will unlock full protection on their account.`,
+        confirmLabel: 'Approve R70', confirmClass: 'safe',
+        onConfirm: async () => {
+          try {
+            const nowIso = new Date().toISOString();
+            await update(ref(adminDb, `users/${uid}`), { paid: true, paidAmount: 70, paidAt: nowIso });
+            await update(ref(adminDb, `paymentRequests/${uid}`), { status: 'approved', approvedAt: nowIso, approvedBy: ADMIN_EMAIL });
+            adminShowToast(`Approved ${email}`, 'success');
+          } catch (e) { console.error(e); adminShowToast('Approve failed: ' + e.message, 'error'); }
+        }
+      });
+    };
+
+    window.adminRejectPayment = function(uid) {
+      const p = adminAllPayments[uid] || {};
+      const email = p.email || uid;
+      adminShowConfirm({
+        icon: '✕', iconClass: 'danger',
+        title: 'Reject payment?',
+        message: `Reject the payment request from <strong>${adminEscape(email)}</strong>. They will remain unpaid.`,
+        confirmLabel: 'Reject', confirmClass: '',
+        onConfirm: async () => {
+          try {
+            await update(ref(adminDb, `paymentRequests/${uid}`), {
+              status: 'rejected', rejectedAt: new Date().toISOString(), rejectedBy: ADMIN_EMAIL
+            });
+            adminShowToast(`Rejected ${email}`, 'info');
+          } catch (e) { console.error(e); adminShowToast('Reject failed: ' + e.message, 'error'); }
+        }
+      });
+    };
+
+    window.adminTogglePaid = function(uid, currentlyPaid) {
+      const u = adminAllUsers[uid] || {};
+      const email = u.email || uid;
+      const activating = !currentlyPaid;
+      adminShowConfirm({
+        icon: activating ? '✓' : '⚠️',
+        iconClass: activating ? 'warn' : 'danger',
+        title: activating ? 'Activate user?' : 'Deactivate user?',
+        message: activating
+          ? `Mark <strong>${adminEscape(email)}</strong> as paid and enable full protection.`
+          : `Set <strong>${adminEscape(email)}</strong> back to unpaid.`,
+        confirmLabel: activating ? 'Activate' : 'Deactivate',
+        confirmClass: activating ? 'safe' : '',
+        onConfirm: async () => {
+          try {
+            const nowIso = new Date().toISOString();
+            if (activating) {
+              await update(ref(adminDb, `users/${uid}`), { paid: true, paidAmount: 70, paidAt: nowIso, paidBy: ADMIN_EMAIL });
+              adminShowToast(`Activated ${email}`, 'success');
+            } else {
+              await update(ref(adminDb, `users/${uid}`), { paid: false, deactivatedAt: nowIso, deactivatedBy: ADMIN_EMAIL });
+              adminShowToast(`Deactivated ${email}`, 'info');
+            }
+          } catch (e) { console.error(e); adminShowToast('Update failed: ' + e.message, 'error'); }
+        }
+      });
+    };
+
+    window.adminExportCSV = function() {
+      const entries = Object.entries(adminAllUsers);
+      if (entries.length === 0) { adminShowToast('No users to export.', 'info'); return; }
+      const headers = ['uid','name','email','deviceCode','paid','paidAmount','paidAt','createdAt','lastLat','lastLng','lastLocationTime'];
+      const rows = entries.map(([uid, u]) => {
+        const loc = u.lastLocation || {};
+        return [uid, u.name||'', u.email||'', u.deviceCode||'', u.paid===true?'true':'false',
+          u.paidAmount||'', u.paidAt||'', u.createdAt||'',
+          loc.lat!=null?loc.lat:'', loc.lng!=null?loc.lng:'', loc.time||''];
+      });
+      const csv = [headers, ...rows].map(r => r.map(adminCsvCell).join(',')).join('\r\n');
+      const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `nooff-users-${new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')}.csv`;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      adminShowToast(`Exported ${entries.length} users`, 'success');
+    };
+
+    function adminCsvCell(v) {
+      const s = (v == null ? '' : String(v));
+      if (/[",\r\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+      return s;
+    }
+
+    let adminConfirmCallback = null;
+    function adminShowConfirm(opts) {
+      document.getElementById('adminConfirmIcon').className = 'icon ' + (opts.iconClass || 'warn');
+      document.getElementById('adminConfirmIcon').textContent = opts.icon || '⚠️';
+      document.getElementById('adminConfirmTitle').textContent = opts.title || 'Confirm';
+      document.getElementById('adminConfirmMessage').innerHTML = opts.message || '';
+      const btn = document.getElementById('adminConfirmBtn');
+      btn.textContent = opts.confirmLabel || 'Confirm';
+      btn.className = 'confirm' + (opts.confirmClass ? ' ' + opts.confirmClass : '');
+      adminConfirmCallback = opts.onConfirm;
+      document.getElementById('adminConfirmModal').classList.add('show');
+    }
+    window.adminCloseConfirm = function() {
+      document.getElementById('adminConfirmModal').classList.remove('show');
+      adminConfirmCallback = null;
+    };
+    document.getElementById('adminConfirmBtn').addEventListener('click', async () => {
+      const cb = adminConfirmCallback; adminCloseConfirm(); if (cb) await cb();
+    });
+    document.getElementById('adminConfirmModal').addEventListener('click', (e) => {
+      if (e.target.id === 'adminConfirmModal') adminCloseConfirm();
+    });
+
+    let adminToastTimer = null;
+    function adminShowToast(msg, type = 'info') {
+      const toast = document.getElementById('adminToast');
+      document.getElementById('adminToastMsg').textContent = msg;
+      toast.className = 'admin-toast ' + type;
+      void toast.offsetWidth;
+      toast.classList.add('show');
+      clearTimeout(adminToastTimer);
+      adminToastTimer = setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    function adminFormatDate(iso) {
+      try {
+        const d = new Date(iso);
+        if (isNaN(d.getTime())) return iso;
+        return d.toLocaleString(undefined, { year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+      } catch { return iso; }
+    }
+
+    function adminEscape(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    window.adminShowToast = adminShowToast;
+  </script>
 
   <script>
     /* =========================================================
@@ -2228,25 +3291,19 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       ];
       for (const name of priorityNames) {
         for (const voice of voices) {
-          if (voice.name.includes(name) && voice.lang.startsWith('en')) {
-            professionalVoice = voice; break;
-          }
+          if (voice.name.includes(name) && voice.lang.startsWith('en')) { professionalVoice = voice; break; }
         }
         if (professionalVoice) break;
       }
       if (!professionalVoice) {
         for (const voice of voices) {
-          if (voice.lang.startsWith('en') &&
-              (voice.name.toLowerCase().includes('female') ||
-               !voice.name.toLowerCase().includes('male'))) {
+          if (voice.lang.startsWith('en') && (voice.name.toLowerCase().includes('female') || !voice.name.toLowerCase().includes('male'))) {
             professionalVoice = voice; break;
           }
         }
       }
       if (professionalVoice) utterance.voice = professionalVoice;
-      utterance.rate = 0.88;
-      utterance.pitch = 1.05;
-      utterance.volume = 1;
+      utterance.rate = 0.88; utterance.pitch = 1.05; utterance.volume = 1;
       window.speechSynthesis.speak(utterance);
     }
     if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = function(){};
@@ -2268,9 +3325,7 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         speak("Access denied.");
       }
     }
-    document.getElementById("accessCode").addEventListener("keydown", e => {
-      if (e.key === "Enter") unlockApp();
-    });
+    document.getElementById("accessCode").addEventListener("keydown", e => { if (e.key === "Enter") unlockApp(); });
 
     function selectType(type) {
       selectedType = type;
@@ -2734,21 +3789,10 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         appName: "",
         appUrl: "",
         contacts: [],
-        metrics: {
-          downloads: 0, users: 0, rating: 0, crash: 0,
-          retention: 0, revenue: 0, version: "v0.0", days: 0
-        },
-        aso: {
-          policy: false, screens: false, keywords: false,
-          graphic: false, video: false, storerating: false
-        },
-        tech: {
-          frontend: 0, backend: 0, database: 0, auth: 0
-        },
-        features: {
-          login: false, payments: false, push: false,
-          analytics: false, ai: false
-        },
+        metrics: { downloads: 0, users: 0, rating: 0, crash: 0, retention: 0, revenue: 0, version: "v0.0", days: 0 },
+        aso: { policy: false, screens: false, keywords: false, graphic: false, video: false, storerating: false },
+        tech: { frontend: 0, backend: 0, database: 0, auth: 0 },
+        features: { login: false, payments: false, push: false, analytics: false, ai: false },
         customFeatures: [],
         alerts: [],
         log: []
@@ -2795,8 +3839,7 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       const canvas = document.getElementById("b2RadarCanvas");
       if (!canvas || !B2.radarCtx) return;
       const ctx = B2.radarCtx;
-      const w = canvas.width / 2;
-      const h = canvas.height / 2;
+      const w = canvas.width / 2; const h = canvas.height / 2;
       const cx = w / 2, cy = h / 2;
       const radius = Math.min(w, h) / 2 - 6;
 
@@ -2804,93 +3847,62 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
 
       ctx.strokeStyle = "rgba(0,255,136,0.2)";
       ctx.lineWidth = 1;
-      for (let i = 1; i <= 4; i++) {
-        ctx.beginPath();
-        ctx.arc(cx, cy, (radius / 4) * i, 0, Math.PI * 2);
-        ctx.stroke();
-      }
+      for (let i = 1; i <= 4; i++) { ctx.beginPath(); ctx.arc(cx, cy, (radius / 4) * i, 0, Math.PI * 2); ctx.stroke(); }
       ctx.beginPath();
       ctx.moveTo(cx, cy - radius); ctx.lineTo(cx, cy + radius);
       ctx.moveTo(cx - radius, cy); ctx.lineTo(cx + radius, cy);
-      ctx.strokeStyle = "rgba(0,255,136,0.15)";
-      ctx.stroke();
+      ctx.strokeStyle = "rgba(0,255,136,0.15)"; ctx.stroke();
 
-      // Sweep gradient
       if (ctx.createConicGradient) {
         const sweepGrad = ctx.createConicGradient(B2.sweepAngle, cx, cy);
         sweepGrad.addColorStop(0, "rgba(0,255,136,0.5)");
         sweepGrad.addColorStop(0.05, "rgba(0,255,136,0.02)");
         sweepGrad.addColorStop(1, "rgba(0,255,136,0.02)");
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
+        ctx.beginPath(); ctx.moveTo(cx, cy);
         ctx.arc(cx, cy, radius, B2.sweepAngle, B2.sweepAngle + 0.5);
-        ctx.closePath();
-        ctx.fillStyle = sweepGrad;
-        ctx.fill();
+        ctx.closePath(); ctx.fillStyle = sweepGrad; ctx.fill();
       }
 
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
+      ctx.beginPath(); ctx.moveTo(cx, cy);
       const endX = cx + Math.cos(B2.sweepAngle) * radius;
       const endY = cy + Math.sin(B2.sweepAngle) * radius;
       ctx.lineTo(endX, endY);
       ctx.strokeStyle = "rgba(0,255,136,0.9)";
       ctx.lineWidth = 2;
-      ctx.shadowColor = "#00ff88";
-      ctx.shadowBlur = 8;
+      ctx.shadowColor = "#00ff88"; ctx.shadowBlur = 8;
       ctx.stroke();
       ctx.shadowBlur = 0;
 
-      // Contacts
       B2.state.contacts.forEach((c, i) => {
         const totalContacts = Math.max(B2.state.contacts.length, 1);
         const dist = 20 + (i / totalContacts) * (radius - 40);
         const angleRad = (c.bearing - 90) * Math.PI / 180;
         const x = cx + Math.cos(angleRad) * dist;
         const y = cy + Math.sin(angleRad) * dist;
-        const col = c.type === "threat" ? "#ff3333" :
-                    c.type === "competitor" ? "#ffaa00" : "#00ff88";
-        ctx.beginPath();
-        ctx.arc(x, y, 5, 0, Math.PI * 2);
-        ctx.fillStyle = col;
-        ctx.shadowColor = col;
-        ctx.shadowBlur = 12;
-        ctx.fill();
+        const col = c.type === "threat" ? "#ff3333" : c.type === "competitor" ? "#ffaa00" : "#00ff88";
+        ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = col; ctx.shadowColor = col; ctx.shadowBlur = 12; ctx.fill();
         ctx.shadowBlur = 0;
-        ctx.fillStyle = col;
-        ctx.font = "9px 'Courier New', monospace";
+        ctx.fillStyle = col; ctx.font = "9px 'Courier New', monospace";
         ctx.fillText(c.name.substring(0, 8), x + 8, y + 3);
       });
 
       B2.sweepAngle += 0.035;
       if (B2.sweepAngle > Math.PI * 2) B2.sweepAngle -= Math.PI * 2;
-
       B2.radarAnimId = requestAnimationFrame(b2RadarLoop);
     }
 
-    function b2StartTick() {
-      if (B2.tickInterval) return;
-      B2.tickInterval = setInterval(b2Tick, 500);
-    }
-    function b2StopTick() {
-      if (B2.tickInterval) { clearInterval(B2.tickInterval); B2.tickInterval = null; }
-    }
+    function b2StartTick() { if (B2.tickInterval) return; B2.tickInterval = setInterval(b2Tick, 500); }
+    function b2StopTick() { if (B2.tickInterval) { clearInterval(B2.tickInterval); B2.tickInterval = null; } }
 
     function b2Tick() {
-      // Drift contact bearings so radar looks alive
-      B2.state.contacts.forEach(c => {
-        c.bearing = (c.bearing + (Math.random() - 0.5) * 2 + 360) % 360;
-      });
+      B2.state.contacts.forEach(c => { c.bearing = (c.bearing + (Math.random() - 0.5) * 2 + 360) % 360; });
       b2UpdateUI();
     }
 
     function b2UpdateUI() {
       const s = B2.state;
-
-      // App name in top HUD
       document.getElementById("b2ActiveApp").textContent = s.appName || "NO APP LOADED";
-
-      // Vitals readouts
       document.getElementById("b2Downloads").innerHTML = formatNum(s.metrics.downloads) + "<small></small>";
       document.getElementById("b2Users").innerHTML = formatNum(s.metrics.users) + "<small></small>";
       document.getElementById("b2Rating").innerHTML = (s.metrics.rating || 0).toFixed(1) + "<small>⭐</small>";
@@ -2899,21 +3911,16 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       document.getElementById("b2Revenue").innerHTML = "$" + formatNum(s.metrics.revenue);
       document.getElementById("b2Version").innerHTML = escapeHTML(s.metrics.version || "v0.0") + "<small></small>";
       document.getElementById("b2Days").innerHTML = (s.metrics.days || 0) + "<small>d</small>";
-
-      // Vitals tag
       document.getElementById("b2VitalsTag").textContent = s.appName ? "LOADED" : "NOT LOADED";
 
-      // Readout color states
       setReadoutState("b2RatingRO", s.metrics.rating >= 4.0 ? "" : s.metrics.rating >= 3.0 ? "warn" : "danger");
       setReadoutState("b2CrashRO", s.metrics.crash <= 1 ? "" : s.metrics.crash <= 3 ? "warn" : "danger");
       setReadoutState("b2RetentionRO", s.metrics.retention >= 40 ? "" : s.metrics.retention >= 20 ? "warn" : "danger");
       setReadoutState("b2DownloadsRO", s.metrics.downloads > 1000 ? "" : s.metrics.downloads > 100 ? "warn" : "danger");
       setReadoutState("b2UsersRO", s.metrics.users > 100 ? "" : s.metrics.users > 10 ? "warn" : "danger");
 
-      // ASO Stealth calc
       const asoKeys = ["policy", "screens", "keywords", "graphic", "video", "storerating"];
-      let asoPoints = 0;
-      asoKeys.forEach(k => { if (s.aso[k]) asoPoints++; });
+      let asoPoints = 0; asoKeys.forEach(k => { if (s.aso[k]) asoPoints++; });
       const asoPct = Math.round((asoPoints / asoKeys.length) * 100);
 
       const fill = document.getElementById("b2StealthFill");
@@ -2927,14 +3934,12 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       document.getElementById("b2StealthLabel").textContent = label;
       document.getElementById("b2RcsTag").textContent = asoPct + "%";
 
-      // ASO pill
       const asoPill = document.getElementById("b2AsoPill");
       asoPill.classList.remove("warn","danger");
       if (asoPct < 70 && s.appName) asoPill.classList.add("warn");
       if (asoPct < 40 && s.appName) asoPill.classList.add("danger");
       asoPill.innerHTML = '<span class="dot"></span> ASO: ' + (s.appName ? asoPct + "%" : "--");
 
-      // Tech stack engines
       const techMap = { frontend:"1", backend:"2", database:"3", auth:"4" };
       Object.keys(techMap).forEach(k => {
         const lvl = s.tech[k];
@@ -2953,7 +3958,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         if (engDiv) engDiv.classList.toggle("off", lvl === 0);
       });
 
-      // Systems pill
       const sysPill = document.getElementById("b2SystemsPill");
       const techAvg = (s.tech.frontend + s.tech.backend + s.tech.database + s.tech.auth) / 4;
       sysPill.classList.remove("warn","danger");
@@ -2961,11 +3965,7 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       if (techAvg < 25) sysPill.classList.add("danger");
       sysPill.innerHTML = '<span class="dot"></span> SYSTEMS ' + (s.appName ? Math.round(techAvg) + "%" : "NOMINAL");
 
-      // ASO toggle buttons sync
-      const asoBtnMap = {
-        policy: "b2PolicyBtn", screens: "b2ScreensBtn", keywords: "b2KeywordsBtn",
-        graphic: "b2GraphicBtn", video: "b2VideoBtn", storerating: "b2StoreRatingBtn"
-      };
+      const asoBtnMap = { policy: "b2PolicyBtn", screens: "b2ScreensBtn", keywords: "b2KeywordsBtn", graphic: "b2GraphicBtn", video: "b2VideoBtn", storerating: "b2StoreRatingBtn" };
       Object.keys(asoBtnMap).forEach(k => {
         const btn = document.getElementById(asoBtnMap[k]);
         if (!btn) return;
@@ -2974,7 +3974,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         btn.classList.toggle("on", on);
       });
 
-      // Feature arsenal sync
       const featMap = { login:"b2Feat1", payments:"b2Feat2", push:"b2Feat3", analytics:"b2Feat4", ai:"b2Feat5" };
       Object.keys(featMap).forEach(k => {
         const btn = document.getElementById(featMap[k]);
@@ -2985,17 +3984,12 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         btn.classList.toggle("warn", on);
       });
 
-      // Master caution
       const mc = document.getElementById("b2MasterCaution");
       const dangerAlerts = s.alerts.filter(a => a.level === "danger").length;
-      const anyFeatureArmed = Object.values(s.features).some(v => v);
       if (dangerAlerts > 0) mc.classList.add("show");
       else mc.classList.remove("show");
 
-      // Alerts count
       document.getElementById("b2AlertCount").textContent = s.alerts.length + " ALERTS";
-
-      // Save
       b2SaveAll();
     }
 
@@ -3013,7 +4007,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       return String(Math.round(n));
     }
 
-    /* --- Load / Unload App --- */
     function b2LoadApp() {
       const name = document.getElementById("b2AppNameInput").value.trim();
       const url = document.getElementById("b2AppUrlInput").value.trim();
@@ -3026,24 +4019,17 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       b2UpdateUI();
     }
     function b2UnloadApp() {
-      B2.state.appName = "";
-      B2.state.appUrl = "";
+      B2.state.appName = ""; B2.state.appUrl = "";
       b2Log("App unloaded from command centre.", "warn");
       showToast("App unloaded.");
       b2UpdateUI();
     }
 
-    /* --- Contacts --- */
     function b2AddContact() {
       const name = document.getElementById("b2ContactName").value.trim();
       const type = document.getElementById("b2ContactType").value;
       if (!name) { showToast("Enter a name."); return; }
-      B2.state.contacts.push({
-        id: Date.now(),
-        name: name,
-        type: type,
-        bearing: Math.random() * 360
-      });
+      B2.state.contacts.push({ id: Date.now(), name: name, type: type, bearing: Math.random() * 360 });
       document.getElementById("b2ContactName").value = "";
       b2RenderContacts();
       b2Log("Contact added: " + name + " (" + type + ")", type === "threat" ? "danger" : "info");
@@ -3070,16 +4056,13 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       });
     }
 
-    /* --- Metrics --- */
     function b2UpdateMetric() {
       const key = document.getElementById("b2MetricKey").value.trim().toLowerCase();
       const val = document.getElementById("b2MetricValue").value.trim();
       if (!key || !val) { showToast("Enter metric and value."); return; }
       if (!(key in B2.state.metrics)) { showToast("Unknown metric: " + key); return; }
-
       if (key === "version") B2.state.metrics.version = val;
       else B2.state.metrics[key] = parseFloat(val) || 0;
-
       document.getElementById("b2MetricKey").value = "";
       document.getElementById("b2MetricValue").value = "";
       b2Log("Metric updated: " + key + " = " + val, "info");
@@ -3087,14 +4070,12 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       b2UpdateUI();
     }
 
-    /* --- ASO --- */
     function b2ToggleASO(key) {
       B2.state.aso[key] = !B2.state.aso[key];
       b2Log("ASO: " + key + " = " + (B2.state.aso[key] ? "YES" : "NO"), "info");
       b2UpdateUI();
     }
 
-    /* --- Tech Stack --- */
     function b2SetTechLevel(key) {
       const levels = [0, 25, 60, 100];
       const cur = B2.state.tech[key];
@@ -3105,7 +4086,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       b2UpdateUI();
     }
 
-    /* --- Features --- */
     function b2ToggleFeature(key) {
       B2.state.features[key] = !B2.state.features[key];
       b2Log("Feature " + key + " " + (B2.state.features[key] ? "ARMED" : "SAFE"), B2.state.features[key] ? "warn" : "info");
@@ -3130,26 +4110,15 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       document.getElementById("b2NewFeatureName").value = "";
       b2Log("Custom feature added: " + name, "info");
       showToast("Custom feature added.");
-      b2RenderCustomFeatures();
-    }
-    function b2RenderCustomFeatures() {
-      // Append to feature arsenal panel dynamically (optional — keep minimal)
-      // For simplicity, log only
     }
 
-    /* --- Alerts --- */
     function b2AddAlert(level) {
       const msgs = {
         info: prompt("Info alert message:", "Version 1.0.3 deployed") || "Info logged",
         warn: prompt("Warning alert message:", "Crash rate rising") || "Warning logged",
         danger: prompt("Critical alert message:", "Privacy policy URL missing") || "Critical logged"
       };
-      B2.state.alerts.unshift({
-        id: Date.now(),
-        level: level,
-        msg: msgs[level],
-        ts: new Date().toISOString()
-      });
+      B2.state.alerts.unshift({ id: Date.now(), level: level, msg: msgs[level], ts: new Date().toISOString() });
       b2Log("Alert [" + level.toUpperCase() + "]: " + msgs[level], level === "danger" ? "danger" : level === "warn" ? "warn" : "info");
       b2RenderAlerts();
       b2UpdateUI();
@@ -3176,7 +4145,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       });
     }
 
-    /* --- Dev Log --- */
     function b2Log(msg, type) {
       B2.state.log.push({ ts: new Date().toISOString(), msg: msg, type: type || "info" });
       if (B2.state.log.length > 200) B2.state.log = B2.state.log.slice(-200);
@@ -3191,9 +4159,7 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         const div = document.createElement("div");
         div.className = "log-entry" + (e.type === "warn" ? " warn" : e.type === "danger" ? " danger" : "");
         const t = new Date(e.ts);
-        const ts = String(t.getUTCHours()).padStart(2,"0") + ":" +
-                   String(t.getUTCMinutes()).padStart(2,"0") + ":" +
-                   String(t.getUTCSeconds()).padStart(2,"0") + "Z";
+        const ts = String(t.getUTCHours()).padStart(2,"0") + ":" + String(t.getUTCMinutes()).padStart(2,"0") + ":" + String(t.getUTCSeconds()).padStart(2,"0") + "Z";
         div.innerHTML = `<span class="ts">${ts}</span> — ${escapeHTML(e.msg)}`;
         el.appendChild(div);
       });
@@ -3213,33 +4179,25 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       downloadText(out, "b2-command-dev-log.txt");
     }
 
-    /* --- UTC Clock --- */
     function b2UpdateUTC() {
       const el = document.getElementById("b2UtcClock");
       if (!el) return;
       const tick = () => {
         const t = new Date();
-        el.textContent = String(t.getUTCHours()).padStart(2,"0") + ":" +
-                         String(t.getUTCMinutes()).padStart(2,"0") + ":" +
-                         String(t.getUTCSeconds()).padStart(2,"0") + "Z";
+        el.textContent = String(t.getUTCHours()).padStart(2,"0") + ":" + String(t.getUTCMinutes()).padStart(2,"0") + ":" + String(t.getUTCSeconds()).padStart(2,"0") + "Z";
       };
       tick();
       if (window._b2UtcInt) clearInterval(window._b2UtcInt);
       window._b2UtcInt = setInterval(tick, 1000);
     }
 
-    /* --- Save / Load --- */
     function b2SaveAll() {
       try {
         localStorage.setItem(CONFIG.b2StateKey, JSON.stringify({
-          appName: B2.state.appName,
-          appUrl: B2.state.appUrl,
-          contacts: B2.state.contacts,
-          metrics: B2.state.metrics,
-          aso: B2.state.aso,
-          tech: B2.state.tech,
-          features: B2.state.features,
-          customFeatures: B2.state.customFeatures,
+          appName: B2.state.appName, appUrl: B2.state.appUrl,
+          contacts: B2.state.contacts, metrics: B2.state.metrics,
+          aso: B2.state.aso, tech: B2.state.tech,
+          features: B2.state.features, customFeatures: B2.state.customFeatures,
           alerts: B2.state.alerts
         }));
         localStorage.setItem(CONFIG.b2LogKey, JSON.stringify(B2.state.log));
@@ -3264,18 +4222,13 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         const log = localStorage.getItem(CONFIG.b2LogKey);
         if (log) B2.state.log = JSON.parse(log) || [];
 
-        // Sync inputs
         document.getElementById("b2AppNameInput").value = B2.state.appName || "";
         document.getElementById("b2AppUrlInput").value = B2.state.appUrl || "";
 
-        b2RenderContacts();
-        b2RenderAlerts();
-        b2RenderLog();
-        b2UpdateUI();
+        b2RenderContacts(); b2RenderAlerts(); b2RenderLog(); b2UpdateUI();
       } catch(e) { console.warn("B-2 load error", e); }
     }
 
-    /* --- B-2 Tabs --- */
     document.querySelectorAll(".b2-tab").forEach(tab => {
       tab.addEventListener("click", () => {
         document.querySelectorAll(".b2-tab").forEach(t => t.classList.remove("active"));
@@ -3285,6 +4238,24 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
         if (tab.dataset.b2tab === "live" && !B2.radarAnimId) b2InitRadar();
       });
     });
+
+    /* =========================================================
+       NOOFF ADMIN ROOM
+       ========================================================= */
+    function openAdminRoom() {
+      document.getElementById("adminOverlay").classList.add("active");
+      document.body.style.overflow = "hidden";
+      showToast("NoOff Guard Admin opened.");
+      speak("NoOff Guard Admin opened.");
+    }
+    function closeAdminRoom() {
+      document.getElementById("adminOverlay").classList.remove("active");
+      document.body.style.overflow = "";
+      showToast("NoOff Guard Admin closed.");
+    }
+    // Expose for inline handlers (they're inline onclick in the overlay)
+    window.openAdminRoom = openAdminRoom;
+    window.closeAdminRoom = closeAdminRoom;
 
     /* ===== UTILITIES ===== */
     async function copyText(text) {
@@ -3322,7 +4293,6 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
     function scrollToLaunchGuide() { document.getElementById("launchGuideSection").scrollIntoView({ behavior:"smooth" }); }
     function scrollToLearn() { document.getElementById("learnSection").scrollIntoView({ behavior:"smooth" }); }
 
-    /* ===== GUIDE TABS ===== */
     document.querySelectorAll(".guide-tab").forEach(tab => {
       tab.addEventListener("click", () => {
         document.querySelectorAll(".guide-tab").forEach(t => t.classList.remove("active"));
@@ -3333,17 +4303,17 @@ localStorage.<span class="hl3">setItem</span>(<span class="hl3">"name"</span>, <
       });
     });
 
-    /* ===== ESC KEY ===== */
     document.addEventListener("keydown", e => {
       if (e.key === "Escape") {
         const office = document.getElementById("officeOverlay");
         const b2 = document.getElementById("b2Overlay");
-        if (office.classList.contains("active")) closeOfficeRoom();
+        const admin = document.getElementById("adminOverlay");
+        if (admin.classList.contains("active")) closeAdminRoom();
+        else if (office.classList.contains("active")) closeOfficeRoom();
         else if (b2.classList.contains("active")) closeB2Room();
       }
     });
 
-    /* ===== STARTUP ===== */
     window.addEventListener("DOMContentLoaded", () => {
       if (sessionStorage.getItem("nineUnlocked") === "true") {
         document.getElementById("accessScreen").classList.add("hidden");
